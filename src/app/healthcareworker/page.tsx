@@ -7,10 +7,14 @@ export default function Healthcareworker() {
         <Layout>
             <div className="mainDiv">
                 <h1>Velkommen Sarah</h1>
+                <section className='dashboardwrap'>
                 <button>Mat bestilling</button>
                 <button>Liste med bestillinger</button>
                 <button>Eventuelle knapper</button>
+                <button>Eventuelle knapper</button>
+                <button>Eventuelle knapper</button>
                 <button>Eventuelle knapper..</button>
+                </section>
             </div>
         </Layout>
     )
