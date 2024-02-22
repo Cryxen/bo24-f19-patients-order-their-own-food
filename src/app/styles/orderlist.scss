@@ -1,0 +1,33 @@
+article {
+    display: flex;
+    flex-direction: row;
+}
+
+section {
+    border-style: solid;
+    border-right: none;
+    display: flex;
+    flex-wrap: wrap;
+    border-collapse: collapse;
+}
+
+section:last-child {
+    border-right: solid;
+}
+
+.dishSection {
+    width: 60%;
+}
+
+.dish {
+    border-style: solid;
+    margin: 2%;
+}
+
+.room {
+    width: max-content;
+}
+
+button {
+    margin: auto
+}
