@@ -1,0 +1,37 @@
+.arrow {
+    font-size: 2rem;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: 55%;
+}
+
+.graph, .overview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; 
+    background-color: red;
+    height: 10rem;
+}
+
+.meal-plan {
+    margin: 1rem;
+    border: solid;
+}
+
+.information {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.buttons {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
