@@ -1,10 +1,11 @@
 import Layout from '@/app/components/layout'
-import Rolledrop from '@/app/components/Rolledrop'
+import Rolledrop from '../../components/Rolledrop';
 import '../../styles/useradministration.scss'
+import '../../styles/globals.scss'
 
 
 
-const Budget = () => {
+const useradministration = () => {
     return (
         <Layout>
         <div className="mainDiv">
@@ -50,4 +51,4 @@ const Budget = () => {
         </Layout>
     )
 }
-export default Budget
+export default useradministration
