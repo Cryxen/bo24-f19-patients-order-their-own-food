@@ -1,0 +1,53 @@
+.mainbox {
+    width: 75%;
+    border-style: solid;
+    align-content: center;
+}
+
+.itembox{
+    display: flex;
+    border-style: solid;
+    margin: 0.5vh;
+}
+
+.itembox2{
+    display: flex;
+    margin: 0.5vh;
+}
+
+.contentitembox {
+    max-width: 50%;
+    width: 50%;
+}
+
+.contentitemboxrolle {
+    max-width: 50%;
+    width: 50%;
+    margin: auto;
+}
+
+.centeritembox {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+.generatebutton {
+    display: block;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    padding: 1vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.inputbruker {
+    max-width: 90%;
+    padding: .4vh;
+    text-align: center;
+    
+}
+
+
+p {
+    margin-left: 1vh;
+}
