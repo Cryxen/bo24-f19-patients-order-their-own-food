@@ -1,0 +1,30 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.meal-list {
+    border: solid;
+}
+
+.list li {
+    background-color: gray;
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+.graphs {
+    text-align: center;
+}
+
+.graphs section {
+    border: solid;
+    margin-bottom: 2rem;
+}
