@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  email String @id @unique
+  Name String 
+  Role String
+  Password String
+}
+
+model Meal {
+  MealName String @id @unique
+  Description String
+  DietaryInfo String
+  ImageUrl String
+  MeaplPlan MealPlan[]
+}
+
+model Room {
+  RoomNumber Int @id @unique
+  Order Order @relation(fields: [OrderId], references: [Id])
+  OrderId Int @unique
+  Restriction Restriction? @relation(fields: [DietaryRestriction], references: [DietaryRestriction])
+  DietaryRestriction String? @unique
+}
+
+model MealPlan {
+  Id Int @id @default(autoincrement())
+  Meal Meal[] 
+  Order Order[]
+  Date String
+}
+
+model Order {
+  Id Int @id @default(autoincrement())
+  Meal String
+  Room Room[]
+  MealPlan MealPlan @relation(fields: [MealPlanId], references: [Id])
+  MealPlanId Int @unique
+}
+
+model PastOrder {
+  Id Int @id @default(autoincrement())
+  RoomNumber Int
+  Meal String
+  Date String
+}
+
+model Restriction {
+  DietaryRestriction String @id
+  Room Room[]
+}
