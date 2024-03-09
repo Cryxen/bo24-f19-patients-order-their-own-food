@@ -23,5 +23,7 @@
     "prisma": "^5.10.2",
     "sass": "^1.71.0",
     "typescript": "^5"
-  }
+  },
+  "homepage": "https://itstud.hiof.no/b24gr1/"
+
 }
