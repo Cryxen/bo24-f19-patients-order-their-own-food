@@ -8,6 +8,8 @@ const prisma = new PrismaClient();
 
 const Users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
+  { email: "karl.gustav@sunnaas.no", name: "Karl Gustav", role: "administrator", password: "password" },
+  { email: "carlos@sunnaas.no", name: "Carlos", role: "kitchen", password: "password" },
 ];
 
 
