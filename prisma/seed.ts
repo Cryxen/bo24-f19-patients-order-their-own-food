@@ -21,9 +21,9 @@ const createUsers = async () => {
       update: {},
       create: {
         email: user.email,
-        Name: user.name,
-        Role: user.role,
-        Password: user.password
+        name: user.name,
+        role: user.role,
+        password: user.password
       }
     })
   });
