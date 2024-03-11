@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import * as userController from "@/features/users/Users.controller"
+import { NextApiRequest } from "next"
 
-export async function GET(){
-
-    return await userController.fetchAllUsers()
+export async function GET(req: NextRequest){
+    return await userController.fetchUsers(req)
 }
