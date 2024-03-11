@@ -6,6 +6,9 @@ import { ChangeEvent, MouseEvent, useState } from 'react'
 import { User } from '@/features/users/types'
 import { useRouter } from 'next/navigation'
 export default function Login() {
+
+    //TODO: ERROR HANDLING.
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
