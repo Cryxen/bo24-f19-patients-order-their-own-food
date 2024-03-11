@@ -15,50 +15,50 @@ datasource db {
 
 model User {
   email String @id @unique
-  Name String 
-  Role String
-  Password String
+  name String 
+  role String
+  password String
 }
 
 model Meal {
-  MealName String @id @unique
-  Description String
-  DietaryInfo String
-  ImageUrl String
-  MeaplPlan MealPlan[]
+  mealName String @id @unique
+  description String
+  dietaryInfo String
+  imageUrl String
+  meaplPlan MealPlan[]
 }
 
 model Room {
-  RoomNumber Int @id @unique
-  Order Order @relation(fields: [OrderId], references: [Id])
-  OrderId Int @unique
-  Restriction Restriction? @relation(fields: [DietaryRestriction], references: [DietaryRestriction])
-  DietaryRestriction String? @unique
+  roomNumber Int @id @unique
+  order Order @relation(fields: [orderId], references: [id])
+  orderId Int @unique
+  restriction Restriction? @relation(fields: [dietaryRestriction], references: [dietaryRestriction])
+  dietaryRestriction String? @unique
 }
 
 model MealPlan {
-  Id Int @id @default(autoincrement())
-  Meal Meal[] 
-  Order Order[]
-  Date String
+  id Int @id @default(autoincrement())
+  meal Meal[] 
+  order Order[]
+  date String
 }
 
 model Order {
-  Id Int @id @default(autoincrement())
-  Meal String
-  Room Room[]
-  MealPlan MealPlan @relation(fields: [MealPlanId], references: [Id])
-  MealPlanId Int @unique
+  id Int @id @default(autoincrement())
+  meal String
+  room Room[]
+  mealPlan MealPlan @relation(fields: [mealPlanId], references: [id])
+  mealPlanId Int @unique
 }
 
 model PastOrder {
-  Id Int @id @default(autoincrement())
-  RoomNumber Int
-  Meal String
-  Date String
+  id Int @id @default(autoincrement())
+  roomNumber Int
+  meal String
+  date String
 }
 
 model Restriction {
-  DietaryRestriction String @id
-  Room Room[]
+  dietaryRestriction String @id
+  room Room[]
 }
