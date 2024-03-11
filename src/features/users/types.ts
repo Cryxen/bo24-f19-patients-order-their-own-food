@@ -1,6 +1,7 @@
 export type User = {
     email: string 
     name: string 
-    role: string
+    role: "healthcare"|"kitchen"|"administrator"
     password: string   
 }
+
