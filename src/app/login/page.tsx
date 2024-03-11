@@ -17,13 +17,19 @@ export default function Login() {
         setPassword(event.target.value)
     }
 
-    const handleSubmitButton = (event: MouseEvent<HTMLButtonElement>) => {
+    const handleSubmitButton = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         let user: User
-        fetch(`/api/users?email=${email}&password=${password}`)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.log(error))
+
+        const response = await fetch(`/api/users?email=${email}&password=${password}`)
+        if (response.status == 200) {
+            const data = await response.json()
+            if (data.success === true) {
+                user = data.data
+                console.log(user)
+            }
+        }
+
     }
 
     return (
