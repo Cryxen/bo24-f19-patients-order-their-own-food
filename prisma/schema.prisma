@@ -25,7 +25,7 @@ model Meal {
   description String
   dietaryInfo String
   imageUrl String
-  meaplPlan MealPlan[]
+  meaplPlan MealToMealPlan[]
 }
 
 model Room {
@@ -38,9 +38,17 @@ model Room {
 
 model MealPlan {
   id Int @id @default(autoincrement())
-  meal Meal[] 
+  meal MealToMealPlan[] 
   order Order[]
   date String
+}
+
+model MealToMealPlan {
+  mealPlan MealPlan @relation(fields: [mealPlanId], references: [id])
+  mealPlanId Int
+  meal Meal @relation(fields: [mealIdName], references: [mealName])
+  mealIdName String
+  @@id([mealPlanId, mealIdName])
 }
 
 model Order {
