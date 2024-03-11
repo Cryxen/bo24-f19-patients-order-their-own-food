@@ -1,7 +1,6 @@
 "use client"
 import '../styles/loginpage.scss'
 import '../styles/globals.scss'
-import Layout from '../components/layout'
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import { User } from '@/features/users/types'
 import { useRouter } from 'next/navigation'
