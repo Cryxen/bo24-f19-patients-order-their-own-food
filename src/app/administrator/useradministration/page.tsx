@@ -26,14 +26,30 @@ const useradministration = () => {
             console.error("Something went wrong retrieving users from API")
     }
 
-    const changeRole = (event: React.ChangeEvent<HTMLSelectElement>, user: User) => {
-        console.log("inside changerole")
-        console.log(users)
-        console.log(user)
+    const changeRole = async (event: React.ChangeEvent<HTMLSelectElement>, user: User) => {
+        const userToUpdate: User = { ...user, role: event.target.value as User["role"] }
+
         setUsers(users?.map(el => (
-            el.email === user.email ? { ...el, role: event.target.value as User["role"] } : el
+            el.email === user.email ? userToUpdate : el
         )))
+
+        const response = await fetch('/api/users', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(userToUpdate)
+        })
+            if(response.status === 200)
+                {
+                    const data = await response.json()
+                    console.log(data)
+                }
+            else 
+                console.error("Something went wrong updating roles on user object in database")
         console.log(users)
+        console.log(response)
+        
     }
 
 

@@ -29,3 +29,13 @@ export const fetchUser = async (email, password) => {
     return { success: false, data: usersFromDb.error }
   }
 }
+
+export const saveUser = async (user: User) => {
+  try {
+    const responseFromDb = await usersRepo.saveUser(user)
+      return { success: true, data: responseFromDb.data }
+  }
+  catch (error) {
+    return { success: false, data: responseFromDb.error }
+  }
+}

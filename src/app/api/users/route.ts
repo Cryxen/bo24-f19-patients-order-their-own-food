@@ -5,3 +5,8 @@ import { NextApiRequest } from "next"
 export async function GET(req: NextRequest){
     return await userController.fetchUsers(req)
 }
+
+export async function POST(req: NextRequest){
+    return await userController.saveUser(req)
+
+}

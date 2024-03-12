@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import * as userService from './Users.service'
 import { NextApiRequest } from "next"
+import { User } from "./types"
 
 export const fetchUsers = async (req: NextRequest) => {
     let userFromDb
@@ -33,4 +34,22 @@ export const fetchUsers = async (req: NextRequest) => {
             return NextResponse.json({ success: false, error: "something went terribly wrong in controller fetching all users"}) //TODO: fix error handling
         }
     }
+}
+
+export const saveUser = async (req: NextRequest) => {
+    try {
+        const userToSave = await req.json() as User
+        const responseFromDb = await userService.saveUser(userToSave)
+        console.log(userToSave)
+        return NextResponse.json({
+            status: 200,
+            success: responseFromDb.success,
+            data: responseFromDb?.data,
+            error: responseFromDb?.error
+        })
+    } catch (error) {
+        
+    }
+
+
 }
