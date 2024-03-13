@@ -13,10 +13,14 @@ const Foodmanagement = () => {
     const [meals, setMeals] = useState<Meal[]>([])
     const [filteredMeals, setFilteredMeals] = useState<Meal[]>([])
     const [categoryFilter, setCategoryFilter] = useState<string>()
+    const [categoryFilteredMeals, setCategoryFilteredMeals] = useState<Meal[]>([])
     const [nameFilter, setNameFilter] = useState<string>('')
+    const [nameFilteredMeals, setNameFilteredMeals] = useState<Meal[]>([])
+
     useEffect(() => {
         fetchMealsFromAPI()
     }, [])
+
 
     const fetchMealsFromAPI = async () => {
         const response = await fetch('/api/meals')
@@ -33,18 +37,26 @@ const Foodmanagement = () => {
         console.log(event.target.value)
         setCategoryFilter(event.target.value)
         if (event.target.value === 'Show all') {
-            setFilteredMeals(meals)
+            setCategoryFilteredMeals(meals)
+            // setFilteredMeals([...categoryFilteredMeals, ...nameFilteredMeals])
         }
         else {
             const filtered = meals.filter(el => el.category === event.target.value)
             setFilteredMeals(filtered)
+            // setFilteredMeals([...categoryFilteredMeals, ...nameFilteredMeals])
+
+            setCategoryFilteredMeals(filtered)
         }
+
     }
 
     const handleNameFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
         setNameFilter(event.target.value)
         const filtered = meals.filter(el => el.mealName.toLowerCase().includes(nameFilter.toLowerCase()))
+        setNameFilteredMeals(filtered)
         setFilteredMeals(filtered)
+        // setFilteredMeals([...categoryFilteredMeals, ...nameFilteredMeals])
+        console.log(filteredMeals)
     }
 
     return (
