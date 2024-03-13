@@ -7,7 +7,7 @@ import { Meal } from "@/features/meals/types"
 
 const Foodmanagement = () => {
 
-    const [meals, setMeals] = useState<Meal>()
+    const [meals, setMeals] = useState<Meal[]>([])
 
     useEffect (() => {
         fetchMealsFromAPI()
@@ -24,7 +24,7 @@ const Foodmanagement = () => {
             console.error('something went wrong fetching meals from API. status code: ' + response.status)
     }
 
-
+    console.log(meals)
     return (
         <Layout>
             <div className="mainDiv">
@@ -58,8 +58,10 @@ const Foodmanagement = () => {
                         </select>
                     </div>
                 </section>
+
                 <section className="food-database">
                     <table>
+                        <thead>
                         <tr>
                             <th></th>
                             <th>Matnavn</th>
@@ -68,7 +70,19 @@ const Foodmanagement = () => {
                             <th>Andre info</th>
                             <th></th>
                         </tr>
-                        <tr>
+                        </thead>
+                        <tbody>
+                        {meals.map((meal) => 
+                        <tr key={meal.mealName}>
+                            <td>{meal.imageUrl}</td>
+                            <td>{meal.mealName}</td>
+                            <td>{meal.description}</td>
+                            <td>{meal.category}</td>
+                            <td>{meal.dietaryInfo}</td>
+                            <td><button>Edit</button></td>
+                        </tr>
+                        )}
+                        {/* <tr>
                             <td>Bilde av mat</td>
                             <td>Matnavn 1</td>
                             <td>Beskrivelse 1</td>
@@ -115,7 +129,8 @@ const Foodmanagement = () => {
                             <td>Kategori 5</td>
                             <td>Andre info 5</td>
                             <td><button>Edit</button></td>
-                        </tr>
+                        </tr> */}
+                        </tbody>
                     </table>
                 </section>
                 <section className="buttons">
