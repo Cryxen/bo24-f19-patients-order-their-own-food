@@ -13,7 +13,7 @@ const Foodmanagement = () => {
     const [meals, setMeals] = useState<Meal[]>([])
     const [filteredMeals, setFilteredMeals] = useState<Meal[]>([])
     const [categoryFilter, setCategoryFilter] = useState<string>()
-
+    const [nameFilter, setNameFilter] = useState<string>('')
     useEffect(() => {
         fetchMealsFromAPI()
     }, [])
@@ -41,13 +41,20 @@ const Foodmanagement = () => {
         }
     }
 
+    const handleNameFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setNameFilter(event.target.value)
+        const filtered = meals.filter(el => el.mealName.toLowerCase().includes(nameFilter.toLowerCase()))
+        setFilteredMeals(filtered)
+        console.log(filtered)
+    }
+
     return (
         <Layout>
             <div className="mainDiv">
                 <h1>Mat håndtering</h1>
                 <section>
                     <div>
-                        <input type="text" placeholder="Søk"></input>
+                        <input type="text" placeholder="Søk" value={nameFilter} onChange={handleNameFilterChange}></input>
                         <MealCategoryRolldownMenu handleCategoryChange={handleCategoryFilterChange} filter={true} categoryFilter={categoryFilter} />
                         <select name="filters">
                             <option>Velg en filter</option>
