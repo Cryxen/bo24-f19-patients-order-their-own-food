@@ -83,7 +83,7 @@ const Foodmanagement = () => {
                         </thead>
                         <tbody>
                             {filteredMeals?.map((meal) =>
-                                <MealListing meal={meal} setMeals={setMeals} meals={meals} key={meal.mealName} />
+                                <MealListing meal={meal} setMeals={setMeals} setFilteredMeals={setFilteredMeals} meals={meals} key={meal.mealName} />
                             )}
                         </tbody>
                     </table>

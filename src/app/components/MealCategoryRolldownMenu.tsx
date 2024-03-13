@@ -8,9 +8,9 @@ interface MealCategoryRolldownMenu {
 
 const MealCategoryRolldownMenu = (props: { meal?: Meal, handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void, filter?: boolean, categoryFilter?: string }) => {
     const { meal = { mealName: '', description: '', category: 'undefined' }, handleCategoryChange, filter = false, categoryFilter } = props
-
-    meal.category = categoryFilter as Meal["category"]
-
+    if (filter) {
+        meal.category = categoryFilter as Meal["category"]
+    }
     return (
         <select id="category" value={meal.category} onChange={handleCategoryChange}>
             {

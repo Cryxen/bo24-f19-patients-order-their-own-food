@@ -3,7 +3,7 @@ import { Meal } from "@/features/meals/types"
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useEffect, useState } from "react"
 import MealCategoryRolldownMenu from "./MealCategoryRolldownMenu"
 
-const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[]>> }) => {
+const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[]>>, setFilteredMeals: Dispatch<SetStateAction<Meal[]>> }) => {
     const [showEditMeal, setShowEditMeal] = useState<Boolean>(false)
     const [mealToChange, setMealToChange] = useState<Meal>({
         mealName: '',
@@ -12,7 +12,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
         dietaryInfo: '',
         imageUrl: ''
     }) //There's probably a much better way to do this  
-    const { meal, meals, setMeals } = props
+    const { meal, meals, setMeals, setFilteredMeals } = props
 
 
     useEffect(() => {
@@ -20,16 +20,16 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
     }, [])
 
 
-    const findMealIndex = ():number => {
+    const findMealIndex = (): number => {
         return meals.findIndex((el) => el.mealName === meal.mealName)
     }
 
-
-
     const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        console.log(event.target.value)
         setMealToChange(prev => ({
             ...prev, category: event.target.value as Meal["category"]
         }))
+        console.log(mealToChange)
     }
 
     const handleImageUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -50,6 +50,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
 
     const handleSaveButton = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
+        console.log(mealToChange)
         if (meal.mealName.length > 0 && meal.description.length > 0 && meal.category !== "undefined") {
             const response = await fetch('/api/meals', {
                 method: "POST",
@@ -62,6 +63,11 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                 const data = await response.json()
                 console.log(data)
                 setMeals(prev => {
+                    const copyMealsArray = [...prev];
+                    copyMealsArray[findMealIndex()] = mealToChange
+                    return copyMealsArray
+                })
+                setFilteredMeals(prev => {
                     const copyMealsArray = [...prev];
                     copyMealsArray[findMealIndex()] = mealToChange
                     return copyMealsArray
