@@ -31,7 +31,7 @@ const CreateUser = () => {
                     <input type='text' placeholder='Brukernavn' className='inputbruker' value={user.name} onChange={handleNameChange} />
                 </section>
                 <section className='contentitemboxrolle'>
-                    <input type='text' placeholder='Passord' className='inputbruker' value={user.password} onChange={handlePasswordChange} />
+                    <input type='password' placeholder='Passord' className='inputbruker' value={user.password} onChange={handlePasswordChange} />
                 </section>
             </article>
 
