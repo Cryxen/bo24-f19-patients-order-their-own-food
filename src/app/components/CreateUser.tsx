@@ -12,6 +12,7 @@ const CreateUser = () => {
             role: 'undefined'
         }
     )
+    const [filledInput, setFilledInput] = useState<Boolean>(true)
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUser(prev => ({
@@ -39,6 +40,7 @@ const CreateUser = () => {
         event.preventDefault()
         if (user.name !== '' || user.email !== '' || user.password !== '' || user.role !== 'undefined') //If check to see that fields are filled
         {
+            setFilledInput(true)
             const response = await fetch('/api/users', {
                 method: "POST",
                 headers: {
@@ -46,14 +48,15 @@ const CreateUser = () => {
                 },
                 body: JSON.stringify(user)
             })
-            if (response.status === 200)
-            {
+            if (response.status === 200) {
                 const data = await response.json()
                 console.log(data)
             }
             else
                 console.error("Something went wrong creating user API call")
         }
+        else
+            setFilledInput(false)
         console.log(user)
     }
 
@@ -77,6 +80,7 @@ const CreateUser = () => {
             </article>
 
             <article className='centerbox'>
+                {filledInput ? '' : <p>Alle felter må fylles.</p>}
                 <button className='generatebutton' onClick={submitUser}>Opprett profil</button>
             </article>
         </div>
