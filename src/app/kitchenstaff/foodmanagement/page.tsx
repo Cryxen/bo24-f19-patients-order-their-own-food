@@ -74,7 +74,7 @@ const Foodmanagement = () => {
                         </thead>
                         <tbody>
                             {meals?.map((meal) =>
-                                <MealListing meal={meal} key={meal.mealName}/>
+                                <MealListing meal={meal} setMeals={setMeals} meals={meals} key={meal.mealName}/>
                                 // <tr key={meal.mealName}>
                                 //     <td>{meal.imageUrl}</td>
                                 //     <td>{meal.mealName}</td>
