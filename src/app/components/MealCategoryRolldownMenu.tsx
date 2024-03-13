@@ -1,8 +1,14 @@
 import { Meal } from "@/features/meals/types"
 import { ChangeEvent } from "react"
 
-const MealCategoryRolldownMenu = (props: { meal: Meal, handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void }) => {
-    const { meal, handleCategoryChange } = props
+interface MealCategoryRolldownMenu {
+    meal?: Meal
+    handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void
+}
+
+const MealCategoryRolldownMenu = (props: { meal?: Meal, handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void }) => {
+    const { meal = {mealName: '', description: '', category: 'undefined'}, handleCategoryChange } = props
+    
     return (
         <select id="category" value={meal.category} onChange={handleCategoryChange}>
             {meal.category === 'undefined' ? <option>Velg kategori:</option> : ''}
