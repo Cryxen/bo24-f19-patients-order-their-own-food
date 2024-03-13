@@ -38,7 +38,7 @@ const CreateUser = () => {
 
     const submitUser = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
-        if (user.name !== '' || user.email !== '' || user.password !== '' || user.role !== 'undefined') //If check to see that fields are filled
+        if (user.name.length > 0 && user.email.length > 0 && user.password.length > 0 && user.role !== 'undefined') //If check to see that fields are filled
         {
             setFilledInput(true)
             const response = await fetch('/api/users', {
