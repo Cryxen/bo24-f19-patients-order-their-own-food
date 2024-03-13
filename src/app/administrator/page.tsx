@@ -1,4 +1,4 @@
-import '../styles/kitchenstaff.scss'
+import '../styles/administrator.scss'
 import '../styles/globals.scss'
 import Layout from '../components/layout'
 

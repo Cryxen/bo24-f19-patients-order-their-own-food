@@ -4,27 +4,42 @@ ul {
     padding: 0;
 }
 
-.container {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.meal-list {
+.border {
     border: solid;
 }
 
-.list li {
-    background-color: gray;
+.meal-list li {
     border: 1px solid black;
     padding: 1rem;
 }
 
-.graphs {
-    text-align: center;
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2.5rem;
+    min-width: 50%;
 }
 
-.graphs section {
-    border: solid;
-    margin-bottom: 2rem;
+.graphs-container {
+    text-align: center;
+}   
+
+.section-filter {
+    display: flex;
+    justify-content: space-between;
+    min-width: 50%;
 }
+
+.graphs-container section {
+    max-width: 50vw;
+}
+
+.meal-list-container {
+    max-width: 50vw;
+}
+
+.popular-section {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
