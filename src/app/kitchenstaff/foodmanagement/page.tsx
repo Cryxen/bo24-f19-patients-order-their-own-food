@@ -45,7 +45,6 @@ const Foodmanagement = () => {
         setNameFilter(event.target.value)
         const filtered = meals.filter(el => el.mealName.toLowerCase().includes(nameFilter.toLowerCase()))
         setFilteredMeals(filtered)
-        console.log(filtered)
     }
 
     return (
