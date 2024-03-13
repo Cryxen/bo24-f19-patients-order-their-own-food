@@ -7,6 +7,7 @@ const Rolledrop = (props: { user: User, changeRole: (event: React.ChangeEvent<HT
 
     return (
         <select name="rolle" id="rolle" value={user?.role} onChange={(e) => changeRole(e, user)}>
+            {user.role === 'undefined' ? <option value=''>Velg rolle</option> : ''}
             <option value="administrator">Admin</option>
             <option value="kitchen">Kjøkken</option>
             <option value="healthcare">Helsefagarbeider</option>
