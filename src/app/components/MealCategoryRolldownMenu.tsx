@@ -6,12 +6,13 @@ interface MealCategoryRolldownMenu {
     handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-const MealCategoryRolldownMenu = (props: { meal?: Meal, handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void }) => {
-    const { meal = {mealName: '', description: '', category: 'undefined'}, handleCategoryChange } = props
-    
+const MealCategoryRolldownMenu = (props: { meal?: Meal, handleCategoryChange: (event: ChangeEvent<HTMLSelectElement>) => void, filter?: boolean }) => {
+    const { meal = { mealName: '', description: '', category: 'undefined' }, handleCategoryChange, filter = false } = props
+
     return (
         <select id="category" value={meal.category} onChange={handleCategoryChange}>
-            {meal.category === 'undefined' ? <option>Velg kategori:</option> : ''}
+            {filter ? <option value="Show all">Vis alle</option> : //If filter is false, show 'velg kategori', if filter is true, show 'vis alle'
+                meal.category === 'undefined' ? <option>Velg kategori:</option> : ''}
             <option value="red meat">Rødt kjøtt</option>
             <option value="fish">Fisk</option>
             <option value="chicken">Kylling</option>
