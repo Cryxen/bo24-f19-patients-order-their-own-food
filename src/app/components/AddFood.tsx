@@ -53,14 +53,6 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
             <input type="text" id="description" placeholder="Beskrivelse" value={meal.description} onChange={handleDescriptionChange} />
             <label htmlFor="category">Kategori:</label>
             <MealCategoryRolldownMenu meal={meal} handleCategoryChange={handleCategoryChange} />
-            {/* <select id="category" onChange={handleCategoryChange}>
-                {meal.category === 'undefined' ? <option>Velg kategori:</option> : ''}
-                <option value="red meat">Rødt kjøtt</option>
-                <option value="fish">Fisk</option>
-                <option value="chicken">Kylling</option>
-                <option value="pasta">Pasta</option>
-                <option value="vegetable">Grønnsak</option>
-            </select> */}
             <button onClick={submitMealToDB}>Legg til måltid.</button>
         </form>
     )
