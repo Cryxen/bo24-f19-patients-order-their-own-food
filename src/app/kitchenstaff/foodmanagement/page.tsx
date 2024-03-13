@@ -29,7 +29,7 @@ const Foodmanagement = () => {
             console.error('something went wrong fetching meals from API. status code: ' + response.status)
     }
 
-    const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const handleCategoryFilterChange = (event: ChangeEvent<HTMLSelectElement>) => {
         console.log(event.target.value)
         setCategoryFilter(event.target.value)
         if (event.target.value === 'Show all') {
@@ -48,7 +48,7 @@ const Foodmanagement = () => {
                 <section>
                     <div>
                         <input type="text" placeholder="Søk"></input>
-                        <MealCategoryRolldownMenu handleCategoryChange={handleCategoryChange} filter={true} categoryFilter={categoryFilter} />
+                        <MealCategoryRolldownMenu handleCategoryChange={handleCategoryFilterChange} filter={true} categoryFilter={categoryFilter} />
                         <select name="filters">
                             <option>Velg en filter</option>
                             <option>Filter 1</option>
