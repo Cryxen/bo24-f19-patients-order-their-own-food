@@ -1,7 +1,7 @@
 "use client"
 import { Meal } from "@/features/meals/types"
 
-const FoodList = (props: { meal: Meal }) => {
+const MealListing = (props: { meal: Meal }) => {
     const { meal } = props
     
     return (
@@ -15,4 +15,4 @@ const FoodList = (props: { meal: Meal }) => {
     </tr>
     )
 }
-export default FoodList
+export default MealListing
