@@ -75,63 +75,7 @@ const Foodmanagement = () => {
                         <tbody>
                             {meals?.map((meal) =>
                                 <MealListing meal={meal} setMeals={setMeals} meals={meals} key={meal.mealName}/>
-                                // <tr key={meal.mealName}>
-                                //     <td>{meal.imageUrl}</td>
-                                //     <td>{meal.mealName}</td>
-                                //     <td>{meal.description}</td>
-                                //     <td>{meal.category}</td>
-                                //     <td>{meal.dietaryInfo}</td>
-                                //     <td><button>Edit</button></td>
-                                // </tr>
                             )}
-                            {/* <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 1</td>
-                            <td>Beskrivelse 1</td>
-                            <td>Kategori 1</td>
-                            <td>Andre info 1</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 2</td>
-                            <td>Beskrivelse 2</td>
-                            <td>Kategori 2</td>
-                            <td>Andre info 2</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 3</td>
-                            <td>Beskrivelse 3</td>
-                            <td>Kategori 3</td>
-                            <td>Andre info 3</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 3</td>
-                            <td>Beskrivelse 3</td>
-                            <td>Kategori 3</td>
-                            <td>Andre info 3</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 4</td>
-                            <td>Beskrivelse 4</td>
-                            <td>Kategori 4</td>
-                            <td>Andre info 4</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 5</td>
-                            <td>Beskrivelse 5</td>
-                            <td>Kategori 5</td>
-                            <td>Andre info 5</td>
-                            <td><button>Edit</button></td>
-                        </tr> */}
                         </tbody>
                     </table>
                 </section>
