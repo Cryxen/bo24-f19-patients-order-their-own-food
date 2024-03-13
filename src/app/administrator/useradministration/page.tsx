@@ -5,6 +5,7 @@ import '../../styles/useradministration.scss'
 import '../../styles/globals.scss'
 import { SetStateAction, useEffect, useState } from 'react';
 import { User } from '@/features/users/types';
+import CreateUser from '@/app/components/CreateUser';
 
 
 
@@ -40,16 +41,15 @@ const useradministration = () => {
             },
             body: JSON.stringify(userToUpdate)
         })
-            if(response.status === 200)
-                {
-                    const data = await response.json()
-                    console.log(data)
-                }
-            else 
-                console.error("Something went wrong updating roles on user object in database")
+        if (response.status === 200) {
+            const data = await response.json()
+            console.log(data)
+        }
+        else
+            console.error("Something went wrong updating roles on user object in database")
         console.log(users)
         console.log(response)
-        
+
     }
 
 
@@ -68,7 +68,7 @@ const useradministration = () => {
 
 
                 </div>
-
+                    <CreateUser />
 
             </div>
         </Layout>
