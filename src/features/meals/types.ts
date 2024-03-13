@@ -1,5 +1,5 @@
 export type Meal = {
-    name: string
+    mealName: string
     description: string
     category: "red meat" | "fish" | "chicken" | "pasta" |"vegetable" 
     dietaryInfo?: string
