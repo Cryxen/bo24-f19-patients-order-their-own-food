@@ -5,6 +5,30 @@ table, td{
     padding-bottom: 5%;
 }
 
+table {
+    width: 75vw;
+    height: 12vh;
+}
+
 .red {
     background-color: red;
+}
+
+.order-config {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    height: 12vh;
+}
+
+@media only screen and (min-width: 1024px) {
+    table {
+        width: 50vw;
+    }
+    .order-config {
+        height: 10vh;
+    }
 }

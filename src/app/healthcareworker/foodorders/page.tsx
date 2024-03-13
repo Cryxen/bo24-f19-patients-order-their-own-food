@@ -23,7 +23,16 @@ const Foodorders = () => {
                     <table>
                         <tbody>
                         <tr>
-                            <td>Bilde av mat 1</td><td>Beskrivelse av mat 1</td><td><button>Bestill</button></td>
+                            <td>Bilde av mat 1</td>
+                            <td>Beskrivelse av mat 1</td>
+                            <td className="order-config">
+                                <select name="portion-list">
+                                    <option>Liten</option>
+                                    <option>Medium</option>
+                                    <option>Stor</option>
+                                </select>
+                                <button>Bestill</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -32,7 +41,16 @@ const Foodorders = () => {
                     <table>
                         <tbody>
                         <tr>
-                            <td>Bilde av mat 2</td><td>Beskrivelse av mat 2</td><td><button>Bestill</button></td>
+                            <td>Bilde av mat 2</td>
+                            <td>Beskrivelse av mat 2</td>
+                            <td className="order-config">
+                                <select name="portion-list">
+                                    <option>Liten</option>
+                                    <option>Medium</option>
+                                    <option>Stor</option>
+                                </select>
+                                <button>Bestill</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -41,7 +59,16 @@ const Foodorders = () => {
                     <table>
                         <tbody>
                         <tr>
-                            <td>Bilde av mat 3</td><td>Beskrivelse av mat 3</td><td><button>Bestill</button></td>
+                            <td>Bilde av mat 3</td>
+                            <td>Beskrivelse av mat 3</td>
+                            <td className="order-config">
+                                <select name="portion-list">
+                                    <option>Liten</option>
+                                    <option>Medium</option>
+                                    <option>Stor</option>
+                                </select>
+                                <button>Bestill</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -50,7 +77,16 @@ const Foodorders = () => {
                     <table>
                         <tbody>
                         <tr>
-                            <td>Bilde av mat 4</td><td>Beskrivelse av mat 4</td><td><button>Bestill</button></td>
+                            <td>Bilde av mat 4</td>
+                            <td>Beskrivelse av mat 4</td>
+                            <td className="order-config">
+                                <select name="portion-list">
+                                    <option>Liten</option>
+                                    <option>Medium</option>
+                                    <option>Stor</option>
+                                </select>
+                                <button>Bestill</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -59,6 +95,5 @@ const Foodorders = () => {
             </div>
         </Layout>
     )
-
 }
 export default Foodorders
