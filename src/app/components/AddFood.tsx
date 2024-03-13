@@ -1,7 +1,9 @@
 import { Meal } from "@/features/meals/types"
-import { ChangeEvent, MouseEvent, useState } from "react"
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useState } from "react"
 
-const AddFood = () => {
+const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[]>> }) => {
+    const {meals, setMeals} = props
+
     const [meal, setMeal] = useState<Meal>({
         mealName: '',
         description: '',
@@ -31,6 +33,9 @@ const AddFood = () => {
             if (response.status === 200) {
                 const data = await response.json()
                 console.log(data)
+                setMeals(prev => ([
+                    ...prev, meal
+                ]))
             }
             else
                 console.error('Something went wrong calling API to save meal to db')

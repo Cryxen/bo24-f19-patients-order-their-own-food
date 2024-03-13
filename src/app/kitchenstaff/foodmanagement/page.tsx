@@ -10,17 +10,16 @@ const Foodmanagement = () => {
 
     const [meals, setMeals] = useState<Meal[]>([])
 
-    useEffect (() => {
+    useEffect(() => {
         fetchMealsFromAPI()
     }, [])
 
     const fetchMealsFromAPI = async () => {
         const response = await fetch('/api/meals')
-        if(response.status === 200)
-            {
-                const data = await response.json()
-                setMeals(data.data)
-            }
+        if (response.status === 200) {
+            const data = await response.json()
+            setMeals(data.data)
+        }
         else
             console.error('something went wrong fetching meals from API. status code: ' + response.status)
     }
@@ -63,27 +62,27 @@ const Foodmanagement = () => {
                 <section className="food-database">
                     <table>
                         <thead>
-                        <tr>
-                            <th></th>
-                            <th>Matnavn</th>
-                            <th>Beskrivelse</th>
-                            <th>Kategori</th>
-                            <th>Andre info</th>
-                            <th></th>
-                        </tr>
+                            <tr>
+                                <th></th>
+                                <th>Matnavn</th>
+                                <th>Beskrivelse</th>
+                                <th>Kategori</th>
+                                <th>Andre info</th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {meals?.map((meal) => 
-                        <tr key={meal.mealName}>
-                            <td>{meal.imageUrl}</td>
-                            <td>{meal.mealName}</td>
-                            <td>{meal.description}</td>
-                            <td>{meal.category}</td>
-                            <td>{meal.dietaryInfo}</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        )}
-                        {/* <tr>
+                            {meals?.map((meal) =>
+                                <tr key={meal.mealName}>
+                                    <td>{meal.imageUrl}</td>
+                                    <td>{meal.mealName}</td>
+                                    <td>{meal.description}</td>
+                                    <td>{meal.category}</td>
+                                    <td>{meal.dietaryInfo}</td>
+                                    <td><button>Edit</button></td>
+                                </tr>
+                            )}
+                            {/* <tr>
                             <td>Bilde av mat</td>
                             <td>Matnavn 1</td>
                             <td>Beskrivelse 1</td>
@@ -136,7 +135,7 @@ const Foodmanagement = () => {
                 </section>
                 <section className="buttons">
                     <button>Legg til ny matrett</button>
-                    <AddFood />
+                    <AddFood meals={meals} setMeals={setMeals} />
                     <button>Fjern matrett</button>
                 </section>
             </div>
