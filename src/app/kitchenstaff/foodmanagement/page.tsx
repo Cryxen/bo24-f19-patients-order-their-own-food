@@ -4,6 +4,7 @@ import '../../styles/foodmanagement.scss'
 import { useEffect, useState } from "react"
 import { Meal } from "@/features/meals/types"
 import AddFood from "@/app/components/AddFood"
+import FoodList from "@/app/components/FoodList"
 
 
 const Foodmanagement = () => {
@@ -73,14 +74,15 @@ const Foodmanagement = () => {
                         </thead>
                         <tbody>
                             {meals?.map((meal) =>
-                                <tr key={meal.mealName}>
-                                    <td>{meal.imageUrl}</td>
-                                    <td>{meal.mealName}</td>
-                                    <td>{meal.description}</td>
-                                    <td>{meal.category}</td>
-                                    <td>{meal.dietaryInfo}</td>
-                                    <td><button>Edit</button></td>
-                                </tr>
+                                <FoodList meal={meal} key={meal.mealName}/>
+                                // <tr key={meal.mealName}>
+                                //     <td>{meal.imageUrl}</td>
+                                //     <td>{meal.mealName}</td>
+                                //     <td>{meal.description}</td>
+                                //     <td>{meal.category}</td>
+                                //     <td>{meal.dietaryInfo}</td>
+                                //     <td><button>Edit</button></td>
+                                // </tr>
                             )}
                             {/* <tr>
                             <td>Bilde av mat</td>
