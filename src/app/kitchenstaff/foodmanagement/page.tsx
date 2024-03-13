@@ -3,6 +3,7 @@ import Layout from "@/app/components/layout"
 import '../../styles/foodmanagement.scss'
 import { useEffect, useState } from "react"
 import { Meal } from "@/features/meals/types"
+import AddFood from "@/app/components/AddFood"
 
 
 const Foodmanagement = () => {
@@ -135,6 +136,7 @@ const Foodmanagement = () => {
                 </section>
                 <section className="buttons">
                     <button>Legg til ny matrett</button>
+                    <AddFood />
                     <button>Fjern matrett</button>
                 </section>
             </div>
