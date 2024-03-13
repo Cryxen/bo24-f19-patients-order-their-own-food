@@ -23,6 +23,7 @@ model User {
 model Meal {
   mealName String @id @unique
   description String
+  category String
   dietaryInfo String
   imageUrl String
   meaplPlan MealToMealPlan[]
