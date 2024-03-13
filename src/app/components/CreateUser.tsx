@@ -24,6 +24,12 @@ const CreateUser = () => {
         }))
     }
 
+    const changeRole = (event: ChangeEvent<HTMLSelectElement>, user:User) => {
+        setUser(prev => ({
+            ...prev, role: event.target.value as User["role"]
+        }))
+    }
+
     return (
         <div className='mainbox'>
             <article className='itembox2'>
@@ -36,7 +42,7 @@ const CreateUser = () => {
             </article>
 
             <article className='centerbox'>
-                <section className='contentitemboxrolle'><Rolledrop /></section>
+                <section className='contentitemboxrolle'><Rolledrop user={user} changeRole={changeRole}/></section>
             </article>
 
             <article className='centerbox'>
