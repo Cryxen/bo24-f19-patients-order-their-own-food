@@ -18,8 +18,24 @@ const AddFood = () => {
         setMeal((prev) => ({ ...prev, category: event.target.value as Meal["category"] }))
     }
 
-    const submitMealToDB = (event: MouseEvent<HTMLButtonElement>) => {
+    const submitMealToDB = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
+        if (meal.mealName.length > 0 && meal.description.length > 0 && meal.category !== "undefined") {
+            const response = await fetch('/api/meals', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(meal)
+            })
+            if (response.status === 200) {
+                const data = await response.json()
+                console.log(data)
+            }
+            else
+                console.error('Something went wrong calling API to save meal to db')
+        }
+
         console.log(meal)
     }
 
