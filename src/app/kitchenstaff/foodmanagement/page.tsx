@@ -1,15 +1,18 @@
 "use client"
 import Layout from "@/app/components/layout"
 import '../../styles/foodmanagement.scss'
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { Meal } from "@/features/meals/types"
 import AddFood from "@/app/components/AddFood"
 import MealListing from "@/app/components/MealListing"
+import MealCategoryRolldownMenu from "@/app/components/MealCategoryRolldownMenu"
 
 
 const Foodmanagement = () => {
 
     const [meals, setMeals] = useState<Meal[]>([])
+    const [filteredMeals, setFilteredMeals] = useState<Meal[]>([])
+    const [categoryFilter, setCategoryFilter] = useState<string>()
 
     useEffect(() => {
         fetchMealsFromAPI()
@@ -20,12 +23,24 @@ const Foodmanagement = () => {
         if (response.status === 200) {
             const data = await response.json()
             setMeals(data.data)
+            setFilteredMeals(data.data) //show all meals by default
         }
         else
             console.error('something went wrong fetching meals from API. status code: ' + response.status)
     }
 
-    console.log(meals)
+    const handleCategoryChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        console.log(event.target.value)
+        setCategoryFilter(event.target.value)
+        if (event.target.value === 'Show all') {
+            setFilteredMeals(meals)
+        }
+        else {
+            const filtered = meals.filter(el => el.category === event.target.value)
+            setFilteredMeals(filtered)
+        }
+    }
+
     return (
         <Layout>
             <div className="mainDiv">
@@ -33,13 +48,7 @@ const Foodmanagement = () => {
                 <section>
                     <div>
                         <input type="text" placeholder="Søk"></input>
-                        <select name="categories">
-                            <option>Velg en kategori</option>
-                            <option>Matkategori 1</option>
-                            <option>Matkategori 2</option>
-                            <option>Matkategori 3</option>
-                            <option>Matkategori 4</option>
-                        </select>
+                        <MealCategoryRolldownMenu handleCategoryChange={handleCategoryChange} filter={true} categoryFilter={categoryFilter} />
                         <select name="filters">
                             <option>Velg en filter</option>
                             <option>Filter 1</option>
@@ -73,8 +82,8 @@ const Foodmanagement = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {meals?.map((meal) =>
-                                <MealListing meal={meal} setMeals={setMeals} meals={meals} key={meal.mealName}/>
+                            {filteredMeals?.map((meal) =>
+                                <MealListing meal={meal} setMeals={setMeals} meals={meals} key={meal.mealName} />
                             )}
                         </tbody>
                     </table>
