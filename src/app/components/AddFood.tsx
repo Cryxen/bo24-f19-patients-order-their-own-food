@@ -2,8 +2,8 @@ import { Meal } from "@/features/meals/types"
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useState } from "react"
 import MealCategoryRolldownMenu from "./MealCategoryRolldownMenu"
 
-const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[]>> }) => {
-    const {meals, setMeals} = props
+const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[]>>,fetchMealsFromAPI: () => void }) => {
+    const {meals, setMeals, fetchMealsFromAPI} = props
 
     const [meal, setMeal] = useState<Meal>({
         mealName: '',
@@ -37,6 +37,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
                 setMeals(prev => ([
                     ...prev, meal
                 ]))
+                fetchMealsFromAPI()
             }
             else
                 console.error('Something went wrong calling API to save meal to db')
