@@ -28,35 +28,50 @@ const Foodmanagement = () => {
             const data = await response.json()
             setMeals(data.data)
             setFilteredMeals(data.data) //show all meals by default
+            setCategoryFilteredMeals(data.data)
+            setNameFilteredMeals(data.data)
         }
         else
             console.error('something went wrong fetching meals from API. status code: ' + response.status)
     }
 
+    const mergeFilterChange = (filter1: Meal[], filter2: Meal[]) => {
+        const filter2MealNames = filter2.map(meal => meal.mealName)
+        setFilteredMeals(
+            filter1.filter(el => filter2MealNames.includes(el.mealName))
+        )
+    }
+
     const handleCategoryFilterChange = (event: ChangeEvent<HTMLSelectElement>) => {
-        console.log(event.target.value)
         setCategoryFilter(event.target.value)
         if (event.target.value === 'Show all') {
             setCategoryFilteredMeals(meals)
-            // setFilteredMeals([...categoryFilteredMeals, ...nameFilteredMeals])
+            mergeFilterChange(meals, nameFilteredMeals)
         }
         else {
             const filtered = meals.filter(el => el.category === event.target.value)
-            setFilteredMeals(filtered)
-            // setFilteredMeals([...categoryFilteredMeals, ...nameFilteredMeals])
-
             setCategoryFilteredMeals(filtered)
+            mergeFilterChange(filtered, nameFilteredMeals)
         }
 
     }
 
     const handleNameFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value)
         setNameFilter(event.target.value)
-        const filtered = meals.filter(el => el.mealName.toLowerCase().includes(nameFilter.toLowerCase()))
-        setNameFilteredMeals(filtered)
-        setFilteredMeals(filtered)
-        // setFilteredMeals([...categoryFilteredMeals, ...nameFilteredMeals])
-        console.log(filteredMeals)
+        if (event.target.value.length === 0) {
+            console.log("inside if")
+            const filtered = meals
+            setNameFilteredMeals(meals)
+            mergeFilterChange(filtered, categoryFilteredMeals)
+        }
+        else {
+            const filtered = meals.filter(el => el.mealName.toLowerCase().includes(nameFilter.toLowerCase()))
+            setNameFilteredMeals(filtered)
+            mergeFilterChange(filtered, categoryFilteredMeals)
+        }
+
+
     }
 
     return (
