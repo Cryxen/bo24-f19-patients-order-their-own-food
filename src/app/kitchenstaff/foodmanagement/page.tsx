@@ -123,7 +123,7 @@ const Foodmanagement = () => {
                 </section>
                 <section className="buttons">
                     <button>Legg til ny matrett</button>
-                    <AddFood meals={meals} setMeals={setMeals} />
+                    <AddFood meals={meals} setMeals={setMeals} fetchMealsFromAPI={fetchMealsFromAPI} />
                     <button>Fjern matrett</button>
                 </section>
             </div>
