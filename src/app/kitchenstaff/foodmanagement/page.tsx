@@ -1,44 +1,87 @@
 "use client"
 import Layout from "@/app/components/layout"
 import '../../styles/foodmanagement.scss'
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { Meal } from "@/features/meals/types"
 import AddFood from "@/app/components/AddFood"
+import MealListing from "@/app/components/MealListing"
+import MealCategoryRolldownMenu from "@/app/components/MealCategoryRolldownMenu"
 
 
 const Foodmanagement = () => {
 
     const [meals, setMeals] = useState<Meal[]>([])
+    const [filteredMeals, setFilteredMeals] = useState<Meal[]>([])
+    const [categoryFilter, setCategoryFilter] = useState<string>()
+    const [categoryFilteredMeals, setCategoryFilteredMeals] = useState<Meal[]>([])
+    const [nameFilter, setNameFilter] = useState<string>('')
+    const [nameFilteredMeals, setNameFilteredMeals] = useState<Meal[]>([])
 
     useEffect(() => {
         fetchMealsFromAPI()
     }, [])
+
 
     const fetchMealsFromAPI = async () => {
         const response = await fetch('/api/meals')
         if (response.status === 200) {
             const data = await response.json()
             setMeals(data.data)
+            setFilteredMeals(data.data) //show all meals by default
+            setCategoryFilteredMeals(data.data)
+            setNameFilteredMeals(data.data)
         }
         else
             console.error('something went wrong fetching meals from API. status code: ' + response.status)
     }
 
-    console.log(meals)
+    const mergeFilterChange = (filter1: Meal[], filter2: Meal[]) => {
+        const filter2MealNames = filter2.map(meal => meal.mealName)
+        setFilteredMeals(
+            filter1.filter(el => filter2MealNames.includes(el.mealName))
+        )
+    }
+
+    const handleCategoryFilterChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        setCategoryFilter(event.target.value)
+        if (event.target.value === 'Show all') {
+            setCategoryFilteredMeals(meals)
+            mergeFilterChange(meals, nameFilteredMeals)
+        }
+        else {
+            const filtered = meals.filter(el => el.category === event.target.value)
+            setCategoryFilteredMeals(filtered)
+            mergeFilterChange(filtered, nameFilteredMeals)
+        }
+
+    }
+
+    const handleNameFilterChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value)
+        setNameFilter(event.target.value)
+        if (event.target.value.length === 0) {
+            console.log("inside if")
+            const filtered = meals
+            setNameFilteredMeals(meals)
+            mergeFilterChange(filtered, categoryFilteredMeals)
+        }
+        else {
+            const filtered = meals.filter(el => el.mealName.toLowerCase().includes(nameFilter.toLowerCase()))
+            setNameFilteredMeals(filtered)
+            mergeFilterChange(filtered, categoryFilteredMeals)
+        }
+
+
+    }
+
     return (
         <Layout>
             <div className="mainDiv">
                 <h1>Mat håndtering</h1>
                 <section>
                     <div>
-                        <input type="text" placeholder="Søk"></input>
-                        <select name="categories">
-                            <option>Velg en kategori</option>
-                            <option>Matkategori 1</option>
-                            <option>Matkategori 2</option>
-                            <option>Matkategori 3</option>
-                            <option>Matkategori 4</option>
-                        </select>
+                        <input type="text" placeholder="Søk" value={nameFilter} onChange={handleNameFilterChange}></input>
+                        <MealCategoryRolldownMenu handleCategoryChange={handleCategoryFilterChange} filter={true} categoryFilter={categoryFilter} />
                         <select name="filters">
                             <option>Velg en filter</option>
                             <option>Filter 1</option>
@@ -72,64 +115,9 @@ const Foodmanagement = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {meals?.map((meal) =>
-                                <tr key={meal.mealName}>
-                                    <td>{meal.imageUrl}</td>
-                                    <td>{meal.mealName}</td>
-                                    <td>{meal.description}</td>
-                                    <td>{meal.category}</td>
-                                    <td>{meal.dietaryInfo}</td>
-                                    <td><button>Edit</button></td>
-                                </tr>
+                            {filteredMeals?.map((meal) =>
+                                <MealListing meal={meal} setMeals={setMeals} setFilteredMeals={setFilteredMeals} meals={meals} key={meal.mealName} />
                             )}
-                            {/* <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 1</td>
-                            <td>Beskrivelse 1</td>
-                            <td>Kategori 1</td>
-                            <td>Andre info 1</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 2</td>
-                            <td>Beskrivelse 2</td>
-                            <td>Kategori 2</td>
-                            <td>Andre info 2</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 3</td>
-                            <td>Beskrivelse 3</td>
-                            <td>Kategori 3</td>
-                            <td>Andre info 3</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 3</td>
-                            <td>Beskrivelse 3</td>
-                            <td>Kategori 3</td>
-                            <td>Andre info 3</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 4</td>
-                            <td>Beskrivelse 4</td>
-                            <td>Kategori 4</td>
-                            <td>Andre info 4</td>
-                            <td><button>Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Bilde av mat</td>
-                            <td>Matnavn 5</td>
-                            <td>Beskrivelse 5</td>
-                            <td>Kategori 5</td>
-                            <td>Andre info 5</td>
-                            <td><button>Edit</button></td>
-                        </tr> */}
                         </tbody>
                     </table>
                 </section>
