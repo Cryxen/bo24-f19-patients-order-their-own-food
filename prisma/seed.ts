@@ -14,9 +14,9 @@ const users: User[] = [
 ];
 
 const meals: Meal[] = [
-  {name: "Stekt kylling", description: "Stekt i smør", category: "chicken"},
-  {name: "Stekt fisk", description: "Stekt i smør", category: "fish"},
-  {name: "Stekt biff", description: "Stekt i smør", category: "red meat"},
+  {mealName: "Stekt kylling", description: "Stekt i smør", category: "chicken"},
+  {mealName: "Stekt fisk", description: "Stekt i smør", category: "fish"},
+  {mealName: "Stekt biff", description: "Stekt i smør", category: "red meat"},
 ]
 
 
@@ -42,10 +42,10 @@ const createUsers = async () => {
 const createMeals = async () => {
   const mealPromises = meals.map(async (meal) => {
     await prisma.meal.upsert({
-      where: {mealName: meal.name},
+      where: {mealName: meal.mealName},
       update: {},
       create: {
-        mealName: meal.name,
+        mealName: meal.mealName,
         description: meal.description,
         category: meal.category,
         dietaryInfo: meal.dietaryInfo,
