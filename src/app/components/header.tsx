@@ -1,9 +1,9 @@
 const Header = () => {
     return(
-        <div id="header">
-        <p>HEADER</p>
-        <button>Dashboard</button>
-        <button>Bruker</button>
+        <div className="header">
+            <p className="content">HEADER</p>
+            <button className="content">Dashboard</button>
+            <button className="content">Bruker</button>
         </div>
     )
 }
