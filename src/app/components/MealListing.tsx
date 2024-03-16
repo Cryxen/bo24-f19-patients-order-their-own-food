@@ -99,6 +99,11 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
         console.log(event.target.checked)
     }
 
+    const handleDeleteMeal = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        
+    }
+
     return (
         <>
             <tr>
@@ -117,6 +122,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                     </ul>
                 </td>
                 <td><button onClick={() => setShowEditMeal(!showEditMeal)}>Edit</button></td>
+                <td><button onClick={handleDeleteMeal}>Slett rett</button></td>
             </tr>
             {
                 showEditMeal ?
@@ -131,7 +137,6 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                                 <input type="checkbox" key={restriction} value={restriction} itemID={restriction} onChange={handleDietaryChange} checked={mealToChange.dietaryInfo?.includes(restriction) ? true : false}/>
                             </div>
                         )}
-
                         </td>
                         <td><button onClick={handleSaveButton}>Lagre</button></td>
                     </tr> : ''
