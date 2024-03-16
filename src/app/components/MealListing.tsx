@@ -42,6 +42,8 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
             ...prev, description: event.target.value
         }))
     }
+
+    // Seems unused, TODO: Find out if can be deleted.
     const handleDietaryInformationChange = (event: ChangeEvent<HTMLInputElement>) => {
         setMealToChange(prev => ({
             ...prev, dietaryInfo: event.target.value
