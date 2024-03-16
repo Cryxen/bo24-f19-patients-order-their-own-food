@@ -22,6 +22,13 @@ const Foodmanagement = () => {
         fetchMealsFromAPI()
     }, [])
 
+    useEffect(() => {
+        setFilteredMeals(meals)
+        console.log("test")
+        console.log(meals)
+        console.log(filteredMeals)
+    }, [meals])
+
     const stringToArray = (string: string): string[] => {
         return string.split(',')
     }

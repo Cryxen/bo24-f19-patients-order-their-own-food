@@ -56,13 +56,19 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
             method: "DELETE"
         } )
         if(response.status === 200) {
+            const mealsWithoutDeletedMeal: Meal[] = meals.filter(el => el.mealName !== meal.mealName)
+            console.log(mealsWithoutDeletedMeal)
+
+            setMeals(mealsWithoutDeletedMeal)
+           
             const data = await response.json()
             console.log(data)
         }   
         else 
             console.error("Something went wrong with deleting meal: " + meal.mealName + " from db")
-        
     }
+
+
 
     const handleSaveButton = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
