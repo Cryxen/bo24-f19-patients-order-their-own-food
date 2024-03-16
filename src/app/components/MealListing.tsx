@@ -1,5 +1,5 @@
 "use client"
-import { Meal } from "@/features/meals/types"
+import { Meal, dietaryRestrictions } from "@/features/meals/types"
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useEffect, useState } from "react"
 import MealCategoryRolldownMenu from "./MealCategoryRolldownMenu"
 
@@ -79,6 +79,24 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
 
         }
     }
+
+
+    const handleDietaryChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            setMealToChange(prev => ({
+                ...prev, dietaryInfo: [...(prev.dietaryInfo || []), event.target.value] // Idea from chatGPT to ensure that dietaryInfo is array.
+            }))
+        }
+        else {
+            setMealToChange(prev => ({
+                ...prev, dietaryInfo: prev.dietaryInfo?.filter(diet => diet !== event.target.value)
+            }))
+        }
+        console.log(meal)
+        console.log(event.target.value)
+        console.log(event.target.checked)
+    }
+
     return (
         <>
             <tr>
@@ -105,7 +123,14 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                         <td> <input type="text" value={mealToChange.mealName} disabled /> </td>
                         <td> <input type="text" value={mealToChange.description} onChange={handleDescriptionChange} /> </td>
                         <td> <MealCategoryRolldownMenu meal={mealToChange} handleCategoryChange={handleCategoryChange} /> </td>
-                        <td> <input type="text" value={mealToChange.dietaryInfo !== null ? mealToChange.dietaryInfo : ''} onChange={handleDietaryInformationChange} /> </td>
+                        <td>{dietaryRestrictions.map(restriction =>
+                            <div key={restriction}>
+                                <label htmlFor={restriction}>{restriction}</label>
+                                <input type="checkbox" key={restriction} value={restriction} itemID={restriction} onChange={handleDietaryChange} checked={mealToChange.dietaryInfo?.includes(restriction) ? true : false}/>
+                            </div>
+                        )}
+
+                        </td>
                         <td><button onClick={handleSaveButton}>Lagre</button></td>
                     </tr> : ''
             }
