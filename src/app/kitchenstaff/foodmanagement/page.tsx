@@ -122,7 +122,8 @@ const Foodmanagement = () => {
                                 <th>Beskrivelse</th>
                                 <th>Kategori</th>
                                 <th>Diet info</th>
-                                <th></th>
+                                <th>Endre</th>
+                                <th>Slett</th>
                             </tr>
                         </thead>
                         <tbody>
