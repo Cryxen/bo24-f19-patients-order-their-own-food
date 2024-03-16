@@ -86,7 +86,16 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                 <td>{meal.mealName}</td>
                 <td>{meal.description}</td>
                 <td>{meal.category}</td>
-                <td>{meal.dietaryInfo}</td>
+                <td>
+                    <ul>
+                        {
+                            Array.isArray(meal.dietaryInfo) ?
+                                meal.dietaryInfo.map(el =>
+                                    <li key={el}>{el}</li>
+                                ) : ''
+                        }
+                    </ul>
+                </td>
                 <td><button onClick={() => setShowEditMeal(!showEditMeal)}>Edit</button></td>
             </tr>
             {
