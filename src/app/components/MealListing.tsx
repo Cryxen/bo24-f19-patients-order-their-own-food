@@ -50,6 +50,20 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
         }))
     }
 
+    const handleDeleteMeal = async(event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        const response = await fetch('/api/meals?mealName=' + meal.mealName, {
+            method: "DELETE"
+        } )
+        if(response.status === 200) {
+            const data = await response.json()
+            console.log(data)
+        }   
+        else 
+            console.error("Something went wrong with deleting meal: " + meal.mealName + " from db")
+        
+    }
+
     const handleSaveButton = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         console.log(mealToChange)
@@ -99,10 +113,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
         console.log(event.target.checked)
     }
 
-    const handleDeleteMeal = (event: MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        
-    }
+
 
     return (
         <>
