@@ -15,6 +15,10 @@ const makeStringToArray = (string:string): string[] => {
     return string.split(',')
 }
 
+const makeArrayToString = (array: string[]) : string => {
+    return array.toString()
+}
+
 export const saveMeal = async (meal: Meal) => {
     try {
         if (Array.isArray(meal.dietaryInfo))
