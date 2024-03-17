@@ -1,0 +1,27 @@
+// Used https://codepen.io/adventuresinmissions/pen/ExwoWL for inspiration
+.confirmationWindow {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(94, 110, 141, 0.9);
+}
+
+.confirmationWindowContainter {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    margin: 8em auto;
+    padding: 1%;
+    background: #FFF;
+    opacity: 0.8;
+    border-radius: .25em .25em .4em .4em;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+    button {
+        margin: 1%
+    }
+}
+

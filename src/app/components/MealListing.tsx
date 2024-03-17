@@ -2,6 +2,7 @@
 import { Meal, dietaryRestrictions } from "@/features/meals/types"
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useEffect, useState } from "react"
 import MealCategoryRolldownMenu from "./MealCategoryRolldownMenu"
+import ConfirmationWindow from "./ComfirmationWindow"
 
 const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[]>>, setFilteredMeals: Dispatch<SetStateAction<Meal[]>> }) => {
     const [showEditMeal, setShowEditMeal] = useState<Boolean>(false)
@@ -12,6 +13,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
         dietaryInfo: '',
         imageUrl: ''
     }) //There's probably a much better way to do this  
+    const [showConfirmationWindow, setShowConfirmationWindow] = useState<Boolean>(false)
     const { meal, meals, setMeals, setFilteredMeals } = props
 
 
@@ -50,24 +52,30 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
         }))
     }
 
-    const handleDeleteMeal = async(event: MouseEvent<HTMLButtonElement>) => {
+    const handleDeleteMealButton = async (event: MouseEvent<HTMLButtonElement>) => {
+        // Show confirmation window
         event.preventDefault()
+        setShowConfirmationWindow(true)
+    }
+
+    const handleConfirmButtonPress = async () => {
+        setShowConfirmationWindow(false)
         const response = await fetch('/api/meals?mealName=' + meal.mealName, {
             method: "DELETE"
-        } )
-        if(response.status === 200) {
+        })
+        if (response.status === 200) {
             const mealsWithoutDeletedMeal: Meal[] = meals.filter(el => el.mealName !== meal.mealName)
-            console.log(mealsWithoutDeletedMeal)
-
             setMeals(mealsWithoutDeletedMeal)
-           
             const data = await response.json()
             console.log(data)
-        }   
-        else 
+        }
+        else
             console.error("Something went wrong with deleting meal: " + meal.mealName + " from db")
     }
 
+    const handleDeclineButtonPress = () => {
+        setShowConfirmationWindow(false)
+    }
 
 
     const handleSaveButton = async (event: MouseEvent<HTMLButtonElement>) => {
@@ -123,6 +131,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
 
     return (
         <>
+            {showConfirmationWindow ? <ConfirmationWindow message={"Er du sikker på at du ønsker å slette?"} confirmButton={"Ja"} declineButton={"Nei"} handleConfirmButtonPress={handleConfirmButtonPress} handleDeclineButtonPress={handleDeclineButtonPress} /> : ''}
             <tr>
                 <td>{meal.imageUrl}</td>
                 <td>{meal.mealName}</td>
@@ -139,7 +148,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                     </ul>
                 </td>
                 <td><button onClick={() => setShowEditMeal(!showEditMeal)}>Edit</button></td>
-                <td><button onClick={handleDeleteMeal}>Slett rett</button></td>
+                <td><button onClick={handleDeleteMealButton}>Slett rett</button></td>
             </tr>
             {
                 showEditMeal ?
@@ -151,7 +160,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                         <td>{dietaryRestrictions.map(restriction =>
                             <div key={restriction}>
                                 <label htmlFor={restriction}>{restriction}</label>
-                                <input type="checkbox" key={restriction} value={restriction} itemID={restriction} onChange={handleDietaryChange} checked={mealToChange.dietaryInfo?.includes(restriction) ? true : false}/>
+                                <input type="checkbox" key={restriction} value={restriction} itemID={restriction} onChange={handleDietaryChange} checked={mealToChange.dietaryInfo?.includes(restriction) ? true : false} />
                             </div>
                         )}
                         </td>
