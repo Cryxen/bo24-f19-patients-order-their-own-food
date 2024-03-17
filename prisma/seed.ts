@@ -48,7 +48,7 @@ const createMeals = async () => {
         mealName: meal.mealName,
         description: meal.description,
         category: meal.category,
-        dietaryInfo: meal.dietaryInfo,
+        dietaryInfo: meal.dietaryInfo as string,
         imageUrl: meal.imageUrl
       }
     })
