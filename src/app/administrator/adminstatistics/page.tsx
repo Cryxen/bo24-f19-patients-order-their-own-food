@@ -6,14 +6,14 @@ const Statisticsmanagement = () => {
         <Layout>
             <div className="mainDiv">
                 <h1>Statistikk verktøy</h1>
-                <section className="section-filter">
+                <section className="filter-container">
                     <select className="date-filter">
                         <option>I dag</option>
                         <option>Denne uken</option>
                         <option>Denne måneden</option>
                         <option>Dette året</option>
                     </select>
-                    <select className="date-filter">
+                    <select className="date-filter calendar">
                         <option>Dato filter</option>
                         <option>Dato</option>
                         <option>Dato</option>
@@ -22,7 +22,7 @@ const Statisticsmanagement = () => {
                     <button className="update-button">Oppdater</button>
                 </section>
                 <div className="stats-container">
-                    <article className="border meal-list-container">
+                    <section className="border meal-list-container">
                         <h5>Måltider og antall bestillinger</h5>
                         <ul className="meal-list">
                             <li>Måltid 1</li>
@@ -30,33 +30,34 @@ const Statisticsmanagement = () => {
                             <li>Måltid 3</li>
                             <li>Måltid 4</li>
                             <li>Måltid 5</li>
+                            <li>Måltid 6</li>
+                            <li>Måltid 7</li>
+                            <li>Måltid 8</li>
                         </ul>
-                    </article>
-                    <article className="graphs-container">
-                        <section className="border total-orders-section">
+                    </section>
+                    <section className="graphs-container">
+                        <article className="border total-orders-stats">
                             <h3>Totale bestillinger</h3>
                             <span>223</span>
-                        </section>
-                        <section className="border popular-section">
+                        </article>
+                        <article className="border popular-stats">
                             <h3>Mest populære bestillinger</h3>
                             <ul>
                                 <li>Måltid 1</li>
                                 <li>Måltid 2</li>
                                 <li>Måltid 3</li>
                             </ul>
-                        </section>
-                        <section className="border least-popular-section">
+                        </article>
+                        <article className="border least-popular-stats">
                             <h3>Minst populære bestillinger</h3>
                             <ul>
                                 <li>Måltid 1</li>
                                 <li>Måltid 2</li>
                                 <li>Måltid 3</li>
                             </ul>
-                        </section>
-                    </article>
+                        </article>
+                    </section>
                 </div>
-                <section>
-                </section>
             </div>
         </Layout>
     )

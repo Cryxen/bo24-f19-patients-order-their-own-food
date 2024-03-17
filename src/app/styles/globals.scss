@@ -2,6 +2,7 @@ $black: #262626;
 $white: #FCF7FF;
 $red: #DD7373; 
 $blue: #75F4F4;
+$gray: #D3D3D3;
 
 .header {
     text-align: center;
@@ -21,7 +22,19 @@ $blue: #75F4F4;
 
     button {
         display: inline-block;
-        padding: 0.5em;   
+        text-align: center;
+        text-decoration: none;
+        border: 0;
+        padding: 1em 0.5em;
+
+        background: $gray;
+        color: $black;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+        &:hover {
+            background: $white;
+        }
     }
 
     @media only screen and (min-width: 475px) {
@@ -41,11 +54,11 @@ $blue: #75F4F4;
 }   
 
 .mainDiv {
-    height: 80dvh;
+    min-height: 80dvh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: space-around;
+    align-items: center;
 }
 
 .dashboardwrap {
@@ -60,10 +73,10 @@ $blue: #75F4F4;
     .navButton {
         display: inline-block;
         text-align: center;
-        font-size: medium;
+        font-size: 1rem;
         text-decoration: none;
 
-        padding: auto;  
+        padding: auto;
         border-radius: 0.5rem;
         min-width: 7.8125em;
         min-height: 7.8125em;

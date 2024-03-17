@@ -12,7 +12,7 @@ const MealCategoryRolldownMenu = (props: { meal?: Meal, handleCategoryChange: (e
         meal.category = categoryFilter as Meal["category"]
     }
     return (
-        <select id="category" value={meal.category} onChange={handleCategoryChange}>
+        <select id="category" className="category dropdown" value={meal.category} onChange={handleCategoryChange}>
             {
                 filter ? <option value="Show all">Vis alle</option> : // if filter is true, show 'vis alle', 
                     meal.category === 'undefined' ? <option>Velg kategori:</option> : '' //If filter is false, show 'velg kategori'

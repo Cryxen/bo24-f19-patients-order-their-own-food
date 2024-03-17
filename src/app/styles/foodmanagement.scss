@@ -1,8 +1,3 @@
-.results {
-    display: flex;
-    justify-content: space-between;
-}
-
 table, th, td {
     border: 1px solid black;
 }
@@ -14,8 +9,63 @@ table, th, td {
     flex-wrap: wrap;
 }
 
-.buttons {
+.filter-container {  
+    border: 1px solid black;
+
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+
+    .dropdown {
+        padding: 0.5rem;
+        border: 0;
+        background-color: #F5F5F5;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .filter-box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        .search-bar {
+            display: flex;
+            border: 1px solid black;
+            margin-right: auto;
+            width: 100%;
+
+            @media only screen and (min-width: 475px) {
+                width: auto;
+            }
+
+            .search-input {
+                width: 100%;
+                background-color: #F5F5F5;
+                border: 0;
+                padding: 0.5rem;
+            }
+        }  
+    }
+
+    .results-box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        .results {
+            margin-right: auto;
+        }
+
+        .sort {
+            margin-left: auto;
+        }
+    }
 }

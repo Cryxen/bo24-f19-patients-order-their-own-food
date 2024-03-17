@@ -1,34 +1,75 @@
-table, td{
+.order-table, td{
     border: 1px solid black;
     border-collapse: collapse;
-    padding-top: 5%;
-    padding-bottom: 5%;
 }
 
-table {
-    width: 75vw;
-    height: 12vh;
+.order-container {
+    width: 95%;
+    background-color: #75F4F4;
+    margin-bottom: 2rem;
+
+    @media only screen and (min-width: 768px) {
+        width: 75%;
+    }
+}
+
+.order-table {
+    width: 100%;
+    table-layout: fixed;
 }
 
 .red {
-    background-color: red;
+    background-color: #DD7373;
 }
 
 .order-config {
     border: none;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-    gap: 1.5rem;
-    height: 12vh;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    min-height: 8rem;
 }
 
-@media only screen and (min-width: 1024px) {
-    table {
-        width: 50vw;
+.portion-list {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    border: 0;
+    background-color: #F5F5F5;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
+    @media only screen and (min-width: 768px) {
+        display: none;
     }
-    .order-config {
-        height: 10vh;
+}
+
+.select-button {
+    display: inline-block;
+    text-align: center;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 0;
+    background-color: #F5F5F5;
+
+    padding: 0.5rem 1rem;
+
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    &:hover {
+        background: #FCF7FF;
+    }
+}
+
+.display-table {
+    padding: 0 0.5rem;
+}
+
+.portion {
+    display: none;
+    
+    @media only screen and (min-width: 768px) {
+        display: inline-block;
     }
 }

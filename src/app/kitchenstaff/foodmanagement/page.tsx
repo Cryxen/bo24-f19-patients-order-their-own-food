@@ -78,11 +78,13 @@ const Foodmanagement = () => {
         <Layout>
             <div className="mainDiv">
                 <h1>Mat håndtering</h1>
-                <section>
-                    <div>
-                        <input type="text" placeholder="Søk" value={nameFilter} onChange={handleNameFilterChange}></input>
+                <div className="filter-container">
+                    <div className="filter-box">
+                        <form className="search-bar">
+                            <input type="text" className="search-input" placeholder="Søk" value={nameFilter} onChange={handleNameFilterChange}></input>
+                        </form>
                         <MealCategoryRolldownMenu handleCategoryChange={handleCategoryFilterChange} filter={true} categoryFilter={categoryFilter} />
-                        <select name="filters">
+                        <select className="filter dropdown">
                             <option>Velg en filter</option>
                             <option>Filter 1</option>
                             <option>Filter 2</option>
@@ -90,9 +92,11 @@ const Foodmanagement = () => {
                             <option>Filter 4</option>
                         </select>
                     </div>
-                    <div className="results">
+                    <div className="results-box">
+                        <div className="results">
                         <span>Viser resultater:</span>
-                        <select name="sort">
+                        </div>
+                        <select className="sort dropdown">
                             <option>Sorteringsmetoder</option>
                             <option>Nyeste</option>
                             <option>Eldste</option>
@@ -100,9 +104,9 @@ const Foodmanagement = () => {
                             <option>Stigende</option>
                         </select>
                     </div>
-                </section>
+                </div>
 
-                <section className="food-database">
+                <div className="food-database">
                     <table>
                         <thead>
                             <tr>
@@ -120,7 +124,7 @@ const Foodmanagement = () => {
                             )}
                         </tbody>
                     </table>
-                </section>
+                </div>
                 <section className="buttons">
                     <button>Legg til ny matrett</button>
                     <AddFood meals={meals} setMeals={setMeals} fetchMealsFromAPI={fetchMealsFromAPI} />
