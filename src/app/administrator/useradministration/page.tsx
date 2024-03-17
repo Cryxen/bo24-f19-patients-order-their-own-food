@@ -68,7 +68,7 @@ const useradministration = () => {
 
 
                 </div>
-                    <CreateUser />
+                    <CreateUser setUsers={setUsers}/>
 
             </div>
         </Layout>
