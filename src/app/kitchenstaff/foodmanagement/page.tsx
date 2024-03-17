@@ -6,6 +6,7 @@ import { Meal } from "@/features/meals/types"
 import AddFood from "@/app/components/AddFood"
 import MealListing from "@/app/components/MealListing"
 import MealCategoryRolldownMenu from "@/app/components/MealCategoryRolldownMenu"
+import { isString } from "util"
 
 
 const Foodmanagement = () => {
@@ -21,15 +22,32 @@ const Foodmanagement = () => {
         fetchMealsFromAPI()
     }, [])
 
+    useEffect(() => {
+        setFilteredMeals(meals)
+        console.log("test")
+        console.log(meals)
+        console.log(filteredMeals)
+    }, [meals])
+
+    const stringToArray = (string: string): string[] => {
+        return string.split(',')
+    }
+
 
     const fetchMealsFromAPI = async () => {
         const response = await fetch('/api/meals')
         if (response.status === 200) {
             const data = await response.json()
-            setMeals(data.data)
-            setFilteredMeals(data.data) //show all meals by default
-            setCategoryFilteredMeals(data.data)
-            setNameFilteredMeals(data.data)
+            const mealsFromAPI = data?.data as Meal[]
+            mealsFromAPI.forEach(element => {
+                if (typeof element.dietaryInfo === 'string')
+                    element.dietaryInfo = stringToArray(element.dietaryInfo)
+            });
+
+            setMeals(mealsFromAPI)
+            setFilteredMeals(mealsFromAPI) //show all meals by default
+            setCategoryFilteredMeals(mealsFromAPI)
+            setNameFilteredMeals(mealsFromAPI)
         }
         else
             console.error('something went wrong fetching meals from API. status code: ' + response.status)
@@ -114,8 +132,9 @@ const Foodmanagement = () => {
                                 <th>Matnavn</th>
                                 <th>Beskrivelse</th>
                                 <th>Kategori</th>
-                                <th>Andre info</th>
-                                <th></th>
+                                <th>Diet info</th>
+                                <th>Endre</th>
+                                <th>Slett</th>
                             </tr>
                         </thead>
                         <tbody>

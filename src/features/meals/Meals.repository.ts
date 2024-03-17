@@ -16,7 +16,7 @@ export const fetchAllMeals = async () => {
 export const saveMeal = async (meal: Meal) => {
     try {
         const responseFromDb = await prisma.meal.upsert({
-            where: {mealName: meal.mealName},
+            where: { mealName: meal.mealName },
             update: {
                 description: meal.description,
                 category: meal.category,
@@ -31,8 +31,20 @@ export const saveMeal = async (meal: Meal) => {
                 imageUrl: meal.imageUrl
             }
         })
-        return {success: true, data: responseFromDb}
+        return { success: true, data: responseFromDb }
     } catch (error) {
-        return {success: false, error: "Failed to update or save entry to database."}
+        return { success: false, error: "Failed to update or save entry to database." }
+    }
+}
+
+export const deleteMeal = async (mealName: Meal["mealName"]) => {
+    try {
+        const responseFromDb = await prisma.meal.delete({
+            where: { mealName: mealName }
+        })
+        return { success: true, data: responseFromDb }
+
+    } catch (error) {
+        return {success: false, error: "Failed to delete entry with mealname: " + mealName + " from database"}
     }
 }

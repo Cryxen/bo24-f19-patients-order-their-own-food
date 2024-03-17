@@ -1,9 +1,9 @@
 "use client"
-import { ChangeEvent, MouseEvent, useState } from "react"
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useState } from "react"
 import Rolledrop from "./Rolledrop"
 import { User } from "@/features/users/types"
 
-const CreateUser = () => {
+const CreateUser = (props: { setUsers: Dispatch<SetStateAction<User[]>> }) => {
     const [user, setUser] = useState<User>(
         {
             name: '',
@@ -13,6 +13,9 @@ const CreateUser = () => {
         }
     )
     const [filledInput, setFilledInput] = useState<Boolean>(true)
+
+    const { setUsers } = props
+
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUser(prev => ({
@@ -51,6 +54,8 @@ const CreateUser = () => {
             if (response.status === 200) {
                 const data = await response.json()
                 console.log(data)
+
+                setUsers(prev => [...prev, user])
             }
             else
                 console.error("Something went wrong creating user API call")

@@ -35,3 +35,26 @@ export const saveMeal = async (req: NextRequest) => {
         })
     }
 }
+
+export const deleteMeal = async (req: NextRequest) => {
+    try {
+        if (req.nextUrl.searchParams.get('mealName')) {
+            const mealName = req.nextUrl.searchParams.get('mealName') as string
+            const responseFromDb = await mealService.deleteMeal(mealName)
+            return NextResponse.json({
+                status: 200,
+                success: responseFromDb.success,
+                data: responseFromDb?.data,
+                error: responseFromDb?.error
+            })
+        }
+        else
+            return NextResponse.json({
+                success: false, status: 400, error: "Missing parameter"
+            })
+    } catch (error) {
+        return NextResponse.json({
+            success: false, error: "API call to delete failed in meals controller"
+        })
+    }
+}
