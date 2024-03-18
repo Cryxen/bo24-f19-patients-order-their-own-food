@@ -124,7 +124,7 @@ const Foodmanagement = () => {
                     </div>
                 </div>
 
-                <div className="food-database">
+                <div className="database-container">
                     <table>
                         <thead>
                             <tr>
@@ -144,11 +144,11 @@ const Foodmanagement = () => {
                         </tbody>
                     </table>
                 </div>
-                <section className="buttons">
-                    <button>Legg til ny matrett</button>
+                <div className="config-container">
+                    <button>[+] Ny matrett</button>
                     <AddFood meals={meals} setMeals={setMeals} fetchMealsFromAPI={fetchMealsFromAPI} />
-                    <button>Fjern matrett</button>
-                </section>
+                    <button>[-] Fjern matrett</button>
+                </div>
             </div>
         </Layout>
     )

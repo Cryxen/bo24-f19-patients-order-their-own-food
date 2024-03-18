@@ -1,37 +1,150 @@
-.arrow {
-    font-size: 2rem;
-}
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 100%;
-    height: 55%;
-}
-
-.graph, .overview {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center; 
-    background-color: red;
-    height: 10rem;
-}
-
-.meal-plan {
-    margin: 1rem;
-    border: solid;
-}
-
-.information {
+.date-container {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 3rem;
+    margin: 1rem;
+
+    input[type=datetime-local] {
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 0.5rem;
+        background-color: #F5F5F5;
+    
+        border: 1px solid black;
+    }
 }
 
-.buttons {
-    width: 50%;
+.main-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    text-align: center;
+
+    .config-button {
+        display: inline-block;
+        text-align: center;
+        font-size: 1rem;
+        text-decoration: none;
+        border: 0;
+        background-color: #F5F5F5;
+    
+        padding: 0.5rem 1rem;
+    
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
+        &:hover {
+            background: #FCF7FF;
+        }
+    }
+
+    .meal-plan-container {
+        border: 1px solid black;
+        background-color: #D3D3D3;
+
+        .meal-plan {
+            border: 1px solid black;
+            background-color: #75F4F4;
+            margin: 1rem;
+
+            .meal-box-1 {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+                // background-color: red;
+                padding: 1rem;
+
+                .update {
+                    margin-right: auto;
+                }
+
+                h3 {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+            }
+
+            .meal-box-2 {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                // background-color: blue;
+                padding: 1rem;
+                gap: 1rem;
+
+                .meal {
+                    border: 1px solid black;
+                    background-color: #DD7373;
+                    padding: 1rem;
+
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                }
+            }
+
+            .meal-box-3 {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                gap: 1rem;
+                // background-color: green;
+                padding: 1rem;
+            }
+        }
+    }
+
+    .meal-overview-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border: 1px solid black;
+        width: 10rem;
+        padding: 1rem;
+
+        background-color: #D3D3D3;
+
+        .meal-graph {
+            border: 1px solid black;
+            height: 30%;
+            background-color: #DD7373;
+        }
+
+        .meal-nutrition {
+            border: 1px solid black;
+            margin-bottom: auto;
+            height: 70%;
+            background-color: #DD7373;
+        }
+    }
 }
+
+.config-container {
+    display: flex;
+    margin: 1rem;
+    
+    .config-button {
+        display: inline-block;
+        text-align: center;
+        font-size: 1rem;
+        text-decoration: none;
+        border: 0;
+        background-color: #F5F5F5;
+    
+        padding: 0.5rem 1rem;
+        margin: 1rem;
+    
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
+        &:hover {
+            background: #FCF7FF;
+        }
+    }
+}
+

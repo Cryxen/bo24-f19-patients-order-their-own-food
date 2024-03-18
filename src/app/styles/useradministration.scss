@@ -1,53 +1,146 @@
-.mainbox {
-    width: 75%;
-    border-style: solid;
-    align-content: center;
-}
+// .mainbox {
+//     width: 75%;
+//     border-style: solid;
+//     align-content: center;
+// }
 
-.itembox{
-    display: flex;
-    border-style: solid;
-    margin: 0.5vh;
-}
+// .itembox{
+//     display: flex;
+//     border-style: solid;
+//     margin: 0.5vh;
+// }
 
-.itembox2{
-    display: flex;
-    margin: 0.5vh;
-}
+// .itembox2{
+//     display: flex;
+//     margin: 0.5vh;
+// }
 
-.contentitembox {
-    max-width: 50%;
-    width: 50%;
-}
+// .contentitembox {
+//     max-width: 50%;
+//     width: 50%;
+// }
 
-.contentitemboxrolle {
-    max-width: 50%;
-    width: 50%;
-    margin: auto;
-}
+// .contentitemboxrolle {
+//     max-width: 50%;
+//     width: 50%;
+//     margin: auto;
+// }
 
-.centeritembox {
-    min-width: 100%;
-    max-width: 100%;
-}
+// .centeritembox {
+//     min-width: 100%;
+//     max-width: 100%;
+// }
 
-.generatebutton {
-    display: block;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    padding: 1vh;
-    margin-left: auto;
-    margin-right: auto;
-}
+// .generatebutton {
+//     display: block;
+//     margin-top: 1vh;
+//     margin-bottom: 1vh;
+//     padding: 1vh;
+//     margin-left: auto;
+//     margin-right: auto;
+// }
 
-.inputbruker {
-    max-width: 90%;
-    padding: .4vh;
-    text-align: center;
+// .inputbruker {
+//     max-width: 90%;
+//     padding: .4vh;
+//     text-align: center;
     
+// }
+
+
+// p {
+//     margin-left: 1vh;
+// }
+
+.main-wrapper {
+    border: 1px solid black;
+
+    .useradmin-container {
+        display: flex;
+        justify-content: space-between;
+        .user-box {
+            background-color: red;
+            padding: 1rem;
+        }
+
+        .role-box {
+            background-color: blue;
+            padding: 1rem;
+        }
+    }
 }
 
+.profile-wrapper {
+    border: 1px black solid;
 
-p {
-    margin-left: 1vh;
+    .profile-container {
+
+        .name-box {
+            input[type=text] {
+                display: inline-block;
+                box-sizing: border-box;
+                padding: 0.5rem;
+                margin: 0.5rem;
+                background-color: #F5F5F5;
+            
+                border: 1px solid black;
+            }
+        }
+
+        .email-box {
+            input[type=email] {
+                display: inline-block;
+                box-sizing: border-box;
+                padding: 0.5rem;
+                margin: 0.5rem;
+                background-color: #F5F5F5;
+            
+                border: 1px solid black;
+            }
+        }
+
+        .password-box {
+            input[type=password] {
+                display: inline-block;
+                box-sizing: border-box;
+                padding: 0.5rem;
+                margin: 0.5rem;
+                background-color: #F5F5F5;
+            
+                border: 1px solid black;
+            }
+        }
+    }
+
+    .role-container {
+
+    }
+
+    .submit-container {
+
+        .submit-button {
+            display: inline-block;
+            text-align: center;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 0;
+            background-color: #F5F5F5;
+        
+            padding: 0.5em 1em;
+        
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        
+            &:hover {
+                background: #FCF7FF;
+            }
+        }
+    }
+}
+
+.role-dropdown {
+    padding: 0.5rem;
+    border: 0;
+    background-color: #F5F5F5;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
