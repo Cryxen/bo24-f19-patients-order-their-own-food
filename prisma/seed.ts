@@ -3,7 +3,7 @@
 
 import { Meal } from "@/features/meals/types";
 import { User } from "@/features/users/types";
-import { PrismaClient } from "@prisma/client";
+import { MealPlan, MealToMealPlan, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -17,8 +17,23 @@ const meals: Meal[] = [
   {mealName: "Stekt kylling", description: "Stekt i smør", category: "chicken"},
   {mealName: "Stekt fisk", description: "Stekt i smør", category: "fish"},
   {mealName: "Stekt biff", description: "Stekt i smør", category: "red meat"},
+  {mealName: "Pommes frittes", description: "Frityrstekt i olje", category: "vegetable"},
 ]
 
+const mealPlan: MealPlan[] = [
+  {id: 0, date: Date.now().toString(), description: "Stekt kylling med pommes frittes", imageUrl: 'TODO'},
+  {id: 1, date: Date.now().toString(), description: "Stekt fisk med pommes frittes", imageUrl: 'TODO'},
+  {id: 2, date: Date.now().toString(), description: "Stekt biff med pommes frittes", imageUrl: 'TODO'}
+]
+
+const mealToMealPlan: MealToMealPlan[] = [
+  {mealIdName: 'Stekt kylling', mealPlanId: 0},
+  {mealIdName: 'Pommes frittes', mealPlanId: 0},
+  {mealIdName: 'Stekt fisk', mealPlanId: 1},
+  {mealIdName: 'Pommes frittes', mealPlanId: 1},
+  {mealIdName: 'Stekt biff', mealPlanId: 2},
+  {mealIdName: 'Pommes frittes', mealPlanId: 2}
+]
 
 // Function to save users to database
 const createUsers = async () => {
