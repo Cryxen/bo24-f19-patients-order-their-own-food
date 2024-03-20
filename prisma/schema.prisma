@@ -39,8 +39,8 @@ model Room {
 
 model MealPlan {
   id Int @id @default(autoincrement())
-  meal MealToMealPlan[] 
-  order Order[]
+  meals MealToMealPlan[] 
+  orders Order[]
   date String
   imageUrl String
   description String

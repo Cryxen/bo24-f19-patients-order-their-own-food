@@ -82,8 +82,15 @@ const createMealPlans = async () => {
         date: mealPlan.date,
         description: mealPlan.description,
         imageUrl: mealPlan.imageUrl,
-        meal: {
-          createMany: {data: [...filteredMealPlans]}
+        meals: {
+          create: [
+            {
+              mealIdName: filteredMealPlans[0].mealIdName
+            },
+            {
+              mealIdName: filteredMealPlans[1].mealIdName
+            },
+          ]
         }
       }
     })
