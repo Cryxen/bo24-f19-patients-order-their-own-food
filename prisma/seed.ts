@@ -83,7 +83,7 @@ const createMealPlans = async () => {
         description: mealPlan.description,
         imageUrl: mealPlan.imageUrl,
         meals: {
-          create: [
+          create: [ //TODO: Make a more automatic function
             {
               mealIdName: filteredMealPlans[0].mealIdName
             },
