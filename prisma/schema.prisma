@@ -42,6 +42,8 @@ model MealPlan {
   meal MealToMealPlan[] 
   order Order[]
   date String
+  imageUrl String
+  description String
 }
 
 model MealToMealPlan {
