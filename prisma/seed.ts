@@ -3,7 +3,7 @@
 
 import { Meal } from "@/features/meals/types";
 import { User } from "@/features/users/types";
-import { PrismaClient } from "@prisma/client";
+import { MealPlan, MealToMealPlan, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -14,17 +14,32 @@ const users: User[] = [
 ];
 
 const meals: Meal[] = [
-  {mealName: "Stekt kylling", description: "Stekt i smør", category: "chicken"},
-  {mealName: "Stekt fisk", description: "Stekt i smør", category: "fish"},
-  {mealName: "Stekt biff", description: "Stekt i smør", category: "red meat"},
+  { mealName: "Stekt kylling", description: "Stekt i smør", category: "chicken" },
+  { mealName: "Stekt fisk", description: "Stekt i smør", category: "fish" },
+  { mealName: "Stekt biff", description: "Stekt i smør", category: "red meat" },
+  { mealName: "Pommes frittes", description: "Frityrstekt i olje", category: "vegetable" },
 ]
 
+const mealPlans: MealPlan[] = [
+  { id: 0, date: Date.now().toString(), description: "Stekt kylling med pommes frittes", imageUrl: 'TODO' },
+  { id: 1, date: Date.now().toString(), description: "Stekt fisk med pommes frittes", imageUrl: 'TODO' },
+  { id: 2, date: Date.now().toString(), description: "Stekt biff med pommes frittes", imageUrl: 'TODO' }
+]
+
+const mealToMealPlans: MealToMealPlan[] = [
+  { mealIdName: 'Stekt kylling', mealPlanId: 0 },
+  { mealIdName: 'Pommes frittes', mealPlanId: 0 },
+  { mealIdName: 'Stekt fisk', mealPlanId: 1 },
+  { mealIdName: 'Pommes frittes', mealPlanId: 1 },
+  { mealIdName: 'Stekt biff', mealPlanId: 2 },
+  { mealIdName: 'Pommes frittes', mealPlanId: 2 }
+]
 
 // Function to save users to database
 const createUsers = async () => {
   const userPromises = users.map(async (user, index) => {
     await prisma.user.upsert({
-      where: {email: user.email},
+      where: { email: user.email },
       update: {},
       create: {
         email: user.email,
@@ -42,7 +57,7 @@ const createUsers = async () => {
 const createMeals = async () => {
   const mealPromises = meals.map(async (meal) => {
     await prisma.meal.upsert({
-      where: {mealName: meal.mealName},
+      where: { mealName: meal.mealName },
       update: {},
       create: {
         mealName: meal.mealName,
@@ -56,12 +71,40 @@ const createMeals = async () => {
   await Promise.all(mealPromises)
 }
 
-// Seed funksjoner
+const createMealPlans = async () => {
+  const mealPlanPromises = mealPlans.map(async (mealPlan) => {
+    const filteredMealPlans = mealToMealPlans.filter(meal => meal.mealPlanId === mealPlan.id)
+    console.log(filteredMealPlans)
+    await prisma.mealPlan.upsert({
+      where: { id: mealPlan.id },
+      update: {},
+      create: {
+        date: mealPlan.date,
+        description: mealPlan.description,
+        imageUrl: mealPlan.imageUrl,
+        meals: {
+          create: [ //TODO: Make a more automatic function
+            {
+              mealIdName: filteredMealPlans[0].mealIdName
+            },
+            {
+              mealIdName: filteredMealPlans[1].mealIdName
+            },
+          ]
+        }
+      }
+    })
+  })
+  await Promise.all(mealPlanPromises)
+}
+
+// Seed funksjoners
 
 async function main() {
   console.log(`Start seeding ...`);
   await createUsers();
   await createMeals();
+  await createMealPlans();
   console.log(`Seeding finished.`);
 }
 
