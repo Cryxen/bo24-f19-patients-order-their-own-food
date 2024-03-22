@@ -3,7 +3,7 @@ import '../styles/globals.scss'
 
 const Navbox = ({redirect, text}: {redirect: string, text: string}) => {
     return(
-        <Link href={{ pathname: redirect }}><button className="navButton">{text}</button></Link>
+        <Link href={{ pathname: redirect }}><button className="nav-button">{text}</button></Link>
     );
 };
 

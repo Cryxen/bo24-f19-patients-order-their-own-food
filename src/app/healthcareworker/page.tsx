@@ -1,5 +1,5 @@
-import '../styles/healthcareworkerpage.scss'
 import '../styles/globals.scss'
+import '../styles/healthcareworkerpage.scss'
 import Layout from '../components/layout'
 import Navbox from '../components/Navbox'
 

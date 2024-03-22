@@ -1,99 +1,125 @@
 ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
 }
 
-.filter-container {
-    width: 95%;
+.main-wrapper {
+    min-width: 75%;
+    margin: 1rem 0;
+
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
-
-    .date-filter {
-        font-size: 1rem;
-        padding: 0.5em 1em;
-        border: 0;
-        background-color: #F5F5F5;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
+    .filter-container {
+        width: 100%;    
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    
+        .date-filter {
+            font-size: 1rem;
+            padding: 0.5em;
+            border: 0;
+        
+            background-color: #F5F5F5;
+            color: #262626;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        
+            &:hover {
+                background: #FCF7FF;
+            }
+        }
+    
+        .update-button {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        
+            font-size: 1rem;
+            border: 0;
+            padding: 0.5em 1em;
+        
+            background-color: #F5F5F5;
+            color: #262626;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        
+            &:hover {
+                background: #FCF7FF;
+            }
+        }
     }
-
-    .update-button {
-        display: inline-block;
+    
+    .stats-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
         text-align: center;
-        font-size: 1rem;
-        text-decoration: none;
-        border: 0;
-        background-color: #F5F5F5;
+        flex-wrap: wrap;
+        gap: 3rem;
     
-        padding: 0.5em 1em;
+        .border {
+            border: 1px solid black;
+        }
     
-        cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    
-        &:hover {
-            background: #FCF7FF;
-        }
-    }
-}
-
-.stats-container {
-    width: 95%;
-    display: flex;
-    justify-content: space-around;
-    text-align: center;
-    padding: 3rem 0;
-    margin-bottom: auto;
-    gap: 3rem;
-
-    .border {
-        border: 1px solid black;
-    }
-
-    .meal-list-container {
-        background-color: #75F4F4;
-
-        h5 {
-            padding: 0 1rem;
-        }
-
-        .meal-list li {
-            border-bottom: 1px solid black;
-            padding: 1rem;
-        }
-
-        .meal-list li:first-child {
-            border-top: 1px solid black;
-        }
-    }
-
-    .graphs-container {
-
-        .total-orders-stats {
-            background-color: #DD7373;
-            padding: 0 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .popular-stats {
+        .meal-list-container {
             background-color: #75F4F4;
-            padding: 0 1rem;
-        }
+            margin-right: auto;
+            width: 100%;
 
-        .least-popular-stats {
-            background-color: #DD7373;
-            padding: 0 1rem;    
-            margin-top: 1rem;
-        }
+            h5 {
+                padding: 1rem;
+            }
+    
+            .meal-list li {
+                border-bottom: 1px solid black;
+                padding: 1rem;
+            }
+    
+            .meal-list li:first-child {
+                border-top: 1px solid black;
+            }
 
-        ul li {
-            padding: 0.5rem;
+            @media only screen and (min-width: 640px) {
+                width: auto;
+            }
         }
+    
+        .graphs-container {
+            margin-left: auto;
+            width: 100%;
+            
+            .total-orders-stats {
+                background-color: #DD7373;
+                padding: 1rem;
+            }
+    
+            .popular-stats {
+                background-color: #75F4F4;
+                padding: 1rem;
+            }
+    
+            .least-popular-stats {
+                background-color: #DD7373;
+                padding: 1rem;
+            }
+    
+            ul li {
+                padding: 0.5rem;
+            }
+    
+            span {
+                display: block;
+                padding: 0.5rem;
+            }
 
-        span {
-            display: block;
-            padding: 0.5rem;
+            @media only screen and (min-width: 640px) {
+                width: auto;
+            }
         }
     }
 }

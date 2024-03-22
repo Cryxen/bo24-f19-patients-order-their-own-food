@@ -61,13 +61,19 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
     }
 
     return (
-        <form>
-            <label htmlFor="mealName">Navn på rett:</label>
-            <input type="text" id="mealName" placeholder="Navn" value={meal.mealName} onChange={handleNameChange} />
-            <label htmlFor="description">Beskrivelse av rett:</label>
-            <input type="text" id="description" placeholder="Beskrivelse" value={meal.description} onChange={handleDescriptionChange} />
-            <label htmlFor="category">Kategori:</label>
-            <MealCategoryRolldownMenu meal={meal} handleCategoryChange={handleCategoryChange} />
+        <form className="add-food-container">
+            <div>
+                <label htmlFor="mealName">Navn på rett: </label>
+                <input type="text" id="mealName" placeholder="Navn" value={meal.mealName} onChange={handleNameChange} />
+            </div>
+            <div>
+                <label htmlFor="description">Beskrivelse av rett: </label>
+                <input type="text" id="description" placeholder="Beskrivelse" value={meal.description} onChange={handleDescriptionChange} />
+            </div>
+            <div>
+                <label htmlFor="category">Kategori: </label>
+                <MealCategoryRolldownMenu meal={meal} handleCategoryChange={handleCategoryChange} />
+            </div>
             <fieldset>
                 <legend>Følgende dietter kan få utslag på maten:</legend>
                 {
@@ -79,7 +85,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
                     )
                 }
             </fieldset>
-            <button onClick={submitMealToDB}>Legg til måltid.</button>
+            <button onClick={submitMealToDB}>Legg til måltid</button>
         </form>
     )
 }

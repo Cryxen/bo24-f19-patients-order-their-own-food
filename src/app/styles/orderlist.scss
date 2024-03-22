@@ -1,19 +1,26 @@
-section {
+.main-wrapper {
+    min-width: 75%;
+    margin: 1rem 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dish-section {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 95%;
-    margin-bottom: 1rem;
-
-    @media only screen and (min-width: 768px) {
-        width: 75%;
-    }
 }
 
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     flex-wrap: wrap;
     background-color: #75F4F4;
 
@@ -22,8 +29,9 @@ section {
     border-collapse: collapse;
 
     width: 100%;
+    gap: 1rem;
     min-height: 8rem;
-    padding: 0 0.5rem;  
+    padding: 1rem;
 }
 
 .container:first-child {
@@ -34,41 +42,23 @@ section {
     border-right: 1px solid black;
 }
 
-.dish-view {
-    align-items: center;
-}
-
-
 .dish {
     border: 1px solid black;
     font-size: 1rem;
     padding: 0.5rem;
-    margin: 0.5rem;
-}
-
-.room {
-    width: max-content;
-    font-size: 1rem;
-}
-
-.select {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    align-content: center;
-    gap: 1rem;
 }
 
 .select-button {
     display: inline-block;
     text-align: center;
-    font-size: 1rem;
     text-decoration: none;
+
+    font-size: 1rem;
     border: 0;
+    padding: 0.5em 1em;
 
-    padding: 0.5rem 1rem;
-
+    background-color: #F5F5F5;
+    color: #262626;
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 

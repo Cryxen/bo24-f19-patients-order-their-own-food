@@ -4,19 +4,49 @@ $red: #DD7373;
 $blue: #75F4F4;
 $gray: #D3D3D3;
 
-.header {
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    line-height: calc(1em + 0.5rem);
+}
+
+img, picture, svg, video {
+    display: block;
+    max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+}
+
+p {
+    max-width: 75ch;
+    text-wrap: pretty;
+}
+
+main {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem;
+}
+
+header {
     text-align: center;
     border-bottom: solid;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    
-    padding-bottom: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+
+    padding: 1rem;
     gap: 1rem;
 
-    .content:first-child {
+    .header-content:first-child {
         margin-right: auto;
     }
 
@@ -25,7 +55,7 @@ $gray: #D3D3D3;
         text-align: center;
         text-decoration: none;
         border: 0;
-        padding: 1em 0.5em;
+        padding: 0.5em 1em;
 
         background: $gray;
         color: $black;
@@ -36,21 +66,16 @@ $gray: #D3D3D3;
             background: $white;
         }
     }
-
-    @media only screen and (min-width: 475px) {
-        button {
-            padding: 1em;
-        }
-    }
 }
 
-.footer {
+footer {
+    display: flex;
+    justify-content: center;
+
     text-align: center;
     border-top: solid;
 
-    padding-top: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 1rem;
 }   
 
 .mainDiv {
@@ -62,7 +87,7 @@ $gray: #D3D3D3;
 }
 
 .dashboardwrap {
-    margin-top: 2em; 
+    margin-top: 2rem; 
     margin-bottom: auto; 
     gap: 2rem;
     
@@ -70,14 +95,14 @@ $gray: #D3D3D3;
     justify-content: space-around;
     flex-wrap: wrap;
 
-    .navButton {
+    .nav-button {
         display: inline-block;
         text-align: center;
-        font-size: 1rem;
         text-decoration: none;
 
-        padding: auto;
-        border-radius: 0.5rem;
+        font-size: 1rem;
+        border-radius: 0.5em;
+        padding: 1em;
         min-width: 7.8125em;
         min-height: 7.8125em;
 
@@ -89,12 +114,55 @@ $gray: #D3D3D3;
         &:hover {
             background: $red;
         }
-    }
 
-    @media only screen and (min-width: 475px) {
-        .navButton {
+        @media only screen and (min-width: 475px) {
             min-width: 12.5em;
             min-height: 12.5em;
         }
     }
-} 
+}
+
+// .select-button {
+    // display: inline-block;
+    // text-align: center;
+    // text-decoration: none;
+
+    // font-size: 1rem;
+    // border: 0;
+    // padding: 0.5em 1em;
+
+    // background-color: #F5F5F5;
+    // color: #262626;
+    // cursor: pointer;
+    // box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    // &:hover {
+    //     background: #FCF7FF;
+    // }
+// }
+
+// .dropdown {
+//     font-size: 1rem;
+//     padding: 0.5em;
+//     border: 0;
+
+//     background-color: #F5F5F5;
+//     color: #262626;
+//     cursor: pointer;
+//     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+//     &:hover {
+//         background: #FCF7FF;
+//     }
+// }
+
+// input[type=text] {
+//     display: inline-block;
+//     font-size: 1rem;
+//     width: 100%;
+//     padding: 0.5em;
+//     background-color: #F5F5F5;
+//     color: #262626;
+
+//     border: 1px solid black;
+// }

@@ -6,7 +6,7 @@ const Budget = () => {
         <Layout>
         <div className="mainDiv">
             <h1>Budsjett</h1>
-            <form className="form-container">
+            <form className="main-wrapper">
                 <div className="item-container">
                     <div className="item-box">
                         <label htmlFor="item1">Mat:</label>

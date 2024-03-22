@@ -1,10 +1,10 @@
 const Header = () => {
     return(
-        <div className="header">
-            <p className="content">HEADER</p>
-            <button className="content">Dashboard</button>
-            <button className="content">Bruker</button>
-        </div>
+        <header>
+            <p className="header-content">HEADER</p>
+            <button className="header-content">Dashboard</button>
+            <button className="header-content">Bruker</button>
+        </header>
     )
 }
 export default Header

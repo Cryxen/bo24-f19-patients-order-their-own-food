@@ -96,58 +96,59 @@ const Foodmanagement = () => {
         <Layout>
             <div className="mainDiv">
                 <h1>Mat håndtering</h1>
-                <div className="filter-container">
-                    <div className="filter-box">
-                        <form className="search-bar">
-                            <input type="text" className="search-input" placeholder="Søk" value={nameFilter} onChange={handleNameFilterChange}></input>
-                        </form>
-                        <MealCategoryRolldownMenu handleCategoryChange={handleCategoryFilterChange} filter={true} categoryFilter={categoryFilter} />
-                        <select className="filter dropdown">
-                            <option>Velg en filter</option>
-                            <option>Filter 1</option>
-                            <option>Filter 2</option>
-                            <option>Filter 3</option>
-                            <option>Filter 4</option>
-                        </select>
-                    </div>
-                    <div className="results-box">
-                        <div className="results">
-                        <span>Viser resultater:</span>
+                <div className="main-wrapper">
+                    <div className="filter-container">
+                        <div className="filter-box">
+                            <form className="search-bar">
+                                <input type="text" className="search-input" placeholder="Søk" value={nameFilter} onChange={handleNameFilterChange}></input>
+                            </form>
+                            <MealCategoryRolldownMenu handleCategoryChange={handleCategoryFilterChange} filter={true} categoryFilter={categoryFilter} />
+                            <select className="filter dropdown">
+                                <option>Velg en filter</option>
+                                <option>Filter 1</option>
+                                <option>Filter 2</option>
+                                <option>Filter 3</option>
+                                <option>Filter 4</option>
+                            </select>
                         </div>
-                        <select className="sort dropdown">
-                            <option>Sorteringsmetoder</option>
-                            <option>Nyeste</option>
-                            <option>Eldste</option>
-                            <option>Synkende</option>
-                            <option>Stigende</option>
-                        </select>
+                        <div className="results-box">
+                            <div className="results">
+                            <span>Viser resultater:</span>
+                            </div>
+                            <select className="sort dropdown">
+                                <option>Sorteringsmetoder</option>
+                                <option>Nyeste</option>
+                                <option>Eldste</option>
+                                <option>Synkende</option>
+                                <option>Stigende</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-
-                <div className="database-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Matnavn</th>
-                                <th>Beskrivelse</th>
-                                <th>Kategori</th>
-                                <th>Diet info</th>
-                                <th>Endre</th>
-                                <th>Slett</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredMeals?.map((meal) =>
-                                <MealListing meal={meal} setMeals={setMeals} setFilteredMeals={setFilteredMeals} meals={meals} key={meal.mealName} />
-                            )}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="config-container">
-                    <button>[+] Ny matrett</button>
-                    <AddFood meals={meals} setMeals={setMeals} fetchMealsFromAPI={fetchMealsFromAPI} />
-                    <button>[-] Fjern matrett</button>
+                    <div className="database-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Matnavn</th>
+                                    <th>Beskrivelse</th>
+                                    <th>Kategori</th>
+                                    <th>Diet info</th>
+                                    <th>Endre</th>
+                                    <th>Slett</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {filteredMeals?.map((meal) =>
+                                    <MealListing meal={meal} setMeals={setMeals} setFilteredMeals={setFilteredMeals} meals={meals} key={meal.mealName} />
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="config-container">
+                        <button>[+] Ny matrett</button>
+                        <AddFood meals={meals} setMeals={setMeals} fetchMealsFromAPI={fetchMealsFromAPI} />
+                        <button>[-] Fjern matrett</button>
+                    </div>
                 </div>
             </div>
         </Layout>

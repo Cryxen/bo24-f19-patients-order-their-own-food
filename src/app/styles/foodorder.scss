@@ -1,75 +1,96 @@
-.order-table, td{
-    border: 1px solid black;
-    border-collapse: collapse;
-}
+.main-wrapper {
+    min-width: 75%;
+    margin: 1rem 0;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
 
-.order-container {
-    width: 95%;
-    background-color: #75F4F4;
-    margin-bottom: 2rem;
+    .room-container {
+    }
+
+    .diet-container {
+    }
+
+    .order-container {
+        width: 100%;
+
+        .order-table, td {
+            border: 1px solid black;
+            border-collapse: collapse;  
+        }
+
+        td {
+            padding: 1rem;
+        }
+        
+        .order-table {
+            width: 100%;
+            
+            .order-config {
+                border: none;
+                padding: 1rem;
+
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+
+                .select-button {
+                    display: inline-block;
+                    text-align: center;
+                    text-decoration: none;
+                
+                    font-size: 1rem;
+                    border: 0;
+                    padding: 0.5em 1em;
+                
+                    background-color: #F5F5F5;
+                    color: #262626;
+                    cursor: pointer;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                
+                    &:hover {
+                        background: #FCF7FF;
+                    }
+                }
+                
+                .portions {
+                    display: none;
+                    
+                    @media only screen and (min-width: 768px) {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+
+    .dropdown {
+        font-size: 1rem;
+        padding: 0.5em;
+        border: 0;
+    
+        background-color: #F5F5F5;
+        color: #262626;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    
+        &:hover {
+            background: #FCF7FF;
+        }
+    }
 
     @media only screen and (min-width: 768px) {
-        width: 75%;
+        .portion {
+            display: none;
+        }
     }
-}
-
-.order-table {
-    width: 100%;
-    table-layout: fixed;
 }
 
 .red {
     background-color: #DD7373;
-}
-
-.order-config {
-    border: none;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    min-height: 8rem;
-}
-
-.portion-list {
-    font-size: 1rem;
-    padding: 0.5rem 0;
-    border: 0;
-    background-color: #F5F5F5;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    
-    @media only screen and (min-width: 768px) {
-        display: none;
-    }
-}
-
-.select-button {
-    display: inline-block;
-    text-align: center;
-    font-size: 1rem;
-    text-decoration: none;
-    border: 0;
-    background-color: #F5F5F5;
-
-    padding: 0.5rem 1rem;
-
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-
-    &:hover {
-        background: #FCF7FF;
-    }
-}
-
-.display-table {
-    padding: 0 0.5rem;
-}
-
-.portion {
-    display: none;
-    
-    @media only screen and (min-width: 768px) {
-        display: inline-block;
-    }
 }

@@ -56,20 +56,17 @@ const useradministration = () => {
     return (
         <Layout>
             <div className="mainDiv">
-                <h1>Brukeradministrasjon</h1>
-                <div className='mainbox'>
+                {/* <h1>Brukeradministrasjon</h1> */}
+                <div className="main-wrapper">
 
                     {users.map((user: User) =>
-                        <article className='itembox' key={user.email}>
-                            <section className='contentitembox'><p>{user.name}</p></section>
-                            <section className='contentitemboxrolle'><Rolledrop user={user} changeRole={changeRole} /></section>
-                        </article>
+                        <div className="useradmin-container" key={user.email}>
+                            <section className="user-box"><p>{user.name}</p></section>
+                            <section className="role-box"><Rolledrop user={user} changeRole={changeRole} /></section>
+                        </div>
                     )}
-
-
-                </div>
                     <CreateUser setUsers={setUsers}/>
-
+                </div>
             </div>
         </Layout>
     )
