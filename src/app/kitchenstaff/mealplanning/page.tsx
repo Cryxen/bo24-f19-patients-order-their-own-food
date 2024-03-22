@@ -1,7 +1,28 @@
+"use client"
 import Layout from "@/app/components/layout"
 import '../../styles/mealplanning.scss'
+import MealPlanList from "@/app/components/MealPlanList"
+import { useEffect, useState } from "react"
+import { MealPlan } from "@/features/mealPlans/types"
 
 const Mealplanning = () => {
+
+    const [listOfMealPlans, setListOfMealPlans] = useState<MealPlan[]>([])
+
+    useEffect(() => {
+        fetchMealPlans()
+    }, [])
+
+    const fetchMealPlans = async (): Promise<void> => {
+        const response = await fetch('/api/mealPlans')
+        if (response.status === 200) {
+            const data = await response.json()
+            setListOfMealPlans(data.data)
+        }
+    }
+
+    
+
     return (
         <Layout>
             <div className="mainDiv">
@@ -35,23 +56,9 @@ const Mealplanning = () => {
                             <button>Se på matrett</button>
                         </section>
                     </article>
-                    <article className="meal-plan">
-                        <section>
-                            <span>Middag</span>
-                            <button>Oppdater</button>
-                            <button>Rediger</button>
-                            <button>Dupliser</button>
-                        </section>
-                        <section className="information">
-                            <span>Bilde</span>
-                            <span>Beskrivelse</span>
-                            <span className="arrow">&#8594;</span>
-                        </section>
-                        <section>
-                            <button>Legg til ny matrett</button>
-                            <button>Se på matrett</button>
-                        </section>
-                    </article>
+                    <MealPlanList />
+                    <MealPlanList />
+                    <MealPlanList />
                     <article>
                         <section className="graph">
                             <span>Ernæringsgraf</span>
@@ -59,13 +66,13 @@ const Mealplanning = () => {
                         <section className="overview">
                             <span>Ernæringsoversikt</span>
                         </section>
-                    </article>  
+                    </article>
                 </div>
                 <section className="buttons">
                     <button>Ny måltid</button>
                     <button>Fjern måltid</button>
                 </section>
-            </div>  
+            </div>
         </Layout>
     )
 }
