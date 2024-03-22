@@ -5,8 +5,12 @@ const prisma = new PrismaClient()
 export const fetchAllMealPlans = async () => {
     try {
         const mealPlansFromDb = await prisma.mealPlan.findMany({
-            select: {
-                meals: true
+            include: {
+                meals: {
+                    select: {
+                        meal: true
+                    }
+                }
             }
         })
         return {success: true, data: mealPlansFromDb}
