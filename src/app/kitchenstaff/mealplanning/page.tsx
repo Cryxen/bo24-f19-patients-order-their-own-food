@@ -4,14 +4,14 @@ import '../../styles/mealplanning.scss'
 import MealPlanList from "@/app/components/MealPlanList"
 import { MouseEvent, useEffect, useState } from "react"
 import { MealPlan } from "@/features/mealPlans/types"
-import { MAIN_DISH, MainDish, Meal, SIDE_DISH, SideDish } from "@/features/meals/types"
 import NewMealPlan from "@/app/components/NewMealPlan"
+import DatePicker from "react-datepicker"
 
 const Mealplanning = () => {
 
     const [listOfMealPlans, setListOfMealPlans] = useState<MealPlan[]>([])
     const [showMealPlans, setShowMealPlans] = useState<Boolean>(true)
-
+    const [date, setDate] = useState<Date>()
     useEffect(() => {
         fetchMealPlans()
     }, [])
@@ -39,13 +39,7 @@ const Mealplanning = () => {
                 <h1>Måltid Planlegging</h1>
                 <section id="mealPlanCalendar">
                     <span>Kostholdsplan for:</span>
-                    <select>
-                        <option>Kalender</option>
-                        <option>Dato 1</option>
-                        <option>Dato 2</option>
-                        <option>Dato 3</option>
-                        <option>Dato 4</option>
-                    </select>
+                    <DatePicker selected={date} onChange={(date) => setDate(date as Date)} dateFormat="dd/MM/YYYY" />
                     <span className="arrow">&#8594;</span>
                 </section>
                 {showMealPlans ?
