@@ -3,11 +3,11 @@
 import { MAIN_DISH, MainDish, Meal, SIDE_DISH, SideDish } from "@/features/meals/types"
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
 
-const NewMealPlan = () => {
-
+const NewMealPlan = (props: {date: Date}) => {
     const [mealList, setMealList] = useState<Meal[]>([])
     const [sideDish, setSideDish] = useState<SideDish>()
     const [mainDish, setMainDish] = useState<MainDish>()
+    const {date} = props
 
     useEffect(() => {
         fetchMeals()

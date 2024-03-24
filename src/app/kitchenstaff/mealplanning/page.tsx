@@ -48,7 +48,7 @@ const Mealplanning = () => {
                             <MealPlanList mealPlan={mealPlan} key={mealPlan.id} />)}
                     </div>
                     :
-                    <NewMealPlan />
+                    <NewMealPlan date={date}/>
                    
                 }
                 <div className="break" />
