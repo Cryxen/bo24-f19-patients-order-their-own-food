@@ -4,6 +4,8 @@ import '../../styles/mealplanning.scss'
 import MealPlanList from "@/app/components/MealPlanList"
 import { MouseEvent, useEffect, useState } from "react"
 import { MealPlan } from "@/features/mealPlans/types"
+import { MAIN_DISH, MainDish, Meal, SIDE_DISH, SideDish } from "@/features/meals/types"
+import NewMealPlan from "@/app/components/NewMealPlan"
 
 const Mealplanning = () => {
 
@@ -22,6 +24,8 @@ const Mealplanning = () => {
             console.log(data.data)
         }
     }
+
+
 
     const showNewMealPlanForm = (event: MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault()
@@ -50,18 +54,39 @@ const Mealplanning = () => {
                             <MealPlanList mealPlan={mealPlan} key={mealPlan.id} />)}
                     </div>
                     :
-                    <div className="container">
-                        <article>
-                            <h3>
-                                Hovedrett:
-                            </h3>
-                        </article>
-                        <article>
-                            <h3>
-                                Siderett:
-                            </h3>
-                        </article>
-                    </div>
+                    <NewMealPlan />
+                    // <div className="container">
+                    //     <article>
+                    //         <h3>
+                    //             Hovedrett:
+                    //         </h3>
+                    //         <form>
+                    //             {mealList?.map(meal =>
+                    //                 (MAIN_DISH as unknown as MainDish[]).includes(meal.category as MainDish) ?
+                    //                     <div key={meal.mealName}>
+                    //                         <label htmlFor={meal.mealName}>{meal.mealName}</label>
+                    //                         <input type="radio" id={meal.mealName} value={meal.mealName} name="mainDish" />
+                    //                     </div>
+                    //                     : ''
+                    //             )}
+                    //         </form>
+                    //     </article>
+                    //     <article>
+                    //         <h3>
+                    //             Siderett:
+                    //         </h3>
+                    //         <form>
+                    //             {mealList?.map(meal =>
+                    //                 (SIDE_DISH as unknown as SideDish[]).includes(meal.category as SideDish) ?
+                    //                     <div key={meal.mealName}>
+                    //                         <label htmlFor={meal.mealName}>{meal.mealName}</label>
+                    //                         <input type="radio" id={meal.mealName} value={meal.mealName} name="sideDish" />
+                    //                     </div>
+                    //                     : ''
+                    //             )}
+                    //         </form>
+                    //     </article>
+                    // </div>
                 }
                 <div className="break" />
                 <article className="nutrition">
