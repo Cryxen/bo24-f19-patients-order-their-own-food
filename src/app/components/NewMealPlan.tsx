@@ -1,11 +1,13 @@
 "use client"
 
 import { MAIN_DISH, MainDish, Meal, SIDE_DISH, SideDish } from "@/features/meals/types"
-import { useEffect, useState } from "react"
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
 
 const NewMealPlan = () => {
 
     const [mealList, setMealList] = useState<Meal[]>([])
+    const [sideDish, setSideDish] = useState<SideDish>()
+    const [mainDish, setMainDish] = useState<MainDish>()
 
     useEffect(() => {
         fetchMeals()
@@ -21,6 +23,18 @@ const NewMealPlan = () => {
         }
     }
 
+    const chosenMainDish = (event: MouseEvent) => {
+        const target = event.target as HTMLInputElement
+        setMainDish(target.value as unknown as MainDish)
+    }
+    const chosenSideDish = (event: MouseEvent) => {
+        const target = event.target as HTMLInputElement
+        setSideDish(target.value as unknown as SideDish)
+    }
+
+
+    
+
     return (
         <div className="container">
             <article>
@@ -32,7 +46,7 @@ const NewMealPlan = () => {
                         (MAIN_DISH as unknown as MainDish[]).includes(meal.category as MainDish) ?
                             <div key={meal.mealName}>
                                 <label htmlFor={meal.mealName}>{meal.mealName}</label>
-                                <input type="radio" id={meal.mealName} value={meal.mealName} name="mainDish" />
+                                <input type="radio" id={meal.mealName} value={meal.mealName} name="mainDish" onClick={chosenMainDish} />
                             </div>
                             : ''
                     )}
@@ -47,7 +61,7 @@ const NewMealPlan = () => {
                         (SIDE_DISH as unknown as SideDish[]).includes(meal.category as SideDish) ?
                             <div key={meal.mealName}>
                                 <label htmlFor={meal.mealName}>{meal.mealName}</label>
-                                <input type="radio" id={meal.mealName} value={meal.mealName} name="sideDish" />
+                                <input type="radio" id={meal.mealName} value={meal.mealName} name="sideDish" onClick={chosenSideDish} />
                             </div>
                             : ''
                     )}
