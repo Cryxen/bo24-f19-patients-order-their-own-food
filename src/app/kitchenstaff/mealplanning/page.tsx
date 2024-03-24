@@ -2,12 +2,13 @@
 import Layout from "@/app/components/layout"
 import '../../styles/mealplanning.scss'
 import MealPlanList from "@/app/components/MealPlanList"
-import { useEffect, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
 import { MealPlan } from "@/features/mealPlans/types"
 
 const Mealplanning = () => {
 
     const [listOfMealPlans, setListOfMealPlans] = useState<MealPlan[]>([])
+    const [showMealPlans, setShowMealPlans] = useState<Boolean>(true)
 
     useEffect(() => {
         fetchMealPlans()
@@ -18,16 +19,21 @@ const Mealplanning = () => {
         if (response.status === 200) {
             const data = await response.json()
             setListOfMealPlans(data.data)
+            console.log(data.data)
         }
     }
 
+    const showNewMealPlanForm = (event: MouseEvent<HTMLButtonElement>): void => {
+        event.preventDefault()
+        setShowMealPlans(!showMealPlans)
+    }
 
 
     return (
         <Layout>
-            <div className="mainDiv">
+            <div className="gridBox">
                 <h1>Måltid Planlegging</h1>
-                <section>
+                <section id="mealPlanCalendar">
                     <span>Kostholdsplan for:</span>
                     <select>
                         <option>Kalender</option>
@@ -38,39 +44,39 @@ const Mealplanning = () => {
                     </select>
                     <span className="arrow">&#8594;</span>
                 </section>
-                <div className="container">
-                    <article className="meal-plan">
-                        <section>
-                            <span>Frokost</span>
-                            <button>Oppdater</button>
-                            <button>Rediger</button>
-                            <button>Dupliser</button>
-                        </section>
-                        <section className="information">
-                            <span>Bilde</span>
-                            <span>Beskrivelse</span>
-                            <span className="arrow">&#8594;</span>
-                        </section>
-                        <section>
-                            <button>Legg til ny matrett</button>
-                            <button>Se på matrett</button>
-                        </section>
-                    </article>
-                    {listOfMealPlans?.map(mealPlan =>
-                        <MealPlanList mealPlan={mealPlan} />)}
-                    <article>
-                        <section className="graph">
-                            <span>Ernæringsgraf</span>
-                        </section>
-                        <section className="overview">
-                            <span>Ernæringsoversikt</span>
-                        </section>
-                    </article>
-                </div>
+                {showMealPlans ?
+                    <div className="container">
+                        {listOfMealPlans?.map(mealPlan =>
+                            <MealPlanList mealPlan={mealPlan} key={mealPlan.id} />)}
+                    </div>
+                    :
+                    <div className="container">
+                        <article>
+                            <h3>
+                                Hovedrett:
+                            </h3>
+                        </article>
+                        <article>
+                            <h3>
+                                Siderett:
+                            </h3>
+                        </article>
+                    </div>
+                }
+                <div className="break" />
+                <article className="nutrition">
+                    <section className="graph">
+                        <span>Ernæringsgraf</span>
+                    </section>
+                    <section className="overview">
+                        <span>Ernæringsoversikt</span>
+                    </section>
+                </article>
                 <section className="buttons">
-                    <button>Ny måltid</button>
+                    <button onClick={showNewMealPlanForm}>{showMealPlans ? 'Nytt måltid' : 'Se lagrede måltid'}</button>
                     <button>Fjern måltid</button>
                 </section>
+
             </div>
         </Layout>
     )

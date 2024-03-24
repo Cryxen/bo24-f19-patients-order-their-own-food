@@ -1,13 +1,35 @@
+.gridBox {
+    display: grid;
+
+    grid-template-areas:
+        "header header"
+        "calendar calendar"
+        "main nutrition"
+        "buttons buttons";
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(auto, 4);
+}
+
+h1 {
+    grid-area: header;
+}
+
+#mealPlanCalendar {
+    grid-area: calendar;
+}
+
 .break {
     flex-basis: 100%;
     width: 0%;
 }
+
 .arrow {
     font-size: 4rem;
     margin: auto;
 }
 
 .container {
+    grid-area: main;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -15,11 +37,16 @@
     height: 55%;
 }
 
-.graph, .overview {
+.nutrition {
+    grid-area: nutrition;
+}
+
+.graph,
+.overview {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     background-color: red;
     height: 10rem;
 }
@@ -40,6 +67,7 @@
 }
 
 .buttons {
+    grid-area: buttons;
     width: 50%;
     display: flex;
     justify-content: space-between;
