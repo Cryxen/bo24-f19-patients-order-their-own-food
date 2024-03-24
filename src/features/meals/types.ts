@@ -1,20 +1,20 @@
-export const sideDishArray = ["vegetable"] as const; //Made with help from chatGPT
-export const mainDishArray = ["red meat", "fish", "chicken", "pasta"] as const;
+export const SIDE_DISH = ["vegetable"] as const; //Made with help from chatGPT
+export const MAIN_DISH = ["red meat", "fish", "chicken", "pasta"] as const;
 
 export type Meal = {
     mealName: string
     description: string
-    category: sideDish | mainDish | "undefined"
+    category: SideDish | MainDish | "undefined"
     dietaryInfo?: string[] | string;
     imageUrl?: string
 }
 
-export type sideDish = {
-    sideDish: typeof sideDishArray[number]
+export type SideDish = {
+    sideDish: typeof SIDE_DISH[number]
 }
 
-export type mainDish = {
-    mainDish: typeof mainDishArray[number]
+export type MainDish = {
+    mainDish: typeof MAIN_DISH[number]
 }
 
 export const dietaryRestrictions = ['Red meat', 'Salt', 'Gluten']
