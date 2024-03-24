@@ -1,3 +1,6 @@
+export const sideDishArray = ["vegetable"] as const; //Made with help from chatGPT
+export const mainDishArray = ["red meat", "fish", "chicken", "pasta"] as const;
+
 export type Meal = {
     mealName: string
     description: string
@@ -7,11 +10,11 @@ export type Meal = {
 }
 
 export type sideDish = {
-    sideDish: "vegetable"
+    sideDish: typeof sideDishArray[number]
 }
 
 export type mainDish = {
-    mainDish: "red meat" | "fish" | "chicken" | "pasta" 
+    mainDish: typeof mainDishArray[number]
 }
 
 export const dietaryRestrictions = ['Red meat', 'Salt', 'Gluten']
