@@ -21,7 +21,7 @@ const Mealplanning = () => {
         }
     }
 
-    
+
 
     return (
         <Layout>
@@ -56,9 +56,8 @@ const Mealplanning = () => {
                             <button>Se på matrett</button>
                         </section>
                     </article>
-                    <MealPlanList />
-                    <MealPlanList />
-                    <MealPlanList />
+                    {listOfMealPlans?.map(mealPlan =>
+                        <MealPlanList mealPlan={mealPlan} />)}
                     <article>
                         <section className="graph">
                             <span>Ernæringsgraf</span>
