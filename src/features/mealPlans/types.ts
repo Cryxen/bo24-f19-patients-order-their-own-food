@@ -1,7 +1,7 @@
 import { Meal } from "../meals/types"
 
 export type MealPlan = {
-    //  meals: Meal[]
+    id: number
     meals: Array<{[key: string]: Meal}> | Meal[]
     date: Date | string
     imageUrl?: string
