@@ -20,7 +20,15 @@ export const saveMealPlan = async (mealPlan: MealPlan) => {
     }
 }
 
+export const updateMealPlan = async (mealPlan: MealPlan) => {
+    try {
+        const responseFromDb = await mealPlansRepo.updateMealPlan(mealPlan)
+        return { success: responseFromDb?.success, data: responseFromDb?.data, error: responseFromDb?.error }
 
+    } catch (error) {
+        return { success: false, error: "Failed to update meal plan to db in service " + error }
+    }
+}
 const checkForImageUrl = (mealPlan: MealPlan): MealPlan => {
     if (!mealPlan.imageUrl)
         mealPlan.imageUrl = ''

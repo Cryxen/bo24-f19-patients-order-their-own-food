@@ -22,13 +22,25 @@ export const fetchAllMealPlans = async (req: NextRequest) => {
 export const saveMealPlan = async (req: NextRequest) => {
     try {
         const mealPlanToSave = await req.json() as MealPlan
-        const responseFromDb = await mealPlansService.saveMealPlan(mealPlanToSave)
-        return NextResponse.json({
-            status: 200,
-            success: responseFromDb.success,
-            data: responseFromDb?.data,
-            error: responseFromDb?.error
-        })
+        if (mealPlanToSave.id) {
+            const responseFromDb = await mealPlanToSave.updateMealPlan(mealPlanToSave)
+            return NextResponse.json({
+                status: 200,
+                success: responseFromDb?.success,
+                data: responseFromDb?.data,
+                error: responseFromDb?.error
+            })
+        }
+        else {
+            const responseFromDb = await mealPlansService.saveMealPlan(mealPlanToSave)
+            return NextResponse.json({
+                status: 200,
+                success: responseFromDb?.success,
+                data: responseFromDb?.data,
+                error: responseFromDb?.error
+            })
+        }
+
     } catch (error) {
         return NextResponse.json({
             success: false,

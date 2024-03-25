@@ -23,7 +23,6 @@ export const fetchAllMealPlans = async () => {
 
 export const saveMealPlan = async (mealPlan: MealPlan) => {
     try {
-        console.log(mealPlan.meals[0])
         const responseFromDb = await prisma.mealPlan.create({
             data: {
                 meals: {
@@ -47,4 +46,39 @@ export const saveMealPlan = async (mealPlan: MealPlan) => {
     catch (error) {
         return { success: false, error: "Failed to save mealplan to db in repository" + error }
     }
+}
+
+export const updateMealPlan = async (mealPlan: MealPlan) => {
+    try {
+        const responseFromDb = await prisma.mealPlan.update({
+            where: { id: mealPlan.id },
+            data: {
+                meals: {
+                    connect: [
+                        {
+                            mealPlanId_mealIdName: {
+                                mealIdName: mealPlan.meals[0] as unknown as string,
+                                mealPlanId: mealPlan.id as number
+                            }
+                        },
+                        {
+                            mealPlanId_mealIdName: {
+                                mealIdName: mealPlan.meals[1] as unknown as string,
+                                mealPlanId: mealPlan.id as number
+                            }
+                        },
+                    ]
+                },
+                date: mealPlan.date.toString(),
+                imageUrl: mealPlan.imageUrl,
+                description: mealPlan.description,
+                orders: mealPlan.order
+            }
+        })
+        return { success: true, data: responseFromDb }
+
+    } catch (error) {
+        return { success: false, error: "Failed to update mealplan to db in repository " + error }
+    }
+
 }
