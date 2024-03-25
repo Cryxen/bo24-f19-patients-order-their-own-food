@@ -1,9 +1,9 @@
 // /prisma/seed.js
 // fra: https://fullstækk.no/courses/next-mvc-orm/06-seeding
 
-import { Meal } from "@/features/meals/types";
+import { MainDish, SideDish } from "@/features/meals/types";
 import { User } from "@/features/users/types";
-import { MealPlan, MealToMealPlan, PrismaClient } from "@prisma/client";
+import { MealPlan, MealToMealPlan, Meal, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -14,10 +14,10 @@ const users: User[] = [
 ];
 
 const meals: Meal[] = [
-  { mealName: "Stekt kylling", description: "Stekt i smør", category: "chicken" },
-  { mealName: "Stekt fisk", description: "Stekt i smør", category: "fish" },
-  { mealName: "Stekt biff", description: "Stekt i smør", category: "red meat" },
-  { mealName: "Pommes frittes", description: "Frityrstekt i olje", category: "vegetable" },
+  { mealName: "Stekt kylling", description: "Stekt i smør", category: "chicken", dietaryInfo: null, imageUrl: null },
+  { mealName: "Stekt fisk", description: "Stekt i smør", category: "fish", dietaryInfo: null, imageUrl: null },
+  { mealName: "Stekt biff", description: "Stekt i smør", category: "red meat", dietaryInfo: null, imageUrl: null },
+  { mealName: "Pommes frittes", description: "Frityrstekt i olje", category: "vegetable", dietaryInfo: null, imageUrl: null },
 ]
 
 const mealPlans: MealPlan[] = [
