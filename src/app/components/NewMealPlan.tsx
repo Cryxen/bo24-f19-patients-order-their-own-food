@@ -5,13 +5,13 @@ import { MAIN_DISH, MainDish, Meal, SIDE_DISH, SideDish } from "@/features/meals
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
 import { POST } from "../api/meals/route"
 
-const NewMealPlan = (props: { date: Date }) => {
+const NewMealPlan = (props: { date: Date, fetchMealPlans: () => void }) => {
     const [mealList, setMealList] = useState<Meal[]>([])
     const [sideDish, setSideDish] = useState<Meal>()
     const [mainDish, setMainDish] = useState<Meal>()
     const [mealPlantoSave, setMealPlanToSave] = useState<MealPlan>()
     const [description, setDescription] = useState<string>()
-    const { date } = props
+    const { date, fetchMealPlans } = props
 
     useEffect(() => {
         fetchMeals()
@@ -53,6 +53,7 @@ const NewMealPlan = (props: { date: Date }) => {
 
         if (response.status === 200) {
             const data = await response.json()
+            fetchMealPlans()
             console.log(data)
         }
         else
