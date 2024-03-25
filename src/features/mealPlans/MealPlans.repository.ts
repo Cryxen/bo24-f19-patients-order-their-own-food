@@ -23,54 +23,28 @@ export const fetchAllMealPlans = async () => {
 
 export const saveMealPlan = async (mealPlan: MealPlan) => {
     try {
-        const responseFromDb = await prisma.mealPlan.upsert({
-            where: { id: mealPlan.id },
-            update: {
+        console.log(mealPlan.meals[0])
+        const responseFromDb = await prisma.mealPlan.create({
+            data: {
                 meals: {
-                    connect: [ //Help from ChatGPT and Prisma documentation
-                        {
-                            mealPlanId_mealIdName: {
-                                mealPlanId: mealPlan.id as number,
-                                mealIdName: mealPlan.meals[0].mealName as string
-                            }
-                        },
-                        {
-                            mealPlanId_mealIdName: {
-                                mealPlanId: mealPlan.id as number,
-                                mealIdName: mealPlan.meals[1].mealName as string
-                            },
+                    createMany: {
+                        data: [{
+                            mealIdName: mealPlan.meals[0] as unknown as string
+                        }, {
+                            mealIdName: mealPlan.meals[1] as unknown as string
                         }
-                    ]
+                        ]
+                    }
                 },
                 date: mealPlan.date.toString(),
                 imageUrl: mealPlan.imageUrl,
                 description: mealPlan.description,
                 orders: mealPlan.order
             },
-            create: {
-                meals: {
-                    connect: [ //Help from ChatGPT and Prisma documentation
-                        {
-                            mealPlanId_mealIdName: {
-                                mealPlanId: mealPlan.id as number,
-                                mealIdName: mealPlan.meals[0].mealName as string
-                            },
-                            mealPlanId_mealIdName: {
-                                mealPlanId: mealPlan.id as number,
-                                mealIdName: mealPlan.meals[1].mealName as string
-                            },
-                        }
-                    ]
-                },
-                date: mealPlan.date.toString(),
-                imageUrl: mealPlan.imageUrl as string,
-                description: mealPlan.description,
-                orders: mealPlan.order
-            }
         })
         return { success: true, data: responseFromDb }
     }
     catch (error) {
-        return { success: false, error: "Failed to save mealplan to db " + error }
+        return { success: false, error: "Failed to save mealplan to db in repository" + error }
     }
 }

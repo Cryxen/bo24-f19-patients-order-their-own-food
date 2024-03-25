@@ -46,6 +46,17 @@ const NewMealPlan = (props: { date: Date }) => {
             description: description as string
         }
         setMealPlanToSave(mealPlan)
+        const response = await fetch('/api/mealPlans', {
+            method: 'POST',
+            body: JSON.stringify(mealPlan)
+        })
+
+        if (response.status === 200) {
+            const data = await response.json()
+            console.log(data)
+        }
+        else
+            console.log(response)
     }
 
 
