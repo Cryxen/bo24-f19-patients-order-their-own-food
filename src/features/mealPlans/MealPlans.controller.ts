@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as mealPlansService from './MealPlans.service'
+import { MealPlan } from './types'
 
 export const fetchAllMealPlans = async (req: NextRequest) => {
     try {
@@ -14,6 +15,24 @@ export const fetchAllMealPlans = async (req: NextRequest) => {
         return NextResponse.json({
             success: false,
             error: "Something went wrong fetching meal plans from db in controller"
+        })
+    }
+}
+
+export const saveMealPlan = async (req: NextRequest) => {
+    try {
+        const mealPlanToSave = await req.json() as MealPlan
+        const responseFromDb = await mealPlansService.saveMealPlan(mealPlanToSave)
+        return NextResponse.json({
+            status: 200,
+            success: responseFromDb.success,
+            data: responseFromDb?.data,
+            error: responseFromDb?.error
+        })
+    } catch (error) {
+        return NextResponse.json({
+            success: false,
+            error: "Something went wrong saving meal plan to db in controller " + error
         })
     }
 }
