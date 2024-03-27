@@ -76,9 +76,6 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
             setMealPlanToUpdate(prev => ({
                 ...prev, meals: [mainDish, sideDish]
             }))
-            console.log(mealPlanToUpdate)
-            console.log(mainDish)
-            console.log(sideDish)
             const response = await fetch('/api/mealPlans', {
                 method: "POST",
                 body: JSON.stringify({
