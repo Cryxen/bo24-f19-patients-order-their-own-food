@@ -42,7 +42,7 @@ const NewMealPlan = (props: { date: Date, fetchMealPlans: () => void }) => {
         event.preventDefault()
         const mealPlan: MealPlan = {
             meals: [mainDish as Meal, sideDish as Meal],
-            date: date,
+            date: date.toDateString(),
             description: description as string
         }
         setMealPlanToSave(mealPlan)
