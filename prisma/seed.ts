@@ -7,6 +7,8 @@ import { MealPlan, MealToMealPlan, Meal, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+const date = new Date()
+
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
   { email: "karl.gustav@sunnaas.no", name: "Karl Gustav", role: "administrator", password: "password" },
@@ -21,9 +23,9 @@ const meals: Meal[] = [
 ]
 
 const mealPlans: MealPlan[] = [
-  { id: 0, date: Date.now().toString(), description: "Stekt kylling med pommes frittes", imageUrl: 'TODO' },
-  { id: 1, date: Date.now().toString(), description: "Stekt fisk med pommes frittes", imageUrl: 'TODO' },
-  { id: 2, date: Date.now().toString(), description: "Stekt biff med pommes frittes", imageUrl: 'TODO' }
+  { id: 0, date: date.toDateString(), description: "Stekt kylling med pommes frittes", imageUrl: 'TODO' },
+  { id: 1, date: date.toDateString(), description: "Stekt fisk med pommes frittes", imageUrl: 'TODO' },
+  { id: 2, date: date.toDateString(), description: "Stekt biff med pommes frittes", imageUrl: 'TODO' }
 ]
 
 const mealToMealPlans: MealToMealPlan[] = [

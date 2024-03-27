@@ -2,9 +2,11 @@ import '@/app/styles/mealplanning.scss'
 import { MealPlan } from '@/features/mealPlans/types'
 import { Meal, MainDish, SideDish, SIDE_DISH, MAIN_DISH } from '@/features/meals/types'
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
+import DatePicker from 'react-datepicker'
 
 const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
     const [updateMealPlanMode, setUpdateMealPlanMode] = useState<boolean>(false)
+    const [newDate, setNewDate] = useState<Date>(new Date())
     const [listOfMeals, setListOfMeals] = useState<Meal[]>([])
     const [mainDish, setMainDish] = useState<Meal>({
         mealName: '',
@@ -26,7 +28,7 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
     useEffect(() => {
         fetchListOfMeals()
         setMealPlanToUpdate(mealPlan)
-
+        setNewDate(mealPlan.date as Date)
     }, [])
 
 
@@ -82,7 +84,7 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
                     id: mealPlanToUpdate.id,
                     description: mealPlanToUpdate.description,
                     meals: [mainDish.mealName, sideDish.mealName],
-                    date: date.toDateString()
+                    date: newDate.toDateString()
                 })
             })
             if (response.status === 200) {
@@ -102,6 +104,8 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
                 <section className='information'>
                     <label htmlFor='descriptionField'>Beskrivelse:</label>
                     <input type='text' value={mealPlanToUpdate?.description} onChange={updateDescriptionField} id='descriptionField' />
+                    <p>Dato: </p>
+                    <DatePicker selected={newDate} onChange={(date => setNewDate(date as Date))} dateFormat={"dd/MM/YYYY"} />
                     <p>Hovedrett: </p>
                     {listOfMeals.map(meal =>
                         (MAIN_DISH as unknown as MainDish[]).includes(meal.category as MainDish) ?
@@ -125,6 +129,7 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
                 :
                 <section className="information">
                     <h4>{mealPlan.description}</h4>
+                    <p>Dato: {mealPlan.date.toString()}</p>
                     <p>Bilde</p>
                     {mealPlan.meals.map(el =>
                         (MAIN_DISH as unknown as MainDish[]).includes(el.meal.category as MainDish) ? <p key={el.meal.mealName}>Hovedrett: {el.meal.mealName}</p> : ''
