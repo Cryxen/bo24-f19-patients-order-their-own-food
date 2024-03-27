@@ -3,11 +3,13 @@ import { MealPlan } from '@/features/mealPlans/types'
 import { Meal, MainDish, SideDish, SIDE_DISH, MAIN_DISH } from '@/features/meals/types'
 import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
+import ConfirmationWindow from './ComfirmationWindow'
 
 const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlans: Dispatch<SetStateAction<MealPlan[]>>, listOfMealPlans: MealPlan[] }) => {
     const [updateMealPlanMode, setUpdateMealPlanMode] = useState<boolean>(false)
     const [newDate, setNewDate] = useState<Date>(new Date())
     const [listOfMeals, setListOfMeals] = useState<Meal[]>([])
+    const [showConfirmationWindow, setShowConfirmationWindow] = useState<Boolean>(false)
     const [mainDish, setMainDish] = useState<Meal>({
         mealName: '',
         category: 'undefined',
@@ -97,6 +99,12 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
 
     const handleDeleteButton = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
+        setShowConfirmationWindow(true)
+
+    }
+
+    const handleConfirmButtonPress = async () => {
+        setShowConfirmationWindow(false)
         const response = await fetch('/api/mealPlans?mealPlanId=' + mealPlan.id, {
             method: "DELETE"
         })
@@ -109,8 +117,14 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
         }
     }
 
+    const handleDeclineButtonPress = () => {
+        setShowConfirmationWindow(false)
+    }
+
     return (
         <article className="meal-plan">
+            {showConfirmationWindow ? <ConfirmationWindow message={"Er du sikker på at du ønsker å slette?"} confirmButton={"Ja"} declineButton={"Nei"} handleConfirmButtonPress={handleConfirmButtonPress} handleDeclineButtonPress={handleDeclineButtonPress} /> : ''}
+
             <section>
                 <span>Middag</span>
                 <button onClick={updateMealButton}>Oppdater</button>
