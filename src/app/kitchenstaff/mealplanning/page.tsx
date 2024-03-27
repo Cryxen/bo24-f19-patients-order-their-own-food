@@ -11,7 +11,7 @@ const Mealplanning = () => {
 
     const [listOfMealPlans, setListOfMealPlans] = useState<MealPlan[]>([])
     const [showMealPlans, setShowMealPlans] = useState<Boolean>(true)
-    const [date, setDate] = useState<Date>()
+    const [date, setDate] = useState<Date>(new Date())
     useEffect(() => {
         fetchMealPlans()
     }, [])
