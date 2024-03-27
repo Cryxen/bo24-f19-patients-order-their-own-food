@@ -54,31 +54,25 @@ export const updateMealPlan = async (mealPlan: MealPlan) => {
             where: { id: mealPlan.id },
             data: {
                 meals: {
-                    connect: [
-                        {
-                            mealPlanId_mealIdName: {
-                                mealIdName: mealPlan.meals[0] as unknown as string,
-                                mealPlanId: mealPlan.id as number
-                            }
-                        },
-                        {
-                            mealPlanId_mealIdName: {
-                                mealIdName: mealPlan.meals[1] as unknown as string,
-                                mealPlanId: mealPlan.id as number
-                            }
-                        },
-                    ]
+                    deleteMany: [{mealPlanId: mealPlan.id}],
+                    createMany: {
+                        data: [{
+                            mealIdName: mealPlan.meals[0] as unknown as string
+                        }, {
+                            mealIdName: mealPlan.meals[1] as unknown as string
+                        }
+                        ]
+                    }
                 },
                 date: mealPlan.date.toString(),
                 imageUrl: mealPlan.imageUrl,
                 description: mealPlan.description,
                 orders: mealPlan.order
-            }
+            },
         })
         return { success: true, data: responseFromDb }
 
     } catch (error) {
         return { success: false, error: "Failed to update mealplan to db in repository " + error }
     }
-
 }

@@ -23,7 +23,7 @@ export const saveMealPlan = async (req: NextRequest) => {
     try {
         const mealPlanToSave = await req.json() as MealPlan
         if (mealPlanToSave.id) {
-            const responseFromDb = await mealPlanToSave.updateMealPlan(mealPlanToSave)
+            const responseFromDb = await mealPlansService.updateMealPlan(mealPlanToSave)
             return NextResponse.json({
                 status: 200,
                 success: responseFromDb?.success,
