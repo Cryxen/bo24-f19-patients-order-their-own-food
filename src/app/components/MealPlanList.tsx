@@ -1,10 +1,10 @@
 import '@/app/styles/mealplanning.scss'
 import { MealPlan } from '@/features/mealPlans/types'
 import { Meal, MainDish, SideDish, SIDE_DISH, MAIN_DISH } from '@/features/meals/types'
-import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
+import { ChangeEvent, Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 
-const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
+const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlans: Dispatch<SetStateAction<MealPlan[]>>, listOfMealPlans: MealPlan[] }) => {
     const [updateMealPlanMode, setUpdateMealPlanMode] = useState<boolean>(false)
     const [newDate, setNewDate] = useState<Date>(new Date())
     const [listOfMeals, setListOfMeals] = useState<Meal[]>([])
@@ -23,12 +23,13 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
         meals: [],
         date: ''
     })
-    const { mealPlan, date } = props
+    const { mealPlan, date, setListOfMealPlans, listOfMealPlans } = props
 
     useEffect(() => {
         fetchListOfMeals()
         setMealPlanToUpdate(mealPlan)
         setNewDate(mealPlan.date as Date)
+
     }, [])
 
 
@@ -103,6 +104,8 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
         if (response.status === 200) {
             const data = await response.json()
             console.log(data)
+            const mealPlansWithoutDeletedMealPlan: MealPlan[] = listOfMealPlans.filter(el => el.id !== mealPlan.id)
+            setListOfMealPlans(mealPlansWithoutDeletedMealPlan)
         }
     }
 

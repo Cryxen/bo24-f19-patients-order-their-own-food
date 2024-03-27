@@ -45,7 +45,7 @@ const Mealplanning = () => {
                 {showMealPlans ?
                     <div className="container">
                         {listOfMealPlans?.map(mealPlan =>
-                            <MealPlanList mealPlan={mealPlan} key={mealPlan.id} date={date}/>)}
+                            <MealPlanList mealPlan={mealPlan} key={mealPlan.id} date={date} setListOfMealPlans={setListOfMealPlans} listOfMealPlans={listOfMealPlans}/>)}
                     </div>
                     :
                     <NewMealPlan date={date} fetchMealPlans={fetchMealPlans}/>
