@@ -3,7 +3,7 @@ import { MealPlan } from '@/features/mealPlans/types'
 import { Meal, MainDish, SideDish, SIDE_DISH, MAIN_DISH } from '@/features/meals/types'
 import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
 
-const MealPlanList = (props: { mealPlan: MealPlan }) => {
+const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
     const [updateMealPlanMode, setUpdateMealPlanMode] = useState<boolean>(false)
     const [listOfMeals, setListOfMeals] = useState<Meal[]>([])
     const [mainDish, setMainDish] = useState<Meal>({
@@ -21,7 +21,7 @@ const MealPlanList = (props: { mealPlan: MealPlan }) => {
         meals: [],
         date: ''
     })
-    const { mealPlan } = props
+    const { mealPlan, date } = props
 
     useEffect(() => {
         fetchListOfMeals()
@@ -61,6 +61,7 @@ const MealPlanList = (props: { mealPlan: MealPlan }) => {
     }
 
     const handleSideDishChange = (event: ChangeEvent<HTMLInputElement>) => {
+        console.log(event.target.value)
         setSideDish(prev => ({
             ...prev, mealName: event.target.value
         }))
@@ -72,11 +73,21 @@ const MealPlanList = (props: { mealPlan: MealPlan }) => {
     const handleUpdateMealButton = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         if (mainDish.mealName.length > 0 && sideDish.mealName.length > 0) {
+            setMealPlanToUpdate(prev => ({
+                ...prev, meals: [mainDish, sideDish]
+            }))
+            console.log(mealPlanToUpdate)
+            console.log(mainDish)
+            console.log(sideDish)
             const response = await fetch('/api/mealPlans', {
                 method: "POST",
-                body: JSON.stringify(mealPlanToUpdate)
+                body: JSON.stringify({
+                    id: mealPlanToUpdate.id,
+                    description: mealPlanToUpdate.description,
+                    meals: [mainDish.mealName, sideDish.mealName],
+                    date: date.toDateString()
+                })
             })
-            console.log(response)
             if (response.status === 200) {
                 const data = await response.json()
                 console.log(data)
@@ -103,7 +114,7 @@ const MealPlanList = (props: { mealPlan: MealPlan }) => {
                             </div>
                             : ''
                     )}
-                    <p>Ved side nav:</p>
+                    <p>Ved siden av:</p>
                     {listOfMeals.map(meal =>
                         (SIDE_DISH as unknown as SideDish[]).includes(meal.category as SideDish) ?
                             <div key={meal.mealName}>
