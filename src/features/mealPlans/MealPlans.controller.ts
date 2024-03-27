@@ -48,3 +48,28 @@ export const saveMealPlan = async (req: NextRequest) => {
         })
     }
 }
+
+
+export const deleteMealPlan = async (req: NextRequest) => {
+    try {
+        if (req.nextUrl.searchParams.get('mealPlanId')) {
+            console.log("Inside controller")
+            const mealPlanId = req.nextUrl.searchParams.get('mealPlanId')
+            const responseFromDb = await mealPlansService.deleteMealPlan(parseInt(mealPlanId!))
+            return NextResponse.json({
+                status: 200,
+                success: responseFromDb?.success,
+                data: responseFromDb?.data,
+                error: responseFromDb?.error
+            })
+        }
+        else NextResponse.json({
+            success: false, status: 400, error: "Missing parameter "
+        })
+    } catch (error) {
+        return NextResponse.json({
+            success: false,
+            error: "Something went wrong deleting meal plan from db in controller " + error
+        })
+    }
+}

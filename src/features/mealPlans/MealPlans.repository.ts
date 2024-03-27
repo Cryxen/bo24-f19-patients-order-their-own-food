@@ -54,7 +54,7 @@ export const updateMealPlan = async (mealPlan: MealPlan) => {
             where: { id: mealPlan.id },
             data: {
                 meals: {
-                    deleteMany: [{mealPlanId: mealPlan.id}],
+                    deleteMany: [{ mealPlanId: mealPlan.id }],
                     createMany: {
                         data: [{
                             mealIdName: mealPlan.meals[0] as unknown as string
@@ -75,4 +75,21 @@ export const updateMealPlan = async (mealPlan: MealPlan) => {
     } catch (error) {
         return { success: false, error: "Failed to update mealplan to db in repository " + error }
     }
+}
+
+export const deleteMealPlan = async (mealPlanId: number) => {
+    try {
+        const deleteManyMealsToMealPlan =  prisma.mealToMealPlan.deleteMany({
+            where: { mealPlanId: mealPlanId }
+        })
+        const responseFromDb =  prisma.mealPlan.delete({
+            where: { id: mealPlanId }
+        })
+        const transaction = await prisma.$transaction([deleteManyMealsToMealPlan, responseFromDb])
+
+        return { success: true, data: transaction }
+    } catch (error) {
+        return { success: false, error: "Failed to delete mealplan from db in repository" }
+    }
+
 }

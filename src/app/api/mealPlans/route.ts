@@ -8,3 +8,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
     return await mealPlanController.saveMealPlan(req)
 }
+
+export async function DELETE(req: NextRequest) {
+    return await mealPlanController.deleteMealPlan(req)
+}

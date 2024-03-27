@@ -34,3 +34,13 @@ const checkForImageUrl = (mealPlan: MealPlan): MealPlan => {
         mealPlan.imageUrl = ''
     return mealPlan
 }
+
+export const deleteMealPlan = async (mealPlanId: number) => {
+    try {
+        console.log("Inside service")
+        const responseFromDb = await mealPlansRepo.deleteMealPlan(mealPlanId!)
+        return {success: true, data: responseFromDb.data}
+    } catch (error) {
+        return {success: false, error: "Something went wrong deleting the mealplan in service"}
+    }
+}

@@ -94,11 +94,24 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date }) => {
         }
     }
 
+    const handleDeleteButton = async (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        const response = await fetch('/api/mealPlans?mealPlanId=' + mealPlan.id, {
+            method: "DELETE"
+        })
+        console.log(response)
+        if (response.status === 200) {
+            const data = await response.json()
+            console.log(data)
+        }
+    }
+
     return (
         <article className="meal-plan">
             <section>
                 <span>Middag</span>
                 <button onClick={updateMealButton}>Oppdater</button>
+                <button onClick={handleDeleteButton}>Slett</button>
             </section>
             {updateMealPlanMode ?
                 <section className='information'>
