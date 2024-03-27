@@ -1,5 +1,5 @@
-import '../styles/kitchenstaff.scss'
 import '../styles/globals.scss'
+import '../styles/administrator.scss'
 import Layout from '../components/layout'
 import Navbox from '../components/Navbox'
 

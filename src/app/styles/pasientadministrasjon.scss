@@ -1,64 +1,138 @@
 
-.box {
-    border-style: solid;
-    max-width: 40%;
-    width: 40%;
+// .box {
+//     border-style: solid;
+//     max-width: 40%;
+//     width: 40%;
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// .boxValgtrom {
+//   border-style: solid;
+//   max-width: 40%;
+//   width: 40%;
+// }
+
+// .restriksjonsbox {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+// }
+
+.diet-container {
+  border-style: solid;
+  width: 10rem;
+  height: 10rem;
+  text-align: center;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+// .selectorRoom {
+//     max-width: 30%;
+//     width: 30%;
+//     margin: auto;
+//     margin-bottom: 1vh;
+// }
+
+// .generatebutton {
+//     display: block;
+//     margin-top: 1vh;
+//     margin-bottom: 1vh;
+//     padding: 1vh;
+//     margin-left: auto;
+//     margin-right: auto;
+// }
+
+// .inputbruker {
+//     max-width: 50%;
+//     margin: auto;
+//     padding: .4vh;
+//     text-align: center;
+    
+// }
+
+// .Title  {
+//   text-align: center;
+// }
+
+.main-wrapper {
+    min-width: 75%;
+    margin: 1rem 0;
+
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .button {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+  
+      font-size: 1rem;
+      border: 0;
+      padding: 0.5em 1em;
+  
+      background-color: #F5F5F5;
+      color: #262626;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  
+      &:hover {
+          background: #FCF7FF;
+      }
+    }
+
+    .dropdown {
+    font-size: 1rem;
+    padding: 0.5em;
+    border: 0;
+
+    background-color: #F5F5F5;
+    color: #262626;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    &:hover {
+        background: #FCF7FF;
+    }
+  }
+
+    .room-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .restriction-container {
+      width: min(75rem, 100%);
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+
+      .title {
+        margin: 0 auto;
+      }
+    }
+
+    .config-container {
+      padding: 0 1rem 1rem 1rem;
+    }
 }
-
-.boxValgtrom {
-  border-style: solid;
-  max-width: 40%;
-  width: 40%;
-}
-
-.restriksjonsbox {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.smallbox {
-  border-style: solid;
-  max-width: 25%;
-  width: 25%;
-  margin: 1vh;
-  padding: .5vh;
-  display: grid;
-  place-items: center;
-  border-radius: 5%;
-}
-
-.selectorRoom {
-    max-width: 30%;
-    width: 30%;
-    margin: auto;
-    margin-bottom: 1vh;
-}
-
-.generatebutton {
-    display: block;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    padding: 1vh;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.inputbruker {
-    max-width: 50%;
-    margin: auto;
-    padding: .4vh;
-    text-align: center;
-    
-}
-
-.Title  {
-  text-align: center;
-}
-
-
 
 //Kode under hentet fra W3 Schools, legger stil på toggle slider
 .switch {
@@ -68,7 +142,6 @@
     height: 34px;
   }
   
-
   .switch input {
     opacity: 0;
     width: 0;
@@ -114,7 +187,6 @@
     transform: translateX(26px);
   }
   
-
   .slider.round {
     border-radius: 34px;
   }

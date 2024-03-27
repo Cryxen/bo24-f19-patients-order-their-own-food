@@ -64,7 +64,6 @@ const Mealplanning = () => {
                     <button onClick={showNewMealPlanForm}>{showMealPlans ? 'Nytt måltid' : 'Se lagrede måltid'}</button>
                     <button>Fjern måltid</button>
                 </section>
-
             </div>
         </Layout>
     )
