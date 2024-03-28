@@ -1,53 +1,140 @@
-.mainbox {
-    width: 75%;
-    border-style: solid;
-    align-content: center;
-}
+.main-wrapper {
+    width: min(75rem, 100%);
+    margin: 1rem 0;
 
-.itembox{
     display: flex;
-    border-style: solid;
-    margin: 0.5vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .useradmin-container {
+        width: 100%;
+        border: 1px black solid;
+        background-color: #75F4F4;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        gap: 1rem;
+
+        .user-box {
+            margin-right: auto;
+        }
+
+        .role-box {
+            margin-left: auto;
+        }
+    }
 }
 
-.itembox2{
+.profile-wrapper {
+    border: 1px black solid;
+    width: 100%;
+    margin: 1rem;
     display: flex;
-    margin: 0.5vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+
+    .profile-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        .name-box {
+
+            input[type=text] {
+                display: inline-block;
+                font-size: 1rem;
+                width: 100%;
+                padding: 0.5em;
+                background-color: #F5F5F5;
+                color: #262626;
+            
+                border: 1px solid black;
+            }
+        }
+
+        .email-box {
+
+            input[type=email] {
+                display: inline-block;
+                font-size: 1rem;
+                width: 100%;
+                padding: 0.5em;
+                background-color: #F5F5F5;
+                color: #262626;
+            
+                border: 1px solid black;
+            }
+        }
+
+        .password-box {
+            
+            input[type=password] {
+                display: inline-block;
+                font-size: 1rem;
+                width: 100%;
+                padding: 0.5em;
+                background-color: #F5F5F5;
+                color: #262626;
+            
+                border: 1px solid black;
+            }
+        }
+    }
+
+    .role-container {
+
+    }
+
+    .submit-container {
+
+        .submit-button {
+            display: inline-block;
+            text-align: center;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 0;
+            background-color: #F5F5F5;
+        
+            padding: 0.5em 1em;
+        
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        
+            &:hover {
+                background: #FCF7FF;
+            }
+        }
+    }
 }
 
-.contentitembox {
-    max-width: 50%;
-    width: 50%;
+.role-dropdown {
+    font-size: 1rem;
+    padding: 0.5em;
+    border: 0;
+
+    background-color: #F5F5F5;
+    color: #262626;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    &:hover {
+        background: #FCF7FF;
+    }
 }
 
-.contentitemboxrolle {
-    max-width: 50%;
-    width: 50%;
-    margin: auto;
-}
+h1 {
+    font-size: 3rem;
 
-.centeritembox {
-    min-width: 100%;
-    max-width: 100%;
-}
-
-.generatebutton {
-    display: block;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    padding: 1vh;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.inputbruker {
-    max-width: 90%;
-    padding: .4vh;
-    text-align: center;
-    
-}
-
-
-p {
-    margin-left: 1vh;
+    @media only screen and (min-width: 475px) {
+        font-size: 2rem;
+    }
 }

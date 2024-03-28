@@ -1,17 +1,50 @@
+header, footer {
+    display: none;
+}
+
+
 .mainDiv {
+    
     h1 {
         border-style: solid;
-        margin: auto;
-        margin-top: 5%;
-        margin-bottom: 5%;
-        padding: 5%;
+        margin: auto 0;
+        padding: 5rem;
     }
-    form {
+    .login-container {
         display: flex;
         flex-direction: column;
+        margin-bottom: auto;
+        gap: 1rem;
 
         input {
-            margin: 2%;
+            display: inline-block;
+            font-size: 1rem;
+            width: 100%;
+            padding: 0.5em;
+            background-color: #F5F5F5;
+            color: #262626;
+        
+            border: 1px solid black;
         }
+
+        .submit-button {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        
+            font-size: 1rem;
+            border: 0;
+            padding: 0.5em 1em;
+        
+            background-color: #F5F5F5;
+            color: #262626;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        
+            &:hover {
+                background: #FCF7FF;
+            }
+        }
+        
     }
 }

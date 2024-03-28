@@ -1,3 +1,4 @@
+import { isArray, isString } from 'util';
 import * as mealsRepo from './Meals.repository'
 import { Meal } from './types';
 export const fetchAllMeals = async () => {
@@ -10,11 +11,32 @@ export const fetchAllMeals = async () => {
     }
 }
 
+const makeStringToArray = (string:string): string[] => {
+    return string.split(',')
+}
+
+const makeArrayToString = (array: string[]) : string => {
+    return array.toString()
+}
+
 export const saveMeal = async (meal: Meal) => {
     try {
-        const resopnseFromDb = await mealsRepo.saveMeal(meal)
-        return {success: true, data: resopnseFromDb.data}
+        if (Array.isArray(meal.dietaryInfo))
+            {
+                meal.dietaryInfo = (makeArrayToString(meal.dietaryInfo))
+            }
+        const responseFromDb = await mealsRepo.saveMeal(meal)
+        return {success: true, data: responseFromDb.data}
     } catch (error) {
         return {success: false, error: "Failed in service to save or update meal to db"}
+    }
+}
+
+export const deleteMeal = async (mealName: Meal["mealName"]) => {
+    try {
+        const responseFromDb = await mealsRepo.deleteMeal(mealName)
+        return {success: true, data: responseFromDb.data}
+    } catch (error) {
+        return {success: false, error: "Something went wrong deleting meal: " + mealName + " in service"}
     }
 }
