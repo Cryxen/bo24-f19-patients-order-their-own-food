@@ -1,3 +1,3 @@
-export type DietaryRestriction = {
-restriction: string
+export type Restriction = {
+    dietaryRestriction: string
 }

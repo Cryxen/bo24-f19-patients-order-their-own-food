@@ -3,7 +3,7 @@
 
 import { Meal } from "@/features/meals/types";
 import { User } from "@/features/users/types";
-import { MealPlan, MealToMealPlan, PrismaClient } from "@prisma/client";
+import { MealPlan, MealToMealPlan, PrismaClient, Restriction } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -33,6 +33,12 @@ const mealToMealPlans: MealToMealPlan[] = [
   { mealIdName: 'Pommes frittes', mealPlanId: 1 },
   { mealIdName: 'Stekt biff', mealPlanId: 2 },
   { mealIdName: 'Pommes frittes', mealPlanId: 2 }
+]
+
+const dietaryRestrictions: Restriction[] = [
+  { dietaryRestriction: 'gluten free' },
+  { dietaryRestriction: 'no sodium' },
+  { dietaryRestriction: 'no pork' }
 ]
 
 // Function to save users to database
@@ -98,6 +104,18 @@ const createMealPlans = async () => {
   await Promise.all(mealPlanPromises)
 }
 
+const createRestrictins = async () => {
+  const restrictionPromises = dietaryRestrictions.map(async (restriction) => {
+    await prisma.restriction.upsert({
+      where: { dietaryRestriction: restriction.dietaryRestriction },
+      update: {},
+      create: {
+        dietaryRestriction: restriction.dietaryRestriction
+      }
+    })
+  })
+}
+
 // Seed funksjoners
 
 async function main() {
@@ -105,6 +123,7 @@ async function main() {
   await createUsers();
   await createMeals();
   await createMealPlans();
+  await createRestrictins();
   console.log(`Seeding finished.`);
 }
 
