@@ -2,7 +2,7 @@ const Header = () => {
     return(
         <div id="header">
         <p>HEADER</p>
-        <button>user</button>
+        <button>Logg ut</button>
         </div>
     )
 }
