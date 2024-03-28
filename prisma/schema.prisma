@@ -31,12 +31,23 @@ model Meal {
 
 model Room {
   roomNumber Int @id @unique
-  order Order @relation(fields: [orderId], references: [id])
-  orderId Int @unique
-  restriction Restriction? @relation(fields: [dietaryRestriction], references: [dietaryRestriction])
-  dietaryRestriction String? @unique
+  order Order? @relation(fields: [orderId], references: [id])
+  orderId Int? @unique
+  restrictions RoomToRestriction[]
 }
 
+model RoomToRestriction {
+  room Room @relation(fields: [roomNumber], references: [roomNumber])
+  roomNumber Int
+  restriction Restriction @relation(fields: [dietaryRestriction], references: [dietaryRestriction])
+  dietaryRestriction String
+  @@id([roomNumber, dietaryRestriction])
+}
+
+model Restriction {
+  dietaryRestriction String @id
+  rooms RoomToRestriction[]
+}
 model MealPlan {
   id Int @id @default(autoincrement())
   meals MealToMealPlan[] 
@@ -69,7 +80,3 @@ model PastOrder {
   date String
 }
 
-model Restriction {
-  dietaryRestriction String @id
-  room Room[]
-}

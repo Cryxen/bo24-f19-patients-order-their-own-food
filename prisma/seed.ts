@@ -11,6 +11,8 @@ const date = new Date()
 
 const DIETARY_RESTRICTIONS = ['gluten free', 'no sodium', 'no pork']
 
+const DIETARY_RESTRICTIONS = ['gluten free', 'no sodium', 'no pork']
+
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
   { email: "karl.gustav@sunnaas.no", name: "Karl Gustav", role: "administrator", password: "password" },
@@ -37,6 +39,26 @@ const mealToMealPlans: MealToMealPlan[] = [
   { mealIdName: 'Pommes frittes', mealPlanId: 1 },
   { mealIdName: 'Stekt biff', mealPlanId: 2 },
   { mealIdName: 'Pommes frittes', mealPlanId: 2 }
+]
+
+const dietaryRestrictions: Restriction[] = [
+  { dietaryRestriction: DIETARY_RESTRICTIONS[0] },
+  { dietaryRestriction: DIETARY_RESTRICTIONS[1] },
+  { dietaryRestriction: DIETARY_RESTRICTIONS[2] }
+]
+
+const rooms: Room[] = [
+  {roomNumber: 1002},
+  {roomNumber: 1003},
+  {roomNumber: 1004},
+  {roomNumber: 1005}
+]
+
+const roomToRestrictions: RoomToRestriction[] = [
+  {roomNumber: 1002, dietaryRestriction: DIETARY_RESTRICTIONS[0]},
+  {roomNumber: 1002, dietaryRestriction: DIETARY_RESTRICTIONS[1]},
+  {roomNumber: 1003, dietaryRestriction: DIETARY_RESTRICTIONS[1]},
+  {roomNumber: 1004, dietaryRestriction: DIETARY_RESTRICTIONS[2]}
 ]
 
 // Function to save users to database
@@ -102,6 +124,44 @@ const createMealPlans = async () => {
   await Promise.all(mealPlanPromises)
 }
 
+const createRooms = async () => {
+  const roomPromises = rooms.map(async (room) => {
+    const filteredRestrictions = roomToRestrictions.filter(el => el.roomNumber === room.roomNumber)
+    const filteredRestrictionsToCreate = filteredRestrictions.map(el => ({
+      dietaryRestriction: el.dietaryRestriction
+    }))
+    await prisma.room.upsert({
+      where: {roomNumber: room.roomNumber},
+      update: {},
+      create: {
+        roomNumber: room.roomNumber,
+        restrictions: {
+          createMany: 
+            ({
+              data: filteredRestrictionsToCreate
+            })
+          // [
+          //   {dietaryRestriction: filteredRestrictions[0].dietaryRestriction}
+          // ]
+        }
+      }
+    })
+  })
+}
+
+const createRestrictins = async () => {
+  const restrictionPromises = dietaryRestrictions.map(async (restriction) => {
+    await prisma.restriction.upsert({
+      where: { dietaryRestriction: restriction.dietaryRestriction },
+      update: {},
+      create: {
+        dietaryRestriction: restriction.dietaryRestriction
+      }
+    })
+  })
+  await Promise.all(restrictionPromises)
+}
+
 // Seed funksjoners
 
 async function main() {
@@ -109,6 +169,8 @@ async function main() {
   await createUsers();
   await createMeals();
   await createMealPlans();
+  await createRestrictins();
+  await createRooms();
   console.log(`Seeding finished.`);
 }
 
