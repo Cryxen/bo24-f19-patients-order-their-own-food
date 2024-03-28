@@ -2,12 +2,14 @@
 // fra: https://fullstækk.no/courses/next-mvc-orm/06-seeding
 
 import { MainDish, SideDish } from "@/features/meals/types";
+import { Room } from "@/features/rooms/types";
 import { User } from "@/features/users/types";
-import { MealPlan, MealToMealPlan, Meal, PrismaClient } from "@prisma/client";
+import { MealPlan, MealToMealPlan, PrismaClient, Restriction, RoomToRestriction, Meal } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
 const date = new Date()
+
+const DIETARY_RESTRICTIONS = ['gluten free', 'no sodium', 'no pork']
 
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
