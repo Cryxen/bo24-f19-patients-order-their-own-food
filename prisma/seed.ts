@@ -8,7 +8,7 @@ import { MealPlan, MealToMealPlan, PrismaClient, Restriction, RoomToRestriction 
 
 const prisma = new PrismaClient();
 
-const DIETARY_RESTRICTIONS = ['gluten free', 'no sodium', 'no pork']
+export const DIETARY_RESTRICTIONS = ['Sukkerfri', 'Lavkarbo', 'Redusert Saltinnhold', 'Keto', 'Diabetisk diett', 'Laktosefri', 'Lavprotein', 'Høyt fiberinnhold']
 
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
