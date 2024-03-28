@@ -2,10 +2,13 @@
 // fra: https://fullstækk.no/courses/next-mvc-orm/06-seeding
 
 import { Meal } from "@/features/meals/types";
+import { Room } from "@/features/rooms/types";
 import { User } from "@/features/users/types";
-import { MealPlan, MealToMealPlan, PrismaClient, Restriction } from "@prisma/client";
+import { MealPlan, MealToMealPlan, PrismaClient, Restriction, RoomToRestriction } from "@prisma/client";
 
 const prisma = new PrismaClient();
+
+const DIETARY_RESTRICTIONS = ['gluten free', 'no sodium', 'no pork']
 
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
@@ -36,9 +39,23 @@ const mealToMealPlans: MealToMealPlan[] = [
 ]
 
 const dietaryRestrictions: Restriction[] = [
-  { dietaryRestriction: 'gluten free' },
-  { dietaryRestriction: 'no sodium' },
-  { dietaryRestriction: 'no pork' }
+  { dietaryRestriction: DIETARY_RESTRICTIONS[0] },
+  { dietaryRestriction: DIETARY_RESTRICTIONS[1] },
+  { dietaryRestriction: DIETARY_RESTRICTIONS[2] }
+]
+
+const rooms: Room[] = [
+  {roomNumber: 1002},
+  {roomNumber: 1003},
+  {roomNumber: 1004},
+  {roomNumber: 1005}
+]
+
+const roomToRestrictions: RoomToRestriction[] = [
+  {roomNumber: 1002, dietaryRestriction: DIETARY_RESTRICTIONS[0]},
+  {roomNumber: 1002, dietaryRestriction: DIETARY_RESTRICTIONS[1]},
+  {roomNumber: 1003, dietaryRestriction: DIETARY_RESTRICTIONS[1]},
+  {roomNumber: 1004, dietaryRestriction: DIETARY_RESTRICTIONS[2]}
 ]
 
 // Function to save users to database
@@ -104,6 +121,31 @@ const createMealPlans = async () => {
   await Promise.all(mealPlanPromises)
 }
 
+const createRooms = async () => {
+  const roomPromises = rooms.map(async (room) => {
+    const filteredRestrictions = roomToRestrictions.filter(el => el.roomNumber === room.roomNumber)
+    const filteredRestrictionsToCreate = filteredRestrictions.map(el => ({
+      dietaryRestriction: el.dietaryRestriction
+    }))
+    await prisma.room.upsert({
+      where: {roomNumber: room.roomNumber},
+      update: {},
+      create: {
+        roomNumber: room.roomNumber,
+        restrictions: {
+          createMany: 
+            ({
+              data: filteredRestrictionsToCreate
+            })
+          // [
+          //   {dietaryRestriction: filteredRestrictions[0].dietaryRestriction}
+          // ]
+        }
+      }
+    })
+  })
+}
+
 const createRestrictins = async () => {
   const restrictionPromises = dietaryRestrictions.map(async (restriction) => {
     await prisma.restriction.upsert({
@@ -114,6 +156,7 @@ const createRestrictins = async () => {
       }
     })
   })
+  await Promise.all(restrictionPromises)
 }
 
 // Seed funksjoners
@@ -124,6 +167,7 @@ async function main() {
   await createMeals();
   await createMealPlans();
   await createRestrictins();
+  await createRooms();
   console.log(`Seeding finished.`);
 }
 

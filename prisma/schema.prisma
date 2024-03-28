@@ -31,8 +31,8 @@ model Meal {
 
 model Room {
   roomNumber Int @id @unique
-  order Order @relation(fields: [orderId], references: [id])
-  orderId Int @unique
+  order Order? @relation(fields: [orderId], references: [id])
+  orderId Int? @unique
   restrictions RoomToRestriction[]
 }
 
