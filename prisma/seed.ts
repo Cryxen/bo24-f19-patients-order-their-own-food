@@ -11,8 +11,6 @@ const date = new Date()
 
 const DIETARY_RESTRICTIONS = ['gluten free', 'no sodium', 'no pork']
 
-const DIETARY_RESTRICTIONS = ['gluten free', 'no sodium', 'no pork']
-
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
   { email: "karl.gustav@sunnaas.no", name: "Karl Gustav", role: "administrator", password: "password" },
