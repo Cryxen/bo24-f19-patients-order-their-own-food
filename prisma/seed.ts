@@ -4,13 +4,15 @@
 import { Meal } from "@/features/meals/types";
 import { Room } from "@/features/rooms/types";
 import { User } from "@/features/users/types";
-import { Allergy, DietaryRestriction, FoodConsistency, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, } from "@prisma/client";
+import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const DIETARY_RESTRICTIONS = ["Laktoseredusert", "Laktosefri", "Energi og næringstett", "Purinfattig", "Lavkarbo", "Keto diett"]
 const CONSISTENCY_RESTRICTIONS = ["IDDSI 4", "IDDSI 5", "IDDSI 6", "Lettygg"]
 const ALLERGY_RESTRICTIONS = ["Fisk", "Skalldyr", "Soya", "Bløtdyr", "Nøtter", "Melk", "Selleri", "Sennep", "Lupin", "Sesamfrø", "Løk", "Svoveldioksid og sulfitt", "Egg", "Peanøtt"]
+const INTOLERANCE_RESTRICTIONS = ["Gluten", "Kål", "Løk"]
+const DIETARY_NEEDS_RESTRICTIONS = ["Halal", "Vegetar", "Vegan", "Pesceterianer", "Ikke Svin", "Rehabeliteringskost"]
 
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
@@ -173,7 +175,7 @@ const createConsistencyRestricions = async () => {
   await Promise.all([restrictionDeleteAllPromises, restrictionPromises])
 }
 
-const createAllergyResitrctions = async() => {
+const createAllergyRestrictions = async () => {
   const dataToSave: Allergy[] = ALLERGY_RESTRICTIONS.map(el => ({
     allergy: el
   }))
@@ -182,6 +184,28 @@ const createAllergyResitrctions = async() => {
     data: dataToSave
   })
   await Promise.all([allergyDeleteAllPromises, allergyPromises])
+}
+
+const createIntolleranceRestrictions = async () => {
+  const dataToSave: Intolerance[] = INTOLERANCE_RESTRICTIONS.map(el => ({
+    intolerance: el
+  }))
+  const intoleranceDeleteAllPromises = await prisma.intolerance.deleteMany({})
+  const intolerancePromises = await prisma.intolerance.createMany({
+    data: dataToSave
+  })
+  await Promise.all([intoleranceDeleteAllPromises, intolerancePromises])
+}
+
+const createDietaryNeedRestrictions = async () => {
+  const dataToSave: DietaryNeeds[] = DIETARY_NEEDS_RESTRICTIONS.map(el => ({
+    dietaryNeed: el
+  }))
+  const dietaryNeedDeleteAllPromises = await prisma.dietaryNeeds.deleteMany({})
+  const dietaryNeedPromises = await prisma.dietaryNeeds.createMany({
+    data: dataToSave
+  })
+  await Promise.all([dietaryNeedDeleteAllPromises, dietaryNeedPromises])
 }
 
 // Seed funksjoners
@@ -194,7 +218,9 @@ async function main() {
   await createRestrictions();
   await createRooms();
   await createConsistencyRestricions();
-  await createAllergyResitrctions();
+  await createAllergyRestrictions();
+  await createIntolleranceRestrictions();
+  await createDietaryNeedRestrictions();
   console.log(`Seeding finished.`);
 }
 
