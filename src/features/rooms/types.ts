@@ -1,7 +1,7 @@
-import { Restriction } from "../dietaryRestrictions/types"
+import { DietaryRestriction } from "../dietaryRestrictions/types"
 
 export type Room = {
     roomNumber: number
-    restriction?: Restriction[]
+    restriction?: DietaryRestriction[]
     order?: number[] //TODO: Change to order type later
 }

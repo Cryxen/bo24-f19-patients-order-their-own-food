@@ -1,7 +1,7 @@
 
 
-export const DIETARY_RESTRICTIONS = ['gluten free', 'no sodium', 'no pork']
+export const DIETARY_RESTRICTIONS = ["Laktoseredusert", "Laktosefri", "Energi og næringstett", "Purinfattig", "Lavkarbo", "Keto diett"]
 
-export type Restriction = {
+export type DietaryRestriction = {
     dietaryRestriction: string
 }
