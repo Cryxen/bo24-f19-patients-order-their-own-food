@@ -4,11 +4,13 @@
 import { Meal } from "@/features/meals/types";
 import { Room } from "@/features/rooms/types";
 import { User } from "@/features/users/types";
-import { DietaryRestriction, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, } from "@prisma/client";
+import { Allergy, DietaryRestriction, FoodConsistency, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const DIETARY_RESTRICTIONS = ["Laktoseredusert", "Laktosefri", "Energi og næringstett", "Purinfattig", "Lavkarbo", "Keto diett"]
+const CONSISTENCY_RESTRICTIONS = ["IDDSI 4", "IDDSI 5", "IDDSI 6", "Lettygg"]
+const ALLERGY_RESTRICTIONS = ["Fisk", "Skalldyr", "Soya", "Bløtdyr", "Nøtter", "Melk", "Selleri", "Sennep", "Lupin", "Sesamfrø", "Løk", "Svoveldioksid og sulfitt", "Egg", "Peanøtt"]
 
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
@@ -144,9 +146,10 @@ const createRooms = async () => {
       }
     })
   })
+  await Promise.all(roomPromises)
 }
 
-const createRestrictins = async () => {
+const createRestrictions = async () => {
   const restrictionPromises = dietaryRestrictions.map(async (restriction) => {
     await prisma.dietaryRestriction.upsert({
       where: { dietaryRestriction: restriction.dietaryRestriction },
@@ -159,6 +162,28 @@ const createRestrictins = async () => {
   await Promise.all(restrictionPromises)
 }
 
+const createConsistencyRestricions = async () => {
+  const dataToSave: FoodConsistency[] = CONSISTENCY_RESTRICTIONS.map(el => ({ //Method found with help from ChatGPT
+    consistency: el
+  }))
+  const restrictionDeleteAllPromises = await prisma.foodConsistency.deleteMany({})
+  const restrictionPromises = await prisma.foodConsistency.createMany({
+    data: dataToSave
+  })
+  await Promise.all([restrictionDeleteAllPromises, restrictionPromises])
+}
+
+const createAllergyResitrctions = async() => {
+  const dataToSave: Allergy[] = ALLERGY_RESTRICTIONS.map(el => ({
+    allergy: el
+  }))
+  const allergyDeleteAllPromises = await prisma.allergy.deleteMany({})
+  const allergyPromises = await prisma.allergy.createMany({
+    data: dataToSave
+  })
+  await Promise.all([allergyDeleteAllPromises, allergyPromises])
+}
+
 // Seed funksjoners
 
 async function main() {
@@ -166,8 +191,10 @@ async function main() {
   await createUsers();
   await createMeals();
   await createMealPlans();
-  await createRestrictins();
+  await createRestrictions();
   await createRooms();
+  await createConsistencyRestricions();
+  await createAllergyResitrctions();
   console.log(`Seeding finished.`);
 }
 

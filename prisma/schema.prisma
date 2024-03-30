@@ -35,7 +35,6 @@ model Room {
   orderId                        Int?                                @unique
   dietaryRestrictions            RoomToDietaryRestrictions[]
   foodConsistencyRestrictions    RoomToFoodConsistencyRestrictions[]
-  allergyRestrictions            Allergy[]
   RoomToAllergyRestrictions      RoomToAllergyRestrictions[]
   RoomToIntolleranceRestrictions RoomToIntolleranceRestrictions[]
   RoomToDietaryneeds             RoomToDietaryneeds[]
@@ -100,10 +99,8 @@ model FoodConsistency {
 }
 
 model Allergy {
-  allergy        String                      @id
-  rooms          RoomToAllergyRestrictions[]
-  Room           Room?                       @relation(fields: [roomRoomNumber], references: [roomNumber])
-  roomRoomNumber Int?
+  allergy String                      @id
+  rooms   RoomToAllergyRestrictions[]
 }
 
 model Intolerance {
