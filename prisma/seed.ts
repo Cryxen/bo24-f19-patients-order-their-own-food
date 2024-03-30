@@ -4,11 +4,16 @@
 import { Meal } from "@/features/meals/types";
 import { Room } from "@/features/rooms/types";
 import { User } from "@/features/users/types";
-import { MealPlan, MealToMealPlan, PrismaClient, Restriction, RoomToRestriction } from "@prisma/client";
+import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const DIETARY_RESTRICTIONS = ['Sukkerfri', 'Lavkarbo', 'Redusert Saltinnhold', 'Keto', 'Diabetisk diett', 'Laktosefri', 'Lavprotein', 'Høyt fiberinnhold']
+
+const DIETARY_RESTRICTIONS = ["Laktoseredusert", "Laktosefri", "Energi og næringstett", "Purinfattig", "Lavkarbo", "Keto diett"]
+const CONSISTENCY_RESTRICTIONS = ["IDDSI 4", "IDDSI 5", "IDDSI 6", "Lettygg"]
+const ALLERGY_RESTRICTIONS = ["Fisk", "Skalldyr", "Soya", "Bløtdyr", "Nøtter", "Melk", "Selleri", "Sennep", "Lupin", "Sesamfrø", "Løk", "Svoveldioksid og sulfitt", "Egg", "Peanøtt"]
+const INTOLERANCE_RESTRICTIONS = ["Gluten", "Kål", "Løk"]
+const DIETARY_NEEDS_RESTRICTIONS = ["Halal", "Vegetar", "Vegan", "Pesceterianer", "Ikke Svin", "Rehabeliteringskost"]
 
 const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
@@ -38,24 +43,27 @@ const mealToMealPlans: MealToMealPlan[] = [
   { mealIdName: 'Pommes frittes', mealPlanId: 2 }
 ]
 
-const dietaryRestrictions: Restriction[] = [
+const dietaryRestrictions: DietaryRestriction[] = [
   { dietaryRestriction: DIETARY_RESTRICTIONS[0] },
   { dietaryRestriction: DIETARY_RESTRICTIONS[1] },
-  { dietaryRestriction: DIETARY_RESTRICTIONS[2] }
+  { dietaryRestriction: DIETARY_RESTRICTIONS[2] },
+  { dietaryRestriction: DIETARY_RESTRICTIONS[3] },
+  { dietaryRestriction: DIETARY_RESTRICTIONS[4] },
+  { dietaryRestriction: DIETARY_RESTRICTIONS[5] }
 ]
 
 const rooms: Room[] = [
-  {roomNumber: 1002},
-  {roomNumber: 1003},
-  {roomNumber: 1004},
-  {roomNumber: 1005}
+  { roomNumber: 1002 },
+  { roomNumber: 1003 },
+  { roomNumber: 1004 },
+  { roomNumber: 1005 }
 ]
 
-const roomToRestrictions: RoomToRestriction[] = [
-  {roomNumber: 1002, dietaryRestriction: DIETARY_RESTRICTIONS[0]},
-  {roomNumber: 1002, dietaryRestriction: DIETARY_RESTRICTIONS[1]},
-  {roomNumber: 1003, dietaryRestriction: DIETARY_RESTRICTIONS[1]},
-  {roomNumber: 1004, dietaryRestriction: DIETARY_RESTRICTIONS[2]}
+const roomToRestrictions: RoomToDietaryRestrictions[] = [
+  { roomNumber: 1002, dietaryRestrictionId: DIETARY_RESTRICTIONS[0] },
+  { roomNumber: 1002, dietaryRestrictionId: DIETARY_RESTRICTIONS[1] },
+  { roomNumber: 1003, dietaryRestrictionId: DIETARY_RESTRICTIONS[1] },
+  { roomNumber: 1004, dietaryRestrictionId: DIETARY_RESTRICTIONS[2] }
 ]
 
 // Function to save users to database
@@ -124,31 +132,29 @@ const createMealPlans = async () => {
 const createRooms = async () => {
   const roomPromises = rooms.map(async (room) => {
     const filteredRestrictions = roomToRestrictions.filter(el => el.roomNumber === room.roomNumber)
-    const filteredRestrictionsToCreate = filteredRestrictions.map(el => ({
-      dietaryRestriction: el.dietaryRestriction
+    const filteredDietaryRestrictionsToCreate = filteredRestrictions.map(el => ({
+      dietaryRestrictionId: el.dietaryRestrictionId
     }))
     await prisma.room.upsert({
-      where: {roomNumber: room.roomNumber},
+      where: { roomNumber: room.roomNumber },
       update: {},
       create: {
         roomNumber: room.roomNumber,
-        restrictions: {
-          createMany: 
+        dietaryRestrictions: {
+          createMany:
             ({
-              data: filteredRestrictionsToCreate
+              data: filteredDietaryRestrictionsToCreate
             })
-          // [
-          //   {dietaryRestriction: filteredRestrictions[0].dietaryRestriction}
-          // ]
         }
       }
     })
   })
+  await Promise.all(roomPromises)
 }
 
-const createRestrictins = async () => {
+const createRestrictions = async () => {
   const restrictionPromises = dietaryRestrictions.map(async (restriction) => {
-    await prisma.restriction.upsert({
+    await prisma.dietaryRestriction.upsert({
       where: { dietaryRestriction: restriction.dietaryRestriction },
       update: {},
       create: {
@@ -159,6 +165,50 @@ const createRestrictins = async () => {
   await Promise.all(restrictionPromises)
 }
 
+const createConsistencyRestricions = async () => {
+  const dataToSave: FoodConsistency[] = CONSISTENCY_RESTRICTIONS.map(el => ({ //Method found with help from ChatGPT
+    consistency: el
+  }))
+  const restrictionDeleteAllPromises = await prisma.foodConsistency.deleteMany({})
+  const restrictionPromises = await prisma.foodConsistency.createMany({
+    data: dataToSave
+  })
+  await Promise.all([restrictionDeleteAllPromises, restrictionPromises])
+}
+
+const createAllergyRestrictions = async () => {
+  const dataToSave: Allergy[] = ALLERGY_RESTRICTIONS.map(el => ({
+    allergy: el
+  }))
+  const allergyDeleteAllPromises = await prisma.allergy.deleteMany({})
+  const allergyPromises = await prisma.allergy.createMany({
+    data: dataToSave
+  })
+  await Promise.all([allergyDeleteAllPromises, allergyPromises])
+}
+
+const createIntolleranceRestrictions = async () => {
+  const dataToSave: Intolerance[] = INTOLERANCE_RESTRICTIONS.map(el => ({
+    intolerance: el
+  }))
+  const intoleranceDeleteAllPromises = await prisma.intolerance.deleteMany({})
+  const intolerancePromises = await prisma.intolerance.createMany({
+    data: dataToSave
+  })
+  await Promise.all([intoleranceDeleteAllPromises, intolerancePromises])
+}
+
+const createDietaryNeedRestrictions = async () => {
+  const dataToSave: DietaryNeeds[] = DIETARY_NEEDS_RESTRICTIONS.map(el => ({
+    dietaryNeed: el
+  }))
+  const dietaryNeedDeleteAllPromises = await prisma.dietaryNeeds.deleteMany({})
+  const dietaryNeedPromises = await prisma.dietaryNeeds.createMany({
+    data: dataToSave
+  })
+  await Promise.all([dietaryNeedDeleteAllPromises, dietaryNeedPromises])
+}
+
 // Seed funksjoners
 
 async function main() {
@@ -166,8 +216,12 @@ async function main() {
   await createUsers();
   await createMeals();
   await createMealPlans();
-  await createRestrictins();
+  await createRestrictions();
   await createRooms();
+  await createConsistencyRestricions();
+  await createAllergyRestrictions();
+  await createIntolleranceRestrictions();
+  await createDietaryNeedRestrictions();
   console.log(`Seeding finished.`);
 }
 
