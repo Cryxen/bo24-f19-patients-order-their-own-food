@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { Room } from "@/features/rooms/types"
 import { DietaryRestriction } from "@/features/dietaryRestrictions/types"
 import { FoodConsistency } from "@/features/consistencyRestrictions/types"
+import { Allergy } from "@/features/allergyRestrictions/types"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
@@ -14,11 +15,13 @@ const pasientadministrasjon = () => {
     const [roomsFromDb, setRoomsFromDb] = useState<Room[]>([])
     const [dietaryRestrictionsFromDb, setDietaryRestrictionsFromDb] = useState<DietaryRestriction[]>([])
     const [consistencyRestrictionsFromDb, setConsistencyRestrictionsFromDb] = useState<FoodConsistency[]>([])
+    const [allergyRestrictionsFromDb, setAllergyRestrictionsFromDb] = useState<Allergy[]>([])
 
     useEffect(() => {
         fetchAllRooms()
         fetchAllDietaryRestrictions()
         fetchAllConsistencyRestrictions()
+        fetchAllAllergyRestrictions()
     }, [])
 
     const fetchAllRooms = async () => {
@@ -39,10 +42,17 @@ const pasientadministrasjon = () => {
 
     const fetchAllConsistencyRestrictions = async () => {
         const response = await fetch('/api/consistencyRestrictions')
-        if(response.status === 200)
-        {
+        if (response.status === 200) {
             const data = await response.json()
             setConsistencyRestrictionsFromDb(data.data)
+        }
+    }
+
+    const fetchAllAllergyRestrictions = async () => {
+        const response = await fetch('/api/allergyRestrictions')
+        if (response.status === 200) {
+            const data = await response.json()
+            setAllergyRestrictionsFromDb(data.data)
         }
     }
 
@@ -70,6 +80,12 @@ const pasientadministrasjon = () => {
                     <div className='restriction-container'>
                         {consistencyRestrictionsFromDb?.map(el => {
                             return <Diettbox key={el.consistency} Diett={el.consistency} />
+                        })}
+                    </div>
+                    <h2 className="title">Velg allergier</h2>
+                    <div className='restriction-container'>
+                        {allergyRestrictionsFromDb?.map(el => {
+                            return <Diettbox key={el.allergy} Diett={el.allergy} />
                         })}
                     </div>
                     <div className="config-container">
