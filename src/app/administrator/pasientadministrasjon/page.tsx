@@ -9,6 +9,7 @@ import { DietaryRestriction } from "@/features/dietaryRestrictions/types"
 import { FoodConsistency } from "@/features/consistencyRestrictions/types"
 import { Allergy } from "@/features/allergyRestrictions/types"
 import { Intolerance } from "@/features/intoleranceRestrictions/types"
+import { DietaryNeeds } from "@/features/DietaryNeeds/types"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
@@ -18,6 +19,7 @@ const pasientadministrasjon = () => {
     const [consistencyRestrictionsFromDb, setConsistencyRestrictionsFromDb] = useState<FoodConsistency[]>([])
     const [allergyRestrictionsFromDb, setAllergyRestrictionsFromDb] = useState<Allergy[]>([])
     const [intoleranceRestrictionsFromDb, setIntoleranceRestrictionsFromDb] = useState<Intolerance[]>([])
+    const [dietaryNeedsFromDb, setDietaryNeedsFromDb] = useState<DietaryNeeds[]>([])
 
     useEffect(() => {
         fetchAllRooms()
@@ -25,6 +27,7 @@ const pasientadministrasjon = () => {
         fetchAllConsistencyRestrictions()
         fetchAllAllergyRestrictions()
         fetchAllIntoleranceRestrictions()
+        fetchAllDietaryNeeds()
     }, [])
 
     const fetchAllRooms = async () => {
@@ -61,11 +64,17 @@ const pasientadministrasjon = () => {
 
     const fetchAllIntoleranceRestrictions = async () => {
         const response = await fetch('/api/intoleranceRestrictions')
-        console.log(response)
         if (response.status === 200) {
             const data = await response.json()
-            console.log(data)
             setIntoleranceRestrictionsFromDb(data.data)
+        }
+    }
+
+    const fetchAllDietaryNeeds = async () => {
+        const response = await fetch('/api/dietaryNeeds')
+        if (response.status === 200) {
+            const data = await response.json()
+            setDietaryNeedsFromDb(data.data)
         }
     }
 
@@ -104,6 +113,12 @@ const pasientadministrasjon = () => {
                     <div className='restriction-container'>
                         {intoleranceRestrictionsFromDb?.map(el => {
                             return <Diettbox key={el.intolerance} Diett={el.intolerance} />
+                        })}
+                    </div>
+                    <h2 className="title">Velg andre kostbehov:</h2>
+                    <div className='restriction-container'>
+                        {dietaryNeedsFromDb?.map(el => {
+                            return <Diettbox key={el.dietaryNeed} Diett={el.dietaryNeed} />
                         })}
                     </div>
                     <div className="config-container">

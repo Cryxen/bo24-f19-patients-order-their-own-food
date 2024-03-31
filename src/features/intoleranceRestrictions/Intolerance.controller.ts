@@ -4,7 +4,6 @@ import * as intoleranceService from './Intolerance.service'
 export const fetchAllIntolerance = async () => {
     try {
         const intoleranceFromDb = await intoleranceService.fetchAllIntolerance()
-        console.log(intoleranceFromDb)
         return NextResponse.json({
             status: 200,
             success: intoleranceFromDb.success,
