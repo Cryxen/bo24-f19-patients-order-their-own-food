@@ -67,26 +67,26 @@ const CreateUser = (props: { setUsers: Dispatch<SetStateAction<User[]>> }) => {
 
 
     return (
-        <div className='mainbox'>
-            <article className='itembox2'>
-                <section className='contentitemboxrolle'>
-                    <input type='text' placeholder='Navn' className='inputbruker' value={user.name} onChange={handleNameChange} />
+        <div className="profile-wrapper">
+            <article className="profile-container">
+                <section className="name-box">
+                    <input type="text" placeholder="Navn" className="input-name" value={user.name} onChange={handleNameChange} />
                 </section>
-                <section className='contentitemboxrolle'>
-                    <input type='email' placeholder='E-post' className='inputbruker' value={user.email} onChange={handleEmailChange} />
+                <section className="email-box">
+                    <input type="email" placeholder="E-post" className="input-email" value={user.email} onChange={handleEmailChange} />
                 </section>
-                <section className='contentitemboxrolle'>
-                    <input type='password' placeholder='Passord' className='inputbruker' value={user.password} onChange={handlePasswordChange} />
+                <section className="password-box">
+                    <input type="password" placeholder="Passord" className="input-password" value={user.password} onChange={handlePasswordChange} />
                 </section>
             </article>
 
-            <article className='centerbox'>
-                <section className='contentitemboxrolle'><Rolledrop user={user} changeRole={changeRole} /></section>
+            <article className="role-container">
+                <section className="role-box"><Rolledrop user={user} changeRole={changeRole} /></section>
             </article>
 
-            <article className='centerbox'>
+            <article className="submit-container">
                 {filledInput ? '' : <p>Alle felter må fylles.</p>}
-                <button className='generatebutton' onClick={submitUser}>Opprett profil</button>
+                <button className="submit-button" onClick={submitUser}>Opprett profil</button>
             </article>
         </div>
     )

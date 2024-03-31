@@ -1,6 +1,6 @@
 "use client"
-import '../styles/loginpage.scss'
 import '../styles/globals.scss'
+import '../styles/loginpage.scss'
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import { User } from '@/features/users/types'
 import { useRouter } from 'next/navigation'
@@ -53,10 +53,10 @@ const Login = () => {
     return (
             <div className='mainDiv'>
                 <h1>Logo</h1>
-                <form>
+                <form className="login-container">
                     <input type="email" value={email} onChange={handleEmailChange} placeholder='E-post' />
                     <input type="password" value={password} onChange={handlePasswordChange} placeholder='Passord' />
-                    <button type="submit" onClick={handleSubmitButton}>Login</button>
+                    <button type="submit" className="submit-button" onClick={handleSubmitButton}>Login</button>
                 </form>
             </div>
     )
