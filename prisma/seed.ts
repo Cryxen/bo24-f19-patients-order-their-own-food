@@ -8,6 +8,7 @@ import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance
 
 const prisma = new PrismaClient();
 
+
 const DIETARY_RESTRICTIONS = ["Laktoseredusert", "Laktosefri", "Energi og næringstett", "Purinfattig", "Lavkarbo", "Keto diett"]
 const CONSISTENCY_RESTRICTIONS = ["IDDSI 4", "IDDSI 5", "IDDSI 6", "Lettygg"]
 const ALLERGY_RESTRICTIONS = ["Fisk", "Skalldyr", "Soya", "Bløtdyr", "Nøtter", "Melk", "Selleri", "Sennep", "Lupin", "Sesamfrø", "Løk", "Svoveldioksid og sulfitt", "Egg", "Peanøtt"]
