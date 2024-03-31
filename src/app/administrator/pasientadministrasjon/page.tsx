@@ -5,14 +5,17 @@ import '../../styles/pasientadministrasjon.scss'
 import '../../styles/globals.scss'
 import { useEffect, useState } from "react"
 import { Room } from "@/features/rooms/types"
+import { DietaryRestriction } from "@/features/dietaryRestrictions/types"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
 const pasientadministrasjon = () => {
     const [roomsFromDb, setRoomsFromDb] = useState<Room[]>([])
+    const [dietaryRestrictionsFromDb, setDietaryRestrictionsFromDb] = useState<DietaryRestriction[]>([])
 
     useEffect(() => {
         fetchAllRooms()
+        fetchAllDietaryRestrictions()
     }, [])
 
     const fetchAllRooms = async () => {
@@ -20,6 +23,14 @@ const pasientadministrasjon = () => {
         if (response.status === 200) {
             const data = await response.json()
             setRoomsFromDb(data.data)
+        }
+    }
+
+    const fetchAllDietaryRestrictions = async () => {
+        const response = await fetch('/api/dietaryRestrictions')
+        if (response.status === 200) {
+            const data = await response.json()
+            setDietaryRestrictionsFromDb(data.data)
         }
     }
 
@@ -36,16 +47,11 @@ const pasientadministrasjon = () => {
                             })}
                         </select>
                     </div>
-                    <h2 className="title">Velg diettrestirksjoner</h2>
+                    <h2 className="title">Velg diettrestriksjoner</h2>
                     <div className='restriction-container'>
-                        <Diettbox Diett='Sukkerfri' />
-                        <Diettbox Diett='Lavkarbo' />
-                        <Diettbox Diett='Redusert Saltinnhold' />
-                        <Diettbox Diett='Keto' />
-                        <Diettbox Diett='Diabetisk diett' />
-                        <Diettbox Diett='Laktosefri' />
-                        <Diettbox Diett='Lavprotein' />
-                        <Diettbox Diett='Høyt fiberinnhold' />
+                        {dietaryRestrictionsFromDb?.map(el => {
+                            return <Diettbox key={el.dietaryRestriction} Diett={el.dietaryRestriction} />
+                        })}
                     </div>
                     <div className="config-container">
                         <button className='generate button'>Oppdater restriksjoner</button>
