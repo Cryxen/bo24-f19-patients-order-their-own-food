@@ -2,5 +2,5 @@ import * as consistencyRestrictionsController from '@/features/consistencyRestri
 import { NextRequest } from 'next/server'
 
 export const GET = async (req: NextRequest) => {
-    return consistencyRestrictionsController.fetchAllConsistencyRestrictions()
+    return await consistencyRestrictionsController.fetchAllConsistencyRestrictions()
 }
