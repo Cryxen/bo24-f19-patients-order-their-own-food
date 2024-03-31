@@ -6,16 +6,19 @@ import '../../styles/globals.scss'
 import { useEffect, useState } from "react"
 import { Room } from "@/features/rooms/types"
 import { DietaryRestriction } from "@/features/dietaryRestrictions/types"
+import { FoodConsistency } from "@/features/consistencyRestrictions/types"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
 const pasientadministrasjon = () => {
     const [roomsFromDb, setRoomsFromDb] = useState<Room[]>([])
     const [dietaryRestrictionsFromDb, setDietaryRestrictionsFromDb] = useState<DietaryRestriction[]>([])
+    const [consistencyRestrictionsFromDb, setConsistencyRestrictionsFromDb] = useState<FoodConsistency[]>([])
 
     useEffect(() => {
         fetchAllRooms()
         fetchAllDietaryRestrictions()
+        fetchAllConsistencyRestrictions()
     }, [])
 
     const fetchAllRooms = async () => {
@@ -34,6 +37,16 @@ const pasientadministrasjon = () => {
         }
     }
 
+    const fetchAllConsistencyRestrictions = async () => {
+        const response = await fetch('/api/consistencyRestrictions')
+        if(response.status === 200)
+        {
+            const data = await response.json()
+            setConsistencyRestrictionsFromDb(data.data)
+        }
+    }
+
+
     return (
         <Layout>
             <div className="mainDiv">
@@ -51,6 +64,12 @@ const pasientadministrasjon = () => {
                     <div className='restriction-container'>
                         {dietaryRestrictionsFromDb?.map(el => {
                             return <Diettbox key={el.dietaryRestriction} Diett={el.dietaryRestriction} />
+                        })}
+                    </div>
+                    <h2 className="title">Velg konsistens restriksjoner</h2>
+                    <div className='restriction-container'>
+                        {consistencyRestrictionsFromDb?.map(el => {
+                            return <Diettbox key={el.consistency} Diett={el.consistency} />
                         })}
                     </div>
                     <div className="config-container">
