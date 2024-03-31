@@ -12,7 +12,7 @@ export const fetchAllRooms = async () => {
         })
     } catch (error) {
         return NextResponse.json({
-            error: "Something went wrong fetching rooms from db " + error
+            success: false, error: "Something went wrong fetching rooms from db " + error
         })
     }
 }
