@@ -3,7 +3,7 @@ import Layout from "@/app/components/layout"
 import Diettbox from "@/app/components/Diettbox"
 import '../../styles/pasientadministrasjon.scss'
 import '../../styles/globals.scss'
-import { useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { Room } from "@/features/rooms/types"
 import { DietaryRestriction } from "@/features/dietaryRestrictions/types"
 import { FoodConsistency } from "@/features/consistencyRestrictions/types"
@@ -20,6 +20,9 @@ const pasientadministrasjon = () => {
     const [allergyRestrictionsFromDb, setAllergyRestrictionsFromDb] = useState<Allergy[]>([])
     const [intoleranceRestrictionsFromDb, setIntoleranceRestrictionsFromDb] = useState<Intolerance[]>([])
     const [dietaryNeedsFromDb, setDietaryNeedsFromDb] = useState<DietaryNeeds[]>([])
+    const [selectedRoom, setSelectedRoom] = useState<Room>({
+        roomNumber: 0
+    })
 
     useEffect(() => {
         fetchAllRooms()
@@ -78,6 +81,10 @@ const pasientadministrasjon = () => {
         }
     }
 
+    const handleRoomChange = async (event: ChangeEvent<HTMLSelectElement>) => {
+        setSelectedRoom({ roomNumber: event.target.value as unknown as number })
+    }
+
     return (
         <Layout>
             <div className="mainDiv">
@@ -85,7 +92,8 @@ const pasientadministrasjon = () => {
                 <div className="main-wrapper">
                     <div className="room-container">
                         <h2 className="title">Velg rom</h2>
-                        <select name="room" id="room" className="room dropdown">
+                        <select name="room" id="room" className="room dropdown" onChange={handleRoomChange} defaultValue="0">
+                            <option value="0">Velg rom</option>
                             {roomsFromDb?.map(room => {
                                 return <option key={room.roomNumber} value={room.roomNumber}>{room.roomNumber}</option>
                             })}
