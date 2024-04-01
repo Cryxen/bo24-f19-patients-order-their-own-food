@@ -39,6 +39,7 @@ const pasientadministrasjon = () => {
         const response = await fetch('/api/rooms')
         if (response.status === 200) {
             const data = await response.json()
+            console.log(data)
             setRoomsFromDb(data.data)
         }
     }
@@ -85,8 +86,9 @@ const pasientadministrasjon = () => {
 
     const handleRoomChange = async (event: ChangeEvent<HTMLSelectElement>) => {
         if (parseInt(event.target.value) !== 0) {
+            const room: Room[] = roomsFromDb.filter(el => el.roomNumber === parseInt(event.target.value))
             setShowRestrictions(true)
-            setSelectedRoom({ roomNumber: parseInt(event.target.value) })
+            setSelectedRoom( room[0] )
         }
         else setShowRestrictions(false)
     }
