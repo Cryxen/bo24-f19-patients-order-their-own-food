@@ -8,7 +8,7 @@ import Diettbox from "./Diettbox"
 
 const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestriction[], consistencyRestriction: FoodConsistency[], allergyRestriction: Allergy[], intoleranceRestriction: Intolerance[], dietaryNeeds: DietaryNeeds[] }) => {
     const { room, dietaryRestrictions, consistencyRestriction, allergyRestriction, intoleranceRestriction, dietaryNeeds } = props
-
+    console.log(room)
     return (
         <>
             <h2 className="title">Velg diettrestriksjoner</h2>

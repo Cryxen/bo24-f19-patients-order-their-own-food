@@ -24,6 +24,7 @@ const pasientadministrasjon = () => {
     const [selectedRoom, setSelectedRoom] = useState<Room>({
         roomNumber: 0
     })
+    const [showRestrictions, setShowRestrictions] = useState<Boolean>(false)
 
     useEffect(() => {
         fetchAllRooms()
@@ -83,7 +84,11 @@ const pasientadministrasjon = () => {
     }
 
     const handleRoomChange = async (event: ChangeEvent<HTMLSelectElement>) => {
-        setSelectedRoom({ roomNumber: event.target.value as unknown as number })
+        if (parseInt(event.target.value) !== 0) {
+            setShowRestrictions(true)
+            setSelectedRoom({ roomNumber: parseInt(event.target.value) })
+        }
+        else setShowRestrictions(false)
     }
 
     return (
@@ -100,46 +105,17 @@ const pasientadministrasjon = () => {
                             })}
                         </select>
                     </div>
-                    <IndividualRoom
-                        room={selectedRoom}
-                        dietaryRestrictions={dietaryRestrictionsFromDb}
-                        consistencyRestriction={consistencyRestrictionsFromDb}
-                        allergyRestriction={allergyRestrictionsFromDb}
-                        intoleranceRestriction={intoleranceRestrictionsFromDb}
-                        dietaryNeeds={dietaryNeedsFromDb} />
-                    {/* <h2 className="title">Velg diettrestriksjoner</h2>
-                    <div className='restriction-container'>
-                        {dietaryRestrictionsFromDb?.map(el => {
-                            return <Diettbox key={el.dietaryRestriction} Diett={el.dietaryRestriction} />
-                        })}
-                    </div>
-                    <h2 className="title">Velg konsistens restriksjoner</h2>
-                    <div className='restriction-container'>
-                        {consistencyRestrictionsFromDb?.map(el => {
-                            return <Diettbox key={el.consistency} Diett={el.consistency} />
-                        })}
-                    </div>
-                    <h2 className="title">Velg allergier</h2>
-                    <div className='restriction-container'>
-                        {allergyRestrictionsFromDb?.map(el => {
-                            return <Diettbox key={el.allergy} Diett={el.allergy} />
-                        })}
-                    </div>
-                    <h2 className="title">Velg intoleranser</h2>
-                    <div className='restriction-container'>
-                        {intoleranceRestrictionsFromDb?.map(el => {
-                            return <Diettbox key={el.intolerance} Diett={el.intolerance} />
-                        })}
-                    </div>
-                    <h2 className="title">Velg andre kostbehov:</h2>
-                    <div className='restriction-container'>
-                        {dietaryNeedsFromDb?.map(el => {
-                            return <Diettbox key={el.dietaryNeed} Diett={el.dietaryNeed} />
-                        })}
-                    </div>
-                    <div className="config-container">
-                        <button className='generate button'>Oppdater restriksjoner</button>
-                    </div> */}
+                    {
+                        showRestrictions ? <IndividualRoom
+                            room={selectedRoom}
+                            dietaryRestrictions={dietaryRestrictionsFromDb}
+                            consistencyRestriction={consistencyRestrictionsFromDb}
+                            allergyRestriction={allergyRestrictionsFromDb}
+                            intoleranceRestriction={intoleranceRestrictionsFromDb}
+                            dietaryNeeds={dietaryNeedsFromDb} />
+                            : ''
+                    }
+
                 </div>
             </div>
         </Layout>
