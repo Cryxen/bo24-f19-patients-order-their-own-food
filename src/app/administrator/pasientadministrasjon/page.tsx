@@ -10,6 +10,7 @@ import { FoodConsistency } from "@/features/consistencyRestrictions/types"
 import { Allergy } from "@/features/allergyRestrictions/types"
 import { Intolerance } from "@/features/intoleranceRestrictions/types"
 import { DietaryNeeds } from "@/features/DietaryNeeds/types"
+import IndividualRoom from "@/app/components/IndividualRoom"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
@@ -99,7 +100,14 @@ const pasientadministrasjon = () => {
                             })}
                         </select>
                     </div>
-                    <h2 className="title">Velg diettrestriksjoner</h2>
+                    <IndividualRoom
+                        room={selectedRoom}
+                        dietaryRestrictions={dietaryRestrictionsFromDb}
+                        consistencyRestriction={consistencyRestrictionsFromDb}
+                        allergyRestriction={allergyRestrictionsFromDb}
+                        intoleranceRestriction={intoleranceRestrictionsFromDb}
+                        dietaryNeeds={dietaryNeedsFromDb} />
+                    {/* <h2 className="title">Velg diettrestriksjoner</h2>
                     <div className='restriction-container'>
                         {dietaryRestrictionsFromDb?.map(el => {
                             return <Diettbox key={el.dietaryRestriction} Diett={el.dietaryRestriction} />
@@ -131,7 +139,7 @@ const pasientadministrasjon = () => {
                     </div>
                     <div className="config-container">
                         <button className='generate button'>Oppdater restriksjoner</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Layout>
