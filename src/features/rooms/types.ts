@@ -6,10 +6,10 @@ import { Intolerance } from "../intoleranceRestrictions/types"
 
 export type Room = {
     roomNumber: number
-    dietaryRestriction?: DietaryRestriction[]
-    consistancyRestriction?: FoodConsistency[]
-    allergyRestriction?: Allergy[]
-    intoleranceRestriction?: Intolerance[]
-    dietaryNeeds?: DietaryNeeds[]
+    dietaryRestrictions: DietaryRestriction[]
+    consistancyRestrictions: FoodConsistency[]
+    allergyRestrictions: Allergy[]
+    intoleranceRestrictions: Intolerance[]
+    dietaryNeeds: DietaryNeeds[]
     order?: number[] //TODO: Change to order type later
 }
