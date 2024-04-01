@@ -68,41 +68,39 @@ const NewMealPlan = (props: { date: Date, fetchMealPlans: () => void }) => {
 
 
     return (
-        <div className="container">
-            <form>
-                <section>
-                    <h3>
-                        Hovedrett:
-                    </h3>
+        <form className="new-meal-container">
+            <section className="main-dish-box">
+                <h3>Hovedrett:</h3>
+                <div className="dish-buttons">
                     {mealList?.map(meal =>
                         (MAIN_DISH as unknown as MainDish[]).includes(meal.category as MainDish) ?
-                            <div key={meal.mealName}>
+                            <div className="dish-box" key={meal.mealName}>
                                 <label htmlFor={meal.mealName}>{meal.mealName}</label>
                                 <input type="radio" id={meal.mealName} value={meal.mealName} name="mainDish" onClick={chosenMainDish} />
                             </div>
                             : ''
                     )}
-                </section>
-                <section>
-                    <h3>
-                        Siderett:
-                    </h3>
+                </div>
+            </section>
+            <section className="side-dish-box">
+                <h3>Siderett:</h3>
+                <div className="dish-buttons">
                     {mealList?.map(meal =>
                         (SIDE_DISH as unknown as SideDish[]).includes(meal.category as SideDish) ?
-                            <div key={meal.mealName}>
+                            <div className="dish-box" key={meal.mealName}>
                                 <label htmlFor={meal.mealName}>{meal.mealName}</label>
                                 <input type="radio" id={meal.mealName} value={meal.mealName} name="sideDish" onClick={chosenSideDish} />
                             </div>
                             : ''
                     )}
-                </section>
-                <section>
-                    <label htmlFor="descriptionOfMealPlan">Beskrivelse:</label>
-                    <textarea id="descriptionOfMealPlan" value={description} onChange={handleDescriptionChange} />
-                </section>
-                <button onClick={handleSaveMealPlanButton}>Lagre måltid</button>
-            </form>
-        </div>
+                </div>
+            </section>
+            <section className="description-box">
+                <label htmlFor="descriptionOfMealPlan">Beskrivelse:</label>
+                <textarea className="description-meal-plan" id="descriptionOfMealPlan" value={description} onChange={handleDescriptionChange} />
+            </section>
+            <button className="config-button" onClick={handleSaveMealPlanButton}>Lagre måltid</button>
+        </form>
     )
 }
 export default NewMealPlan

@@ -35,36 +35,39 @@ const Mealplanning = () => {
 
     return (
         <Layout>
-            <div className="gridBox">
+            <div className="mainDiv">
                 <h1>Måltid Planlegging</h1>
-                <section id="mealPlanCalendar">
-                    <span>Kostholdsplan for:</span>
-                    <DatePicker selected={date} onChange={(date) => setDate(date as Date)} dateFormat="dd/MM/YYYY" />
-                    <span className="arrow">&#8594;</span>
-                </section>
-                {showMealPlans ?
-                    <div className="container">
-                        {listOfMealPlans?.map(mealPlan =>
-                            <MealPlanList mealPlan={mealPlan} key={mealPlan.id} date={date} setListOfMealPlans={setListOfMealPlans} listOfMealPlans={listOfMealPlans}/>)}
+                <div className="main-wrapper">
+                    <div className="date-container">
+                        <div className="date-box">
+                            <p>Kostholdsplan for:</p>
+                            <DatePicker className="calendar" selected={date} onChange={(date) => setDate(date as Date)} dateFormat="dd/MM/YYYY" />
+                        </div>
+                        <p className="arrow date-arrow">&#8594;</p>
                     </div>
-                    :
-                    <NewMealPlan date={date} fetchMealPlans={fetchMealPlans}/>
-                   
-                }
-                <div className="break" />
-                <article className="nutrition">
-                    <section className="graph">
-                        <span>Ernæringsgraf</span>
-                    </section>
-                    <section className="overview">
-                        <span>Ernæringsoversikt</span>
-                    </section>
-                </article>
-                <section className="buttons">
-                    <button onClick={showNewMealPlanForm}>{showMealPlans ? 'Nytt måltid' : 'Se lagrede måltid'}</button>
-                    <button>Fjern måltid</button>
-                </section>
-
+                    <div className="main-container">
+                        {showMealPlans ?
+                            <div className="meal-plan-container">
+                                {listOfMealPlans?.map(mealPlan =>
+                                    <MealPlanList mealPlan={mealPlan} key={mealPlan.id} date={date} setListOfMealPlans={setListOfMealPlans} listOfMealPlans={listOfMealPlans}/>)}
+                            </div>
+                            :
+                            <NewMealPlan date={date} fetchMealPlans={fetchMealPlans}/>
+                        }
+                        <div className="nutrition-container">
+                            <section className="nutrition-graph">
+                                <h3>Ernæringsgraf</h3>
+                            </section>
+                            <section className="nutrition-overview">
+                                <h3>Ernæringsoversikt</h3>
+                            </section>
+                        </div>
+                    </div>
+                    <div className="config-container">
+                        <button className="config-button" onClick={showNewMealPlanForm}>{showMealPlans ? 'Nytt måltid' : 'Se lagrede måltid'}</button>
+                        <button className="config-button">Print</button>
+                    </div>
+                </div>
             </div>
         </Layout>
     )

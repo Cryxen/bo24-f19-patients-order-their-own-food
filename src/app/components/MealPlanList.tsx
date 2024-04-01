@@ -122,42 +122,44 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
     }
 
     return (
-        <article className="meal-plan">
+        <div className="meal-plan">
             {showConfirmationWindow ? <ConfirmationWindow message={"Er du sikker på at du ønsker å slette?"} confirmButton={"Ja"} declineButton={"Nei"} handleConfirmButtonPress={handleConfirmButtonPress} handleDeclineButtonPress={handleDeclineButtonPress} /> : ''}
-
-            <section>
-                <span>Middag</span>
-                <button onClick={updateMealButton}>Oppdater</button>
-                <button onClick={handleDeleteButton}>Slett</button>
+            
+            <section className="config-meal-box">
+                <h3>Middag</h3>
+                <button className="config-button" onClick={updateMealButton}>Oppdater</button>
+                <button className="config-button" onClick={handleDeleteButton}>Slett</button>
             </section>
             {updateMealPlanMode ?
-                <section className='information'>
-                    <label htmlFor='descriptionField'>Beskrivelse:</label>
-                    <input type='text' value={mealPlanToUpdate?.description} onChange={updateDescriptionField} id='descriptionField' />
-                    <p>Dato: </p>
-                    <DatePicker selected={newDate} onChange={(date => setNewDate(date as Date))} dateFormat={"dd/MM/YYYY"} />
-                    <p>Hovedrett: </p>
-                    {listOfMeals.map(meal =>
-                        (MAIN_DISH as unknown as MainDish[]).includes(meal.category as MainDish) ?
-                            <div key={meal.mealName}>
-                                <label htmlFor={meal.mealName}>{meal.mealName}</label>
-                                <input type='radio' value={meal.mealName} name='mainDish' id={meal.mealName} onChange={handleMainDishChange} />
-                            </div>
-                            : ''
-                    )}
-                    <p>Ved siden av:</p>
-                    {listOfMeals.map(meal =>
-                        (SIDE_DISH as unknown as SideDish[]).includes(meal.category as SideDish) ?
-                            <div key={meal.mealName}>
-                                <label htmlFor={meal.mealName}>{meal.mealName}</label>
-                                <input type='radio' value={meal.mealName} name='sideDish' id={meal.mealName} onChange={handleSideDishChange} />
-                            </div>
-                            : ''
-                    )}
-                    <button onClick={handleUpdateMealButton}>Oppdater rett</button>
-                </section>
-                :
-                <section className="information">
+            
+            <div className="information-meal-box">
+                <label htmlFor="descriptionField">Beskrivelse:</label>
+                <input type="text" value={mealPlanToUpdate?.description} onChange={updateDescriptionField} id="descriptionField" />
+                <p>Dato:</p>
+                <DatePicker className="calendar" selected={newDate} onChange={(date => setNewDate(date as Date))} dateFormat={"dd/MM/YYYY"} />
+                <p>Hovedrett:</p>
+                {listOfMeals.map(meal =>
+                    (MAIN_DISH as unknown as MainDish[]).includes(meal.category as MainDish) ?
+                        <div className="dish-box" key={meal.mealName}>
+                            <label htmlFor={meal.mealName}>{meal.mealName}</label>
+                            <input type='radio' value={meal.mealName} name='mainDish' id={meal.mealName} onChange={handleMainDishChange} />
+                        </div>
+                        : ''
+                )}
+                <p>Ved siden av:</p>
+                {listOfMeals.map(meal =>
+                    (SIDE_DISH as unknown as SideDish[]).includes(meal.category as SideDish) ?
+                        <div className="dish-box" key={meal.mealName}>
+                            <label htmlFor={meal.mealName}>{meal.mealName}</label>
+                            <input type="radio" value={meal.mealName} name='sideDish' id={meal.mealName} onChange={handleSideDishChange} />
+                        </div>
+                        : ''
+                )}
+                <button className="config-button" onClick={handleUpdateMealButton}>Oppdater rett</button>
+            </div>
+            :
+            <div className="meal-desc-container">
+                <section className="description-meal-box">
                     <h4>{mealPlan.description}</h4>
                     <p>Dato: {mealPlan.date.toString()}</p>
                     <p>Bilde</p>
@@ -165,13 +167,13 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
                         (MAIN_DISH as unknown as MainDish[]).includes(el.meal.category as MainDish) ? <p key={el.meal.mealName}>Hovedrett: {el.meal.mealName}</p> : ''
                     )}
                     {mealPlan.meals.map(el =>
-                        (SIDE_DISH as unknown as SideDish[]).includes(el.meal.category as SideDish) ? <p key={el.meal.mealName}>Ved siden av: {el.meal.mealName}</p> : ''
+                            (SIDE_DISH as unknown as SideDish[]).includes(el.meal.category as SideDish) ? <p key={el.meal.mealName}>Ved siden av: {el.meal.mealName}</p> : ''
                     )}
                 </section>
-            }
-            <div className='break'></div>
-            <span className="arrow">&#8594;</span>
-        </article>
+                <span className="arrow">&#8594;</span>
+            </div>
+        }
+        </div>
     )
 }
 export default MealPlanList
