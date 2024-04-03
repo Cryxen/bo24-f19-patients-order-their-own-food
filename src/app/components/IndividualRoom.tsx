@@ -29,23 +29,88 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
     }, [])
 
 
+
     const handleDiettRestrictionChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
             setRoomToUpdate(prev =>
             ({
                 ...prev,
-                dietaryRestrictions: [...prev.dietaryRestrictions, { dietaryRestrictionId: event.target.value }]
+                dietaryRestrictions: [...prev?.dietaryRestrictions, { dietaryRestrictionId: event.target.value }]
             }))
         }
         else {
             setRoomToUpdate(prev => ({
                 ...prev,
-                dietaryRestrictions: prev.dietaryRestrictions.filter(el => el.dietaryRestrictionId !== event.target.value)
+                dietaryRestrictions: prev?.dietaryRestrictions.filter(el => el.dietaryRestrictionId !== event.target.value)
             }))
         }
-        console.log(roomToUpdate.dietaryRestrictions)
-
     }
+
+    const handleDiettConsistencyChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            setRoomToUpdate(prev =>
+            ({
+                ...prev,
+                consistancyRestrictions: [...prev?.consistancyRestrictions, { consistency: event.target.value }]
+            }))
+        }
+        else {
+            setRoomToUpdate(prev => ({
+                ...prev,
+                consistancyRestrictions: prev?.consistancyRestrictions.filter(el => el.consistency !== event.target.value)
+            }))
+        }
+    }
+
+    const handleDiettAllergyChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            setRoomToUpdate(prev =>
+            ({
+                ...prev,
+                allergyRestrictions: [...prev?.allergyRestrictions, { allergy: event.target.value }]
+            }))
+        }
+        else {
+            setRoomToUpdate(prev => ({
+                ...prev,
+                allergyRestrictions: prev?.allergyRestrictions.filter(el => el.allergy !== event.target.value)
+            }))
+        }
+    }
+
+    const handleDiettIntoleranceChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            setRoomToUpdate(prev =>
+            ({
+                ...prev,
+                intoleranceRestrictions: [...prev?.intoleranceRestrictions, { intolerance: event.target.value }]
+            }))
+        }
+        else {
+            setRoomToUpdate(prev => ({
+                ...prev,
+                intoleranceRestrictions: prev?.intoleranceRestrictions.filter(el => el.intolerance !== event.target.value)
+            }))
+        }
+    }
+
+    const handleDiettDietaryNeedChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            setRoomToUpdate(prev =>
+            ({
+                ...prev,
+                dietaryNeeds: [...prev?.dietaryNeeds, { dietaryNeed: event.target.value }]
+            }))
+        }
+        else {
+            setRoomToUpdate(prev => ({
+                ...prev,
+                dietaryNeeds: prev?.dietaryNeeds.filter(el => el.dietaryNeed !== event.target.value)
+            }))
+        }
+    }
+
+
 
     return (
         <>
@@ -58,25 +123,25 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
             <h2 className="title">Velg konsistens restriksjoner</h2>
             <div className='restriction-container'>
                 {consistencyRestrictions?.map(el => {
-                    return <Diettbox key={el.consistency} Diett={el.consistency} Checked={roomToUpdate?.consistancyRestrictions?.includes(el) ? true : false} />
+                    return <Diettbox key={el.consistency} Diett={el.consistency} Checked={checkForCommonRestrictions(roomToUpdate.consistancyRestrictions, el.consistency!)} onChangeMethod={handleDiettConsistencyChange} />
                 })}
             </div>
             <h2 className="title">Velg allergier</h2>
             <div className='restriction-container'>
                 {allergyRestrictions?.map(el => {
-                    return <Diettbox key={el.allergy} Diett={el.allergy} Checked={roomToUpdate?.allergyRestrictions?.includes(el) ? true : false} />
+                    return <Diettbox key={el.allergy} Diett={el.allergy} Checked={checkForCommonRestrictions(roomToUpdate.allergyRestrictions, el.allergy)} onChangeMethod={handleDiettAllergyChange} />
                 })}
             </div>
             <h2 className="title">Velg intoleranser</h2>
             <div className='restriction-container'>
                 {intoleranceRestrictions?.map(el => {
-                    return <Diettbox key={el.intolerance} Diett={el.intolerance} Checked={roomToUpdate?.intoleranceRestrictions?.includes(el) ? true : false} />
+                    return <Diettbox key={el.intolerance} Diett={el.intolerance} Checked={checkForCommonRestrictions(roomToUpdate.intoleranceRestrictions, el.intolerance)} onChangeMethod={handleDiettIntoleranceChange} />
                 })}
             </div>
             <h2 className="title">Velg andre kostbehov:</h2>
             <div className='restriction-container'>
                 {dietaryNeeds?.map(el => {
-                    return <Diettbox key={el.dietaryNeed} Diett={el.dietaryNeed} Checked={roomToUpdate?.dietaryNeeds?.includes(el) ? true : false} />
+                    return <Diettbox key={el.dietaryNeed} Diett={el.dietaryNeed} Checked={checkForCommonRestrictions(roomToUpdate.dietaryNeeds, el.dietaryNeed)} onChangeMethod={handleDiettDietaryNeedChange} />
                 })}
             </div>
             <div className="config-container">
