@@ -10,10 +10,8 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
     const { room, dietaryRestrictions, consistencyRestriction, allergyRestriction, intoleranceRestriction, dietaryNeeds } = props
 
     const checkForCommonRestrictions = (roomRestrictions: DietaryRestriction[] | FoodConsistency[] | Allergy[] | Intolerance[] | DietaryNeeds[], restriction: string): boolean => { //Made from inspiration of chatGPT
-        // console.log(roomRestrictions)
-        // console.log(restriction)
-        console.log(roomRestrictions.toString())
-        console.log(roomRestrictions)
+        if(JSON.stringify(roomRestrictions).includes(restriction))
+            return true
         return false
     }
 

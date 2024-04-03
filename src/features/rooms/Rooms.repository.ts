@@ -24,6 +24,6 @@ export const fetchAllRooms = async () => {
         })
         return { success: true, data: roomsFromDb }
     } catch (error) {
-        return { success: false, error: "Failed to retrieve users from db " + error }
+        return { success: false, error: "Failed to retrieve users from db in repository " + error }
     }
 }
