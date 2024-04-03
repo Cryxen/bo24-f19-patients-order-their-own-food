@@ -22,7 +22,12 @@ const pasientadministrasjon = () => {
     const [intoleranceRestrictionsFromDb, setIntoleranceRestrictionsFromDb] = useState<Intolerance[]>([])
     const [dietaryNeedsFromDb, setDietaryNeedsFromDb] = useState<DietaryNeeds[]>([])
     const [selectedRoom, setSelectedRoom] = useState<Room>({
-        roomNumber: 0
+        roomNumber: 0,
+        dietaryRestrictions: [],
+        consistancyRestrictions: [],
+        allergyRestrictions: [],
+        intoleranceRestrictions: [],
+        dietaryNeeds: []
     })
     const [showRestrictions, setShowRestrictions] = useState<Boolean>(false)
 
@@ -111,7 +116,7 @@ const pasientadministrasjon = () => {
                         showRestrictions ? <IndividualRoom
                             room={selectedRoom}
                             dietaryRestrictions={dietaryRestrictionsFromDb}
-                            consistencyRestriction={consistencyRestrictionsFromDb}
+                            consistencyRestrictions={consistencyRestrictionsFromDb}
                             allergyRestriction={allergyRestrictionsFromDb}
                             intoleranceRestriction={intoleranceRestrictionsFromDb}
                             dietaryNeeds={dietaryNeedsFromDb} />
