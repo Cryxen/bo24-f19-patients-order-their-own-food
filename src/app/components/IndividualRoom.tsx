@@ -5,7 +5,8 @@ import { DietaryRestriction } from "@/features/dietaryRestrictions/types"
 import { Intolerance } from "@/features/intoleranceRestrictions/types"
 import { Room } from "@/features/rooms/types"
 import Diettbox from "./Diettbox"
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
+import { POST } from "../api/meals/route"
 
 const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestriction[], consistencyRestrictions: FoodConsistency[], allergyRestriction: Allergy[], intoleranceRestriction: Intolerance[], dietaryNeeds: DietaryNeeds[] }) => {
     const { room, dietaryRestrictions, consistencyRestrictions: consistencyRestrictions, allergyRestriction: allergyRestrictions, intoleranceRestriction: intoleranceRestrictions, dietaryNeeds } = props
@@ -110,6 +111,18 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
         }
     }
 
+    const handleUpdateButton = async (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        const response = await fetch('/api/rooms', {
+            method: "POST",
+            body: JSON.stringify(roomToUpdate)
+        })
+        if (response.status === 200) {
+            const data = await response.json()
+            console.log(data)
+        }
+    }
+
 
 
     return (
@@ -145,7 +158,7 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
                 })}
             </div>
             <div className="config-container">
-                <button className='generate button'>Oppdater restriksjoner</button>
+                <button className='generate button' onClick={handleUpdateButton}>Oppdater restriksjoner</button>
             </div>
         </>
     )

@@ -1,5 +1,5 @@
 import * as roomsRepo from './Rooms.repository'
-import { Room as RoomType } from './types';
+import { Room, Room as RoomType } from './types';
 
 const changeKeyNames = (rooms: any[]): RoomType[] => {
     let roomWithProperKeys: RoomType[] = []
@@ -26,5 +26,14 @@ export const fetchAllRooms = async () => {
         return { success: true, data: changeKeyNames(roomsFromDb?.data!), error: roomsFromDb.error }
     } catch (error) {
         return { success: false, data: "Failed to fetch rooms from db in service " + error }
+    }
+}
+
+export const updateRoom = async (room: Room) => {
+    try {
+        const updateRoomInDb = await roomsRepo.updateRoom(room);
+        return { success: updateRoomInDb.success, data: updateRoomInDb.data, error: updateRoomInDb.error }
+    } catch (error) {
+        return { success: false, error: "Something went wrong updating room in db in service " + error }
     }
 }
