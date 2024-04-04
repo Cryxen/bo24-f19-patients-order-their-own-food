@@ -2,9 +2,8 @@
 // fra: https://fullstækk.no/courses/next-mvc-orm/06-seeding
 
 import { Meal } from "@/features/meals/types";
-import { Room } from "@/features/rooms/types";
 import { User } from "@/features/users/types";
-import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, } from "@prisma/client";
+import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, Room } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -53,10 +52,22 @@ const dietaryRestrictions: DietaryRestriction[] = [
 ]
 
 const rooms: Room[] = [
-  { roomNumber: 1002 },
-  { roomNumber: 1003 },
-  { roomNumber: 1004 },
-  { roomNumber: 1005 }
+  {
+    roomNumber: 1002,
+    orderId: null,
+  },
+  {
+    roomNumber: 1003,
+    orderId: null
+  },
+  {
+    roomNumber: 1004,
+    orderId: null
+  },
+  {
+    roomNumber: 1005,
+    orderId: null
+  }
 ]
 
 const roomToRestrictions: RoomToDietaryRestrictions[] = [

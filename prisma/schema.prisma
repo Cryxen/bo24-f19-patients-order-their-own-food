@@ -44,10 +44,9 @@ model RoomToDietaryRestrictions {
   roomId               Room               @relation(fields: [roomNumber], references: [roomNumber])
   roomNumber           Int
   dietaryRestriction   DietaryRestriction @relation(fields: [dietaryRestrictionId], references: [dietaryRestriction])
-  dietaryRestrictionId String             @map("dietaryRestriction")
+  dietaryRestrictionId String
 
   @@id([roomNumber, dietaryRestrictionId])
-  @@map("RoomToRestriction")
 }
 
 model RoomToFoodConsistencyRestrictions {
