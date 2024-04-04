@@ -141,10 +141,47 @@ export const updateRoom = async (room: Room) => {
 
 export const deleteRoomFromDb = async (roomNumber: number) => {
     try {
-        const deleteRoom = await prisma.room.delete({
+        console.log(roomNumber)
+
+        const deleteDietaryRestrictions = prisma.roomToDietaryRestrictions.deleteMany({
+            where: {
+                roomNumber: roomNumber
+            }
+        })
+
+        const deleteConsistencyRestrictions = prisma.roomToFoodConsistencyRestrictions.deleteMany({
+            where: {
+                roomNumber: roomNumber,
+            }
+        })
+
+
+        const deleteAllergyRestrictions = prisma.roomToAllergyRestrictions.deleteMany({
+            where: {
+                roomNumber: roomNumber
+            }
+        })
+
+        const deleteIntoleranceRestrictions = prisma.roomToIntolleranceRestrictions.deleteMany({
+            where: {
+                roomNumber: roomNumber
+            }
+        })
+
+        const deleteDietaryNeeds = prisma.roomToDietaryneeds.deleteMany({
+            where: ({
+                roomNumber: roomNumber
+            })
+        })
+
+
+        const deleteRoom = prisma.room.delete({
             where: { roomNumber: roomNumber }
         })
-        return { success: true, data: deleteRoom }
+
+        const transaction = await prisma.$transaction([deleteDietaryRestrictions, deleteConsistencyRestrictions, deleteAllergyRestrictions, deleteIntoleranceRestrictions, deleteDietaryNeeds, deleteRoom])
+
+        return { success: true, data: transaction }
     } catch (error) {
         return { success: false, error: "Failed to delete room in repo " + error }
     }
