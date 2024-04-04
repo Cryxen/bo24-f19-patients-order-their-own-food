@@ -151,7 +151,7 @@ const createRooms = async () => {
       update: {},
       create: {
         roomNumber: room.roomNumber,
-        dietaryRestrictions: {
+        RoomToDietaryRestrictions: {
           createMany:
             ({
               data: filteredDietaryRestrictionsToCreate

@@ -11,9 +11,10 @@ export const fetchAllRooms = async () => {
     try {
         const roomsFromDb = await prisma.room.findMany({
             include: {
-                dietaryRestrictions: {
-                    select: { dietaryRestrictionId: true }
-                },
+                // dietaryRestrictions: {
+                //     select: { dietaryRestrictionId: true }
+                // },
+
                 foodConsistencyRestrictions: {
                     select: { foodConsistencyRestrictionId: true }
                 },
@@ -25,12 +26,15 @@ export const fetchAllRooms = async () => {
                 },
                 RoomToDietaryneeds: {
                     select: { dietaryNeedId: true }
+                },
+                RoomToDietaryRestrictions: {
+                    select: { dietaryRestrictionId: true }
                 }
             }
         })
         return { success: true, data: roomsFromDb }
     } catch (error) {
-        return { success: false, error: "Failed to retrieve users from db in repository " + error }
+        return { success: false, error: "Failed to retrieve rooms from db in repository " + error }
     }
 }
 
@@ -57,7 +61,7 @@ export const updateRoom = async (room: Room) => {
                 }
             }
         })
-        
+
 
         const deleteAllergyRestrictions = prisma.roomToAllergyRestrictions.deleteMany({
             where: {
@@ -131,7 +135,7 @@ export const updateRoom = async (room: Room) => {
         })
 
         const transaction = await prisma.$transaction([deleteDietaryRestrictions, deleteConsistencyRestrictions, deleteAllergyRestrictions, deleteIntoleranceRestrictions, deleteDietaryNeeds, updateRoomInDb])
-        
+
         return { success: true, data: transaction }
     } catch (error) {
         return { success: false, error: "Something went wrong updating room in db in repo " + error }

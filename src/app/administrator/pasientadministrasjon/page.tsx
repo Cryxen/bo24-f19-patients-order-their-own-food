@@ -45,7 +45,8 @@ const pasientadministrasjon = () => {
         if (response.status === 200) {
             const data = await response.json()
             console.log(data)
-            setRoomsFromDb(data.data)
+            if (data.success === true)
+                setRoomsFromDb(data.data)
         }
     }
 
@@ -93,7 +94,7 @@ const pasientadministrasjon = () => {
         if (parseInt(event.target.value) !== 0) {
             const room: Room[] = roomsFromDb.filter(el => el.roomNumber === parseInt(event.target.value))
             setShowRestrictions(true)
-            setSelectedRoom( room[0] )
+            setSelectedRoom(room[0])
         }
         else setShowRestrictions(false)
     }
