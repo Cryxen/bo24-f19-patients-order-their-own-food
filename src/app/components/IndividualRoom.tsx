@@ -6,8 +6,9 @@ import { Intolerance } from "@/features/intoleranceRestrictions/types"
 import { Room } from "@/features/rooms/types"
 import Diettbox from "./Diettbox"
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
+import ConfirmationWindow from "./ComfirmationWindow"
 
-const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestriction[], consistencyRestrictions: FoodConsistency[], allergyRestriction: Allergy[], intoleranceRestriction: Intolerance[], dietaryNeeds: DietaryNeeds[], fetchAllRooms: ()=> void }) => {
+const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestriction[], consistencyRestrictions: FoodConsistency[], allergyRestriction: Allergy[], intoleranceRestriction: Intolerance[], dietaryNeeds: DietaryNeeds[], fetchAllRooms: () => void }) => {
     const { room, dietaryRestrictions, consistencyRestrictions: consistencyRestrictions, allergyRestriction: allergyRestrictions, intoleranceRestriction: intoleranceRestrictions, dietaryNeeds, fetchAllRooms } = props
     const [roomToUpdate, setRoomToUpdate] = useState<Room>({
         roomNumber: 0,
@@ -17,6 +18,7 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
         intoleranceRestrictions: [],
         dietaryNeeds: []
     })
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<boolean>(false)
 
     console.log(room.roomNumber)
     const checkForCommonRestrictions = (roomRestrictions: DietaryRestriction[] | FoodConsistency[] | Allergy[] | Intolerance[] | DietaryNeeds[], restriction: string): boolean => { //Made from inspiration of chatGPT
@@ -124,7 +126,16 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
         }
     }
 
+    const handleDeleteRoomButton = (event: MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+        setShowDeleteConfirmation(true)
+    }
 
+    const handleConfirmPress = () => {
+        setShowDeleteConfirmation(false)
+    }
+
+    
 
     return (
         <>
@@ -160,6 +171,10 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
             </div>
             <div className="config-container">
                 <button className='generate button' onClick={handleUpdateButton}>Oppdater restriksjoner</button>
+                <button className='generate button' onClick={handleDeleteRoomButton}>Slett rom</button>
+                {showDeleteConfirmation ? 
+                <ConfirmationWindow confirmButton="Slett rom" declineButton="Gå tilbake" handleConfirmButtonPress={handleConfirmPress} handleDeclineButtonPress={() => {setShowDeleteConfirmation(false)}} message={"Er du sikker på at du ønsker å slette rom " + room.roomNumber}/>
+                : ''}
             </div>
         </>
     )
