@@ -139,33 +139,3 @@ export const updateRoom = async (room: Room) => {
 
 }
 
-/***
-
-Object { status: 200, success: false, error: "Something went wrong updating room in db in repo PrismaClientValidationError: 
-\nInvalid `prisma.roomToDietaryRestrictions.deleteMany()` invocation:\n\n{\n  where: {\n    roomNumber: undefined,\n?   
-    orderId?: Int,\n?   AND?: RoomWhereInput | RoomWhereInput[],\n?   OR?: RoomWhereInput[],\n?   NOT?: RoomWhereInput | 
-    RoomWhereInput[],\n?   order?: OrderNullableRelationFilter | OrderWhereInput | Null,\n?   RoomToDietaryRestrictions?:
-     RoomToDietaryRestrictionsListRelationFilter,\n?   foodConsistencyRestrictions?: RoomToFoodConsistencyRestrictionsListRelationFilter,\n?  
-      RoomToAllergyRestrictions?: RoomToAllergyRestrictionsListRelationFilter,\n?   RoomToIntolleranceRestrictions?:
-      RoomToIntolleranceRestrictionsListRelationFilter,\n?   RoomToDietaryneeds?: RoomToDietaryneedsListRelationFilter\n  
-    }\n}\n\nArgument `where` of type RoomWhereUniqueInput needs at least one of `roomNumber`, `roomNumber` or `orderId` arguments. 
-    Available options are marked with ?." }
-​
-error: "Something went wrong updating room in db in repo PrismaClientValidationError: \nInvalid `prisma.roomToDietaryRestrictions.deleteMany()` 
-invocation:\n\n{\n  where: {\n    roomNumber: undefined,\n?   orderId?: Int,\n?   AND?: RoomWhereInput | RoomWhereInput[],\n?   
-    OR?: RoomWhereInput[],\n?   NOT?: RoomWhereInput | RoomWhereInput[],\n?   order?: OrderNullableRelationFilter | OrderWhereInput |
-    Null,\n?   RoomToDietaryRestrictions?: RoomToDietaryRestrictionsListRelationFilter,\n?   foodConsistencyRestrictions?: 
-    RoomToFoodConsistencyRestrictionsListRelationFilter,\n?   RoomToAllergyRestrictions?: RoomToAllergyRestrictionsListRelationFilter,\n?  
-     RoomToIntolleranceRestrictions?: RoomToIntolleranceRestrictionsListRelationFilter,\n?   RoomToDietaryneeds?:
-      RoomToDietaryneedsListRelationFilter\n  }\n}\n\nArgument `where` of type RoomWhereUniqueInput needs at least one of `
-      roomNumber`, `roomNumber` or `orderId` arguments. Available options are marked with ?."
-​
-status: 200
-​
-success: false
-​
-<prototype>: Object { … }
-page.tsx:65:20
-
- * 
- */
