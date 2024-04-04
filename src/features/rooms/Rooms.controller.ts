@@ -36,3 +36,27 @@ export const updateRoom = async (req: NextRequest) => {
         })
     }
 }
+
+export const deleteRoomFromDb = async (req: NextRequest) => {
+    try {
+        if (req.nextUrl.searchParams.get('roomNumber')) {
+            const roomNumber = req.nextUrl.searchParams.get('roomNumber') as string
+            const deleteRoom = await roomsService.deleteRoomFromDb(parseInt(roomNumber))
+            return NextResponse.json({
+                status: 200,
+                success: deleteRoom.success,
+                data: deleteRoom.data,
+                error: deleteRoom.error
+            })
+
+        }
+        else
+            return NextResponse.json({
+                success: false, status: 400, error: "Missing parameter"
+            })
+    } catch (error) {
+        return NextResponse.json({
+            success: false, error: "Failed to delete room in controller " + error
+        })
+    }
+}

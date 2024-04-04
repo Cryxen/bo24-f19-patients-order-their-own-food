@@ -1,3 +1,4 @@
+import { error } from 'console';
 import * as roomsRepo from './Rooms.repository'
 import { Room, Room as RoomType } from './types';
 
@@ -34,5 +35,14 @@ export const updateRoom = async (room: Room) => {
         return { success: updateRoomInDb.success, data: updateRoomInDb.data, error: updateRoomInDb.error }
     } catch (error) {
         return { success: false, error: "Something went wrong updating room in db in service " + error }
+    }
+}
+
+export const deleteRoomFromDb = async (roomNumber: number) => {
+    try {
+        const deleteRoom = await roomsRepo.deleteRoomFromDb(roomNumber)
+        return ({ success: deleteRoom.success, data: deleteRoom.data, error: deleteRoom.error })
+    } catch (error) {
+        return ({success: false, error: "Failed to delete room in service " + error})
     }
 }

@@ -139,3 +139,13 @@ export const updateRoom = async (room: Room) => {
 
 }
 
+export const deleteRoomFromDb = async (roomNumber: number) => {
+    try {
+        const deleteRoom = await prisma.room.delete({
+            where: { roomNumber: roomNumber }
+        })
+        return { success: true, data: deleteRoom }
+    } catch (error) {
+        return { success: false, error: "Failed to delete room in repo " + error }
+    }
+}
