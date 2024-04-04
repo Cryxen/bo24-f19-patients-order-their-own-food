@@ -43,36 +43,69 @@ export const updateRoom = async (room: Room) => {
         const intoleranceRestrictionsToUpdate: Intolerance[] = room.intoleranceRestrictions
         const dietaryNeedsToUpdate: DietaryNeeds[] = room.dietaryNeeds
 
-        const updateRoomInDb = await prisma.room.update({
+        const deleteDietaryRestrictions = prisma.roomToDietaryRestrictions.deleteMany({
+            where: {
+                roomNumber: room.roomNumber
+            }
+        })
+
+        const deleteConsistencyRestrictions = prisma.roomToFoodConsistencyRestrictions.deleteMany({
+            where: {
+                roomNumber: room.roomNumber,
+                foodConsistencyRestriction: {
+                    // consistency: ''
+                }
+            }
+        })
+        
+
+        const deleteAllergyRestrictions = prisma.roomToAllergyRestrictions.deleteMany({
+            where: {
+                roomNumber: room.roomNumber
+            }
+        })
+
+        const deleteIntoleranceRestrictions = prisma.roomToIntolleranceRestrictions.deleteMany({
+            where: {
+                roomNumber: room.roomNumber
+            }
+        })
+
+        const deleteDietaryNeeds = prisma.roomToDietaryneeds.deleteMany({
+            where: ({
+                roomNumber: room.roomNumber
+            })
+        })
+
+        const updateRoomInDb = prisma.room.update({
             where: { roomNumber: room.roomNumber },
             data: {
                 dietaryRestrictions: {
-                    deleteMany: [{ roomNumber: room.roomNumber }],
                     create: dietaryRestrictionsToUpdate.map(el => ({
                         dietaryRestrictionId: el.dietaryRestrictionId!,
                         dietaryRestriction: el.dietaryRestriction
                     }))
                 },
                 foodConsistencyRestrictions: {
-                    deleteMany: [{ roomNumber: room.roomNumber }],
+                    // deleteMany: [{ roomNumber: room.roomNumber }],
                     create: consistencyRestrictionsToUpdate.map(el => ({
                         foodConsistencyRestrictionId: el.consistency
                     }))
                 },
                 RoomToAllergyRestrictions: {
-                    deleteMany: [{ roomNumber: room.roomNumber }],
+                    // deleteMany: [{ roomNumber: room.roomNumber }],
                     create: allergyRestrictionsToUpdate.map(el => ({
                         allergyRestricionId: el.allergy
                     }))
                 },
                 RoomToIntolleranceRestrictions: {
-                    deleteMany: [{ roomNumber: room.roomNumber }],
+                    // deleteMany: [{ roomNumber: room.roomNumber }],
                     create: intoleranceRestrictionsToUpdate.map(el => ({
                         intolleranceRestrictionId: el.intolerance
                     }))
                 },
                 RoomToDietaryneeds: {
-                    deleteMany: [{ roomNumber: room.roomNumber }],
+                    // deleteMany: [{ roomNumber: room.roomNumber }],
                     create: dietaryNeedsToUpdate.map(el => ({
                         dietaryNeedId: el.dietaryNeed
                     }))
@@ -96,8 +129,10 @@ export const updateRoom = async (room: Room) => {
                 }
             }
         })
-        console.log(updateRoomInDb)
-        return { success: true, data: updateRoomInDb }
+
+        const transaction = await prisma.$transaction([deleteDietaryRestrictions, deleteConsistencyRestrictions, deleteAllergyRestrictions, deleteIntoleranceRestrictions, deleteDietaryNeeds, updateRoomInDb])
+        
+        return { success: true, data: transaction }
     } catch (error) {
         return { success: false, error: "Something went wrong updating room in db in repo " + error }
     }
