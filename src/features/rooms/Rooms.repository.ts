@@ -11,10 +11,6 @@ export const fetchAllRooms = async () => {
     try {
         const roomsFromDb = await prisma.room.findMany({
             include: {
-                // dietaryRestrictions: {
-                //     select: { dietaryRestrictionId: true }
-                // },
-
                 foodConsistencyRestrictions: {
                     select: { foodConsistencyRestrictionId: true }
                 },
@@ -56,9 +52,6 @@ export const updateRoom = async (room: Room) => {
         const deleteConsistencyRestrictions = prisma.roomToFoodConsistencyRestrictions.deleteMany({
             where: {
                 roomNumber: room.roomNumber,
-                foodConsistencyRestriction: {
-                    // consistency: ''
-                }
             }
         })
 
@@ -84,10 +77,9 @@ export const updateRoom = async (room: Room) => {
         const updateRoomInDb = prisma.room.update({
             where: { roomNumber: room.roomNumber },
             data: {
-                dietaryRestrictions: {
+                RoomToDietaryRestrictions: {
                     create: dietaryRestrictionsToUpdate.map(el => ({
                         dietaryRestrictionId: el.dietaryRestrictionId!,
-                        dietaryRestriction: el.dietaryRestriction
                     }))
                 },
                 foodConsistencyRestrictions: {
@@ -116,7 +108,7 @@ export const updateRoom = async (room: Room) => {
                 },
             },
             include: {
-                dietaryRestrictions: {
+                RoomToDietaryRestrictions: {
                     select: { dietaryRestrictionId: true }
                 },
                 foodConsistencyRestrictions: {
