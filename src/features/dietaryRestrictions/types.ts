@@ -1,7 +1,4 @@
-
-
-export const DIETARY_RESTRICTIONS = ["Laktoseredusert", "Laktosefri", "Energi og næringstett", "Purinfattig", "Lavkarbo", "Keto diett"]
-
 export type DietaryRestriction = {
-    dietaryRestriction: typeof DIETARY_RESTRICTIONS[number]
+    dietaryRestriction?: string
+    dietaryRestrictionId?: string //TODO: Find out where the mistake is that created this Id variable
 }

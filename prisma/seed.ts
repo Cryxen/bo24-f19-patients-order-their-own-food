@@ -1,10 +1,12 @@
 // /prisma/seed.js
 // fra: https://fullstækk.no/courses/next-mvc-orm/06-seeding
 
+
 import { Room } from "@/features/rooms/types";
 import { MainDish, SideDish } from "@/features/meals/types";
 import { User } from "@/features/users/types";
 import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, Meal } from "@prisma/client";
+
 
 const prisma = new PrismaClient();
 const date = new Date()
@@ -54,10 +56,22 @@ const dietaryRestrictions: DietaryRestriction[] = [
 ]
 
 const rooms: Room[] = [
-  { roomNumber: 1002 },
-  { roomNumber: 1003 },
-  { roomNumber: 1004 },
-  { roomNumber: 1005 }
+  {
+    roomNumber: 1002,
+    orderId: null,
+  },
+  {
+    roomNumber: 1003,
+    orderId: null
+  },
+  {
+    roomNumber: 1004,
+    orderId: null
+  },
+  {
+    roomNumber: 1005,
+    orderId: null
+  }
 ]
 
 const roomToRestrictions: RoomToDietaryRestrictions[] = [
@@ -141,7 +155,7 @@ const createRooms = async () => {
       update: {},
       create: {
         roomNumber: room.roomNumber,
-        dietaryRestrictions: {
+        RoomToDietaryRestrictions: {
           createMany:
             ({
               data: filteredDietaryRestrictionsToCreate
