@@ -18,7 +18,6 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
         intoleranceRestrictions: [],
         dietaryNeeds: []
     })
-    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<boolean>(false)
 
     console.log(room.roomNumber)
     const checkForCommonRestrictions = (roomRestrictions: DietaryRestriction[] | FoodConsistency[] | Allergy[] | Intolerance[] | DietaryNeeds[], restriction: string): boolean => { //Made from inspiration of chatGPT
@@ -126,16 +125,9 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
         }
     }
 
-    const handleDeleteRoomButton = (event: MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-        setShowDeleteConfirmation(true)
-    }
 
-    const handleConfirmPress = () => {
-        setShowDeleteConfirmation(false)
-    }
 
-    
+
 
     return (
         <>
@@ -171,10 +163,7 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
             </div>
             <div className="config-container">
                 <button className='generate button' onClick={handleUpdateButton}>Oppdater restriksjoner</button>
-                <button className='generate button' onClick={handleDeleteRoomButton}>Slett rom</button>
-                {showDeleteConfirmation ? 
-                <ConfirmationWindow confirmButton="Slett rom" declineButton="Gå tilbake" handleConfirmButtonPress={handleConfirmPress} handleDeclineButtonPress={() => {setShowDeleteConfirmation(false)}} message={"Er du sikker på at du ønsker å slette rom " + room.roomNumber}/>
-                : ''}
+
             </div>
         </>
     )
