@@ -122,7 +122,7 @@ const pasientadministrasjon = () => {
                                 setShowRestrictions={setShowRestrictions} />
                     }
                     {selectedRoom.roomNumber !== 0 ?
-                        <DeleteRoom room={selectedRoom} setSelectedRoom={setSelectedRoom} setShowRestrictions={setShowRestrictions}/>
+                        <DeleteRoom room={selectedRoom} setSelectedRoom={setSelectedRoom} setShowRestrictions={setShowRestrictions} fetchAllRooms={fetchAllRooms}/>
                         :
                         ''
                     }

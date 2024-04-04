@@ -3,8 +3,8 @@ import { Room } from "@/features/rooms/types"
 import ConfirmationWindow from "./ComfirmationWindow"
 import { Dispatch, MouseEvent, SetStateAction, useState } from "react"
 
-const DeleteRoom = (props: { room: Room, setSelectedRoom: Dispatch<SetStateAction<Room>>, setShowRestrictions: Dispatch<SetStateAction<boolean>> }) => {
-    const { room, setSelectedRoom, setShowRestrictions } = props
+const DeleteRoom = (props: { room: Room, setSelectedRoom: Dispatch<SetStateAction<Room>>, setShowRestrictions: Dispatch<SetStateAction<boolean>>, fetchAllRooms: () => {} }) => {
+    const { room, setSelectedRoom, setShowRestrictions, fetchAllRooms } = props
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<boolean>(false)
 
     const handleDeleteRoomButton = (event: MouseEvent<HTMLButtonElement>) => {
@@ -29,7 +29,8 @@ const DeleteRoom = (props: { room: Room, setSelectedRoom: Dispatch<SetStateActio
                 allergyRestrictions: [],
                 intoleranceRestrictions: [],
                 dietaryNeeds: []
-            }            )
+            })
+            fetchAllRooms()
             setShowRestrictions(false)
         }
     }

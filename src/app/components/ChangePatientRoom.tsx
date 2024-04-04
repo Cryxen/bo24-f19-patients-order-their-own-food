@@ -1,7 +1,7 @@
 import { Room } from "@/features/rooms/types"
 import { ChangeEvent, Dispatch, SetStateAction } from "react"
 
-const ChangePatientRoom = (props: { setShowRestrictions: Dispatch<SetStateAction<Boolean>>, roomsFromDb: Room[], setSelectedRoom: Dispatch<SetStateAction<Room>>, selectedRoom: Room }) => {
+const ChangePatientRoom = (props: { setShowRestrictions: Dispatch<SetStateAction<boolean>>, roomsFromDb: Room[], setSelectedRoom: Dispatch<SetStateAction<Room>>, selectedRoom: Room }) => {
 
     const { setShowRestrictions, setSelectedRoom, roomsFromDb, selectedRoom } = props
 
