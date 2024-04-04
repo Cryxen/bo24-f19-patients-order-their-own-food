@@ -21,6 +21,7 @@ export const fetchAllRooms = async () => {
 export const updateRoom = async (req: NextRequest) => {
     try {
         const room = await req.json() as Room
+        console.log(room)
         const updateRoomInDb = await roomsService.updateRoom(room)
         return NextResponse.json({
             status: 200,

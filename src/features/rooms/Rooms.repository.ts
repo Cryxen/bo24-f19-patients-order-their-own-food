@@ -36,6 +36,7 @@ export const fetchAllRooms = async () => {
 
 export const updateRoom = async (room: Room) => {
     try {
+        console.log(room)
         // With inspiration of chatGPT of .map of functions.
         const dietaryRestrictionsToUpdate: DietaryRestriction[] = room.dietaryRestrictions
         const consistencyRestrictionsToUpdate: FoodConsistency[] = room.consistancyRestrictions
@@ -74,9 +75,9 @@ export const updateRoom = async (room: Room) => {
             })
         })
 
-        const updateRoomInDb = prisma.room.update({
+        const updateRoomInDb = prisma.room.upsert({
             where: { roomNumber: room.roomNumber },
-            data: {
+            update: {
                 RoomToDietaryRestrictions: {
                     create: dietaryRestrictionsToUpdate.map(el => ({
                         dietaryRestrictionId: el.dietaryRestrictionId!,
@@ -123,6 +124,9 @@ export const updateRoom = async (room: Room) => {
                 RoomToDietaryneeds: {
                     select: { dietaryNeedId: true }
                 }
+            },
+            create: {
+                roomNumber: room.roomNumber
             }
         })
 
@@ -134,3 +138,34 @@ export const updateRoom = async (room: Room) => {
     }
 
 }
+
+/***
+
+Object { status: 200, success: false, error: "Something went wrong updating room in db in repo PrismaClientValidationError: 
+\nInvalid `prisma.roomToDietaryRestrictions.deleteMany()` invocation:\n\n{\n  where: {\n    roomNumber: undefined,\n?   
+    orderId?: Int,\n?   AND?: RoomWhereInput | RoomWhereInput[],\n?   OR?: RoomWhereInput[],\n?   NOT?: RoomWhereInput | 
+    RoomWhereInput[],\n?   order?: OrderNullableRelationFilter | OrderWhereInput | Null,\n?   RoomToDietaryRestrictions?:
+     RoomToDietaryRestrictionsListRelationFilter,\n?   foodConsistencyRestrictions?: RoomToFoodConsistencyRestrictionsListRelationFilter,\n?  
+      RoomToAllergyRestrictions?: RoomToAllergyRestrictionsListRelationFilter,\n?   RoomToIntolleranceRestrictions?:
+      RoomToIntolleranceRestrictionsListRelationFilter,\n?   RoomToDietaryneeds?: RoomToDietaryneedsListRelationFilter\n  
+    }\n}\n\nArgument `where` of type RoomWhereUniqueInput needs at least one of `roomNumber`, `roomNumber` or `orderId` arguments. 
+    Available options are marked with ?." }
+​
+error: "Something went wrong updating room in db in repo PrismaClientValidationError: \nInvalid `prisma.roomToDietaryRestrictions.deleteMany()` 
+invocation:\n\n{\n  where: {\n    roomNumber: undefined,\n?   orderId?: Int,\n?   AND?: RoomWhereInput | RoomWhereInput[],\n?   
+    OR?: RoomWhereInput[],\n?   NOT?: RoomWhereInput | RoomWhereInput[],\n?   order?: OrderNullableRelationFilter | OrderWhereInput |
+    Null,\n?   RoomToDietaryRestrictions?: RoomToDietaryRestrictionsListRelationFilter,\n?   foodConsistencyRestrictions?: 
+    RoomToFoodConsistencyRestrictionsListRelationFilter,\n?   RoomToAllergyRestrictions?: RoomToAllergyRestrictionsListRelationFilter,\n?  
+     RoomToIntolleranceRestrictions?: RoomToIntolleranceRestrictionsListRelationFilter,\n?   RoomToDietaryneeds?:
+      RoomToDietaryneedsListRelationFilter\n  }\n}\n\nArgument `where` of type RoomWhereUniqueInput needs at least one of `
+      roomNumber`, `roomNumber` or `orderId` arguments. Available options are marked with ?."
+​
+status: 200
+​
+success: false
+​
+<prototype>: Object { … }
+page.tsx:65:20
+
+ * 
+ */

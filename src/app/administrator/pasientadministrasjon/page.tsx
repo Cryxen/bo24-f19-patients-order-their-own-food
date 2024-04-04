@@ -3,7 +3,7 @@ import Layout from "@/app/components/layout"
 import Diettbox from "@/app/components/Diettbox"
 import '../../styles/pasientadministrasjon.scss'
 import '../../styles/globals.scss'
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useEffect, useState, MouseEvent } from "react"
 import { Room } from "@/features/rooms/types"
 import { DietaryRestriction } from "@/features/dietaryRestrictions/types"
 import { FoodConsistency } from "@/features/consistencyRestrictions/types"
@@ -12,6 +12,7 @@ import { Intolerance } from "@/features/intoleranceRestrictions/types"
 import { DietaryNeeds } from "@/features/DietaryNeeds/types"
 import IndividualRoom from "@/app/components/IndividualRoom"
 import ChangePatientRoom from "@/app/components/ChangePatientRoom"
+import AddNewRoom from "@/app/components/AddNewRoom"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
@@ -30,7 +31,9 @@ const pasientadministrasjon = () => {
         intoleranceRestrictions: [],
         dietaryNeeds: []
     })
-    const [showRestrictions, setShowRestrictions] = useState<Boolean>(false)
+    const [showRestrictions, setShowRestrictions] = useState<boolean>(false)
+    const [showNewRoomForm, setShowNewRoomForm] = useState<boolean>(false)
+    const [inputRoomNumberChange, setInputRoomNumberChange] = useState<number>(0)
 
     useEffect(() => {
         fetchAllRooms()
@@ -96,19 +99,27 @@ const pasientadministrasjon = () => {
             <div className="mainDiv">
                 <h1>Pasientadministrasjon</h1>
                 <div className="main-wrapper">
-                    <ChangePatientRoom setShowRestrictions={setShowRestrictions} setSelectedRoom={setSelectedRoom} roomsFromDb={roomsFromDb} />
+                    <ChangePatientRoom setShowRestrictions={setShowRestrictions} setSelectedRoom={setSelectedRoom} roomsFromDb={roomsFromDb} selectedRoom={selectedRoom}/>
                     {
-                        showRestrictions ? <IndividualRoom
-                            room={selectedRoom}
-                            dietaryRestrictions={dietaryRestrictionsFromDb}
-                            consistencyRestrictions={consistencyRestrictionsFromDb}
-                            allergyRestriction={allergyRestrictionsFromDb}
-                            intoleranceRestriction={intoleranceRestrictionsFromDb}
-                            dietaryNeeds={dietaryNeedsFromDb}
-                            fetchAllRooms={fetchAllRooms} />
-                            : ''
+                        showRestrictions ?
+                            <IndividualRoom
+                                room={selectedRoom}
+                                dietaryRestrictions={dietaryRestrictionsFromDb}
+                                consistencyRestrictions={consistencyRestrictionsFromDb}
+                                allergyRestriction={allergyRestrictionsFromDb}
+                                intoleranceRestriction={intoleranceRestrictionsFromDb}
+                                dietaryNeeds={dietaryNeedsFromDb}
+                                fetchAllRooms={fetchAllRooms} />
+                            :
+                            <AddNewRoom
+                                setInputRoomNumberChange={setInputRoomNumberChange}
+                                setSelectedRoom={setSelectedRoom}
+                                setShowNewRoomForm={setShowNewRoomForm}
+                                showNewRoomForm={showNewRoomForm}
+                                inputRoomNumberChange={inputRoomNumberChange}
+                                fetchAllRooms={fetchAllRooms}
+                                setShowRestrictions={setShowRestrictions} />
                     }
-
                 </div>
             </div>
         </Layout>
