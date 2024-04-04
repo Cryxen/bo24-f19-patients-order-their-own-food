@@ -49,7 +49,6 @@ const pasientadministrasjon = () => {
         const response = await fetch('/api/rooms')
         if (response.status === 200) {
             const data = await response.json()
-            console.log(data)
             if (data.success === true)
                 setRoomsFromDb(data.data)
         }

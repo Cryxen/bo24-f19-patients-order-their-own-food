@@ -14,14 +14,11 @@ const DeleteRoom = (props: { room: Room, setSelectedRoom: Dispatch<SetStateActio
 
     const handleConfirmPress = async () => {
         setShowDeleteConfirmation(false)
-        console.log(room)
         const response = await fetch('/api/rooms?roomNumber=' + room.roomNumber, {
             method: 'DELETE'
         })
-        console.log(response)
         if (response.status === 200) {
             const data = await response.json()
-            console.log(data)
             setSelectedRoom({
                 roomNumber: 0,
                 dietaryRestrictions: [],

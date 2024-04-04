@@ -15,10 +15,8 @@ const AddNewRoom = (props: { setShowNewRoomForm: Dispatch<SetStateAction<boolean
             method: 'POST',
             body: JSON.stringify(room)
         })
-        console.log(response)
         if (response.status === 200) {
             const data = await response.json()
-            console.log(data)
         }
     }
 
