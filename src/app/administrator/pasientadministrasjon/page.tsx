@@ -11,6 +11,7 @@ import { Allergy } from "@/features/allergyRestrictions/types"
 import { Intolerance } from "@/features/intoleranceRestrictions/types"
 import { DietaryNeeds } from "@/features/DietaryNeeds/types"
 import IndividualRoom from "@/app/components/IndividualRoom"
+import ChangePatientRoom from "@/app/components/ChangePatientRoom"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
@@ -90,29 +91,12 @@ const pasientadministrasjon = () => {
         }
     }
 
-    const handleRoomChange = async (event: ChangeEvent<HTMLSelectElement>) => {
-        if (parseInt(event.target.value) !== 0) {
-            const room: Room[] = roomsFromDb.filter(el => el.roomNumber === parseInt(event.target.value))
-            setShowRestrictions(true)
-            setSelectedRoom(room[0])
-        }
-        else setShowRestrictions(false)
-    }
-
     return (
         <Layout>
             <div className="mainDiv">
                 <h1>Pasientadministrasjon</h1>
                 <div className="main-wrapper">
-                    <div className="room-container">
-                        <h2 className="title">Velg rom</h2>
-                        <select name="room" id="room" className="room dropdown" onChange={handleRoomChange} defaultValue="0">
-                            <option value="0">Velg rom</option>
-                            {roomsFromDb?.map(room => {
-                                return <option key={room.roomNumber} value={room.roomNumber}>{room.roomNumber}</option>
-                            })}
-                        </select>
-                    </div>
+                    <ChangePatientRoom setShowRestrictions={setShowRestrictions} setSelectedRoom={setSelectedRoom} roomsFromDb={roomsFromDb} />
                     {
                         showRestrictions ? <IndividualRoom
                             room={selectedRoom}
@@ -120,7 +104,8 @@ const pasientadministrasjon = () => {
                             consistencyRestrictions={consistencyRestrictionsFromDb}
                             allergyRestriction={allergyRestrictionsFromDb}
                             intoleranceRestriction={intoleranceRestrictionsFromDb}
-                            dietaryNeeds={dietaryNeedsFromDb} />
+                            dietaryNeeds={dietaryNeedsFromDb}
+                            fetchAllRooms={fetchAllRooms} />
                             : ''
                     }
 

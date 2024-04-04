@@ -6,10 +6,9 @@ import { Intolerance } from "@/features/intoleranceRestrictions/types"
 import { Room } from "@/features/rooms/types"
 import Diettbox from "./Diettbox"
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
-import { POST } from "../api/meals/route"
 
-const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestriction[], consistencyRestrictions: FoodConsistency[], allergyRestriction: Allergy[], intoleranceRestriction: Intolerance[], dietaryNeeds: DietaryNeeds[] }) => {
-    const { room, dietaryRestrictions, consistencyRestrictions: consistencyRestrictions, allergyRestriction: allergyRestrictions, intoleranceRestriction: intoleranceRestrictions, dietaryNeeds } = props
+const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestriction[], consistencyRestrictions: FoodConsistency[], allergyRestriction: Allergy[], intoleranceRestriction: Intolerance[], dietaryNeeds: DietaryNeeds[], fetchAllRooms: ()=> void }) => {
+    const { room, dietaryRestrictions, consistencyRestrictions: consistencyRestrictions, allergyRestriction: allergyRestrictions, intoleranceRestriction: intoleranceRestrictions, dietaryNeeds, fetchAllRooms } = props
     const [roomToUpdate, setRoomToUpdate] = useState<Room>({
         roomNumber: 0,
         dietaryRestrictions: [],
@@ -19,6 +18,7 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
         dietaryNeeds: []
     })
 
+    console.log(room.roomNumber)
     const checkForCommonRestrictions = (roomRestrictions: DietaryRestriction[] | FoodConsistency[] | Allergy[] | Intolerance[] | DietaryNeeds[], restriction: string): boolean => { //Made from inspiration of chatGPT
         if (JSON.stringify(roomRestrictions).includes(restriction))
             return true
@@ -27,7 +27,7 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
 
     useEffect(() => {
         setRoomToUpdate(room)
-    }, [])
+    }, [room])
 
 
 
@@ -119,6 +119,7 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
         })
         if (response.status === 200) {
             const data = await response.json()
+            fetchAllRooms()
             console.log(data)
         }
     }
