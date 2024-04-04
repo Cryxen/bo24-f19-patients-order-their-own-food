@@ -13,6 +13,7 @@ import { DietaryNeeds } from "@/features/DietaryNeeds/types"
 import IndividualRoom from "@/app/components/IndividualRoom"
 import ChangePatientRoom from "@/app/components/ChangePatientRoom"
 import AddNewRoom from "@/app/components/AddNewRoom"
+import DeleteRoom from "@/app/components/DeleteRoom"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
@@ -99,7 +100,7 @@ const pasientadministrasjon = () => {
             <div className="mainDiv">
                 <h1>Pasientadministrasjon</h1>
                 <div className="main-wrapper">
-                    <ChangePatientRoom setShowRestrictions={setShowRestrictions} setSelectedRoom={setSelectedRoom} roomsFromDb={roomsFromDb} selectedRoom={selectedRoom}/>
+                    <ChangePatientRoom setShowRestrictions={setShowRestrictions} setSelectedRoom={setSelectedRoom} roomsFromDb={roomsFromDb} selectedRoom={selectedRoom} />
                     {
                         showRestrictions ?
                             <IndividualRoom
@@ -119,6 +120,11 @@ const pasientadministrasjon = () => {
                                 inputRoomNumberChange={inputRoomNumberChange}
                                 fetchAllRooms={fetchAllRooms}
                                 setShowRestrictions={setShowRestrictions} />
+                    }
+                    {selectedRoom.roomNumber !== 0 ?
+                        <DeleteRoom room={selectedRoom} setSelectedRoom={setSelectedRoom} setShowRestrictions={setShowRestrictions}/>
+                        :
+                        ''
                     }
                 </div>
             </div>
