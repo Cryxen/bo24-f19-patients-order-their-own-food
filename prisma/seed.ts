@@ -1,11 +1,15 @@
 // /prisma/seed.js
 // fra: https://fullstækk.no/courses/next-mvc-orm/06-seeding
 
-import { Meal } from "@/features/meals/types";
+
+import { Room } from "@/features/rooms/types";
+import { MainDish, SideDish } from "@/features/meals/types";
 import { User } from "@/features/users/types";
-import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, Room } from "@prisma/client";
+import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, Meal } from "@prisma/client";
+
 
 const prisma = new PrismaClient();
+const date = new Date()
 
 
 const DIETARY_RESTRICTIONS = ["Laktoseredusert", "Laktosefri", "Energi og næringstett", "Purinfattig", "Lavkarbo", "Keto diett"]
@@ -21,16 +25,16 @@ const users: User[] = [
 ];
 
 const meals: Meal[] = [
-  { mealName: "Stekt kylling", description: "Stekt i smør", category: "chicken" },
-  { mealName: "Stekt fisk", description: "Stekt i smør", category: "fish" },
-  { mealName: "Stekt biff", description: "Stekt i smør", category: "red meat" },
-  { mealName: "Pommes frittes", description: "Frityrstekt i olje", category: "vegetable" },
+  { mealName: "Stekt kylling", description: "Stekt i smør", category: "chicken", dietaryInfo: null, imageUrl: null },
+  { mealName: "Stekt fisk", description: "Stekt i smør", category: "fish", dietaryInfo: null, imageUrl: null },
+  { mealName: "Stekt biff", description: "Stekt i smør", category: "red meat", dietaryInfo: null, imageUrl: null },
+  { mealName: "Pommes frittes", description: "Frityrstekt i olje", category: "vegetable", dietaryInfo: null, imageUrl: null },
 ]
 
 const mealPlans: MealPlan[] = [
-  { id: 0, date: Date.now().toString(), description: "Stekt kylling med pommes frittes", imageUrl: 'TODO' },
-  { id: 1, date: Date.now().toString(), description: "Stekt fisk med pommes frittes", imageUrl: 'TODO' },
-  { id: 2, date: Date.now().toString(), description: "Stekt biff med pommes frittes", imageUrl: 'TODO' }
+  { id: 0, date: date.toDateString(), description: "Stekt kylling med pommes frittes", imageUrl: 'TODO' },
+  { id: 1, date: date.toDateString(), description: "Stekt fisk med pommes frittes", imageUrl: 'TODO' },
+  { id: 2, date: date.toDateString(), description: "Stekt biff med pommes frittes", imageUrl: 'TODO' }
 ]
 
 const mealToMealPlans: MealToMealPlan[] = [
