@@ -1,11 +1,15 @@
 @import 'react-datepicker/dist/react-datepicker';
 
-
 $black: #262626;
 $white: #FCF7FF;
+$dark-white: #F5F5F5;
 $red: #DD7373; 
 $blue: #75F4F4;
 $gray: #D3D3D3;
+
+// background colors page
+$neutral: #FAFAFA;
+$dark-sky: #0C4A6E;
 
 *,
 *::before,
@@ -36,31 +40,34 @@ p {
 main {
     margin-left: auto;
     margin-right: auto;
-    padding: 1rem;
+    padding: 2rem 1rem;
+    background-color: $neutral;
 }
 
 header {
     text-align: center;
-    border-bottom: solid;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: center;
 
+    background-color: $dark-sky;
     padding: 1rem;
     gap: 1rem;
 
     .header-content:first-child {
-        margin-right: auto;
+        margin-left: auto;
     }
 
     button {
         display: inline-block;
         text-align: center;
         text-decoration: none;
+        font-size: 1rem;
         border: 0;
         padding: 0.5em 1em;
 
-        background: $gray;
+        background: $dark-white;
         color: $black;
         cursor: pointer;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -74,11 +81,11 @@ header {
 footer {
     display: flex;
     justify-content: center;
-
     text-align: center;
-    border-top: solid;
 
+    background-color: $dark-sky;
     padding: 1rem;
+    min-height: 10dvh;
 }   
 
 .mainDiv {
@@ -87,6 +94,7 @@ footer {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background-color: $neutral;
 }
 
 .dashboardwrap {
@@ -134,13 +142,13 @@ footer {
     // border: 0;
     // padding: 0.5em 1em;
 
-    // background-color: #F5F5F5;
-    // color: #262626;
+    // background-color: $dark-white;
+    // color: $black;
     // cursor: pointer;
     // box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 
     // &:hover {
-    //     background: #FCF7FF;
+    //     background: $white;
     // }
 // }
 
@@ -149,13 +157,13 @@ footer {
 //     padding: 0.5em;
 //     border: 0;
 
-//     background-color: #F5F5F5;
-//     color: #262626;
+//     background-color: $dark-white;
+//     color: $black;
 //     cursor: pointer;
 //     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 
 //     &:hover {
-//         background: #FCF7FF;
+//         background: $white;
 //     }
 // }
 
@@ -164,8 +172,8 @@ footer {
 //     font-size: 1rem;
 //     width: 100%;
 //     padding: 0.5em;
-//     background-color: #F5F5F5;
-//     color: #262626;
+//     background-color: $dark-white;
+//     color: $black;
 
 //     border: 1px solid black;
 // }

@@ -1,7 +1,8 @@
+@import "src/app/styles/globals";
+
 header, footer {
     display: none;
 }
-
 
 .mainDiv {
     
@@ -10,6 +11,7 @@ header, footer {
         margin: auto 0;
         padding: 5rem;
     }
+    
     .login-container {
         display: flex;
         flex-direction: column;
@@ -21,8 +23,8 @@ header, footer {
             font-size: 1rem;
             width: 100%;
             padding: 0.5em;
-            background-color: #F5F5F5;
-            color: #262626;
+            background-color: $dark-white;
+            color: $black;
         
             border: 1px solid black;
         }
@@ -36,15 +38,14 @@ header, footer {
             border: 0;
             padding: 0.5em 1em;
         
-            background-color: #F5F5F5;
-            color: #262626;
+            background-color: $dark-white;
+            color: $black;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         
             &:hover {
-                background: #FCF7FF;
+                background: $white;
             }
         }
-        
     }
 }

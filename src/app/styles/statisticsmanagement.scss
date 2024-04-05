@@ -1,3 +1,5 @@
+@import "src/app/styles/globals";
+
 ul {
     list-style-type: none;
 }
@@ -24,13 +26,13 @@ ul {
             padding: 0.5em;
             border: 0;
         
-            background-color: #F5F5F5;
-            color: #262626;
+            background-color: $dark-white;
+            color: $black;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         
             &:hover {
-                background: #FCF7FF;
+                background: $white;
             }
         }
     
@@ -43,13 +45,13 @@ ul {
             border: 0;
             padding: 0.5em 1em;
         
-            background-color: #F5F5F5;
-            color: #262626;
+            background-color: $dark-white;
+            color: $black;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         
             &:hover {
-                background: #FCF7FF;
+                background: $white;
             }
         }
     }
@@ -63,11 +65,11 @@ ul {
         gap: 3rem;
     
         .border {
-            border: 1px solid black;
+            border: 1px solid $black;
         }
     
         .meal-list-container {
-            background-color: #75F4F4;
+            background-color: $blue;
             margin-right: auto;
             width: 100%;
 
@@ -76,12 +78,12 @@ ul {
             }
     
             .meal-list li {
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid $black;
                 padding: 1rem;
             }
     
             .meal-list li:first-child {
-                border-top: 1px solid black;
+                border-top: 1px solid $black;
             }
 
             @media only screen and (min-width: 640px) {
@@ -92,19 +94,24 @@ ul {
         .graphs-container {
             margin-left: auto;
             width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 1rem;
             
             .total-orders-stats {
-                background-color: #DD7373;
+                background-color: $red;
                 padding: 1rem;
             }
     
             .popular-stats {
-                background-color: #75F4F4;
+                background-color: $blue;
                 padding: 1rem;
             }
     
             .least-popular-stats {
-                background-color: #DD7373;
+                background-color: $red;
                 padding: 1rem;
             }
     

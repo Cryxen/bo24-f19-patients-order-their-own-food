@@ -165,6 +165,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                         )}
                         </td>
                         <td><button onClick={handleSaveButton}>Lagre</button></td>
+                        <td></td>
                     </tr> : ''
             }
         </>

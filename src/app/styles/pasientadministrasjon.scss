@@ -1,65 +1,4 @@
-
-// .box {
-//     border-style: solid;
-//     max-width: 40%;
-//     width: 40%;
-//     display: flex;
-//     flex-direction: column;
-// }
-
-// .boxValgtrom {
-//   border-style: solid;
-//   max-width: 40%;
-//   width: 40%;
-// }
-
-// .restriksjonsbox {
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-// }
-
-.diet-container {
-  border-style: solid;
-  width: 10rem;
-  height: 10rem;
-  text-align: center;
-  border-radius: 5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-// .selectorRoom {
-//     max-width: 30%;
-//     width: 30%;
-//     margin: auto;
-//     margin-bottom: 1vh;
-// }
-
-// .generatebutton {
-//     display: block;
-//     margin-top: 1vh;
-//     margin-bottom: 1vh;
-//     padding: 1vh;
-//     margin-left: auto;
-//     margin-right: auto;
-// }
-
-// .inputbruker {
-//     max-width: 50%;
-//     margin: auto;
-//     padding: .4vh;
-//     text-align: center;
-    
-// }
-
-// .Title  {
-//   text-align: center;
-// }
+@import "src/app/styles/globals";
 
 .main-wrapper {
     min-width: 75%;
@@ -80,30 +19,44 @@
       border: 0;
       padding: 0.5em 1em;
   
-      background-color: #F5F5F5;
-      color: #262626;
+      background-color: $dark-white;
+      color: $black;
       cursor: pointer;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   
       &:hover {
-          background: #FCF7FF;
+          background: $white;
       }
     }
 
     .dropdown {
-    font-size: 1rem;
-    padding: 0.5em;
-    border: 0;
-
-    background-color: #F5F5F5;
-    color: #262626;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-
-    &:hover {
-        background: #FCF7FF;
+      font-size: 1rem;
+      padding: 0.5em;
+      border: 0;
+  
+      background-color: $dark-white;
+      color: $black;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  
+      &:hover {
+          background: $white;
+      }
     }
-  }
+
+    .diet-container {
+      border-style: solid;
+      width: 10rem;
+      height: 10rem;
+      text-align: center;
+      border-radius: 5%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
 
     .room-container {
       display: flex;
@@ -116,7 +69,7 @@
 
     .restriction-container {
       width: min(75rem, 100%);
-      border: 1px solid black;
+      border: 1px solid $black;
       display: flex;
       justify-content: center;
       align-items: center;

@@ -1,6 +1,4 @@
-// table, th, td {
-//     border: 1px solid black;
-// }
+@import "src/app/styles/globals";
 
 .main-wrapper {
     min-width: 75%;
@@ -23,45 +21,45 @@
         border: 0;
         padding: 0.5em 1em;
     
-        background-color: #F5F5F5;
-        color: #262626;
+        background-color: $dark-white;
+        color: $black;
         cursor: pointer;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     
         &:hover {
-            background: #FCF7FF;
+            background: $white;
         }
     }
 
     input[type=text] {
         display: inline-block;
-        border: 1px solid black;
+        border: 1px solid $black;
         font-size: 1rem;
         width: 100%;
         padding: 0.5em;
 
-        background-color: #F5F5F5;
-        color: #262626;
+        background-color: $dark-white;
+        color: $black;
     }
 
     .dropdown {
         font-size: 1rem;
         padding: 0.5em;
         border: 0;
-        background-color: #F5F5F5;
-        color: #262626;
+        background-color: $dark-white;
+        color: $black;
 
         cursor: pointer;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 
         &:hover {
-            background: #FCF7FF;
+            background: $white;
         }
     }
 
     .filter-container {  
-        border: 1px solid black;
-        min-width: 100%;
+        border: 1px solid $black;
+        width: min(50rem, 100%);
 
         display: flex;
         flex-direction: column;
@@ -80,7 +78,7 @@
             .search-bar {
                 width: 100%;
                 display: flex;
-                border: 1px solid black;
+                border: 1px solid $black;
                 margin-right: auto;
                 flex: none;
     
@@ -117,17 +115,17 @@
         max-width: 100%;
     
         table {
-            background-color: #D3D3D3;
+            background-color: $gray;
             border-collapse: collapse;
         }
         
         th {
-            background-color: #75F4F4;
+            background-color: $blue;
             text-align: left;
         }
         
         tr:nth-of-type(2n) {
-            background-color: #FAFAFA;
+            background-color: $white;
         }
         
         th, td {
@@ -136,8 +134,8 @@
     }
     
     .config-container {
-        border: 1px solid black;
-        min-width: 100%;
+        border: 1px solid $black;
+        width: min(50rem, 100%);
         
         padding: 1rem;
         display: flex;

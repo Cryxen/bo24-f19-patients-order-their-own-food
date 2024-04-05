@@ -86,8 +86,8 @@ const Foodorders = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="red order-container">
-                        <table className="order-table">
+                    <div className="order-container">
+                        <table className="red order-table">
                             <tbody>
                             <tr>
                                 <td className="display-table">Bilde av mat 4</td>
