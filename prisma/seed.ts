@@ -98,9 +98,9 @@ const roomToRestrictions: RoomToDietaryRestrictions[] = [
 ]
 
 const orders: Order[] = [ //new Prisma.Decimal from inspiration of ChatGPT
-  { id: 0, roomNumber: 1002, size: new Prisma.Decimal(1.0), mealPlanId: mealPlans[0].id },
-  { id: 1, roomNumber: 1002, size: new Prisma.Decimal(1.25), mealPlanId: mealPlans[1].id },
-  { id: 2, roomNumber: 1003, size: new Prisma.Decimal(0.75), mealPlanId: mealPlans[2].id },
+  { id: 1, roomNumber: 1002, size: new Prisma.Decimal(1.0), mealPlanId: mealPlans[0].id },
+  { id: 2, roomNumber: 1002, size: new Prisma.Decimal(1.25), mealPlanId: mealPlans[1].id },
+  { id: 3, roomNumber: 1003, size: new Prisma.Decimal(0.75), mealPlanId: mealPlans[2].id },
 ]
 
 // Function to save users to database
@@ -247,23 +247,21 @@ const createDietaryNeedRestrictions = async () => {
 
 const createOrders = async () => {
   // const deleteMany = prisma.order.deleteMany({})
-  console.log(orders)
   try {
-    const orderPromises = orders.map(async (order, index) => {
+    const orderPromises = orders.map(async (order) => {
       console.log(order)
       await prisma.order.upsert({
         where: { id: order.id },
         update: {
-          id: order.id,
           size: order.size,
           roomNumber: order.roomNumber,
-          mealPlanId: order.mealPlanId
+          mealPlanId: order.mealPlanId,
         },
         create: {
           id: order.id,
           size: order.size,
           roomNumber: order.roomNumber,
-          mealPlanId: order.mealPlanId
+          mealPlanId: order.mealPlanId,
         }
       })
     })
@@ -298,4 +296,4 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
-  });
+  }); 
