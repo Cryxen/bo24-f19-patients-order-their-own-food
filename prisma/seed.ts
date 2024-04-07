@@ -58,19 +58,35 @@ const dietaryRestrictions: DietaryRestriction[] = [
 const rooms: Room[] = [
   {
     roomNumber: 1002,
-    orderId: null,
+    dietaryRestrictions: [],
+    allergyRestrictions: [],
+    intoleranceRestrictions: [],
+    consistancyRestrictions: [],
+    dietaryNeeds: []
   },
   {
     roomNumber: 1003,
-    orderId: null
+    dietaryRestrictions: [],
+    allergyRestrictions: [],
+    intoleranceRestrictions: [],
+    consistancyRestrictions: [],
+    dietaryNeeds: []
   },
   {
     roomNumber: 1004,
-    orderId: null
+    dietaryRestrictions: [],
+    allergyRestrictions: [],
+    intoleranceRestrictions: [],
+    consistancyRestrictions: [],
+    dietaryNeeds: []
   },
   {
     roomNumber: 1005,
-    orderId: null
+    dietaryRestrictions: [],
+    allergyRestrictions: [],
+    intoleranceRestrictions: [],
+    consistancyRestrictions: [],
+    dietaryNeeds: []
   }
 ]
 
