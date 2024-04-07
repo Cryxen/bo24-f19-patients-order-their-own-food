@@ -31,8 +31,7 @@ model Meal {
 
 model Room {
   roomNumber                     Int                                 @id @unique
-  order                          Order?                              @relation(fields: [orderId], references: [id])
-  orderId                        Int?                                @unique
+  order                          Order[]
   RoomToDietaryRestrictions      RoomToDietaryRestrictions[]
   foodConsistencyRestrictions    RoomToFoodConsistencyRestrictions[]
   RoomToAllergyRestrictions      RoomToAllergyRestrictions[]
@@ -131,9 +130,10 @@ model MealToMealPlan {
 model Order {
   id         Int      @id @default(autoincrement())
   size       Decimal  @default(1)
-  room       Room[]
+  room       Room     @relation(fields: [roomNumber], references: [roomNumber])
+  roomNumber Int
   mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id])
-  mealPlanId Int      @unique
+  mealPlanId Int      
 }
 
 model PastOrder {
