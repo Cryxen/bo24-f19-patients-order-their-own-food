@@ -130,7 +130,7 @@ model MealToMealPlan {
 
 model Order {
   id         Int      @id @default(autoincrement())
-  size       Int      @default(1)
+  size       Decimal  @default(1)
   room       Room[]
   mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id])
   mealPlanId Int      @unique
