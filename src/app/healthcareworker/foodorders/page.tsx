@@ -4,6 +4,7 @@ import '../../styles/foodorder.scss'
 import { useEffect, useState } from "react"
 import { Room } from "@/features/rooms/types"
 import ChangePatientRoom from "@/app/components/ChangePatientRoom"
+import { Allergy } from "@/features/allergyRestrictions/types"
 
 const Foodorders = () => {
     const [roomsFromDb, setRoomsFromDb] = useState<Room[]>([])
@@ -23,8 +24,11 @@ const Foodorders = () => {
         if (response.status === 200) {
             const data = await response.json()
             setRoomsFromDb(data.data)
+            console.log(data.data)
         }
     }
+
+
     return (
         <Layout>
             <div className="mainDiv">
@@ -33,6 +37,56 @@ const Foodorders = () => {
                     <ChangePatientRoom roomsFromDb={roomsFromDb} setSelectedRoom={setSelectedRoom} selectedRoom={selectedRoom} />
                     <div className="diet container">
                         <p className="diet-info">Diett info:</p>
+                        {selectedRoom.allergyRestrictions.length > 0 ?
+                            <>
+                                <p>Allergi:</p>
+                                <ul>
+                                    {selectedRoom.allergyRestrictions.map(el =>
+                                        <li key={el.allergyRestricionId}>{el.allergyRestricionId}</li>
+                                    )}
+                                </ul>
+                            </> : ''
+                        }
+                        {selectedRoom.dietaryRestrictions.length > 0 ?
+                            <>
+                                <p>Diett:</p>
+                                <ul>
+                                    {selectedRoom.dietaryRestrictions.map(el =>
+                                        <li key={el.dietaryRestrictionId}>{el.dietaryRestrictionId}</li>
+                                    )}
+                                </ul>
+                            </> : ''
+                        }
+                        {selectedRoom.consistancyRestrictions.length > 0 ?
+                            <>
+                                <p>Konsistens:</p>
+                                <ul>
+                                    {selectedRoom.consistancyRestrictions.map(el =>
+                                        <li key={el.foodConsistencyRestrictionId}>{el.foodConsistencyRestrictionId}</li>
+                                    )}
+                                </ul>
+                            </> : ''
+                        }
+                        {selectedRoom.intoleranceRestrictions.length > 0 ?
+                            <>
+                                <p>Intoleranse:</p>
+                                <ul>
+                                    {selectedRoom.intoleranceRestrictions.map(el =>
+                                        <li key={el.intolleranceRestrictionId}>{el.intolleranceRestrictionId}</li>
+                                    )}
+                                </ul>
+                            </> : ''
+                        }
+                        {selectedRoom.dietaryNeeds.length > 0 ?
+                            <>
+                                <p>Andre kostbehov:</p>
+                                <ul>
+                                    {selectedRoom.dietaryNeeds.map(el =>
+                                        <li key={el.dietaryNeedId}>{el.dietaryNeedId}</li>
+                                    )}
+                                </ul>
+                            </> : ''
+                        }
                     </div>
                     <div className="order-container">
                         <table className="order-table">
