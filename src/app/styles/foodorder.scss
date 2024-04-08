@@ -53,10 +53,10 @@
                     border: 0;
                     padding: 0.5em 1em;
                 
-                    background-color: $dark-white;
+                    background-color: $gray-300;
                     color: $black;
                     cursor: pointer;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
                 
                     &:hover {
                         background: $white;
@@ -79,10 +79,10 @@
         padding: 0.5em;
         border: 0;
     
-        background-color: $dark-white;
+        background-color: $gray-300;
         color: $black;
         cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
     
         &:hover {
             background: $white;

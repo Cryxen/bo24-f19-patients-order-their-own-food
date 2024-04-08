@@ -56,7 +56,7 @@ const useradministration = () => {
     return (
         <Layout>
             <div className="mainDiv">
-                {/* <h1>Brukeradministrasjon</h1> */}
+                <h1>Brukeradministrasjon</h1>
                 <div className="main-wrapper">
 
                     {users.map((user: User) =>

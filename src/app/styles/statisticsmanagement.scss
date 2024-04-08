@@ -5,8 +5,11 @@ ul {
 }
 
 .main-wrapper {
-    min-width: 75%;
-    margin: 1rem 0;
+    width: min(75rem, 100%);
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: $white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
 
     display: flex;
     flex-direction: column;
@@ -15,7 +18,7 @@ ul {
     gap: 1rem;
     
     .filter-container {
-        width: 100%;    
+        min-width: 100%;    
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -26,10 +29,10 @@ ul {
             padding: 0.5em;
             border: 0;
         
-            background-color: $dark-white;
+            background-color: $gray-300;
             color: $black;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
         
             &:hover {
                 background: $white;
@@ -45,10 +48,10 @@ ul {
             border: 0;
             padding: 0.5em 1em;
         
-            background-color: $dark-white;
+            background-color: $gray-300;
             color: $black;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
         
             &:hover {
                 background: $white;
@@ -57,12 +60,12 @@ ul {
     }
     
     .stats-container {
-        width: 100%;
+        min-width: 100%;
         display: flex;
         justify-content: center;
         text-align: center;
         flex-wrap: wrap;
-        gap: 3rem;
+        gap: 2rem;
     
         .border {
             border: 1px solid $black;

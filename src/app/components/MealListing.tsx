@@ -147,8 +147,8 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                         }
                     </ul>
                 </td>
-                <td><button onClick={() => setShowEditMeal(!showEditMeal)}>Edit</button></td>
-                <td><button onClick={handleDeleteMealButton}>Slett rett</button></td>
+                <td><button onClick={() => setShowEditMeal(!showEditMeal)}>Rediger</button></td>
+                <td><button onClick={handleDeleteMealButton}>Slett</button></td>
             </tr>
             {
                 showEditMeal ?
@@ -158,7 +158,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                         <td> <input type="text" value={mealToChange.description} onChange={handleDescriptionChange} /> </td>
                         <td> <MealCategoryRolldownMenu meal={mealToChange} handleCategoryChange={handleCategoryChange} /> </td>
                         <td>{dietaryRestrictions.map(restriction =>
-                            <div key={restriction}>
+                            <div className="restriction-box" key={restriction}>
                                 <label htmlFor={restriction}>{restriction}</label>
                                 <input type="checkbox" key={restriction} value={restriction} itemID={restriction} onChange={handleDietaryChange} checked={mealToChange.dietaryInfo?.includes(restriction) ? true : false} />
                             </div>
