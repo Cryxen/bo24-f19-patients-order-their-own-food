@@ -74,11 +74,11 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
                 <label htmlFor="category">Kategori: </label>
                 <MealCategoryRolldownMenu meal={meal} handleCategoryChange={handleCategoryChange} />
             </div>
-            <fieldset>
-                <legend>Følgende dietter kan få utslag på maten:</legend>
+            <fieldset className="food-fieldset">
+                <legend className="food-legend">Følgende dietter kan få utslag på maten</legend>
                 {
                     dietaryRestrictions.map(restrition =>
-                        <div key={restrition}>
+                        <div className="restriction-box" key={restrition}>
                             <label htmlFor={restrition}>{restrition}</label>
                             <input type="checkbox" id={restrition} value={restrition} itemID={restrition} onChange={handleDietaryChange} />
                         </div>

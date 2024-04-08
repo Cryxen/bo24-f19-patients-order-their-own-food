@@ -2,7 +2,10 @@
 
 .main-wrapper {
     width: min(75rem, 100%);
-    margin: 1rem 0;
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: $white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
 
     display: flex;
     flex-direction: column;
@@ -19,14 +22,14 @@
         font-size: 1rem;
         width: 100%;
         padding: 0.5em;
-        background-color: $dark-white;
+        background-color: $gray-300;
         color: $black;
     
         border: 1px solid $black;
     }
     
     .date-container {
-        width: 100%;
+        min-width: 100%;
 
         display: flex;
         align-items: center;
@@ -43,7 +46,7 @@
     }
 
     .main-container {
-        width: 100%;
+        min-width: 100%;
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -79,10 +82,10 @@
                 border: 0;
                 padding: 0.5em 1em;
             
-                background-color: $dark-white;
+                background-color: $gray-300;
                 color: $black;
                 cursor: pointer;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
             
                 &:hover {
                     background: $white;
@@ -134,7 +137,7 @@
                     resize: none;
                     border: 1px solid $black;
 
-                    background-color: $dark-white;
+                    background-color: $gray-300;
                     color: $black;
                 }
             }
@@ -142,7 +145,7 @@
 
         .meal-plan-container {
             border: 1px solid $black;
-            background-color: $gray;
+            background-color: $neutral-200;
 
             margin: 0 auto;
             
@@ -169,10 +172,10 @@
                         border: 0;
                         padding: 0.5em 0.5em;
                     
-                        background-color: $dark-white;
+                        background-color: $gray-300;
                         color: $black;
                         cursor: pointer;
-                        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
                     
                         &:hover {
                             background: $white;
@@ -202,10 +205,10 @@
                         border: 0;
                         padding: 0.5em 1em;
                     
-                        background-color: $dark-white;
+                        background-color: $gray-300;
                         color: $black;
                         cursor: pointer;
-                        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
                     
                         &:hover {
                             background: $white;
@@ -248,7 +251,7 @@
             margin: 0 auto;
             height: 25rem;
     
-            background-color: $gray;
+            background-color: $neutral-200;
 
             .nutrition-graph {
                 width: 100%;
@@ -272,7 +275,7 @@
     }
 
     .config-container {
-        width: 100%;
+        min-width: 100%;
 
         display: flex;
         justify-content: center;
@@ -288,10 +291,10 @@
             border: 0;
             padding: 0.5em 1em;
         
-            background-color: $dark-white;
+            background-color: $gray-300;
             color: $black;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
         
             &:hover {
                 background: $white;

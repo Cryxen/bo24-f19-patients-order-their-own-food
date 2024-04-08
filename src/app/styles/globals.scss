@@ -2,13 +2,15 @@
 
 $black: #262626;
 $white: #FCF7FF;
-$dark-white: #F5F5F5;
 $red: #DD7373; 
 $blue: #75F4F4;
-$gray: #D3D3D3;
+
+$gray-300: #D1D5DB;
+$neutral-300: #D4D4D4;
+$neutral-200: #E5E5E5;
 
 // background colors page
-$neutral: #FAFAFA;
+$neutral-50: #FAFAFA;
 $dark-sky: #0C4A6E;
 
 *,
@@ -41,7 +43,7 @@ main {
     margin-left: auto;
     margin-right: auto;
     padding: 2rem 1rem;
-    background-color: $neutral;
+    background-color: $neutral-50;
 }
 
 header {
@@ -51,7 +53,8 @@ header {
     justify-content: flex-start;
     align-items: center;
 
-    background-color: $dark-sky;
+    border-bottom: 1px solid black;
+    // background-color: $dark-sky;
     padding: 1rem;
     gap: 1rem;
 
@@ -67,11 +70,11 @@ header {
         border: 0;
         padding: 0.5em 1em;
 
-        background: $dark-white;
+        background: $gray-300;
         color: $black;
         cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-
+        box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 0.2);
+        
         &:hover {
             background: $white;
         }
@@ -83,7 +86,8 @@ footer {
     justify-content: center;
     text-align: center;
 
-    background-color: $dark-sky;
+    border-top: 1px solid black;
+    // background-color: $dark-sky;
     padding: 1rem;
     min-height: 10dvh;
 }   
@@ -94,7 +98,7 @@ footer {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-color: $neutral;
+    background-color: $neutral-50;
 }
 
 .dashboardwrap {
@@ -120,7 +124,7 @@ footer {
         background: $blue;
         color: $black;
         cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     
         &:hover {
             background: $red;
@@ -142,10 +146,10 @@ footer {
     // border: 0;
     // padding: 0.5em 1em;
 
-    // background-color: $dark-white;
+    // background-color: $gray-300;
     // color: $black;
     // cursor: pointer;
-    // box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
     // &:hover {
     //     background: $white;
@@ -157,10 +161,10 @@ footer {
 //     padding: 0.5em;
 //     border: 0;
 
-//     background-color: $dark-white;
+//     background-color: $gray-300;
 //     color: $black;
 //     cursor: pointer;
-//     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+//     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 
 //     &:hover {
 //         background: $white;
@@ -172,7 +176,7 @@ footer {
 //     font-size: 1rem;
 //     width: 100%;
 //     padding: 0.5em;
-//     background-color: $dark-white;
+//     background-color: $gray-300;
 //     color: $black;
 
 //     border: 1px solid black;

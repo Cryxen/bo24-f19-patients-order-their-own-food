@@ -145,9 +145,9 @@ const Foodmanagement = () => {
                         </table>
                     </div>
                     <div className="config-container">
-                        <button>[+] Ny matrett</button>
+                        {/* <button>[+] Ny matrett</button> */}
                         <AddFood meals={meals} setMeals={setMeals} fetchMealsFromAPI={fetchMealsFromAPI} />
-                        <button>[-] Fjern matrett</button>
+                        {/* <button>[-] Fjern matrett</button> */}
                     </div>
                 </div>
             </div>

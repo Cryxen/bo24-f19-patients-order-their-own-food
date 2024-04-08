@@ -1,16 +1,25 @@
 @import "src/app/styles/globals";
 
 .main-wrapper {
-    min-width: 75%;
-    margin: 1rem 0;
+    width: min(75rem, 100%);
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: $white;
     max-width: 100%;
     overflow-x: auto;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
     
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+
+    .restriction-box {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
 
     button {
         display: inline-block;
@@ -21,10 +30,10 @@
         border: 0;
         padding: 0.5em 1em;
     
-        background-color: $dark-white;
+        background-color: $gray-300;
         color: $black;
         cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
     
         &:hover {
             background: $white;
@@ -38,7 +47,7 @@
         width: 100%;
         padding: 0.5em;
 
-        background-color: $dark-white;
+        background-color: $gray-300;
         color: $black;
     }
 
@@ -46,11 +55,11 @@
         font-size: 1rem;
         padding: 0.5em;
         border: 0;
-        background-color: $dark-white;
+        background-color: $gray-300;
         color: $black;
 
         cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
 
         &:hover {
             background: $white;
@@ -59,7 +68,7 @@
 
     .filter-container {  
         border: 1px solid $black;
-        width: min(50rem, 100%);
+        min-width: 100%;
 
         display: flex;
         flex-direction: column;
@@ -112,10 +121,12 @@
     }
     
     .database-container {
+        min-width: 100%;
         max-width: 100%;
     
         table {
-            background-color: $gray;
+            width: 100%;
+            background-color: $neutral-300;
             border-collapse: collapse;
         }
         
@@ -125,7 +136,7 @@
         }
         
         tr:nth-of-type(2n) {
-            background-color: $white;
+            background-color: $neutral-200;
         }
         
         th, td {
@@ -135,7 +146,7 @@
     
     .config-container {
         border: 1px solid $black;
-        width: min(50rem, 100%);
+        min-width: 100%;
         
         padding: 1rem;
         display: flex;
@@ -148,6 +159,20 @@
             align-items: flex-start;
             flex-wrap: wrap;
             gap: 1rem;
+
+            .food-fieldset {
+                padding: 0.5rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+                
+                .food-legend {
+                    padding: 0 0.5rem;
+                    margin: 1rem;
+                }
+            }
         }
     }
 }
