@@ -36,7 +36,6 @@ export const fetchAllRooms = async () => {
 
 export const updateRoom = async (room: Room) => {
     try {
-        console.log(room)
         // With inspiration of chatGPT of .map of functions.
         const dietaryRestrictionsToUpdate: DietaryRestriction[] = room.dietaryRestrictions
         const consistencyRestrictionsToUpdate: FoodConsistency[] = room.consistancyRestrictions
