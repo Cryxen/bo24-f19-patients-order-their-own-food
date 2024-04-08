@@ -5,7 +5,7 @@
 import { Room } from "@/features/rooms/types";
 import { MainDish, SideDish } from "@/features/meals/types";
 import { User } from "@/features/users/types";
-import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, Meal } from "@prisma/client";
+import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, Meal, Order, Prisma } from "@prisma/client";
 
 
 const prisma = new PrismaClient();
@@ -32,18 +32,18 @@ const meals: Meal[] = [
 ]
 
 const mealPlans: MealPlan[] = [
-  { id: 0, date: date.toDateString(), description: "Stekt kylling med pommes frittes", imageUrl: 'TODO' },
-  { id: 1, date: date.toDateString(), description: "Stekt fisk med pommes frittes", imageUrl: 'TODO' },
-  { id: 2, date: date.toDateString(), description: "Stekt biff med pommes frittes", imageUrl: 'TODO' }
+  { id: 1, date: date.toDateString(), description: "Stekt kylling med pommes frittes", imageUrl: 'TODO' },
+  { id: 2, date: date.toDateString(), description: "Stekt fisk med pommes frittes", imageUrl: 'TODO' },
+  { id: 3, date: date.toDateString(), description: "Stekt biff med pommes frittes", imageUrl: 'TODO' }
 ]
 
 const mealToMealPlans: MealToMealPlan[] = [
-  { mealIdName: 'Stekt kylling', mealPlanId: 0 },
-  { mealIdName: 'Pommes frittes', mealPlanId: 0 },
-  { mealIdName: 'Stekt fisk', mealPlanId: 1 },
+  { mealIdName: 'Stekt kylling', mealPlanId: 1 },
   { mealIdName: 'Pommes frittes', mealPlanId: 1 },
-  { mealIdName: 'Stekt biff', mealPlanId: 2 },
-  { mealIdName: 'Pommes frittes', mealPlanId: 2 }
+  { mealIdName: 'Stekt fisk', mealPlanId: 2 },
+  { mealIdName: 'Pommes frittes', mealPlanId: 2 },
+  { mealIdName: 'Stekt biff', mealPlanId: 3 },
+  { mealIdName: 'Pommes frittes', mealPlanId: 3 }
 ]
 
 const dietaryRestrictions: DietaryRestriction[] = [
@@ -58,19 +58,35 @@ const dietaryRestrictions: DietaryRestriction[] = [
 const rooms: Room[] = [
   {
     roomNumber: 1002,
-    orderId: null,
+    dietaryRestrictions: [],
+    allergyRestrictions: [],
+    intoleranceRestrictions: [],
+    consistancyRestrictions: [],
+    dietaryNeeds: []
   },
   {
     roomNumber: 1003,
-    orderId: null
+    dietaryRestrictions: [],
+    allergyRestrictions: [],
+    intoleranceRestrictions: [],
+    consistancyRestrictions: [],
+    dietaryNeeds: []
   },
   {
     roomNumber: 1004,
-    orderId: null
+    dietaryRestrictions: [],
+    allergyRestrictions: [],
+    intoleranceRestrictions: [],
+    consistancyRestrictions: [],
+    dietaryNeeds: []
   },
   {
     roomNumber: 1005,
-    orderId: null
+    dietaryRestrictions: [],
+    allergyRestrictions: [],
+    intoleranceRestrictions: [],
+    consistancyRestrictions: [],
+    dietaryNeeds: []
   }
 ]
 
@@ -79,6 +95,12 @@ const roomToRestrictions: RoomToDietaryRestrictions[] = [
   { roomNumber: 1002, dietaryRestrictionId: DIETARY_RESTRICTIONS[1] },
   { roomNumber: 1003, dietaryRestrictionId: DIETARY_RESTRICTIONS[1] },
   { roomNumber: 1004, dietaryRestrictionId: DIETARY_RESTRICTIONS[2] }
+]
+
+const orders: Order[] = [ //new Prisma.Decimal from inspiration of ChatGPT
+  { id: 1, roomNumber: 1002, size: new Prisma.Decimal(1.0), mealPlanId: mealPlans[0].id },
+  { id: 2, roomNumber: 1002, size: new Prisma.Decimal(1.25), mealPlanId: mealPlans[1].id },
+  { id: 3, roomNumber: 1003, size: new Prisma.Decimal(0.75), mealPlanId: mealPlans[2].id },
 ]
 
 // Function to save users to database
@@ -95,7 +117,6 @@ const createUsers = async () => {
       }
     })
   });
-  console.log(userPromises);
   await Promise.all(userPromises);
 };
 
@@ -120,7 +141,6 @@ const createMeals = async () => {
 const createMealPlans = async () => {
   const mealPlanPromises = mealPlans.map(async (mealPlan) => {
     const filteredMealPlans = mealToMealPlans.filter(meal => meal.mealPlanId === mealPlan.id)
-    console.log(filteredMealPlans)
     await prisma.mealPlan.upsert({
       where: { id: mealPlan.id },
       update: {},
@@ -224,6 +244,34 @@ const createDietaryNeedRestrictions = async () => {
   await Promise.all([dietaryNeedDeleteAllPromises, dietaryNeedPromises])
 }
 
+
+const createOrders = async () => {
+  // const deleteMany = prisma.order.deleteMany({})
+  try {
+    const orderPromises = orders.map(async (order) => {
+      console.log(order)
+      await prisma.order.upsert({
+        where: { id: order.id },
+        update: {
+          size: order.size,
+          roomNumber: order.roomNumber,
+          mealPlanId: order.mealPlanId,
+        },
+        create: {
+          id: order.id,
+          size: order.size,
+          roomNumber: order.roomNumber,
+          mealPlanId: order.mealPlanId,
+        }
+      })
+    })
+    await Promise.all(orderPromises)
+  } catch (error) {
+    console.log(error)
+  }
+  
+}
+
 // Seed funksjoners
 
 async function main() {
@@ -237,6 +285,7 @@ async function main() {
   await createAllergyRestrictions();
   await createIntolleranceRestrictions();
   await createDietaryNeedRestrictions();
+  await createOrders();
   console.log(`Seeding finished.`);
 }
 
@@ -247,4 +296,4 @@ main()
   })
   .finally(async () => {
     await prisma.$disconnect();
-  });
+  }); 
