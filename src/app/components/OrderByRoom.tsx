@@ -7,7 +7,7 @@ return (
     <div className="container"><h4 className="room">Rom {ordersByRoom[0]?.roomNumber}</h4></div>
     <div className="dish-view container">
         {ordersByRoom.map(order => 
-            <p className="dish">{order.mealPlanId} - {order.size}</p>
+            <p className="dish" key={order.id}>{order.mealPlan.description} - {order.size}</p>
         )}
         <p className="dish">Rett 1 - liten</p>
         <p className="dish">Rett 2</p>
