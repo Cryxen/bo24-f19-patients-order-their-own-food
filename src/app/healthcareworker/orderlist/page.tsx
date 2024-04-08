@@ -18,6 +18,7 @@ const Orderlist = () => {
         const response = await fetch('/api/orders')
         if (response.status === 200) {
             const data = await response.json()
+            console.log(data)
             setOrdersFromDb(data.data)
         }
     }
@@ -26,7 +27,6 @@ const Orderlist = () => {
         const response = await fetch('/api/rooms')
         if (response.status === 200) {
             const data = await response.json()
-            console.log(data)
             setRoomsFromDb(data.data)
         }
     }
