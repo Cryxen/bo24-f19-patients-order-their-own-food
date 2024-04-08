@@ -1,14 +1,15 @@
 import { Room } from "@/features/rooms/types"
 import { ChangeEvent, Dispatch, SetStateAction } from "react"
 
-const ChangePatientRoom = (props: { setShowRestrictions: Dispatch<SetStateAction<boolean>>, roomsFromDb: Room[], setSelectedRoom: Dispatch<SetStateAction<Room>>, selectedRoom: Room }) => {
+const ChangePatientRoom = (props: { setShowRestrictions?: Dispatch<SetStateAction<boolean>>, roomsFromDb: Room[], setSelectedRoom: Dispatch<SetStateAction<Room>>, selectedRoom: Room }) => {
 
     const { setShowRestrictions, setSelectedRoom, roomsFromDb, selectedRoom } = props
 
     const handleRoomChange = async (event: ChangeEvent<HTMLSelectElement>) => {
         if (parseInt(event.target.value) !== 0) {
             const room: Room[] = roomsFromDb.filter(el => el.roomNumber === parseInt(event.target.value))
-            setShowRestrictions(true)
+            if (setShowRestrictions)
+                setShowRestrictions(true)
             setSelectedRoom(room[0])
         }
         else {
@@ -20,7 +21,9 @@ const ChangePatientRoom = (props: { setShowRestrictions: Dispatch<SetStateAction
                 intoleranceRestrictions: [],
                 dietaryNeeds: []
             })
-            setShowRestrictions(false)}
+            if (setShowRestrictions)
+                setShowRestrictions(false)
+        }
     }
     return (
         <div className="room-container">
