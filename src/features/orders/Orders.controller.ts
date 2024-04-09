@@ -1,5 +1,6 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import * as ordersService from './Orders.service'
+import { Order } from './types'
 
 export const fetchAllOrders = async () => {
     try {
@@ -15,6 +16,25 @@ export const fetchAllOrders = async () => {
     catch (error) {
         return NextResponse.json({
             success: false, error: "Failed to fetch orders from db in controller " + error
+        })
+    }
+}
+
+export const saveOrUpdateOrder = async (req: NextRequest) => {
+    try {
+        const order = await req.json() as Order
+        const responseFromDb = await ordersService.saveOrUpdateOrder(order)
+        return NextResponse.json({
+            status: 200,
+            success: responseFromDb.success,
+            data: responseFromDb.data,
+            error: responseFromDb.error
+        })
+
+    } catch (error) {
+        return NextResponse.json({
+            success: false,
+            error: "Something went wrong saving or updating order in controller " + error
         })
     }
 }
