@@ -1,19 +1,23 @@
 import { MealPlan } from "@/features/mealPlans/types"
 import { MAIN_DISH, MainDish } from "@/features/meals/types"
-import { Order } from "@/features/orders/types"
+import { OrderClass } from "@/features/orders/classes"
+import { Order, orderSize } from "@/features/orders/types"
 import { ChangeEvent, useState, MouseEvent, useEffect, SetStateAction, Dispatch } from "react"
 
-const ChangeOrder = (props: { order: Order, fetchAllOrders: () => void, setShowChangeOrder: Dispatch<SetStateAction<boolean>> }) => {
+const ChangeOrder = (props: { order: OrderClass, fetchAllOrders: () => void, setShowChangeOrder: Dispatch<SetStateAction<boolean>> }) => {
     const { order, fetchAllOrders, setShowChangeOrder } = props
 
 
     const [newMealPlanToUpdate, setNewMealPlanToUpdate] = useState<MealPlan>()
     const [mealPlansByDate, setMealPlansByDate] = useState<MealPlan[]>([])
     const [orderToUpdate, setOrderToUpdate] = useState<Order>(order)
-
+    const [orderSizes, setOrderSizes] = useState<orderSize[]>([])
     useEffect(() => {
         fetchMealPlansByDate()
+        setOrderSizes([{ sizeNumber: "0.75", sizeName: "liten" }, { sizeNumber: "1", sizeName: "medium" }, { sizeNumber: "1.25", sizeName: "stor" }])
     }, [])
+
+    const remainingOrderSizes = orderSizes.filter(el => el.sizeNumber !== order.size)
 
     const fetchMealPlansByDate = async () => {
         const date = new Date()
@@ -35,6 +39,16 @@ const ChangeOrder = (props: { order: Order, fetchAllOrders: () => void, setShowC
                 mealPlan: chosenMealPlan[0]
             })
             )
+        }
+    }
+
+    const handleSizeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+        const sizes: orderSize["sizeNumber"][] = ["0.75", "1", "1.25"] //typeguarding
+        if (sizes.includes(event.target.value as orderSize["sizeNumber"])) {
+            setOrderToUpdate(prev => ({
+                ...prev,
+                size: event.target.value as orderSize["sizeNumber"]
+            }))
         }
     }
 
@@ -76,6 +90,12 @@ const ChangeOrder = (props: { order: Order, fetchAllOrders: () => void, setShowC
                 })}
             </select>
             <p>Kommentar: {newMealPlanToUpdate?.description}</p>
+            <select name="mealPlanSize" id="mealPlanSize" onChange={handleSizeChange}>
+                <option value={order.size}>{order.mealSize}</option>
+                {remainingOrderSizes.map(size =>
+                    <option key={size.sizeNumber} value={size.sizeNumber}>{size.sizeName}</option>
+                )}
+            </select>
             <button onClick={handleUpdateButton}>Lagre endring</button>
         </form>
     )
