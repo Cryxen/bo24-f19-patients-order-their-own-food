@@ -36,12 +36,18 @@ const OrderByRoom = (props: { ordersByRoom: Order[] }) => {
                             <form key={order.id}>
                                 <label htmlFor="todaysMealPlans">Velg rett:</label>
                                 <select name="todaysMealPlans" id="todaysMealPlans">
-                                    {mealPlansByDate.map(el => 
-                                        <option key={el.id} value={el.id}>
-                                            
-                                            test
-                                        </option>
-                                    )}
+                                    {mealPlansByDate.map(el => {
+                                        let mainDish: string = 'undefined'
+                                        let sideDish: string = 'undefined'
+                                        el.meals.map(meal => {
+                                            (MAIN_DISH as unknown as MainDish[]).includes(meal.meal.category as unknown as MainDish) ?
+                                                mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
+                                            console.log(meal.meal)
+                                        })
+                                        return (<option key={el.id} value={el.id}>
+                                            Hovedrett: {mainDish} - Siderett: {sideDish}
+                                        </option>)
+                                    })}
                                 </select>
                             </form>
                             :
