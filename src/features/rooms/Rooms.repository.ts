@@ -140,7 +140,6 @@ export const updateRoom = async (room: Room) => {
 
 export const deleteRoomFromDb = async (roomNumber: number) => {
     try {
-        console.log(roomNumber)
 
         const deleteDietaryRestrictions = prisma.roomToDietaryRestrictions.deleteMany({
             where: {

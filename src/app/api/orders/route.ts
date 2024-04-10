@@ -6,3 +6,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     return await ordersController.saveOrUpdateOrder(req)
 }
+
+export async function DELETE(req: NextRequest) {
+    return await ordersController.deleteOrder(req)
+}

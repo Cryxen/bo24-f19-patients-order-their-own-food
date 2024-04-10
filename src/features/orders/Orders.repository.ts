@@ -45,3 +45,14 @@ export const saveOrUpdateOrder = async (order: Order) => {
         return ({ success: false, error: "Something went wrong saving or updating order in db " + error })
     }
 }
+
+export const deleteOrder = async (orderId: number) => {
+    try {
+        const responseFromDb = await prisma.order.delete({
+            where: {id: orderId}
+        })
+        return {success: true, data: responseFromDb}
+    } catch (error) {
+        return {success: false, error: "Something went wrong deleting order from db in repository " + error}
+    }
+}
