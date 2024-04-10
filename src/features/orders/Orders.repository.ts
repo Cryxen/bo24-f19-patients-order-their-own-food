@@ -7,7 +7,12 @@ export const fetchAllOrders = async () => {
     try {
         const fetchOrdersFromDb = await prisma.order.findMany({
             include: {
-                mealPlan: true
+                mealPlan: {
+                    include: {
+                        meals: true
+                    }
+                }
+                
             }
         })
         return ({ success: true, data: fetchOrdersFromDb })
