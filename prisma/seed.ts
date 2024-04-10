@@ -5,7 +5,7 @@
 import { Room } from "@/features/rooms/types";
 import { MainDish, SideDish } from "@/features/meals/types";
 import { User } from "@/features/users/types";
-import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, Meal, Order, Prisma } from "@prisma/client";
+import { Allergy, DietaryNeeds, DietaryRestriction, FoodConsistency, Intolerance, MealPlan, MealToMealPlan, PrismaClient, RoomToDietaryRestrictions, Meal, Order, Prisma, PastOrder } from "@prisma/client";
 
 
 const prisma = new PrismaClient();
@@ -101,6 +101,12 @@ const orders: Order[] = [ //new Prisma.Decimal from inspiration of ChatGPT
   { id: 1, roomNumber: 1002, size: new Prisma.Decimal(1.0), mealPlanId: mealPlans[0].id },
   { id: 2, roomNumber: 1002, size: new Prisma.Decimal(1.25), mealPlanId: mealPlans[1].id },
   { id: 3, roomNumber: 1003, size: new Prisma.Decimal(0.75), mealPlanId: mealPlans[2].id },
+]
+
+const pastOrders: PastOrder[] = [
+  { id: 1, roomNumber: orders[0].roomNumber, date: date.toDateString(), mainDish: meals[0].mealName, sideDish: meals[3].mealName, size: orders[0].size },
+  { id: 2, roomNumber: orders[1].roomNumber, date: date.toDateString(), mainDish: meals[1].mealName, sideDish: meals[3].mealName, size: orders[1].size },
+  { id: 3, roomNumber: orders[2].roomNumber, date: date.toDateString(), mainDish: meals[1].mealName, sideDish: meals[3].mealName, size: orders[2].size },
 ]
 
 // Function to save users to database
@@ -269,7 +275,33 @@ const createOrders = async () => {
   } catch (error) {
     console.log(error)
   }
-  
+}
+
+const createPastOrders = async () => {
+  try {
+    const pastOrderPromises = pastOrders.map(async (pastOrder) => {
+      await prisma.pastOrder.upsert({
+        where: { id: pastOrder.id },
+        update: {
+          date: pastOrder.date,
+          roomNumber: pastOrder.roomNumber,
+          mainDish: pastOrder.mainDish,
+          sideDish: pastOrder.sideDish,
+          size: pastOrder.size
+        },
+        create: {
+          id: pastOrder.id,
+          date: pastOrder.date,
+          roomNumber: pastOrder.roomNumber,
+          mainDish: pastOrder.mainDish,
+          sideDish: pastOrder.sideDish,
+          size: pastOrder.size
+        }
+      })
+    })
+  } catch (error) {
+
+  }
 }
 
 // Seed funksjoners
@@ -286,6 +318,7 @@ async function main() {
   await createIntolleranceRestrictions();
   await createDietaryNeedRestrictions();
   await createOrders();
+  await createPastOrders();
   console.log(`Seeding finished.`);
 }
 

@@ -133,12 +133,14 @@ model Order {
   room       Room     @relation(fields: [roomNumber], references: [roomNumber])
   roomNumber Int
   mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id])
-  mealPlanId Int      
+  mealPlanId Int
 }
 
 model PastOrder {
-  id         Int    @id @default(autoincrement())
-  roomNumber Int
-  meal       String
+  id         Int     @id @default(autoincrement())
   date       String
+  roomNumber Int
+  mainDish   String
+  sideDish   String
+  size       Decimal
 }
