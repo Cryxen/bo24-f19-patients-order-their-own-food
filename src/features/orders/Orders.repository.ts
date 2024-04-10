@@ -9,7 +9,11 @@ export const fetchAllOrders = async () => {
             include: {
                 mealPlan: {
                     include: {
-                        meals: true
+                        meals: {
+                            select: {
+                                meal: true
+                            }
+                        }
                     }
                 }
                 
