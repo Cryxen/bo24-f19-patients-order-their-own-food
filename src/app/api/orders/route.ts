@@ -3,6 +3,6 @@ import { NextRequest } from 'next/server'
 export async function GET() {
     return await ordersController.fetchAllOrders()
 }
-export async function ORDER(req: NextRequest) {
+export async function POST(req: NextRequest) {
     return await ordersController.saveOrUpdateOrder(req)
 }
