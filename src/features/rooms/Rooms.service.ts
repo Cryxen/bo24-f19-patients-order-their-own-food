@@ -3,7 +3,6 @@ import * as roomsRepo from './Rooms.repository'
 import { Room, Room as RoomType } from './types';
 
 const changeKeyNames = (rooms: any[]): RoomType[] => {
-    console.log(rooms)
     let roomWithProperKeys: RoomType[] = []
     rooms.forEach(element => {
         roomWithProperKeys.push({
