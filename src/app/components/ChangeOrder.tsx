@@ -27,18 +27,20 @@ const ChangeOrder = (props: { order: Order }) => {
     const handleMealPlanChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const chosenMealPlan = mealPlansByDate.filter(el => el.id === parseInt(event.target.value))
         setNewMealPlanToUpdate(chosenMealPlan[0])
+        if (chosenMealPlan) {
+            setOrderToUpdate(prev =>
+            ({
+                ...prev,
+                mealPlanId: (chosenMealPlan[0].id as number),
+                mealPlan: chosenMealPlan[0]
+            })
+            )
+        }
     }
 
     const handleUpdateButton = async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault()
         if (newMealPlanToUpdate) {
-            setOrderToUpdate(prev =>
-            ({
-                ...prev,
-                mealPlanId: (newMealPlanToUpdate?.id as number),
-                mealPlan: newMealPlanToUpdate
-            })
-            )
             const response = await fetch('/api/orders', {
                 method: 'POST',
                 body: JSON.stringify(orderToUpdate)
