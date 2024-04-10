@@ -38,3 +38,31 @@ export const saveOrUpdateOrder = async (req: NextRequest) => {
         })
     }
 }
+
+export const deleteOrder = async (req: NextRequest) => {
+
+    try {
+        if (req.nextUrl.searchParams.get('deleteId')) {
+            const deleteId = req.nextUrl.searchParams.get('deleteId')
+            const responseFromDb = await ordersService.deleteOrder(parseInt(deleteId as string))
+            return NextResponse.json({
+                status: 200,
+                success: responseFromDb.success,
+                error: responseFromDb.error,
+                data: responseFromDb.data
+            })
+        }
+        else {
+            return NextResponse.json({
+                status: 400,
+                success: false,
+                error: "missing parameter"
+            })
+        }
+    } catch (error) {
+        return NextResponse.json({
+            success: false,
+            error: "Something went wrong deleting order from db in controller " + error
+        })
+    }
+}
