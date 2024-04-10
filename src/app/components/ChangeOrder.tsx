@@ -1,10 +1,10 @@
 import { MealPlan } from "@/features/mealPlans/types"
 import { MAIN_DISH, MainDish } from "@/features/meals/types"
 import { Order } from "@/features/orders/types"
-import { ChangeEvent, useState, MouseEvent, useEffect } from "react"
+import { ChangeEvent, useState, MouseEvent, useEffect, SetStateAction, Dispatch } from "react"
 
-const ChangeOrder = (props: { order: Order }) => {
-    const { order } = props
+const ChangeOrder = (props: { order: Order, fetchAllOrders: () => void, setShowChangeOrder: Dispatch<SetStateAction<boolean>> }) => {
+    const { order, fetchAllOrders, setShowChangeOrder } = props
 
 
     const [newMealPlanToUpdate, setNewMealPlanToUpdate] = useState<MealPlan>()
@@ -49,6 +49,8 @@ const ChangeOrder = (props: { order: Order }) => {
             if (response.status === 200) {
                 const data = await response.json()
                 console.log(data)
+                fetchAllOrders()
+                setShowChangeOrder(false)
             }
         }
     }

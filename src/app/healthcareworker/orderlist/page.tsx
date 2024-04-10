@@ -43,7 +43,7 @@ const Orderlist = () => {
                         }
                         if (ordersByRoom.length > 0){
                             return (
-                                <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} />
+                                <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders}/>
                             )}
                     })}
                 </div>

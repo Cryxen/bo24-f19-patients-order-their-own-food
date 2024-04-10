@@ -5,9 +5,9 @@ import { Order } from "@/features/orders/types"
 import { ChangeEvent, MouseEvent, useState } from "react"
 import ChangeOrder from "./ChangeOrder"
 
-const OrderByRoom = (props: { ordersByRoom: Order[] }) => {
+const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void }) => {
     const [showChangeOrder, setShowChangeOrder] = useState<boolean>(false)
-    const { ordersByRoom } = props
+    const { ordersByRoom, fetchAllOrders } = props
 
 
 
@@ -25,7 +25,7 @@ const OrderByRoom = (props: { ordersByRoom: Order[] }) => {
                     const orderClass = new OrderClass(order.id, order.size, order.roomNumber, order.mealPlanId, order.mealPlan, "test")
                     return (
                         showChangeOrder ?
-                            <ChangeOrder key={order.id} order={order} />
+                            <ChangeOrder key={order.id} order={order} fetchAllOrders={fetchAllOrders} setShowChangeOrder={setShowChangeOrder} />
                             :
                             <p className="dish" key={order.id}>{orderClass.mealPlan.description} - {orderClass.mealSize}</p>
 
