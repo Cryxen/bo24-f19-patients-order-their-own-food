@@ -17,7 +17,27 @@ export const fetchAllMealPlans = async () => {
         })
         return { success: true, data: mealPlansFromDb }
     } catch (error) {
-        return { success: false, error: "Failed to retrieve meal plans from db" }
+        return { success: false, error: "Failed to retrieve meal plans from db " + error}
+    }
+}
+
+export const fetchMealPlansByDate = async (date: string) => {
+    try {
+        const mealPlansFromDb = await prisma.mealPlan.findMany({
+            where: {
+                date: date
+            },
+            include: {
+                meals: {
+                    select: {
+                        meal: true
+                    }
+                }
+            }
+        })
+        return {success: true, data: mealPlansFromDb}
+    } catch (error) {
+        return {success: false, error: "Failed to retrieve meal plans for current date from db " + error}
     }
 }
 
@@ -89,7 +109,7 @@ export const deleteMealPlan = async (mealPlanId: number) => {
 
         return { success: true, data: transaction }
     } catch (error) {
-        return { success: false, error: "Failed to delete mealplan from db in repository" }
+        return { success: false, error: "Failed to delete mealplan from db in repository " + error }
     }
 
 }

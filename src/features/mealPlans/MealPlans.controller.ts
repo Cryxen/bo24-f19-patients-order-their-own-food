@@ -73,3 +73,27 @@ export const deleteMealPlan = async (req: NextRequest) => {
         })
     }
 }
+
+export const fetchMealPlansByDate = async (req: NextRequest) => {
+    try {
+        if (req.nextUrl.searchParams.get('date')) {
+            const date: string = req.nextUrl.searchParams.get('date') as string
+            const responseFromDb = await mealPlansService.fetchMealPlansByDate(date)
+            return NextResponse.json({
+                status: 200,
+                success: responseFromDb.data,
+                error: responseFromDb.error,
+                data: responseFromDb.data
+            })
+        }
+        else
+            return NextResponse.json({
+                success: false, error: "Missing parameter", status: 400
+            })
+    } catch (error) {
+        return NextResponse.json({
+            success: false,
+            error: "Something went wrong fetching meal plans from db in controller " + error
+        })
+    }
+}
