@@ -26,7 +26,7 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
                     mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
             })
             const pastOrderToAdd: PastOrder = {
-                date: date,
+                date: date.toDateString(),
                 roomNumber: order.roomNumber,
                 size: order.size,
                 mainDish: mainDish,
@@ -49,7 +49,17 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
     }
 
     const handleMarkDeliveredButton = async (event: MouseEvent<HTMLButtonElement>) => {
-        console.log(pastOrdersByRooms)
+        pastOrdersByRooms.map(async el => {
+            const response = await fetch('/api/pastOrder', {
+                method: 'POST',
+                body: JSON.stringify(el)
+            })
+            if (response.status === 200) {
+                const data = await response.json()
+                console.log(data)
+            }
+        }
+        )
     }
 
     return (

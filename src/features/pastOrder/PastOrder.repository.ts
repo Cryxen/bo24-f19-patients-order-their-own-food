@@ -7,7 +7,7 @@ export const savePastOrder = async (pastOrder: PastOrder) => {
     try {
         const responseFromDb = await prisma.pastOrder.create({
             data: {
-                date: pastOrder.date.toDateString(),
+                date: pastOrder.date as string,
                 size: pastOrder.size,
                 mainDish: pastOrder.mainDish,
                 sideDish: pastOrder.sideDish,
