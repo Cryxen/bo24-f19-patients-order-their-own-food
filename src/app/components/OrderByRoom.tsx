@@ -48,6 +48,18 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
         setShowChangeOrder(!showChangeOrder)
     }
 
+    const deleteOrderFromDb = async (orderId: number): Promise<void> => {
+        const response = await fetch('/api/orders?deleteId=' + orderId, {
+            method: 'DELETE'
+        })
+        if (response.status === 200) {
+            const data = await response.json()
+            console.log(orderId)
+            console.log(data)
+            fetchAllOrders() // Fetch new orders
+        }
+    }
+
     const handleMarkDeliveredButton = async (event: MouseEvent<HTMLButtonElement>) => {
         pastOrdersByRooms.map(async el => {
             const response = await fetch('/api/pastOrder', {
@@ -56,7 +68,9 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
             })
             if (response.status === 200) {
                 const data = await response.json()
-                console.log(data)
+                ordersByRoom.forEach(async el => {
+                    await deleteOrderFromDb(el.id)
+                });
             }
         }
         )
