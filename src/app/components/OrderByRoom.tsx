@@ -4,17 +4,53 @@ import { OrderClass } from "@/features/orders/classes"
 import { Order } from "@/features/orders/types"
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
 import ChangeOrder from "./ChangeOrder"
+import { PastOrder } from "@/features/pastOrder/types"
 
 const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void }) => {
     const [showChangeOrder, setShowChangeOrder] = useState<boolean>(false)
+    const [pastOrdersByRooms, setPastOrdersByRooms] = useState<PastOrder[]>([])
     const { ordersByRoom, fetchAllOrders } = props
 
-    
+    useEffect(() => {
+        populatePastOrdersByRooms()
+
+    }, [])
+
+    const populatePastOrdersByRooms = () => {
+        const date = new Date()
+        ordersByRoom.map(order => {
+            let mainDish: string = 'undefined'
+            let sideDish: string = 'undefined'
+            order.mealPlan.meals.map(meal => {
+                (MAIN_DISH as unknown as MainDish[]).includes(meal.meal.category as unknown as MainDish) ?
+                    mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
+            })
+            const pastOrderToAdd: PastOrder = {
+                date: date,
+                roomNumber: order.roomNumber,
+                size: order.size,
+                mainDish: mainDish,
+                sideDish: sideDish
+            }
+
+            if (!pastOrdersByRooms.includes(pastOrderToAdd)) {
+                console.log("true")
+                setPastOrdersByRooms(prev => [
+                    ...prev,
+                    pastOrderToAdd
+                ])
+            }
+        })
+    }
+
+
     const handleOrderChangeButton = async (event: MouseEvent<HTMLButtonElement>) => {
         setShowChangeOrder(!showChangeOrder)
     }
 
-
+    const handleMarkDeliveredButton = async (event: MouseEvent<HTMLButtonElement>) => {
+        console.log(pastOrdersByRooms)
+    }
 
     return (
         <section className="dish-section">
@@ -26,7 +62,6 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
                     let sideDish: string = 'undefined'
 
                     orderClass?.mealPlan?.meals?.map(meal => {
-                        console.log(meal);
                         (MAIN_DISH as unknown as MainDish[]).includes(meal.meal.category as unknown as MainDish) ?
                             mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
                     })
@@ -40,7 +75,7 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
             </div>
             <div className="select container">
                 <button className="select-button" onClick={handleOrderChangeButton}>Endre bestilling</button>
-                <button className="select-button">Merk levert</button>
+                <button className="select-button" onClick={handleMarkDeliveredButton}>Merk levert</button>
             </div>
         </section>
     )

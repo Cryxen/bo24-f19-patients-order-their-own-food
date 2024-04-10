@@ -1,5 +1,5 @@
 export type PastOrder = {
-    id: number,
+    id?: number,
     date: Date,
     roomNumber: number,
     mainDish: string,
