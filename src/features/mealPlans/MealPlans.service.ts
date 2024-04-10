@@ -44,3 +44,12 @@ export const deleteMealPlan = async (mealPlanId: number) => {
         return {success: false, error: "Something went wrong deleting the mealplan in service"}
     }
 }
+
+export const fetchMealPlansByDate = async (date: string) => {
+    try {
+    const responseFromDb = await mealPlansRepo.fetchMealPlansByDate(date)
+        return {success: true, data: responseFromDb.data, error: responseFromDb.error}
+    } catch (error) {
+        return {success: false, error: "Failed to retrieve meal plans from db by date in service " + error}
+    }
+}
