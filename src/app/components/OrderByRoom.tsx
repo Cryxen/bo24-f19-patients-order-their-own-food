@@ -24,19 +24,15 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
                     const orderClass = new OrderClass(order.id, order.size, order.roomNumber, order.mealPlanId, order.mealPlan, "test")
                     let mainDish: string = 'undefined'
                     let sideDish: string = 'undefined'
-                    console.log(orderClass)
-                    console.log(order)
 
                     orderClass?.mealPlan?.meals?.map(meal => {
                         console.log(meal);
                         (MAIN_DISH as unknown as MainDish[]).includes(meal.meal.category as unknown as MainDish) ?
                             mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
-                            console.log(mainDish)
-                            console.log(sideDish)
                     })
                     return (
                         showChangeOrder ?
-                            <ChangeOrder key={order.id} order={order} fetchAllOrders={fetchAllOrders} setShowChangeOrder={setShowChangeOrder} />
+                            <ChangeOrder key={order.id} order={orderClass} fetchAllOrders={fetchAllOrders} setShowChangeOrder={setShowChangeOrder} />
                             :
                             <p className="dish" key={order.id}>{mainDish} med {sideDish} - {orderClass.mealSize}</p>
                     )
