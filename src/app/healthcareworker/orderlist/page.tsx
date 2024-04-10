@@ -41,12 +41,16 @@ const Orderlist = () => {
                             if (room.roomNumber === order.roomNumber)
                                 ordersByRoom.push(order)
                         }
-                        if (ordersByRoom.length > 0){
+                        if (ordersByRoom.length > 0) {
                             return (
-                                <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders}/>
-                            )}
+                                <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders} />
+                            )
+                        }
                     })}
                 </div>
+                {ordersFromDb.length <= 0 ?
+                    <h3>Det er ingen bestillinger igjen</h3> : ''
+                }
             </div>
         </Layout>
     )
