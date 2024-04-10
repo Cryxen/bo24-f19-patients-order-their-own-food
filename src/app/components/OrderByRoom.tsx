@@ -1,16 +1,15 @@
 import { MealPlan } from "@/features/mealPlans/types"
-import { MAIN_DISH, MainDish } from "@/features/meals/types"
+import { MAIN_DISH, MainDish, SIDE_DISH, SideDish } from "@/features/meals/types"
 import { OrderClass } from "@/features/orders/classes"
 import { Order } from "@/features/orders/types"
-import { ChangeEvent, MouseEvent, useState } from "react"
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
 import ChangeOrder from "./ChangeOrder"
 
 const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void }) => {
     const [showChangeOrder, setShowChangeOrder] = useState<boolean>(false)
     const { ordersByRoom, fetchAllOrders } = props
 
-
-
+    
     const handleOrderChangeButton = async (event: MouseEvent<HTMLButtonElement>) => {
         setShowChangeOrder(!showChangeOrder)
     }
@@ -23,12 +22,23 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
             <div className="dish-view container">
                 {ordersByRoom.map(order => {
                     const orderClass = new OrderClass(order.id, order.size, order.roomNumber, order.mealPlanId, order.mealPlan, "test")
+                    let mainDish: string = 'undefined'
+                    let sideDish: string = 'undefined'
+                    console.log(orderClass)
+                    console.log(order)
+
+                    orderClass?.mealPlan?.meals?.map(meal => {
+                        console.log(meal);
+                        (MAIN_DISH as unknown as MainDish[]).includes(meal.meal.category as unknown as MainDish) ?
+                            mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
+                            console.log(mainDish)
+                            console.log(sideDish)
+                    })
                     return (
                         showChangeOrder ?
                             <ChangeOrder key={order.id} order={order} fetchAllOrders={fetchAllOrders} setShowChangeOrder={setShowChangeOrder} />
                             :
-                            <p className="dish" key={order.id}>{orderClass.mealPlan.description} - {orderClass.mealSize}</p>
-
+                            <p className="dish" key={order.id}>{mainDish} med {sideDish} - {orderClass.mealSize}</p>
                     )
                 })}
             </div>
