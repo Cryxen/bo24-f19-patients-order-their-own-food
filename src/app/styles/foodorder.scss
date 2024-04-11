@@ -1,5 +1,7 @@
+@import "src/app/styles/globals";
+
 .main-wrapper {
-    min-width: 75%;
+    width: min(75rem, 100%);    
     margin: 1rem 0;
     
     display: flex;
@@ -16,19 +18,22 @@
 
     .order-container {
         width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         .order-table, td {
-            border: 1px solid black;
+            border: 1px solid $black;
             border-collapse: collapse;  
         }
 
         td {
-            padding: 1rem;
+            padding: 0.5rem;
         }
         
         .order-table {
             width: 100%;
-            
+
             .order-config {
                 border: none;
                 padding: 1rem;
@@ -48,13 +53,13 @@
                     border: 0;
                     padding: 0.5em 1em;
                 
-                    background-color: #F5F5F5;
-                    color: #262626;
+                    background-color: $gray-300;
+                    color: $black;
                     cursor: pointer;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
                 
                     &:hover {
-                        background: #FCF7FF;
+                        background: $white;
                     }
                 }
                 
@@ -74,13 +79,13 @@
         padding: 0.5em;
         border: 0;
     
-        background-color: #F5F5F5;
-        color: #262626;
+        background-color: $gray-300;
+        color: $black;
         cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
     
         &:hover {
-            background: #FCF7FF;
+            background: $white;
         }
     }
 
@@ -92,5 +97,5 @@
 }
 
 .red {
-    background-color: #DD7373;
+    background-color: $red;
 }

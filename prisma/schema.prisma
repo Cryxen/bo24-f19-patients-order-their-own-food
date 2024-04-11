@@ -14,59 +14,135 @@ datasource db {
 }
 
 model User {
-  email String @id @unique
-  name String 
-  role String
+  email    String @id @unique
+  name     String
+  role     String
   password String
 }
 
 model Meal {
-  mealName String @id @unique
+  mealName    String           @id @unique
   description String
-  category String
+  category    String
   dietaryInfo String?
-  imageUrl String?
-  meaplPlan MealToMealPlan[]
+  imageUrl    String?
+  meaplPlan   MealToMealPlan[]
 }
 
 model Room {
-  roomNumber Int @id @unique
-  order Order @relation(fields: [orderId], references: [id])
-  orderId Int @unique
-  restriction Restriction? @relation(fields: [dietaryRestriction], references: [dietaryRestriction])
-  dietaryRestriction String? @unique
+  roomNumber                     Int                                 @id @unique
+  order                          Order[]
+  RoomToDietaryRestrictions      RoomToDietaryRestrictions[]
+  foodConsistencyRestrictions    RoomToFoodConsistencyRestrictions[]
+  RoomToAllergyRestrictions      RoomToAllergyRestrictions[]
+  RoomToIntolleranceRestrictions RoomToIntolleranceRestrictions[]
+  RoomToDietaryneeds             RoomToDietaryneeds[]
+}
+
+model RoomToDietaryRestrictions {
+  roomId               Room               @relation(fields: [roomNumber], references: [roomNumber])
+  roomNumber           Int
+  dietaryRestriction   DietaryRestriction @relation(fields: [dietaryRestrictionId], references: [dietaryRestriction])
+  dietaryRestrictionId String
+
+  @@id([roomNumber, dietaryRestrictionId])
+}
+
+model RoomToFoodConsistencyRestrictions {
+  roomId                       Room            @relation(fields: [roomNumber], references: [roomNumber])
+  roomNumber                   Int
+  foodConsistencyRestriction   FoodConsistency @relation(fields: [foodConsistencyRestrictionId], references: [consistency])
+  foodConsistencyRestrictionId String
+
+  @@id([roomNumber, foodConsistencyRestrictionId])
+}
+
+model RoomToAllergyRestrictions {
+  roomId              Room    @relation(fields: [roomNumber], references: [roomNumber])
+  roomNumber          Int
+  allergyRestriction  Allergy @relation(fields: [allergyRestricionId], references: [allergy])
+  allergyRestricionId String
+
+  @@id([roomNumber, allergyRestricionId])
+}
+
+model RoomToIntolleranceRestrictions {
+  roomId                    Room        @relation(fields: [roomNumber], references: [roomNumber])
+  roomNumber                Int
+  intolleranceRestriction   Intolerance @relation(fields: [intolleranceRestrictionId], references: [intolerance])
+  intolleranceRestrictionId String
+
+  @@id([roomNumber, intolleranceRestrictionId])
+}
+
+model RoomToDietaryneeds {
+  roomId        Room         @relation(fields: [roomNumber], references: [roomNumber])
+  roomNumber    Int
+  dietaryNeed   DietaryNeeds @relation(fields: [dietaryNeedId], references: [dietaryNeed])
+  dietaryNeedId String
+
+  @@id([roomNumber, dietaryNeedId])
+}
+
+model DietaryRestriction {
+  dietaryRestriction String                      @id
+  rooms              RoomToDietaryRestrictions[]
+}
+
+model FoodConsistency {
+  consistency String                              @id
+  rooms       RoomToFoodConsistencyRestrictions[]
+}
+
+model Allergy {
+  allergy String                      @id
+  rooms   RoomToAllergyRestrictions[]
+}
+
+model Intolerance {
+  intolerance                    String                           @id
+  RoomToIntolleranceRestrictions RoomToIntolleranceRestrictions[]
+}
+
+model DietaryNeeds {
+  dietaryNeed        String               @id
+  RoomToDietaryneeds RoomToDietaryneeds[]
 }
 
 model MealPlan {
-  id Int @id @default(autoincrement())
-  meals MealToMealPlan[] 
-  orders Order[]
-  date String
-  imageUrl String
+  id          Int              @id @default(autoincrement())
+  meals       MealToMealPlan[]
+  orders      Order[]
+  date        String
+  imageUrl    String
   description String
 }
 
 model MealToMealPlan {
-  mealPlan MealPlan @relation(fields: [mealPlanId], references: [id])
+  mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id])
   mealPlanId Int
-  meal Meal @relation(fields: [mealIdName], references: [mealName])
+  meal       Meal     @relation(fields: [mealIdName], references: [mealName])
   mealIdName String
+
   @@id([mealPlanId, mealIdName])
 }
 
 model Order {
-  id Int @id @default(autoincrement())
-  meal String
-  room Room[]
-  mealPlan MealPlan @relation(fields: [mealPlanId], references: [id])
-  mealPlanId Int @unique
+  id         Int      @id @default(autoincrement())
+  size       Decimal  @default(1)
+  room       Room     @relation(fields: [roomNumber], references: [roomNumber])
+  roomNumber Int
+  mealPlan   MealPlan @relation(fields: [mealPlanId], references: [id])
+  mealPlanId Int
 }
 
 model PastOrder {
-  id Int @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
+  date       String
   roomNumber Int
-  meal String
-  date String
+  mainDish   String
+  sideDish   String
+  size       Decimal
 }
 
 model Restriction {

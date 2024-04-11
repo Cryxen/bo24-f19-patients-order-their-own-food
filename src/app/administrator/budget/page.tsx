@@ -37,7 +37,7 @@ const Budget = () => {
                         <input type="number" id="price3" className="price" placeholder="Tast inn pris..."/>
                     </div>
                 </div>  
-                <button className="new-item button">+ Ny mat</button>
+                <button className="new-item button">[+] Ny mat</button>
                 <input type="submit" className="submit button" value="Generer Rapport"/>
             </form>
         </div>
