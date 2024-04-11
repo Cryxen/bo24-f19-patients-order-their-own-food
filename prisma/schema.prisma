@@ -145,10 +145,10 @@ model PastOrder {
   size       Decimal
 }
 
-model Restriction {
-  dietaryRestriction String @id
-  room Room[]
-}
+// model Restriction {
+//   dietaryRestriction String @id
+//   room Room[]
+// }
 
 model Message {
   messageID Int @id @default(autoincrement())
