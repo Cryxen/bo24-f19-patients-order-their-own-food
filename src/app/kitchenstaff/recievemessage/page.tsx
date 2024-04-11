@@ -10,12 +10,8 @@ export default function recievemessage() {
                 <h1>Kjøkken</h1>
                 <section className='mainBody'>
 
-                <RecievedMSG Title="Message1" room="Rom 1221" content="Blah blah"/>
-                <RecievedMSG Title="Message1" room="Rom 1221" content="Blah blah"/>
-                <RecievedMSG Title="Message1" room="Rom 1221" content="Blah blah"/>
-                <RecievedMSG Title="Message1" room="Rom 1221" content="Blah blah"/>
-
-
+                <RecievedMSG />
+                
                 </section>
             </div>
         </Layout>
