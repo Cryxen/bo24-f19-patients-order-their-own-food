@@ -144,3 +144,16 @@ model PastOrder {
   sideDish   String
   size       Decimal
 }
+
+model Restriction {
+  dietaryRestriction String @id
+  room Room[]
+}
+
+model Message {
+  messageID Int @id @default(autoincrement())
+  title String
+  room String
+  message String
+  createdAt DateTime @default(now())
+}

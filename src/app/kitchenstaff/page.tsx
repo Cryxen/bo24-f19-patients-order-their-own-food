@@ -12,6 +12,8 @@ export default function Kitchenstaff() {
                 <Navbox redirect='kitchenstaff/mealplanning' text='Måltid planlegging'/>
                 <Navbox redirect='kitchenstaff/foodmanagement' text='Mat håndtering'/>
                 <Navbox redirect='kitchenstaff/staffstatistics' text='Statistikk verktøy'/>
+                <Navbox redirect='kitchenstaff/recievemessage' text='Meldinger'/>
+                <Navbox redirect='kitchenstaff/dietaryinfo' text='Diettinformasjon'/>
                 </section>
             </div>
         </Layout>

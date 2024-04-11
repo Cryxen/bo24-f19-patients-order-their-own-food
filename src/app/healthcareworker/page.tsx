@@ -11,6 +11,7 @@ export default function Healthcareworker() {
                 <section className='dashboardwrap'>
                 <Navbox redirect='healthcareworker/foodorders' text='Matbestilling'/>
                 <Navbox redirect='healthcareworker/orderlist' text='Ordreliste'/>
+                <Navbox redirect='healthcareworker/messaging' text='Melding til kjøkken'/>
                 </section>
             </div>
         </Layout>
