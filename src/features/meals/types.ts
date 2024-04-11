@@ -5,8 +5,9 @@ export type Meal = {
     mealName: string
     description: string
     category: SideDish | MainDish | "undefined"
-    dietaryInfo?: string[] | string;
+    dietaryInfo?: string[];
     imageUrl?: string
+    meal?: Meal
 }
 
 export type SideDish = {

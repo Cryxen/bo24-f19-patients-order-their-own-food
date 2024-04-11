@@ -1,4 +1,4 @@
-export type Allergy {
+export type Allergy = {
     allergyRestricionId?: string
     allergy: string
 }

@@ -1,4 +1,4 @@
-export type FoodConsistency {
+export type FoodConsistency = {
     foodConsistencyRestrictionId?: string
     consistency: string
 }

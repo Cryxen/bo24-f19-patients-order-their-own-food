@@ -56,7 +56,7 @@ export const saveMealPlan = async (mealPlan: MealPlan) => {
                     }
                 },
                 date: mealPlan.date.toString(),
-                imageUrl: mealPlan.imageUrl,
+                imageUrl: mealPlan.imageUrl as string,
                 description: mealPlan.description,
                 orders: mealPlan.order
             },

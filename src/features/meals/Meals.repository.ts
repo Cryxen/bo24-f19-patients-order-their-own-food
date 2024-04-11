@@ -13,7 +13,7 @@ export const fetchAllMeals = async () => {
     }
 }
 
-export const saveMeal = async (meal: Meal) => {
+export const saveMeal = async (meal: any) => {
     try {
         const responseFromDb = await prisma.meal.upsert({
             where: { mealName: meal.mealName },

@@ -1,4 +1,5 @@
-import { Order, PrismaClient } from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
+import { Order } from "./types"
 
 const prisma = new PrismaClient
 

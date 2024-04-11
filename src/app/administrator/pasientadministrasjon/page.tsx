@@ -17,7 +17,7 @@ import DeleteRoom from "@/app/components/DeleteRoom"
 
 /*VIRKER KUN PÅ DEKSTOP PER NÅ*/
 
-const pasientadministrasjon = () => {
+const Pasientadministrasjon = () => {
     const [roomsFromDb, setRoomsFromDb] = useState<Room[]>([])
     const [dietaryRestrictionsFromDb, setDietaryRestrictionsFromDb] = useState<DietaryRestriction[]>([])
     const [consistencyRestrictionsFromDb, setConsistencyRestrictionsFromDb] = useState<FoodConsistency[]>([])
@@ -131,4 +131,4 @@ const pasientadministrasjon = () => {
     )
 }
 
-export default pasientadministrasjon
+export default Pasientadministrasjon

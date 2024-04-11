@@ -32,7 +32,7 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
         setMealPlanToUpdate(mealPlan)
         setNewDate(mealPlan.date as Date)
 
-    }, [])
+    }, [mealPlan])
 
 
     const fetchListOfMeals = async (): Promise<void> => {
@@ -164,10 +164,10 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
                     <p>Dato: {mealPlan.date.toString()}</p>
                     <p>Bilde</p>
                     {mealPlan.meals.map(el =>
-                        (MAIN_DISH as unknown as MainDish[]).includes(el.meal.category as MainDish) ? <p key={el.meal.mealName}>Hovedrett: {el.meal.mealName}</p> : ''
+                        (MAIN_DISH as unknown as MainDish[]).includes(el.meal!.category as MainDish) ? <p key={el.meal!.mealName}>Hovedrett: {el.meal!.mealName}</p> : ''
                     )}
                     {mealPlan.meals.map(el =>
-                            (SIDE_DISH as unknown as SideDish[]).includes(el.meal.category as SideDish) ? <p key={el.meal.mealName}>Ved siden av: {el.meal.mealName}</p> : ''
+                            (SIDE_DISH as unknown as SideDish[]).includes(el.meal!.category as SideDish) ? <p key={el.meal!.mealName}>Ved siden av: {el.meal!.mealName}</p> : ''
                     )}
                 </section>
                 <span className="arrow">&#8594;</span>

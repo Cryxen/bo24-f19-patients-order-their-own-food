@@ -25,12 +25,12 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
     const handleDietaryChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
             setMeal(prev => ({
-                ...prev, dietaryInfo: [...(prev.dietaryInfo || []), event.target.value] // Idea from chatGPT to ensure that dietaryInfo is array.
+                ...prev, dietaryInfo: [...prev.dietaryInfo as [], event.target.value]  // changed in build, Make sure works.
             }))
         }
         else {
             setMeal(prev => ({
-                ...prev, dietaryInfo: prev.dietaryInfo?.filter(diet => diet !== event.target.value)
+                ...prev, dietaryInfo: (prev.dietaryInfo as [])?.filter(diet => diet !== event.target.value)
             }))
         }
         console.log(meal)

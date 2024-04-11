@@ -10,7 +10,7 @@ export const fetchUsers = async (req: NextRequest) => {
         const email = req.nextUrl.searchParams.get('email')
         const password = req.nextUrl.searchParams.get('password')
         try {
-            const userFromDb = await userService.fetchUser(email, password)
+            const userFromDb = await userService.fetchUser(email as string, password as string)
             return NextResponse.json({
                 status: 200,
                 success: userFromDb.success,

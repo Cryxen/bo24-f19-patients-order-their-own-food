@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as mealService from './Meals.service'
-import { Meal } from './types'
+import { Meal } from '@prisma/client'
 
 export const fetchAllMeals = async (req: NextRequest) => {
     try {
