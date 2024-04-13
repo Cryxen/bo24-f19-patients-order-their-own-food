@@ -3,7 +3,7 @@ import { checkUserRole } from "./libs/router/checkUserRole";
 
 export const middleware = (req: NextRequest) => {
     console.log("Inside middleware")
-    return checkUserRole("test", req)
+    return checkUserRole(req)
 }
 
 export const config = {

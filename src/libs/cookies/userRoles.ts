@@ -24,7 +24,14 @@ export const userRoleSaveToCookie = (userRole: User["role"]): boolean => {
 export const userRoleCheckCookie = (): User["role"] => {
     try {
         const userRole = cookies().get("role")
-        return userRole as unknown as User["role"]
+        console.log(userRole)
+        if (userRole !== undefined) {
+            const { value } = userRole
+            console.log(value)
+            return value as unknown as User["role"]
+        }
+        else
+            return 'undefined'
 
     } catch (error) {
         console.error("Something went wrong checking user role in local storage " + error)
