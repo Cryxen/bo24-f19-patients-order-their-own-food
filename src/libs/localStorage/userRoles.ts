@@ -5,7 +5,7 @@ import { User } from "@/features/users/types"
  * @param userRole Role of user logging in
  * @returns true if localStorage functions properly
  */
-export const saveRoleToLocalStorage = (userRole: string): boolean => {
+export const saveRoleToLocalStorage = (userRole: User["role"]): boolean => {
     try {
         localStorage.setItem("role", userRole)
         return true
