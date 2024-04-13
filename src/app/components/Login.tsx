@@ -4,6 +4,7 @@ import '../styles/loginpage.scss'
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import { User } from '@/features/users/types'
 import { useRouter } from 'next/navigation'
+import { saveRoleToLocalStorage } from '@/libs/localStorage/userRoles'
 
 const Login = () => {
     //TODO: ERROR HANDLING.
@@ -32,6 +33,7 @@ const Login = () => {
             const data = await response.json()
             if (data.success === true) {
                 user = data.data
+                saveRoleToLocalStorage(user.role)
                 //Route according to role
                 switch (user.role) {
                     case "healthcare":
