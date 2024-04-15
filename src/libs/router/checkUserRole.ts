@@ -1,8 +1,5 @@
-import { redirect, usePathname } from "next/navigation"
 import { userRoleCheckCookie } from "../cookies/userRoles"
-import { useEffect } from "react"
 import { NextRequest, NextResponse } from "next/server"
-import path from "path"
 
 /**
  * Compares user role towards link and routes the web application towards which page that the user have access to.
@@ -10,33 +7,43 @@ import path from "path"
 export const checkUserRole = (req: NextRequest) => {
     const role = userRoleCheckCookie()
     const pathName = req.url
+
+    /**
+     * Checks the path name towards given string to check. If the pathname contains string, returns true.
+     * @param pathnameToCheck URL Pathname
+     * @returns boolean
+     */
     const checkPathName = (pathnameToCheck: string): boolean | NextResponse => {
         if (pathName.toLowerCase().includes(pathnameToCheck.toLowerCase())) {
             return true
         }
         else {
-            return redirectToLogin()
+            return false
         }
     }
 
-    const redirectToLogin = () => {
-        req.nextUrl.pathname = '/'
-        return NextResponse.redirect(req.nextUrl)
-    }
-
+    /**
+     * Checks path name depending on role.
+     */
     if (role === 'administrator') {
         if (checkPathName("administrator"))
-            redirectToLogin()
+            return true
+        else
+            return false
     }
     else if (role === "healthcare") {
         if (checkPathName("healthcareworker"))
-            redirectToLogin()
+            return true
+        else
+            return false
     } else if (role === 'kitchen') {
         if (checkPathName("kitchenstaff"))
-            redirectToLogin()
+            return true
+        else
+            return false
     }
     else {
-        return
+        return false
     }
 
     // switch (role) {

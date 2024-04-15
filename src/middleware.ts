@@ -1,9 +1,16 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { checkUserRole } from "./libs/router/checkUserRole";
+import { NextApiResponse } from "next";
 
-export const middleware = (req: NextRequest) => {
+export const middleware = (req: NextRequest, res: NextResponse) => {
     console.log("Inside middleware")
-    return checkUserRole(req)
+    if (!checkUserRole(req)) {
+        return NextResponse.redirect(new URL('/', req.url))
+
+    }
+
+
+    // return checkUserRole(req, res)
 }
 
 export const config = {
