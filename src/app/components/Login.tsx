@@ -4,7 +4,7 @@ import '../styles/loginpage.scss'
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import { User } from '@/features/users/types'
 import { useRouter } from 'next/navigation'
-import { userRoleSaveToCookie } from '@/libs/cookies/userRoles'
+import { userRoleSaveToCookie } from '@/libs/cookies/userRolesServer'
 import { checkUserRole } from '@/libs/router/checkUserRole'
 
 const Login = () => {
