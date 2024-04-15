@@ -1,5 +1,5 @@
 "use server"
-import { User } from "@/features/users/types"
+import { User, userRoleTypeGuard } from "@/features/users/types"
 import { cookies } from "next/headers"
 
 /**
@@ -50,3 +50,4 @@ export const userRoleDeleteFromCookie = (): boolean => {
         return false
     }
 }
+

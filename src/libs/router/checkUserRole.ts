@@ -1,4 +1,4 @@
-import { userRoleCheckCookie } from "../cookies/userRoles"
+import { userRoleCheckCookie } from "../cookies/userRolesServer"
 import { NextRequest, NextResponse } from "next/server"
 
 /**
