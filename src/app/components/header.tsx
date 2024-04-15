@@ -25,8 +25,16 @@ const Header = () => {
         }
     }
 
-    const handleLogOutButton = (event: MouseEvent<HTMLButtonElement>) => {
-
+    const handleLogOutButton = async (event: MouseEvent<HTMLButtonElement>) => {
+        const response = await fetch('/api/userRoleCookie', {
+            method: 'DELETE'
+        })
+        if(response.status === 200) {
+            router.push('/')
+        }
+        else {
+            console.error("Something went wrong logging out " + response)
+        }
     }
 
     return (
