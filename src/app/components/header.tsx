@@ -1,10 +1,11 @@
 import { findRoleFromCookies } from "@/libs/cookies/userRolesClient"
 import { useRouter } from "next/navigation"
+import { MouseEvent } from "react"
 
 const Header = () => {
     const router = useRouter()
 
-    const routeToDashboard = () => {
+    const handleRouteToDashboardButton = () => {
         const role = findRoleFromCookies()
         switch (role) {
             case 'administrator':
@@ -24,10 +25,14 @@ const Header = () => {
         }
     }
 
+    const handleLogOutButton = (event: MouseEvent<HTMLButtonElement>) => {
+
+    }
+
     return (
         <header>
-            <button className="header-content" onClick={routeToDashboard}>Dashboard</button>
-            <button className="header-content">Bruker</button>
+            <button className="header-content" onClick={handleRouteToDashboardButton}>Dashboard</button>
+            <button className="header-content" onClick={handleLogOutButton}>Logg ut</button>
         </header>
     )
 }
