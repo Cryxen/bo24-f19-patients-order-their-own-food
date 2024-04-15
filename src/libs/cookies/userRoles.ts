@@ -24,10 +24,8 @@ export const userRoleSaveToCookie = (userRole: User["role"]): boolean => {
 export const userRoleCheckCookie = (): User["role"] => {
     try {
         const userRole = cookies().get("role")
-        console.log(userRole)
         if (userRole !== undefined) {
             const { value } = userRole
-            console.log(value)
             return value as unknown as User["role"]
         }
         else

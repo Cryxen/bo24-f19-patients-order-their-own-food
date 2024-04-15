@@ -45,25 +45,4 @@ export const checkUserRole = (req: NextRequest) => {
     else {
         return false
     }
-
-    // switch (role) {
-    //     case "administrator":
-    //         checkPathName("administrator")
-    //         break;
-    //     case "healthcare":
-    //         checkPathName("healthcareworker")
-    //         break;
-    //     case "kitchen":
-    //         checkPathName("kitchenstaff")
-    //         break;
-    //     default:
-    //         console.log("no case")
-    //         break;
-    // }
-    // return redirectToLogin()
-
-
-
 }
-
-// }
