@@ -42,6 +42,8 @@ export const checkUserRole = (req: NextRequest) => {
         else
             return false
     }
+    else if (role === 'development')
+        return true
     else {
         return false
     }
