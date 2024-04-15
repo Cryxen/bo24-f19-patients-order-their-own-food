@@ -4,10 +4,11 @@ import '../styles/loginpage.scss'
 import { ChangeEvent, MouseEvent, useState } from 'react'
 import { User } from '@/features/users/types'
 import { useRouter } from 'next/navigation'
+import { userRoleSaveToCookie } from '@/libs/cookies/userRoles'
+import { checkUserRole } from '@/libs/router/checkUserRole'
 
 const Login = () => {
     //TODO: ERROR HANDLING.
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -32,6 +33,7 @@ const Login = () => {
             const data = await response.json()
             if (data.success === true) {
                 user = data.data
+                userRoleSaveToCookie(user.role)
                 //Route according to role
                 switch (user.role) {
                     case "healthcare":
