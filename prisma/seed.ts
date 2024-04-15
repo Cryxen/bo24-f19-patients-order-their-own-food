@@ -22,6 +22,7 @@ const users: User[] = [
   { email: "sarah@sunnaas.no", name: "Sarah", role: "healthcare", password: "password" },
   { email: "karl.gustav@sunnaas.no", name: "Karl Gustav", role: "administrator", password: "password" },
   { email: "carlos@sunnaas.no", name: "Carlos", role: "kitchen", password: "password" },
+  { email: "developer@secret.no", name: "Developer", role: "development", password: "password" },
 ];
 
 const meals: Meal[] = [

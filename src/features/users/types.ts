@@ -1,7 +1,7 @@
 export type User = {
-    email: string 
-    name: string 
-    role: "healthcare"|"kitchen"|"administrator"|"undefined"
-    password: string   
+    email: string
+    name: string
+    role: "healthcare" | "kitchen" | "administrator" | "undefined" | "development"
+    password: string
 }
 
