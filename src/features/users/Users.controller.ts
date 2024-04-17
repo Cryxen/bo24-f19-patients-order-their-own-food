@@ -11,30 +11,33 @@ export const fetchUsers = async (req: NextRequest) => {
     if (req.nextUrl.searchParams.get('email')) {
         const email = req.nextUrl.searchParams.get('email')
         const password = req.nextUrl.searchParams.get('password')
-        try {
-            const userFromDb = await userService.fetchUser(email, password)
-            return NextResponse.json({
-                status: 200,
-                success: userFromDb.success,
-                data: userFromDb?.data,
-                error: userFromDb?.error
-            })
+        if (typeof email === 'string' && typeof password === 'string') {
+            try {
+                const userFromDb = await userService.fetchUser(email, password)
+                return NextResponse.json({
+                    status: 200,
+                    success: userFromDb?.success,
+                    data: userFromDb?.data,
+                    error: userFromDb?.error
+                }
+                )
+            }
+            catch (error) {
+                return NextResponse.json({ success: false, error: MVCFetchingError("user", "controller", error) })
+            }
         }
-        catch (error) {
-            return NextResponse.json({ success: false, error: MVCFetchingError("user", "controller", error) })
-        }
-    }
-    else {
-        try {
-            const usersFromDb = await userService.fetchAllUsers()
-            return NextResponse.json({
-                status: 200,
-                success: true,
-                data: usersFromDb.data,
-                error: usersFromDb.error
-            })
-        } catch (error) {
-            return NextResponse.json({ success: false, error: MVCFetchingError("users", "controller", error) })
+        else {
+            try {
+                const usersFromDb = await userService.fetchAllUsers()
+                return NextResponse.json({
+                    status: 200,
+                    success: true,
+                    data: usersFromDb.data,
+                    error: usersFromDb.error
+                })
+            } catch (error) {
+                return NextResponse.json({ success: false, error: MVCFetchingError("users", "controller", error) })
+            }
         }
     }
 }
@@ -53,6 +56,4 @@ export const saveUser = async (req: NextRequest) => {
     } catch (error) {
         return NextResponse.json({ success: false, error: MVCSavingError("user", "controller", error) })
     }
-
-
 }
