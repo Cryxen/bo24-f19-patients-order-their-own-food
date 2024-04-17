@@ -22,7 +22,7 @@ export const fetchUser = async (email: string, password: string) => {
   try {
     const userFromDb = await usersRepo.fetchUser(email)
     if (isUser(userFromDb.data))
-      if (controllUserNameToPassword(userFromDb.data, email, password)) //TODO: Fix TS Error
+      if (controllUserNameToPassword(userFromDb.data, email, password))
         return { success: true, data: userFromDb.data, error: userFromDb.error }
       else
         return { success: false, error: "Failed to match user name and password to db" }
