@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as ordersService from './Orders.service'
 import { Order } from './types'
+import { MVCDeletingError, MVCFetchingError, MVCSavingError } from '@/libs/errors/MVC-errors'
 
 export const fetchAllOrders = async () => {
     try {
@@ -15,7 +16,7 @@ export const fetchAllOrders = async () => {
     }
     catch (error) {
         return NextResponse.json({
-            success: false, error: "Failed to fetch orders from db in controller " + error
+            success: false, error: MVCFetchingError("orders", "controller", error)
         })
     }
 }
@@ -34,7 +35,7 @@ export const saveOrUpdateOrder = async (req: NextRequest) => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Something went wrong saving or updating order in controller " + error
+            error: MVCSavingError("order", "controller", error)
         })
     }
 }
@@ -62,7 +63,7 @@ export const deleteOrder = async (req: NextRequest) => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Something went wrong deleting order from db in controller " + error
+            error: MVCDeletingError("order", "controller", error)
         })
     }
 }

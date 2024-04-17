@@ -1,3 +1,4 @@
+import { MVCFetchingError } from '@/libs/errors/MVC-errors'
 import * as intoleranceRepo from './Intolerance.repository'
 
 export const fetchAllIntolerance = async () => {
@@ -8,7 +9,8 @@ export const fetchAllIntolerance = async () => {
         }
     } catch (error) {
         return {
-            success: false, error: "Failed to retrieve intolerance from db in service " + error
+            success: false, 
+            error: MVCFetchingError('intolerance restrictions', 'service', error)
         }
     }
 }

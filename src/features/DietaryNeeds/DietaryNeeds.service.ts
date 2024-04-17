@@ -1,3 +1,4 @@
+import { MVCFetchingError } from '@/libs/errors/MVC-errors'
 import * as dietaryNeedsrepo from './DietaryNeeds.repository'
 
 export const fetchAllDietaryNeeds = async () => {
@@ -8,7 +9,8 @@ export const fetchAllDietaryNeeds = async () => {
         }
     } catch (error) {
         return {
-            success: false, error: "Failed to fetch dietary needs from db in service " + error
+            success: false,
+            error: MVCFetchingError('dietary needs', 'service', error)
         }
     }
 }

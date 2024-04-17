@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as pastOrderService from './PastOrder.service'
 import { PastOrder } from './types'
+import { MVCSavingError } from '@/libs/errors/MVC-errors'
 
 export const savePastOrder = async (req: NextRequest) => {
     try {
@@ -15,7 +16,7 @@ export const savePastOrder = async (req: NextRequest) => {
     } catch (error) {
         return (NextResponse.json({
             success: false,
-            error: "Something went wrong saving past order to db in controller " + error
+            error: MVCSavingError("past order", "controller", error)
         }))
     }
 

@@ -1,3 +1,4 @@
+import { MVCDeletingError, MVCFetchingError, MVCSavingError } from '@/libs/errors/MVC-errors';
 import * as messageRepo from './message.repository';
 
 
@@ -6,7 +7,7 @@ export const fetchAllMessages = async () => {
         const messagesFromDb = await messageRepo.fetchAllMessages();
         return { success: true, data: messagesFromDb.data };
     } catch (error) {
-        return { success: false, error: "Something went wrong fetching messages from the database in the service" };
+        return { success: false, error: MVCFetchingError("Messages", "service", error) };
     }
 };
 
@@ -18,7 +19,7 @@ export const createMessage = async (title: string, room: string, message: string
         });
         return { success: true, data: responseFromDb.data };
     } catch (error) {
-        return { success: false, error: "Failed to create the message in the service" };
+        return { success: false, error: MVCSavingError("Messages", "service", error)};
     }
 };
 
@@ -28,7 +29,7 @@ export const deleteMessage = async (messageID: number) => {
         const responseFromDb = await messageRepo.deleteMessage(messageID);
         return { success: true, data: responseFromDb.data };
     } catch (error) {
-        return { success: false, error: `Something went wrong deleting message with ID ${messageID} in service` };
+        return { success: false, error: MVCDeletingError("Messages", "service", error) };
     }
 };
 

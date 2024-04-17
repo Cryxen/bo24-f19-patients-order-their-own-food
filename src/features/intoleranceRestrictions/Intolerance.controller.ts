@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import * as intoleranceService from './Intolerance.service'
+import { MVCFetchingError } from '@/libs/errors/MVC-errors'
 
 export const fetchAllIntolerance = async () => {
     try {
@@ -13,7 +14,7 @@ export const fetchAllIntolerance = async () => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Failed to retrieve intolerance from db in controller " + error
+            error: MVCFetchingError('intolerance restrictions', 'controller', error)
         })
     }
 }

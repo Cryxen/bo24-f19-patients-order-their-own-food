@@ -5,6 +5,7 @@ import { FoodConsistency } from "../consistencyRestrictions/types"
 import { Allergy } from "../allergyRestrictions/types"
 import { Intolerance } from "../intoleranceRestrictions/types"
 import { DietaryNeeds } from "../DietaryNeeds/types"
+import { MVCDeletingError, MVCFetchingError, MVCUpdatingError } from "@/libs/errors/MVC-errors"
 
 const prisma = new PrismaClient()
 export const fetchAllRooms = async () => {
@@ -30,7 +31,7 @@ export const fetchAllRooms = async () => {
         })
         return { success: true, data: roomsFromDb }
     } catch (error) {
-        return { success: false, error: "Failed to retrieve rooms from db in repository " + error }
+        return { success: false, error: MVCFetchingError("rooms", "repository", error) }
     }
 }
 
@@ -133,7 +134,7 @@ export const updateRoom = async (room: Room) => {
 
         return { success: true, data: transaction }
     } catch (error) {
-        return { success: false, error: "Something went wrong updating room in db in repo " + error }
+        return { success: false, error: MVCUpdatingError("room", "repository", error) }
     }
 
 }
@@ -181,6 +182,6 @@ export const deleteRoomFromDb = async (roomNumber: number) => {
 
         return { success: true, data: transaction }
     } catch (error) {
-        return { success: false, error: "Failed to delete room in repo " + error }
+        return { success: false, error: MVCDeletingError("room", "repository", error) }
     }
 }

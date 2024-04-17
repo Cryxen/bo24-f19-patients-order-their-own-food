@@ -1,3 +1,4 @@
+import { MVCFetchingError } from "@/libs/errors/MVC-errors";
 import { PrismaClient } from "@prisma/client";
 
 
@@ -11,7 +12,8 @@ export const fetchAllIntolerance = async () => {
         }
     } catch (error) {
         return {
-            success: false, error: "Failed to retrieve intolerance from db in repository " + error
+            success: false, 
+            error: MVCFetchingError('intolerance restrictions', 'repository', error)
         }
     }
 }

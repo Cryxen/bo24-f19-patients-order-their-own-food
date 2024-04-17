@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { MealPlan } from "./types";
 import { Meal } from "../meals/types";
+import { MVCDeletingError, MVCFetchingError, MVCSavingError, MVCUpdatingError } from "@/libs/errors/MVC-errors";
 
 const prisma = new PrismaClient()
 
@@ -17,7 +18,10 @@ export const fetchAllMealPlans = async () => {
         })
         return { success: true, data: mealPlansFromDb }
     } catch (error) {
-        return { success: false, error: "Failed to retrieve meal plans from db " + error}
+        return {
+            success: false,
+            error: MVCFetchingError("MealPlan", "repository", error)
+        }
     }
 }
 
@@ -35,9 +39,11 @@ export const fetchMealPlansByDate = async (date: string) => {
                 }
             }
         })
-        return {success: true, data: mealPlansFromDb}
+        return { success: true, data: mealPlansFromDb }
     } catch (error) {
-        return {success: false, error: "Failed to retrieve meal plans for current date from db " + error}
+        return {
+            success: false, error: MVCFetchingError("MealPlan", "repository", error)
+        }
     }
 }
 
@@ -56,7 +62,7 @@ export const saveMealPlan = async (mealPlan: MealPlan) => {
                     }
                 },
                 date: mealPlan.date.toString(),
-                imageUrl: mealPlan.imageUrl,
+                imageUrl: mealPlan.imageUrl as string,
                 description: mealPlan.description,
                 orders: mealPlan.order
             },
@@ -64,7 +70,7 @@ export const saveMealPlan = async (mealPlan: MealPlan) => {
         return { success: true, data: responseFromDb }
     }
     catch (error) {
-        return { success: false, error: "Failed to save mealplan to db in repository" + error }
+        return { success: false, error: MVCSavingError("MealPlan", "repository", error) }
     }
 }
 
@@ -93,23 +99,23 @@ export const updateMealPlan = async (mealPlan: MealPlan) => {
         return { success: true, data: responseFromDb }
 
     } catch (error) {
-        return { success: false, error: "Failed to update mealplan to db in repository " + error }
+        return { success: false, error: MVCUpdatingError("MealPlan", "repository", error) }
     }
 }
 
 export const deleteMealPlan = async (mealPlanId: number) => {
     try {
-        const deleteManyMealsToMealPlan =  prisma.mealToMealPlan.deleteMany({
+        const deleteManyMealsToMealPlan = prisma.mealToMealPlan.deleteMany({
             where: { mealPlanId: mealPlanId }
         })
-        const responseFromDb =  prisma.mealPlan.delete({
+        const responseFromDb = prisma.mealPlan.delete({
             where: { id: mealPlanId }
         })
         const transaction = await prisma.$transaction([deleteManyMealsToMealPlan, responseFromDb])
 
         return { success: true, data: transaction }
     } catch (error) {
-        return { success: false, error: "Failed to delete mealplan from db in repository " + error }
+        return { success: false, error: MVCDeletingError("MealPlan", "repository", error) }
     }
 
 }

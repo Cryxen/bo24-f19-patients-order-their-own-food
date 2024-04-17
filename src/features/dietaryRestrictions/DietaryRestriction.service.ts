@@ -1,3 +1,4 @@
+import { MVCFetchingError } from '@/libs/errors/MVC-errors';
 import * as dietaryRestrictionRepo from './DietaryRestriction.repository'
 
 export const fetchAllDietaryRestricions = async () => {
@@ -5,6 +6,9 @@ export const fetchAllDietaryRestricions = async () => {
         const dietaryRestrictionsFromDb = await dietaryRestrictionRepo.fetchAllDietaryRestricions();
         return ({ success: true, data: dietaryRestrictionsFromDb?.data, error: dietaryRestrictionsFromDb.error })
     } catch (error) {
-        return ({ success: false, error: "Failed to retrieve dietary restrictrions from db in service " + error })
+        return ({
+            success: false,
+            error: MVCFetchingError('dietary restrictions', 'service', error)
+        })
     }
 }

@@ -1,12 +1,13 @@
+import { MVCFetchingError } from '@/libs/errors/MVC-errors';
 import * as usersRepo from './Users.repository'
 import { User } from './types';
 
 export const fetchAllUsers = async () => {
   try {
     const usersFromDb = await usersRepo.fetchAllUsers();
-    return { success: true, data: usersFromDb.data };
+    return { success: true, data: usersFromDb.data, error: usersFromDb.error };
   } catch (error) {
-    return { success: false, data: usersFromDb.error };
+    return { success: false, data: MVCFetchingError("users", "service", error) };
   }
 };
 
@@ -20,22 +21,22 @@ const controllUserNameToPassword = (user: User, email: string, password: string)
 export const fetchUser = async (email, password) => {
   try {
     const userFromDb = await usersRepo.fetchUser(email)
-    if (controllUserNameToPassword(userFromDb.data, email, password))
-      return { success: true, data: userFromDb.data }
+    if (controllUserNameToPassword(userFromDb.data, email, password)) //TODO: Fix TS Error
+      return { success: true, data: userFromDb.data, error: userFromDb.error }
     else
       return { success: false, error: "Failed to match user name and password to db" }
   }
   catch (error) {
-    return { success: false, data: usersFromDb.error }
+    return { success: false, error: MVCFetchingError("user", "service", error) }
   }
 }
 
 export const saveUser = async (user: User) => {
   try {
     const responseFromDb = await usersRepo.saveUser(user)
-      return { success: true, data: responseFromDb.data }
+    return { success: true, data: responseFromDb.data, error: responseFromDb.error }
   }
   catch (error) {
-    return { success: false, data: responseFromDb.error }
+    return { success: false, error: MVCFetchingError("user", "service", error) }
   }
 }

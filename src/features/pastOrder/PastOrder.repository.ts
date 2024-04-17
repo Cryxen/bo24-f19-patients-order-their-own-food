@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { PastOrder } from "./types";
+import { MVCSavingError } from "@/libs/errors/MVC-errors";
 
 const prisma = new PrismaClient()
 
@@ -14,8 +15,8 @@ export const savePastOrder = async (pastOrder: PastOrder) => {
                 roomNumber: pastOrder.roomNumber
             }
         })
-        return {success: true, data: responseFromDb}
+        return { success: true, data: responseFromDb }
     } catch (error) {
-        return {success: false, error: "Something went wrong saving past order to db in repository " + error}
+        return { success: false, error: MVCSavingError("past order", "repository", error) }
     }
 }

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import * as userService from './Users.service'
 import { NextApiRequest } from "next"
 import { User } from "./types"
+import { MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors"
+import { error } from "console"
 
 export const fetchUsers = async (req: NextRequest) => {
     let userFromDb
@@ -18,8 +20,8 @@ export const fetchUsers = async (req: NextRequest) => {
                 error: userFromDb?.error
             })
         }
-        catch(error) {
-            return NextResponse.json({success: false, error: "something went terribly wrong in controller fetching one user"}) //TODO: fix error handling
+        catch (error) {
+            return NextResponse.json({ success: false, error: MVCFetchingError("user", "controller", error) })
         }
     }
     else {
@@ -28,10 +30,11 @@ export const fetchUsers = async (req: NextRequest) => {
             return NextResponse.json({
                 status: 200,
                 success: true,
-                data: usersFromDb.data
+                data: usersFromDb.data,
+                error: usersFromDb.error
             })
         } catch (error) {
-            return NextResponse.json({ success: false, error: "something went terribly wrong in controller fetching all users"}) //TODO: fix error handling
+            return NextResponse.json({ success: false, error: MVCFetchingError("users", "controller", error) })
         }
     }
 }
@@ -48,7 +51,7 @@ export const saveUser = async (req: NextRequest) => {
             error: responseFromDb?.error
         })
     } catch (error) {
-        
+        return NextResponse.json({ success: false, error: MVCSavingError("user", "controller", error) })
     }
 
 

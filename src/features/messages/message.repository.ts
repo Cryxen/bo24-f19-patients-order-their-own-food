@@ -1,5 +1,6 @@
 // components/messages/Message.repository.ts
 
+import { MVCDeletingError, MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors";
 import { PrismaClient } from "@prisma/client";
 
 // Define the Message type
@@ -18,12 +19,13 @@ export const fetchAllMessages = async () => {
         const messagesFromDb = await prisma.message.findMany();
         return { success: true, data: messagesFromDb };
     } catch (error) {
-        return { success: false, error: "Failed to retrieve messages from the database" };
+        return { success: false, error: MVCFetchingError("Messages", "repository", error) };
     }
 };
 
 export const createMessage = async (message: Message) => {
     try {
+        h
         const responseFromDb = await prisma.message.create({
             data: {
                 title: message.title,
@@ -34,7 +36,7 @@ export const createMessage = async (message: Message) => {
         });
         return { success: true, data: responseFromDb };
     } catch (error) {
-        return { success: false, error: "Failed to create message in the database" };
+        return { success: false, error: MVCSavingError("Messages", "repository", error) };
     }
 };
 
@@ -45,6 +47,6 @@ export const deleteMessage = async (messageID: number) => {
         });
         return { success: true, data: responseFromDb };
     } catch (error) {
-        return { success: false, error: `Failed to delete message with ID ${messageID} from the database` };
+        return { success: false, error: MVCDeletingError("Messages", "repository", error) };
     }
 };

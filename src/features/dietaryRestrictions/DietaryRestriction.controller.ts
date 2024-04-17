@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import * as dietaryRestrictionsService from './DietaryRestriction.service'
+import { MVCFetchingError } from '@/libs/errors/MVC-errors'
 
 export const fetchAllDietaryRestricions = async () => {
     try {
@@ -12,7 +13,8 @@ export const fetchAllDietaryRestricions = async () => {
         })
     } catch (error) {
         return NextResponse.json({
-            success: false, error: "Something went wrong fetching dietary restrictions from db in controller " + error
+            success: false, 
+            error: MVCFetchingError('dietary restrictions', 'controller', error)
         })
     }
 }
