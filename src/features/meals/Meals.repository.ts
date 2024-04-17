@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 import { Meal } from "./types"
+import { MVCDeletingError, MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors"
 
 const prisma = new PrismaClient()
 
@@ -9,7 +10,7 @@ export const fetchAllMeals = async () => {
         return { success: true, data: mealsFromDb }
     }
     catch (error) {
-        return { success: false, error: "Failed to retrieve meals from db" }
+        return { success: false, error: MVCFetchingError("Meal", "repository", error) }
     }
 }
 
@@ -17,7 +18,7 @@ export const saveMeal = async (meal: Meal) => {
     try {
         const responseFromDb = await prisma.meal.upsert({
             where: { mealName: meal.mealName },
-            update: {
+            update: { //TODO: FIX TS ERROR
                 description: meal.description,
                 category: meal.category,
                 dietaryInfo: meal.dietaryInfo,
@@ -33,7 +34,7 @@ export const saveMeal = async (meal: Meal) => {
         })
         return { success: true, data: responseFromDb }
     } catch (error) {
-        return { success: false, error: "Failed to update or save entry to database." }
+        return { success: false, error: MVCSavingError("Meal", "repository", error) }
     }
 }
 
@@ -45,6 +46,6 @@ export const deleteMeal = async (mealName: Meal["mealName"]) => {
         return { success: true, data: responseFromDb }
 
     } catch (error) {
-        return {success: false, error: "Failed to delete entry with mealname: " + mealName + " from database"}
+        return { success: false, error: MVCDeletingError("Meal", "repository", error) }
     }
 }

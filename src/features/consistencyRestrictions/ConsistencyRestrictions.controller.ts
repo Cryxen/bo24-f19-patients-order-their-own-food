@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import * as consistencyRestrictionsService from './ConsistencyRestrictions.service'
+import { MVCFetchingError } from '@/libs/errors/MVC-errors'
 
 export const fetchAllConsistencyRestrictions = async () => {
     try {
@@ -13,7 +14,8 @@ export const fetchAllConsistencyRestrictions = async () => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Something went wrong fetching consistency restrictions from db in controller " + error
+            error: MVCFetchingError('consistency restrictions', 'controller', error)
+
         })
     }
 }

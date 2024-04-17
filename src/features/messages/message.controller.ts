@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as messageService from './message.service';
+import { MVCDeletingError, MVCFetchingError, MVCSavingError } from '@/libs/errors/MVC-errors';
 
 export const createMessage = async (req: NextRequest) => {
     try {
@@ -25,7 +26,7 @@ export const createMessage = async (req: NextRequest) => {
             status: 500,
             success: false,
             data: null,
-            error: 'An error occurred while creating the message'
+            error: MVCSavingError("Messages", "controller", error)
         });
     }
 };
@@ -45,7 +46,7 @@ export const fetchAllMessages = async (req: NextRequest) => {
             status: 500,
             success: false,
             data: null,
-            error: 'An error occurred while fetching messages'
+            error: MVCFetchingError("Messages", "controller", error)
         });
     }
 };
@@ -78,7 +79,7 @@ export const deleteMessage = async (req: NextRequest) => {
             status: 500,
             success: false,
             data: null,
-            error: 'An error occurred while deleting the message'
+            error: MVCDeletingError("Messages", "controller", error)
         });
     }
 };

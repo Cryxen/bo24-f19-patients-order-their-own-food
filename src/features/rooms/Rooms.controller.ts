@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as roomsService from './Rooms.service'
 import { Room } from './types';
+import { MVCDeletingError, MVCFetchingError, MVCUpdatingError } from '@/libs/errors/MVC-errors';
 
 export const fetchAllRooms = async () => {
     try {
@@ -13,7 +14,7 @@ export const fetchAllRooms = async () => {
         })
     } catch (error) {
         return NextResponse.json({
-            success: false, error: "Something went wrong fetching rooms from db " + error
+            success: false, error: MVCFetchingError("rooms", "controller", error)
         })
     }
 }
@@ -31,7 +32,7 @@ export const updateRoom = async (req: NextRequest) => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Something went wrong updating room in db in controller " + error
+            error: MVCUpdatingError("rooms", "controller", error)
         })
     }
 }
@@ -55,7 +56,7 @@ export const deleteRoomFromDb = async (req: NextRequest) => {
             })
     } catch (error) {
         return NextResponse.json({
-            success: false, error: "Failed to delete room in controller " + error
+            success: false, error: MVCDeletingError("rooms", "controller", error)
         })
     }
 }

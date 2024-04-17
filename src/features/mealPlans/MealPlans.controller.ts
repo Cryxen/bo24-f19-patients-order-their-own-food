@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as mealPlansService from './MealPlans.service'
 import { MealPlan } from './types'
+import { MVCDeletingError, MVCFetchingError, MVCSavingError } from '@/libs/errors/MVC-errors'
 
 export const fetchAllMealPlans = async (req: NextRequest) => {
     try {
@@ -14,7 +15,7 @@ export const fetchAllMealPlans = async (req: NextRequest) => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Something went wrong fetching meal plans from db in controller"
+            error: MVCFetchingError("MealPlans", "controller", error)
         })
     }
 }
@@ -44,7 +45,7 @@ export const saveMealPlan = async (req: NextRequest) => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Something went wrong saving meal plan to db in controller " + error
+            error: MVCSavingError("MealPlan", "controller", error)
         })
     }
 }
@@ -69,7 +70,7 @@ export const deleteMealPlan = async (req: NextRequest) => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Something went wrong deleting meal plan from db in controller " + error
+            error: MVCDeletingError("MealPlan", "controller", error)
         })
     }
 }
@@ -93,7 +94,7 @@ export const fetchMealPlansByDate = async (req: NextRequest) => {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            error: "Something went wrong fetching meal plans from db in controller " + error
-        })
+            error: MVCFetchingError("MealPlans", "controller", error)
+            })
     }
 }

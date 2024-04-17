@@ -1,3 +1,4 @@
+import { MVCFetchingError } from "@/libs/errors/MVC-errors";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient()
@@ -7,6 +8,6 @@ export const fetchAllConsistencyRestrictions = async () => {
         const consistencyRestrictionsFromDb = await prisma.foodConsistency.findMany()
         return {success: true, data: consistencyRestrictionsFromDb}
     } catch (error) {
-        return {success: false, error: "Failed to retrieve consistency restrictions from db in repository " + error}
+        return {success: false, error: MVCFetchingError('consistency restrictions', 'repository', error)
     }
 }

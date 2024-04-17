@@ -1,3 +1,4 @@
+import { MVCFetchingError } from "@/libs/errors/MVC-errors"
 import { PrismaClient } from "@prisma/client"
 
 export const fetchAllDietaryRestricions = async () => {
@@ -7,6 +8,9 @@ export const fetchAllDietaryRestricions = async () => {
         const DietaryRestrictionsFromDb = await prisma.dietaryRestriction.findMany()
         return ({ success: true, data: DietaryRestrictionsFromDb })
     } catch (error) {
-        return ({ success: false, error: "Failed to retrieve dietary restrictions from db " + error })
+        return ({
+            success: false,
+            error: MVCFetchingError('dietary restrictions', 'repository', error)
+        })
     }
 }
