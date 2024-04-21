@@ -9,8 +9,8 @@ const ConfirmationWindow = (props: {message: string, confirmButton: string, decl
         <div className="confirmationWindow">
             <div className='confirmationWindowContainter'>
             <p>{message}</p>
-            <button onClick={handleConfirmButtonPress}>{confirmButton}</button>
-            <button onClick={handleDeclineButtonPress}>{declineButton}</button>
+            <button className="confirmation-button" onClick={handleConfirmButtonPress}>{confirmButton}</button>
+            <button className="confirmation-button" onClick={handleDeclineButtonPress}>{declineButton}</button>
             </div>
         </div>
     )

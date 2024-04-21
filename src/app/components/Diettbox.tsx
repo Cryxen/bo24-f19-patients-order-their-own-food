@@ -6,7 +6,7 @@ const Diettbox = (props: { Diett: string, Checked: boolean, onChangeMethod?: (ev
     // console.log(Diett + " : " + Checked) //FOR DEBUG
     return (
         <div className="diet-container">
-            <p>{Diett}</p>
+            <p className="diet-name">{Diett}</p>
             <label className="switch">
                 <input type="checkbox" name="toggleSwitch" checked={Checked ? true : false} onChange={onChangeMethod} value={Diett}/>
                 <span className="slider round"></span>
