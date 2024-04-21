@@ -54,7 +54,7 @@ const Login = () => {
 
     return (
             <div className='mainDiv'>
-                <h1>Logo</h1>
+                <h2 className="logo">Logo</h2>
                 <form className="login-container">
                     <input type="email" value={email} onChange={handleEmailChange} placeholder='E-post' />
                     <input type="password" value={password} onChange={handlePasswordChange} placeholder='Passord' />

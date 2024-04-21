@@ -154,7 +154,7 @@ const IndividualRoom = (props: { room: Room, dietaryRestrictions: DietaryRestric
                     return <Diettbox key={el.intolerance} Diett={el.intolerance} Checked={checkForCommonRestrictions(roomToUpdate.intoleranceRestrictions, el.intolerance)} onChangeMethod={handleDiettIntoleranceChange} />
                 })}
             </div>
-            <h2 className="title">Velg andre kostbehov:</h2>
+            <h2 className="title">Velg andre kostbehov</h2>
             <div className='restriction-container'>
                 {dietaryNeeds?.map(el => {
                     return <Diettbox key={el.dietaryNeed} Diett={el.dietaryNeed} Checked={checkForCommonRestrictions(roomToUpdate.dietaryNeeds, el.dietaryNeed)} onChangeMethod={handleDiettDietaryNeedChange} />
