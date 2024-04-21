@@ -1,30 +1,136 @@
+@import "src/app/styles/globals";
+
 ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
 }
 
-.container {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.meal-list {
-    border: solid;
-}
-
-.list li {
-    background-color: gray;
-    border: 1px solid black;
+.main-wrapper {
+    width: min(75rem, 100%);
     padding: 1rem;
+    margin-top: 2rem;
+    background-color: $white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    
+    .filter-container {
+        min-width: 100%;    
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    
+        .date-filter {
+            font-size: 1rem;
+            padding: 0.5em;
+            border: 0;
+        
+            background-color: $gray-300;
+            color: $black;
+            cursor: pointer;
+            box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+        
+            &:hover {
+                background: $white;
+            }
+        }
+    
+        .update-button {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        
+            font-size: 1rem;
+            border: 0;
+            padding: 0.5em 1em;
+        
+            background-color: $gray-300;
+            color: $black;
+            cursor: pointer;
+            box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+        
+            &:hover {
+                background: $white;
+            }
+        }
+    }
+    
+    .stats-container {
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+    
+        .border {
+            border: 1px solid $black;
+        }
+    
+        .meal-list-container {
+            background-color: $blue;
+            margin-right: auto;
+            width: 100%;
+
+            h5 {
+                padding: 1rem;
+            }
+    
+            .meal-list li {
+                border-bottom: 1px solid $black;
+                padding: 1rem;
+            }
+    
+            .meal-list li:first-child {
+                border-top: 1px solid $black;
+            }
+
+            @media only screen and (min-width: 640px) {
+                width: auto;
+            }
+        }
+    
+        .graphs-container {
+            margin-left: auto;
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 1rem;
+            
+            .total-orders-stats {
+                background-color: $red;
+                padding: 1rem;
+            }
+    
+            .popular-stats {
+                background-color: $blue;
+                padding: 1rem;
+            }
+    
+            .least-popular-stats {
+                background-color: $red;
+                padding: 1rem;
+            }
+    
+            ul li {
+                padding: 0.5rem;
+            }
+    
+            span {
+                display: block;
+                padding: 0.5rem;
+            }
+
+            @media only screen and (min-width: 640px) {
+                width: auto;
+            }
+        }
+    }
 }
 
-.graphs {
-    text-align: center;
-}
-
-.graphs section {
-    border: solid;
-    margin-bottom: 2rem;
-}

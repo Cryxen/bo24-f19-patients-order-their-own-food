@@ -1,6 +1,6 @@
 import '../styles/healthcareworkerpage.scss'
-import '../styles/globals.scss'
 import Layout from '../components/layout'
+import Navbox from '../components/Navbox'
 
 export default function Healthcareworker() {
     return (
@@ -8,12 +8,9 @@ export default function Healthcareworker() {
             <div className="mainDiv">
                 <h1>Velkommen Sarah</h1>
                 <section className='dashboardwrap'>
-                <button>Mat bestilling</button>
-                <button>Liste med bestillinger</button>
-                <button>Eventuelle knapper</button>
-                <button>Eventuelle knapper</button>
-                <button>Eventuelle knapper</button>
-                <button>Eventuelle knapper..</button>
+                <Navbox redirect='healthcareworker/foodorders' text='Matbestilling'/>
+                <Navbox redirect='healthcareworker/orderlist' text='Ordreliste'/>
+                <Navbox redirect='healthcareworker/messaging' text='Melding til kjøkken'/>
                 </section>
             </div>
         </Layout>

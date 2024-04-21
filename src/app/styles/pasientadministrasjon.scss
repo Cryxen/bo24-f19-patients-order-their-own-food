@@ -1,64 +1,102 @@
+@import "src/app/styles/globals";
 
-.box {
-    border-style: solid;
-    max-width: 40%;
-    width: 40%;
+h1 {
+    font-size: 1.5rem;
+
+    @media only screen and (min-width: 475px) {
+      font-size: 2rem;
+    }
+}
+
+.main-wrapper {
+    width: min(75rem, 100%);
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: $white;
+
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    .diet-name {
+    }
+
+    .title {
+      margin: 0 auto;
+    }
+
+    .button {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+  
+      font-size: 1rem;
+      border: 0;
+      padding: 0.5em 1em;
+  
+      background-color: $gray-300;
+      color: $black;
+      cursor: pointer;
+      box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+  
+      &:hover {
+          background: $white;
+      }
+    }
+
+    .dropdown {
+      font-size: 1rem;
+      padding: 0.5em;
+      border: 0;
+  
+      background-color: $gray-300;
+      color: $black;
+      cursor: pointer;
+      box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+  
+      &:hover {
+          background: $white;
+      }
+    }
+
+    .diet-container {
+      border-style: solid;
+      width: 10rem;
+      height: 10rem;
+      text-align: center;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .room-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .restriction-container {
+      min-width: 100%;
+      border: 1px solid $black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .config-container {
+
+    }
 }
-
-.boxValgtrom {
-  border-style: solid;
-  max-width: 40%;
-  width: 40%;
-}
-
-.restriksjonsbox {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.smallbox {
-  border-style: solid;
-  max-width: 25%;
-  width: 25%;
-  margin: 1vh;
-  padding: .5vh;
-  display: grid;
-  place-items: center;
-  border-radius: 5%;
-}
-
-.selectorRoom {
-    max-width: 30%;
-    width: 30%;
-    margin: auto;
-    margin-bottom: 1vh;
-}
-
-.generatebutton {
-    display: block;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
-    padding: 1vh;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.inputbruker {
-    max-width: 50%;
-    margin: auto;
-    padding: .4vh;
-    text-align: center;
-    
-}
-
-.Title  {
-  text-align: center;
-}
-
-
 
 //Kode under hentet fra W3 Schools, legger stil på toggle slider
 .switch {
@@ -68,14 +106,12 @@
     height: 34px;
   }
   
-
   .switch input {
     opacity: 0;
     width: 0;
     height: 0;
   }
   
- 
   .slider {
     position: absolute;
     cursor: pointer;
@@ -114,7 +150,6 @@
     transform: translateX(26px);
   }
   
-
   .slider.round {
     border-radius: 34px;
   }

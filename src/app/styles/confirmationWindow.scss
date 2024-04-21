@@ -1,0 +1,45 @@
+// Used https://codepen.io/adventuresinmissions/pen/ExwoWL for inspiration
+
+@import "src/app/styles/globals";
+
+.confirmationWindow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $slate-500;
+}
+
+.confirmationWindowContainter {
+    position: relative;
+    width: min(25rem, 100%);
+    margin: 10em auto;
+    padding: 1em;
+    opacity: 0.8;
+    background-color: $neutral-300;
+    border-radius: 0.25em;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+    .confirmation-button {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+    
+        font-size: 1rem;
+        border: 0;
+        padding: 0.5em 1em;
+        margin: 0.5em;
+    
+        background-color: $gray-300;
+        color: $black;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    
+        &:hover {
+            background: $white;
+        }
+    }
+}
+

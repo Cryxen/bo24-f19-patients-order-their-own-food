@@ -1,37 +1,308 @@
-.arrow {
-    font-size: 2rem;
-}
+@import "src/app/styles/globals";
 
-.container {
+.main-wrapper {
+    width: min(75rem, 100%);
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: $white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
-    width: 100%;
-    height: 55%;
-}
-
-.graph, .overview {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    align-items: center; 
-    background-color: red;
-    height: 10rem;
-}
-
-.meal-plan {
-    margin: 1rem;
-    border: solid;
-}
-
-.information {
-    display: flex;
     align-items: center;
-    justify-content: space-around;
-}
+    gap: 1rem;
 
-.buttons {
-    width: 50%;
-    display: flex;
-    justify-content: space-between;
+    .arrow {
+        font-size: 2rem;
+    }
+
+    input[type=text] {
+        display: inline-block;
+        font-size: 1rem;
+        width: 100%;
+        padding: 0.5em;
+        background-color: $gray-300;
+        color: $black;
+    
+        border: 1px solid $black;
+    }
+    
+    .date-container {
+        min-width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .date-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+    }
+
+    .main-container {
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1rem;
+        text-align: center;
+
+        .dish-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+        }
+
+        .new-meal-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            margin: 0 auto;
+            padding: 1rem;
+            border: 1px solid $black;
+
+            .config-button {
+                display: inline-block;
+                text-align: center;
+                text-decoration: none;
+            
+                font-size: 1rem;
+                border: 0;
+                padding: 0.5em 1em;
+            
+                background-color: $gray-300;
+                color: $black;
+                cursor: pointer;
+                box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+            
+                &:hover {
+                    background: $white;
+                }
+            }
+
+            .main-dish-box {
+
+                .dish-buttons {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    text-align: center;
+                    gap: 1rem;
+
+                    margin: 0.5rem;
+                }
+            }
+
+            .side-dish-box {
+
+                .dish-buttons {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+
+                    margin: 0.5rem;
+                }
+            }
+
+            .description-box {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                gap: 1rem;
+
+                .description-meal-plan {
+                    display: inline-block;
+                    width: 100%;
+
+                    font-size: 1rem;
+                    padding: 0.5em;
+                    resize: none;
+                    border: 1px solid $black;
+
+                    background-color: $gray-300;
+                    color: $black;
+                }
+            }
+        }
+
+        .meal-plan-container {
+            border: 1px solid $black;
+            background-color: $neutral-200;
+
+            margin: 0 auto;
+            
+            .meal-plan {
+                border: 1px solid $black;
+                background-color: $blue;
+                margin: 1rem;
+
+                .config-meal-box {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    text-align: center;
+
+                    gap: 1rem;
+                    margin: 1rem;
+                    
+                    .config-button {
+                        display: inline-block;
+                        text-align: center;
+                        text-decoration: none;
+                    
+                        font-size: 1rem;
+                        border: 0;
+                        padding: 0.5em 0.5em;
+                    
+                        background-color: $gray-300;
+                        color: $black;
+                        cursor: pointer;
+                        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+                    
+                        &:hover {
+                            background: $white;
+                        }
+
+                        @media only screen and (min-width: 475px) {
+                            padding: 0.5em 1em;
+                        }
+                    }
+                }
+
+                .information-meal-box {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 0.5rem;
+
+                    margin: 1rem;
+
+                    .config-button {
+                        display: inline-block;
+                        text-align: center;
+                        text-decoration: none;
+                    
+                        font-size: 1rem;
+                        border: 0;
+                        padding: 0.5em 1em;
+                    
+                        background-color: $gray-300;
+                        color: $black;
+                        cursor: pointer;
+                        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+                    
+                        &:hover {
+                            background: $white;
+                        }
+                    }
+                }
+
+                .meal-desc-container {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+
+                    margin: 1rem;
+
+                    .description-meal-box {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        gap: 0.5rem;
+                    }
+
+                    .arrow {
+                        margin-left: auto;
+                    }
+                }
+            }
+        }
+
+        .nutrition-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+
+            border: 1px solid $black;
+            padding: 1rem;
+            margin: 0 auto;
+            height: 25rem;
+    
+            background-color: $neutral-200;
+
+            .nutrition-graph {
+                width: 100%;
+                padding: 1rem;
+                height: 30%;
+
+                border: 1px solid $black;
+                background-color: $red;
+            }
+
+            .nutrition-overview {
+                width: 100%;
+                padding: 1rem;
+                height: 70%;
+
+                border: 1px solid $black;
+                margin-bottom: auto;
+                background-color: $red;
+            }
+        }
+    }
+
+    .config-container {
+        min-width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        .config-button {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+        
+            font-size: 1rem;
+            border: 0;
+            padding: 0.5em 1em;
+        
+            background-color: $gray-300;
+            color: $black;
+            cursor: pointer;
+            box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+        
+            &:hover {
+                background: $white;
+            }
+        }
+
+        .config-button:first-child, .config-button:last-child {
+            margin: 0 auto;
+        }
+    }
 }
