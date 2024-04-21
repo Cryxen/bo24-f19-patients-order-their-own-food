@@ -25,6 +25,7 @@
 
 .textDiet{
     padding: .3vh;
+    text-align: center;
 }
 
 .displayX{
@@ -63,4 +64,11 @@
     padding-right: 1vh;
     background-color: rgb(231, 218, 202);
     flex-wrap: wrap;
+}
+
+.boxInfoComp{
+    min-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

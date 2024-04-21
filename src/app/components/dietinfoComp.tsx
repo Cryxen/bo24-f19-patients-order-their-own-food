@@ -45,7 +45,7 @@ const DietInfoContainer = () => {
         <div className="Topbox">
           <p className='textDiet'>{dietType}</p>
         </div>
-        
+
         <div className="Bottombox">
           <p className='textDiet'>{dietName}</p>
         </div>

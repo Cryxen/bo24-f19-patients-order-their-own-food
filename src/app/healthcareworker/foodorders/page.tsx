@@ -1,6 +1,7 @@
 "use client"
 import Layout from "@/app/components/layout"
 import '../../styles/foodorder.scss'
+import '../../styles/minidiet.scss';
 import { useEffect, useState } from "react"
 import { Room } from "@/features/rooms/types"
 import ChangePatientRoom from "@/app/components/ChangePatientRoom"
@@ -17,17 +18,38 @@ const Foodorders = () => {
         dietaryNeeds: []
     })
     useEffect(() => {
-        fetchAllRooms()
-    }, [])
+        fetchAllRooms();
+    }, []);
+  
     const fetchAllRooms = async (): Promise<void> => {
-        const response = await fetch('/api/rooms')
-        if (response.status === 200) {
-            const data = await response.json()
-            setRoomsFromDb(data.data)
-            console.log(data.data)
+        try {
+            const response = await fetch('/api/rooms');
+            if (!response.ok) {
+                throw new Error('Failed to fetch rooms');
+            }
+            const data = await response.json();
+            setRoomsFromDb(data.data);
+        } catch (error) {
+            console.error('Error fetching rooms:', error);
         }
-    }
+    };
 
+    const DietaryInfoComp = ({ dietType, dietName }: { dietType: string; dietName: string | undefined }) => {
+        return (
+            <article className='Minibox'>
+            <div className="Topbox">
+              <p className='textDiet'>{dietType}</p>
+            </div>
+    
+            <div className="Bottombox">
+              <p className='textDiet'>{dietName}</p>
+            </div>
+          </article>
+        );
+    };
+
+
+    console.log("Valgt rom:", selectedRoom);
 
     return (
         <Layout>
@@ -35,58 +57,33 @@ const Foodorders = () => {
                 <h1>Dagens meny:</h1>
                 <div className="main-wrapper">
                     <ChangePatientRoom roomsFromDb={roomsFromDb} setSelectedRoom={setSelectedRoom} selectedRoom={selectedRoom} />
+                    <h3 className="diet-info">Diett info:</h3>
                     <div className="diet container">
-                        <p className="diet-info">Diett info:</p>
-                        {selectedRoom.allergyRestrictions.length > 0 ?
-                            <>
-                                <p>Allergi:</p>
-                                <ul>
-                                    {selectedRoom.allergyRestrictions.map(el =>
-                                        <li key={el.allergyRestricionId}>{el.allergyRestricionId}</li>
-                                    )}
-                                </ul>
-                            </> : ''
-                        }
-                        {selectedRoom.dietaryRestrictions.length > 0 ?
-                            <>
-                                <p>Diett:</p>
-                                <ul>
-                                    {selectedRoom.dietaryRestrictions.map(el =>
-                                        <li key={el.dietaryRestrictionId}>{el.dietaryRestrictionId}</li>
-                                    )}
-                                </ul>
-                            </> : ''
-                        }
-                        {selectedRoom.consistancyRestrictions.length > 0 ?
-                            <>
-                                <p>Konsistens:</p>
-                                <ul>
-                                    {selectedRoom.consistancyRestrictions.map(el =>
-                                        <li key={el.foodConsistencyRestrictionId}>{el.foodConsistencyRestrictionId}</li>
-                                    )}
-                                </ul>
-                            </> : ''
-                        }
-                        {selectedRoom.intoleranceRestrictions.length > 0 ?
-                            <>
-                                <p>Intoleranse:</p>
-                                <ul>
-                                    {selectedRoom.intoleranceRestrictions.map(el =>
-                                        <li key={el.intolleranceRestrictionId}>{el.intolleranceRestrictionId}</li>
-                                    )}
-                                </ul>
-                            </> : ''
-                        }
-                        {selectedRoom.dietaryNeeds.length > 0 ?
-                            <>
-                                <p>Andre kostbehov:</p>
-                                <ul>
-                                    {selectedRoom.dietaryNeeds.map(el =>
-                                        <li key={el.dietaryNeedId}>{el.dietaryNeedId}</li>
-                                    )}
-                                </ul>
-                            </> : ''
-                        }
+
+
+                    <div className="boxInfoComp">
+                        {selectedRoom.allergyRestrictions && selectedRoom.allergyRestrictions.length > 0 && selectedRoom.allergyRestrictions.map((restriction, index) => (
+                            <DietaryInfoComp key={index} dietType="Allergier" dietName={restriction.allergyRestricionId} />
+                        ))}
+                        {selectedRoom.dietaryRestrictions && selectedRoom.dietaryRestrictions.length > 0 && selectedRoom.dietaryRestrictions.map((restriction, index) => (
+                            <DietaryInfoComp key={index} dietType="Diettrestriksjoner" dietName={restriction.dietaryRestrictionId} />
+                        ))}
+                        {selectedRoom.consistancyRestrictions && selectedRoom.consistancyRestrictions.length > 0 && selectedRoom.consistancyRestrictions.map((restriction, index) => (
+                            <DietaryInfoComp key={index} dietType="Konsistensrestriksjoner" dietName={restriction.foodConsistencyRestrictionId} />
+                        ))}
+                        {selectedRoom.intoleranceRestrictions && selectedRoom.intoleranceRestrictions.length > 0 && selectedRoom.intoleranceRestrictions.map((restriction, index) => (
+                            <DietaryInfoComp key={index} dietType="Intoleranser" dietName={restriction.intolleranceRestrictionId} />
+                        ))}
+                        {selectedRoom.dietaryNeeds && selectedRoom.dietaryNeeds.length > 0 && selectedRoom.dietaryNeeds.map((restriction, index) => (
+                            <DietaryInfoComp key={index} dietType="Andre kostbehov" dietName={restriction.dietaryNeedId} />
+                        ))}
+                        {!selectedRoom.allergyRestrictions.length && !selectedRoom.dietaryRestrictions.length && !selectedRoom.consistancyRestrictions.length && !selectedRoom.intoleranceRestrictions.length && !selectedRoom.dietaryNeeds.length && (
+                        <p>Ingen diettbehov registert på dette rommet</p>
+                        )}
+
+                    </div>
+
+                        
                     </div>
                     <div className="order-container">
                         <table className="order-table">
