@@ -45,6 +45,9 @@ const Login = () => {
                     case "administrator":
                         router.push('/administrator')
                         break;
+                    case "development":
+                        router.push('/developer')
+                        break;
                     default:
                         break;
                 }
