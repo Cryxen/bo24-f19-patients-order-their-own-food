@@ -4,8 +4,10 @@ import * as consistencyRestrictionsRepo from './ConsistencyRestrictions.reposito
 export const fetchAllConsistencyRestrictions = async () => {
     try {
         const consistencyRestrictionsFromDb = await consistencyRestrictionsRepo.fetchAllConsistencyRestrictions()
-        return {success: true, data: consistencyRestrictionsFromDb.data, error: consistencyRestrictionsFromDb.error}
+        return { success: true, data: consistencyRestrictionsFromDb.data, error: consistencyRestrictionsFromDb.error }
     } catch (error) {
-        return {success: false,error: MVCFetchingError('consistency restrictions', 'service', error)
+        return {
+            success: false, error: MVCFetchingError('consistency restrictions', 'service', error)
+        }
     }
 }
