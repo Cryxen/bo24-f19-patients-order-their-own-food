@@ -12,7 +12,7 @@ const Header = () => {
                 router.push('/administrator')
                 break;
             case 'development':
-                router.push('/')
+                router.push('/developer')
                 break;
             case "healthcare":
                 router.push('/healthcareworker')
