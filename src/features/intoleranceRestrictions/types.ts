@@ -1,4 +1,4 @@
-export type Intolerance {
+export type Intolerance = {
     intolleranceRestrictionId?: string
     intolerance: string
 }
