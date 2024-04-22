@@ -7,7 +7,7 @@ export type Meal = {
     category: SideDish | MainDish | "undefined"
     dietaryInfo?: string[] | string;
     imageUrl?: string
-    meal: Meal //Made to reflect DB response.
+    meal?: Meal //Made to reflect DB response.
 }
 
 export type SideDish = {
