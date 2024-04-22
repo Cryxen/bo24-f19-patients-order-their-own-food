@@ -81,8 +81,8 @@ const ChangeOrder = (props: { order: OrderClass, fetchAllOrders: () => void, set
                     let mainDish: string = 'undefined'
                     let sideDish: string = 'undefined'
                     el.meals.map(meal => {
-                        (MAIN_DISH as unknown as MainDish[]).includes(meal.meal.category as unknown as MainDish) ?
-                            mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
+                        (MAIN_DISH as unknown as MainDish[]).includes(meal.meal?.category as unknown as MainDish) ?
+                            mainDish = meal.meal?.mealName as string : sideDish = meal.meal?.mealName as string
                     })
                     return (<option key={el.id} value={el.id}>
                         Hovedrett: {mainDish} - Siderett: {sideDish}
