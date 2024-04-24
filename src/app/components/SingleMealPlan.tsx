@@ -6,18 +6,19 @@ import { useState, MouseEvent, useEffect, Dispatch, SetStateAction } from "react
 const SingleMealPlan = (props: { mealPlan: MealPlan, selectedRoom: Room, setOrder: Dispatch<SetStateAction<Order | undefined>>, saveOrder: () => void }) => {
     const { mealPlan, selectedRoom, setOrder, saveOrder } = props
 
-
-    // const [order, setOrder] = useState<Order>({
-    //     roomNumber: selectedRoom.roomNumber,
-    //     mealPlanId: mealPlan.id!,
-    //     mealPlan: mealPlan,
-    //     size: "1"
-    // })
+    const [allergies, setAllergies] = useState<boolean>(false)
     const [smallButton, setSmallButton] = useState<boolean>(false)
     const [mediumButton, setMediumButton] = useState<boolean>(false)
     const [largeButton, setLargeButton] = useState<boolean>(false)
     const [showWarning, setShowWarning] = useState<boolean>(false)
 
+    useEffect(() => {
+        checkForAllergies()
+    },[])
+
+    const checkForAllergies = () => {
+        console.log(mealPlan.meals)
+    }
 
     const handleSmallButtonPress = (event: MouseEvent<HTMLButtonElement>) => {
         setSmallButton(true)
