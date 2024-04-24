@@ -14,10 +14,45 @@ const SingleMealPlan = (props: { mealPlan: MealPlan, selectedRoom: Room, setOrde
 
     useEffect(() => {
         checkForAllergies()
-    },[])
+    }, [])
 
     const checkForAllergies = () => {
-        console.log(mealPlan.meals)
+        mealPlan.meals.map(meal => {
+            console.log(meal.meal?.dietaryInfo)
+            if (typeof meal.meal?.dietaryInfo === "string") {
+                const arrayOfDietaryInfo = meal.meal.dietaryInfo.split(",")
+
+                /**
+                 * Iterate through all restrictions to try and find a match. 
+                 * if Match = setAllergies true.
+                 */
+
+                arrayOfDietaryInfo.forEach(element => {
+                    selectedRoom.allergyRestrictions.forEach(allergy => {
+                        console.log(element)
+                        console.log(allergy)
+                        if (element === allergy.allergyRestricionId)
+                            setAllergies(true)
+                    });
+                    selectedRoom.consistancyRestrictions.forEach(consistancy => {
+                        if (element === consistancy.foodConsistencyRestrictionId)
+                            setAllergies(true)
+                    })
+                    selectedRoom.dietaryNeeds.forEach(dietaryNeed => {
+                        if (element === dietaryNeed.dietaryNeedId)
+                            setAllergies(true)
+                    })
+                    selectedRoom.dietaryRestrictions.forEach(dietaryRestriction => {
+                        if (element === dietaryRestriction.dietaryRestrictionId)
+                            setAllergies(true)
+                    })
+                    selectedRoom.intoleranceRestrictions.forEach(intolerance => {
+                        if (element === intolerance.intolleranceRestrictionId)
+                            setAllergies(true)
+                    })
+                });
+            }
+        })
     }
 
     const handleSmallButtonPress = (event: MouseEvent<HTMLButtonElement>) => {
@@ -73,7 +108,7 @@ const SingleMealPlan = (props: { mealPlan: MealPlan, selectedRoom: Room, setOrde
     }
 
     return (
-        <div className="order-container">
+        <div className={allergies ? "red order-container" : "order-container"}>
             {showWarning ? <p>Du må velge porsjon størrelse</p> : ''}
             <table className="order-table">
                 <tbody>
