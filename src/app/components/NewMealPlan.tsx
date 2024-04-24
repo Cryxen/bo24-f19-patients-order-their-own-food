@@ -27,12 +27,12 @@ const NewMealPlan = (props: { date: Date, fetchMealPlans: () => void }) => {
         }
     }
 
-    const chosenMainDish = (event: MouseEvent): void => {
-        const target = event.target as HTMLInputElement
+    const chosenMainDish = (event: ChangeEvent<HTMLSelectElement>): void => {
+        const target = event.target
         setMainDish(target.value as unknown as Meal)
     }
-    const chosenSideDish = (event: MouseEvent): void => {
-        const target = event.target as HTMLInputElement
+    const chosenSideDish = (event: ChangeEvent<HTMLSelectElement>): void => {
+        const target = event.target
         setSideDish(target.value as unknown as Meal)
     }
 
@@ -71,29 +71,26 @@ const NewMealPlan = (props: { date: Date, fetchMealPlans: () => void }) => {
         <form className="new-meal-container">
             <section className="main-dish-box">
                 <h3>Hovedrett:</h3>
-                <div className="dish-buttons">
+                <select onChange={chosenMainDish}>
+                    <option>Velg hovedrett</option>
+
                     {mealList?.map(meal =>
                         (MAIN_DISH as unknown as MainDish[]).includes(meal.category as MainDish) ?
-                            <div className="dish-box" key={meal.mealName}>
-                                <label htmlFor={meal.mealName}>{meal.mealName}</label>
-                                <input type="radio" id={meal.mealName} value={meal.mealName} name="mainDish" onClick={chosenMainDish} />
-                            </div>
+                            <option key={meal.mealName} value={meal.mealName}>{meal.mealName}</option>
                             : ''
                     )}
-                </div>
+                </select>
             </section>
             <section className="side-dish-box">
                 <h3>Siderett:</h3>
-                <div className="dish-buttons">
+                <select onChange={chosenSideDish}>
+                    <option>Velg siderett</option>
                     {mealList?.map(meal =>
                         (SIDE_DISH as unknown as SideDish[]).includes(meal.category as SideDish) ?
-                            <div className="dish-box" key={meal.mealName}>
-                                <label htmlFor={meal.mealName}>{meal.mealName}</label>
-                                <input type="radio" id={meal.mealName} value={meal.mealName} name="sideDish" onClick={chosenSideDish} />
-                            </div>
+                            <option key={meal.mealName} value={meal.mealName}>{meal.mealName}</option>
                             : ''
                     )}
-                </div>
+                </select>
             </section>
             <section className="description-box">
                 <label htmlFor="descriptionOfMealPlan">Beskrivelse:</label>
