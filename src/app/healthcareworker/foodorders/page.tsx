@@ -19,8 +19,22 @@ const Foodorders = () => {
     })
     useEffect(() => {
         fetchAllRooms();
+        fetchTodaysMealPlans();
     }, []);
-  
+
+    const fetchTodaysMealPlans = async (): Promise<void> => {
+        try {
+            const date = new Date()
+            const response = await fetch('/api/mealPlans?date=' + date.toDateString)
+            if (response.status === 200) {
+                const data = await response.json()
+                console.log(data)
+            }
+        } catch (error) {
+
+        }
+    }
+
     const fetchAllRooms = async (): Promise<void> => {
         try {
             const response = await fetch('/api/rooms');
@@ -37,14 +51,14 @@ const Foodorders = () => {
     const DietaryInfoComp = ({ dietType, dietName }: { dietType: string; dietName: string | undefined }) => {
         return (
             <article className='Minibox'>
-            <div className="Topbox">
-              <p className='textDiet'>{dietType}</p>
-            </div>
-    
-            <div className="Bottombox">
-              <p className='textDiet'>{dietName}</p>
-            </div>
-          </article>
+                <div className="Topbox">
+                    <p className='textDiet'>{dietType}</p>
+                </div>
+
+                <div className="Bottombox">
+                    <p className='textDiet'>{dietName}</p>
+                </div>
+            </article>
         );
     };
 
@@ -61,29 +75,29 @@ const Foodorders = () => {
                     <div className="diet container">
 
 
-                    <div className="boxInfoComp">
-                        {selectedRoom.allergyRestrictions && selectedRoom.allergyRestrictions.length > 0 && selectedRoom.allergyRestrictions.map((restriction, index) => (
-                            <DietaryInfoComp key={index} dietType="Allergier" dietName={restriction.allergyRestricionId} />
-                        ))}
-                        {selectedRoom.dietaryRestrictions && selectedRoom.dietaryRestrictions.length > 0 && selectedRoom.dietaryRestrictions.map((restriction, index) => (
-                            <DietaryInfoComp key={index} dietType="Diettrestriksjoner" dietName={restriction.dietaryRestrictionId} />
-                        ))}
-                        {selectedRoom.consistancyRestrictions && selectedRoom.consistancyRestrictions.length > 0 && selectedRoom.consistancyRestrictions.map((restriction, index) => (
-                            <DietaryInfoComp key={index} dietType="Konsistensrestriksjoner" dietName={restriction.foodConsistencyRestrictionId} />
-                        ))}
-                        {selectedRoom.intoleranceRestrictions && selectedRoom.intoleranceRestrictions.length > 0 && selectedRoom.intoleranceRestrictions.map((restriction, index) => (
-                            <DietaryInfoComp key={index} dietType="Intoleranser" dietName={restriction.intolleranceRestrictionId} />
-                        ))}
-                        {selectedRoom.dietaryNeeds && selectedRoom.dietaryNeeds.length > 0 && selectedRoom.dietaryNeeds.map((restriction, index) => (
-                            <DietaryInfoComp key={index} dietType="Andre kostbehov" dietName={restriction.dietaryNeedId} />
-                        ))}
-                        {!selectedRoom.allergyRestrictions.length && !selectedRoom.dietaryRestrictions.length && !selectedRoom.consistancyRestrictions.length && !selectedRoom.intoleranceRestrictions.length && !selectedRoom.dietaryNeeds.length && (
-                        <p>Ingen diettbehov registert på dette rommet</p>
-                        )}
+                        <div className="boxInfoComp">
+                            {selectedRoom.allergyRestrictions && selectedRoom.allergyRestrictions.length > 0 && selectedRoom.allergyRestrictions.map((restriction, index) => (
+                                <DietaryInfoComp key={index} dietType="Allergier" dietName={restriction.allergyRestricionId} />
+                            ))}
+                            {selectedRoom.dietaryRestrictions && selectedRoom.dietaryRestrictions.length > 0 && selectedRoom.dietaryRestrictions.map((restriction, index) => (
+                                <DietaryInfoComp key={index} dietType="Diettrestriksjoner" dietName={restriction.dietaryRestrictionId} />
+                            ))}
+                            {selectedRoom.consistancyRestrictions && selectedRoom.consistancyRestrictions.length > 0 && selectedRoom.consistancyRestrictions.map((restriction, index) => (
+                                <DietaryInfoComp key={index} dietType="Konsistensrestriksjoner" dietName={restriction.foodConsistencyRestrictionId} />
+                            ))}
+                            {selectedRoom.intoleranceRestrictions && selectedRoom.intoleranceRestrictions.length > 0 && selectedRoom.intoleranceRestrictions.map((restriction, index) => (
+                                <DietaryInfoComp key={index} dietType="Intoleranser" dietName={restriction.intolleranceRestrictionId} />
+                            ))}
+                            {selectedRoom.dietaryNeeds && selectedRoom.dietaryNeeds.length > 0 && selectedRoom.dietaryNeeds.map((restriction, index) => (
+                                <DietaryInfoComp key={index} dietType="Andre kostbehov" dietName={restriction.dietaryNeedId} />
+                            ))}
+                            {!selectedRoom.allergyRestrictions.length && !selectedRoom.dietaryRestrictions.length && !selectedRoom.consistancyRestrictions.length && !selectedRoom.intoleranceRestrictions.length && !selectedRoom.dietaryNeeds.length && (
+                                <p>Ingen diettbehov registert på dette rommet</p>
+                            )}
 
-                    </div>
+                        </div>
 
-                        
+
                     </div>
                     <div className="order-container">
                         <table className="order-table">

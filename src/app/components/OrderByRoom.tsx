@@ -22,8 +22,8 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
             let mainDish: string = 'undefined'
             let sideDish: string = 'undefined'
             order.mealPlan.meals.map(meal => {
-                (MAIN_DISH as unknown as MainDish[]).includes(meal.meal.category as unknown as MainDish) ?
-                    mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
+                (MAIN_DISH as unknown as MainDish[]).includes(meal.meal?.category as unknown as MainDish) ?
+                    mainDish = meal.meal?.mealName as string : sideDish = meal.meal?.mealName as string
             })
             const pastOrderToAdd: PastOrder = {
                 date: date.toDateString(),
@@ -86,8 +86,8 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
                     let sideDish: string = 'undefined'
 
                     orderClass?.mealPlan?.meals?.map(meal => {
-                        (MAIN_DISH as unknown as MainDish[]).includes(meal.meal.category as unknown as MainDish) ?
-                            mainDish = meal.meal.mealName as string : sideDish = meal.meal.mealName as string
+                        (MAIN_DISH as unknown as MainDish[]).includes(meal.meal?.category as unknown as MainDish) ?
+                            mainDish = meal.meal?.mealName as string : sideDish = meal.meal?.mealName as string
                     })
                     return (
                         showChangeOrder ?
