@@ -68,8 +68,17 @@ const Foodorders = () => {
         );
     };
 
-    const saveOrder = () => {
+    const saveOrder = async () => {
         console.log(order)
+        const response = await fetch('/api/orders', {
+            method: "POST",
+            body: JSON.stringify(order)
+        })
+        console.log(response)
+        if (response.status === 200) {
+            const data = await response.json()
+            console.log(data)
+        }
     }
 
     console.log("Valgt rom:", selectedRoom);
@@ -110,7 +119,7 @@ const Foodorders = () => {
                     </div>
                     {selectedRoom.roomNumber !== 0 ?
                         mealPlans.map(mealPlan =>
-                            <SingleMealPlan key={mealPlan.id} mealPlan={mealPlan} selectedRoom={selectedRoom} setOrder={setOrder} saveOrder={saveOrder}/>
+                            <SingleMealPlan key={mealPlan.id} mealPlan={mealPlan} selectedRoom={selectedRoom} setOrder={setOrder} saveOrder={saveOrder} />
                         ) : ''
                     }
                 </div>

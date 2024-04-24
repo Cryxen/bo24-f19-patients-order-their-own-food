@@ -26,6 +26,7 @@ const SingleMealPlan = (props: { mealPlan: MealPlan, selectedRoom: Room, setOrde
         setShowWarning(false)
 
         setOrder({
+            id: 0,
             roomNumber: selectedRoom.roomNumber,
             mealPlan: mealPlan,
             mealPlanId: mealPlan.id!,
@@ -39,6 +40,7 @@ const SingleMealPlan = (props: { mealPlan: MealPlan, selectedRoom: Room, setOrde
         setShowWarning(false)
 
         setOrder({
+            id: 0,
             roomNumber: selectedRoom.roomNumber,
             mealPlan: mealPlan,
             mealPlanId: mealPlan.id!,
@@ -52,6 +54,7 @@ const SingleMealPlan = (props: { mealPlan: MealPlan, selectedRoom: Room, setOrde
         setShowWarning(false)
 
         setOrder({
+            id: 0,
             roomNumber: selectedRoom.roomNumber,
             mealPlan: mealPlan,
             mealPlanId: mealPlan.id!,
