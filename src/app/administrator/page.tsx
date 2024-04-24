@@ -9,12 +9,12 @@ export default function Administrator() {
         <Layout>
             <div className="mainDiv">
                 <h1>Administrator</h1>
-                <section className='dashboardwrap'>
+                <div className='dashboardwrap'>
                     <Navbox redirect='administrator/budget' text='Budsjett'/>
                     <Navbox redirect='administrator/adminstatistics' text='Statistikk'/>
-                    <Navbox redirect='administrator/pasientadministrasjon' text='Pasientadministrasjon'/>
-                    <Navbox redirect='administrator/useradministration' text='Brukeradministrasjon'/>
-                </section>
+                    <Navbox redirect='administrator/pasientadministrasjon' text='Pasient-Administrasjon'/>
+                    <Navbox redirect='administrator/useradministration' text='Bruker-Administrasjon'/>
+                </div>
             </div>
         </Layout>
     )

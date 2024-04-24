@@ -102,42 +102,6 @@ footer {
     background-color: $neutral-50;
 }
 
-.dashboardwrap {
-    margin-top: 2rem; 
-    margin-bottom: auto; 
-    gap: 2rem;
-    
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-
-    .nav-button {
-        display: inline-block;
-        text-align: center;
-        text-decoration: none;
-
-        font-size: 1rem;
-        border-radius: 0.5em;
-        padding: 1em;
-        min-width: 7.8125em;
-        min-height: 7.8125em;
-
-        background: $blue;
-        color: $black;
-        cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    
-        &:hover {
-            background: $red;
-        }
-
-        @media only screen and (min-width: 475px) {
-            min-width: 12.5em;
-            min-height: 12.5em;
-        }
-    }
-}
-
 // .select-button {
     // display: inline-block;
     // text-align: center;

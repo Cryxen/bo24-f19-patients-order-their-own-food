@@ -1,9 +1,9 @@
 @import "src/app/styles/globals";
 
 .main-wrapper {
-    min-width: 75%;
-    margin: 1rem 0;
+    width: min(75rem, 100%);
 
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;

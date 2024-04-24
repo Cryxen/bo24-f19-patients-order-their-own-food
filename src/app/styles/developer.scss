@@ -1,0 +1,50 @@
+@import "src/app/styles/globals";
+
+.dashboardwrap {
+    width: min(75rem, 100%);
+    padding: 1rem;
+    margin-top: 2rem;
+    margin-bottom: auto;
+    background-color: $white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+
+    display: grid;
+    grid-auto-columns: 1fr;
+    gap: 2rem;
+    
+    .dashboard-role-container {
+        text-align: center;
+
+        h2 {
+            margin: 1rem 0 2rem 0;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-auto-rows: 10rem;
+            grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+            gap: 1rem;
+
+            .nav-button {
+                display: inline-block;
+                text-align: center;
+                text-decoration: none;
+        
+                width: 100%;
+                height: 100%;
+                font-size: 1rem;
+                border-radius: 0.5em;
+                padding: 1em;
+        
+                background: $blue;
+                color: $black;
+                cursor: pointer;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            
+                &:hover {
+                    background: $red;
+                }
+            }
+        }
+    }
+}

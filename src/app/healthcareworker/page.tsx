@@ -7,11 +7,11 @@ export default function Healthcareworker() {
         <Layout>
             <div className="mainDiv">
                 <h1>Velkommen Sarah</h1>
-                <section className='dashboardwrap'>
-                <Navbox redirect='healthcareworker/foodorders' text='Matbestilling'/>
-                <Navbox redirect='healthcareworker/orderlist' text='Ordreliste'/>
-                <Navbox redirect='healthcareworker/messaging' text='Melding til kjøkken'/>
-                </section>
+                <div className='dashboardwrap'>
+                    <Navbox redirect='healthcareworker/foodorders' text='Matbestilling'/>
+                    <Navbox redirect='healthcareworker/orderlist' text='Ordreliste'/>
+                    <Navbox redirect='healthcareworker/messaging' text='Melding til kjøkken'/>
+                </div>
             </div>
         </Layout>
     )

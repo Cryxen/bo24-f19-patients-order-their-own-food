@@ -2,13 +2,13 @@
 
 .main-wrapper {
     width: min(75rem, 100%);    
-    margin: 1rem 0;
     
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 
     .room-container {
     }

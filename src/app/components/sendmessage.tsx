@@ -1,5 +1,4 @@
 'use client'
-import '../styles/globals.scss';
 import '../styles/messagehealthcare.scss';
 
 import React, { useState } from 'react';
@@ -43,36 +42,15 @@ const SendMessage = () => {
         <Layout>
             <div className="mainDiv">
                 <h1>Meldingsmodul</h1>
-                <section className='mainSection'>
-                    <article className='messageMain'>
-                        <form onSubmit={handleSubmit}>
-                            <input 
-                                type="text" 
-                                placeholder='Tittel' 
-                                className='titleInput' 
-                                value={title} 
-                                onChange={(e) => setTitle(e.target.value)} 
-                            />
-                            <input 
-                                type="text" 
-                                placeholder='Romnr' 
-                                className='titleInput' 
-                                value={room} 
-                                onChange={(e) => setRoom(e.target.value)} 
-                            />
-                            <textarea 
-                                name="message" 
-                                id='message' 
-                                placeholder='Meldingstekst' 
-                                className='messageInput' 
-                                value={message} 
-                                onChange={(e) => setMessage(e.target.value)} 
-                            ></textarea>
-                            <button type='submit' className='submitButton'>Send melding til kjøkken</button>
-                            {errorMessage && <p className="error">{errorMessage}</p>}
-                        </form>
-                    </article>
-                </section>
+                <div className="main-wrapper">
+                    <form className="message-container" onSubmit={handleSubmit}>
+                        <input type="text" placeholder='Tittel' value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <input type="text" placeholder='Romnr' value={room} onChange={(e) => setRoom(e.target.value)} />
+                        <textarea name="message" id='message' className="description-message"  placeholder='Meldingstekst' value={message} onChange={(e) => setMessage(e.target.value)} ></textarea>
+                        <button type='submit' className="submit-button">Send melding til kjøkken</button> 
+                        {errorMessage && <p className="error">{errorMessage}</p>}
+                    </form>
+                </div>
             </div>
         </Layout>
     );
