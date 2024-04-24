@@ -7,6 +7,8 @@ import { Room } from "@/features/rooms/types"
 import ChangePatientRoom from "@/app/components/ChangePatientRoom"
 import { Allergy } from "@/features/allergyRestrictions/types"
 import { MealPlan } from "@/features/mealPlans/types";
+import SingleMealPlan from "@/app/components/SingleMealPlan";
+import { Order } from "@/features/orders/types";
 
 const Foodorders = () => {
     const [roomsFromDb, setRoomsFromDb] = useState<Room[]>([])
@@ -18,7 +20,9 @@ const Foodorders = () => {
         intoleranceRestrictions: [],
         dietaryNeeds: []
     })
-    const [mealPlans, setMealPlans] = useState<MealPlan>()
+    const [mealPlans, setMealPlans] = useState<MealPlan[]>([])
+    const [order, setOrder] = useState<Order>()
+
     useEffect(() => {
         fetchAllRooms();
         fetchTodaysMealPlans();
@@ -64,6 +68,9 @@ const Foodorders = () => {
         );
     };
 
+    const saveOrder = () => {
+        console.log(order)
+    }
 
     console.log("Valgt rom:", selectedRoom);
 
@@ -75,8 +82,6 @@ const Foodorders = () => {
                     <ChangePatientRoom roomsFromDb={roomsFromDb} setSelectedRoom={setSelectedRoom} selectedRoom={selectedRoom} />
                     <h3 className="diet-info">Diett info:</h3>
                     <div className="diet container">
-
-
                         <div className="boxInfoComp">
                             {selectedRoom.allergyRestrictions && selectedRoom.allergyRestrictions.length > 0 && selectedRoom.allergyRestrictions.map((restriction, index) => (
                                 <DietaryInfoComp key={index} dietType="Allergier" dietName={restriction.allergyRestricionId} />
@@ -97,98 +102,17 @@ const Foodorders = () => {
                                 <p>Ingen diettbehov registert på dette rommet</p>
                             )}
 
+
+
                         </div>
 
 
                     </div>
-                    <div className="order-container">
-                        <table className="order-table">
-                            <tbody>
-                                <tr>
-                                    <td className="display-table">Bilde av mat 1</td>
-                                    <td className="display-table">Beskrivelse av mat 1</td>
-                                    <td className="order-config">
-                                        <select className="portion dropdown">
-                                            <option className="portion-option">Porsjon</option>
-                                            <option className="portion-option">Liten</option>
-                                            <option className="portion-option">Medium</option>
-                                            <option className="portion-option">Stor</option>
-                                        </select>
-                                        <button className="portions select-button">Små</button>
-                                        <button className="portions select-button">Medium</button>
-                                        <button className="portions select-button">Stor</button>
-                                        <button className="select-button">Bestill</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="order-container">
-                        <table className="order-table">
-                            <tbody>
-                                <tr>
-                                    <td className="display-table">Bilde av mat 2</td>
-                                    <td className="display-table">Beskrivelse av mat 2</td>
-                                    <td className="order-config">
-                                        <select className="portion dropdown">
-                                            <option className="portion-option">Porsjon</option>
-                                            <option className="portion-option">Liten</option>
-                                            <option className="portion-option">Medium</option>
-                                            <option className="portion-option">Stor</option>
-                                        </select>
-                                        <button className="portions select-button">Små</button>
-                                        <button className="portions select-button">Medium</button>
-                                        <button className="portions select-button">Stor</button>
-                                        <button className="select-button">Bestill</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="order-container">
-                        <table className="order-table">
-                            <tbody>
-                                <tr>
-                                    <td className="display-table">Bilde av mat 3</td>
-                                    <td className="display-table">Beskrivelse av mat 3</td>
-                                    <td className="order-config">
-                                        <select className="portion dropdown">
-                                            <option className="portion-option">Porsjon</option>
-                                            <option className="portion-option">Liten</option>
-                                            <option className="portion-option">Medium</option>
-                                            <option className="portion-option">Stor</option>
-                                        </select>
-                                        <button className="portions select-button">Små</button>
-                                        <button className="portions select-button">Medium</button>
-                                        <button className="portions select-button">Stor</button>
-                                        <button className="select-button">Bestill</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="order-container">
-                        <table className="red order-table">
-                            <tbody>
-                                <tr>
-                                    <td className="display-table">Bilde av mat 4</td>
-                                    <td className="display-table">Beskrivelse av mat 4</td>
-                                    <td className="order-config">
-                                        <select className="portion dropdown">
-                                            <option className="portion-option">Porsjon</option>
-                                            <option className="portion-option">Liten</option>
-                                            <option className="portion-option">Medium</option>
-                                            <option className="portion-option">Stor</option>
-                                        </select>
-                                        <button className="portions select-button">Små</button>
-                                        <button className="portions select-button">Medium</button>
-                                        <button className="portions select-button">Stor</button>
-                                        <button className="select-button">Bestill</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    {selectedRoom.roomNumber !== 0 ?
+                        mealPlans.map(mealPlan =>
+                            <SingleMealPlan key={mealPlan.id} mealPlan={mealPlan} selectedRoom={selectedRoom} setOrder={setOrder} saveOrder={saveOrder}/>
+                        ) : ''
+                    }
                 </div>
             </div>
         </Layout>
