@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { Room } from "@/features/rooms/types"
 import ChangePatientRoom from "@/app/components/ChangePatientRoom"
 import { Allergy } from "@/features/allergyRestrictions/types"
+import { MealPlan } from "@/features/mealPlans/types";
 
 const Foodorders = () => {
     const [roomsFromDb, setRoomsFromDb] = useState<Room[]>([])
@@ -17,6 +18,7 @@ const Foodorders = () => {
         intoleranceRestrictions: [],
         dietaryNeeds: []
     })
+    const [mealPlans, setMealPlans] = useState<MealPlan>()
     useEffect(() => {
         fetchAllRooms();
         fetchTodaysMealPlans();
@@ -25,13 +27,13 @@ const Foodorders = () => {
     const fetchTodaysMealPlans = async (): Promise<void> => {
         try {
             const date = new Date()
-            const response = await fetch('/api/mealPlans?date=' + date.toDateString)
+            const response = await fetch('/api/mealPlans?date=' + date.toDateString())
             if (response.status === 200) {
                 const data = await response.json()
-                console.log(data)
+                setMealPlans(data.data)
             }
         } catch (error) {
-
+            console.error("Failed to fetch meal plans", error)
         }
     }
 
