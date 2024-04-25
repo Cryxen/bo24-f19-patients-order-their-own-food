@@ -1,15 +1,13 @@
-// components/messages/Message.repository.ts
+
 
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors";
 import { PrismaClient } from "@prisma/client";
 
-// Define the Message type
 type Message = {
     messageID?: number;
     title: string;
     room: string;
     message: string;
-    // Add other fields as needed
 };
 
 const prisma = new PrismaClient();
