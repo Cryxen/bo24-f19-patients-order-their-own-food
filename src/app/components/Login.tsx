@@ -50,20 +50,26 @@ const Login = () => {
                         break;
                     default:
                         break;
-                }
+                }  
             }
         }
     }
 
     return (
             <div className='mainDiv'>
-                <h2 className="logo">Logo</h2>
+
+                
+                <img src={'/media/logo-stor.webp'} alt='Stor Sunnaas logo' className='logoLogin'></img>
+                
+                <h2 className='titleLogin'>Matbestillingsplattform</h2>
+
                 <form className="login-container">
                     <input type="email" value={email} onChange={handleEmailChange} placeholder='E-post' />
                     <input type="password" value={password} onChange={handlePasswordChange} placeholder='Passord' />
                     <button type="submit" className="submit-button" onClick={handleSubmitButton}>Login</button>
                 </form>
             </div>
+            
     )
 }
 

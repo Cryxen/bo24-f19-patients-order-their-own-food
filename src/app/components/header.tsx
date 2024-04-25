@@ -1,6 +1,7 @@
 import { findRoleFromCookies } from "@/libs/cookies/userRolesClient"
 import { useRouter } from "next/navigation"
 import { MouseEvent } from "react"
+import Image from 'next/image'
 
 const Header = () => {
     const router = useRouter()
@@ -39,8 +40,11 @@ const Header = () => {
 
     return (
         <header>
+            <Image src={'/media/logo.webp'} alt="Sunnaas logo" width="300" height="42"></Image>
+            <div className="header-buttons">
             <button className="header-content" onClick={handleRouteToDashboardButton}>Dashboard</button>
             <button className="header-content" onClick={handleLogOutButton}>Logg ut</button>
+            </div>
         </header>
     )
 }

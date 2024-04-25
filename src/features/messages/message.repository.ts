@@ -1,15 +1,13 @@
-// components/messages/Message.repository.ts
+
 
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors";
 import { PrismaClient } from "@prisma/client";
 
-// Define the Message type
 type Message = {
     messageID?: number;
     title: string;
     room: string;
     message: string;
-    // Add other fields as needed
 };
 
 const prisma = new PrismaClient();
@@ -25,13 +23,11 @@ export const fetchAllMessages = async () => {
 
 export const createMessage = async (message: Message) => {
     try {
-        h
         const responseFromDb = await prisma.message.create({
             data: {
                 title: message.title,
                 room: message.room,
                 message: message.message
-                // Add other fields as needed
             }
         });
         return { success: true, data: responseFromDb };
