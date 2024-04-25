@@ -90,7 +90,7 @@ const Foodorders = () => {
                 <div className="main-wrapper">
                     <ChangePatientRoom roomsFromDb={roomsFromDb} setSelectedRoom={setSelectedRoom} selectedRoom={selectedRoom} />
                     <h3 className="diet-info">Diett info:</h3>
-                    <div className="diet container">
+                    <div className="diet-container">
                         <div className="boxInfoComp">
                             {selectedRoom.allergyRestrictions && selectedRoom.allergyRestrictions.length > 0 && selectedRoom.allergyRestrictions.map((restriction, index) => (
                                 <DietaryInfoComp key={index} dietType="Allergier" dietName={restriction.allergyRestricionId} />
