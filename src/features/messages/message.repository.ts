@@ -23,13 +23,11 @@ export const fetchAllMessages = async () => {
 
 export const createMessage = async (message: Message) => {
     try {
-        h
         const responseFromDb = await prisma.message.create({
             data: {
                 title: message.title,
                 room: message.room,
                 message: message.message
-                // Add other fields as needed
             }
         });
         return { success: true, data: responseFromDb };

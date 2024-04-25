@@ -8,13 +8,15 @@ body {
     background-color: $neutral-50;
 }
 
+.logoLogin{
+    margin-bottom: -5vh;
+}
+
+.titleLogin {
+    margin-bottom: 10vh;
+}
+
 .mainDiv {
-    
-    .logo {
-        border-style: solid;
-        margin: auto 0;
-        padding: 5rem;
-    }
     
     .login-container {
         display: flex;

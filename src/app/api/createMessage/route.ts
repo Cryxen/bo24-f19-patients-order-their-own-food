@@ -9,6 +9,7 @@ interface ApiResponse {
 }
 
 export async function POST(req: NextRequest) {
+    console.log("Variable passed through API:", req);
     return await messageController.createMessage(req);
 }
 
