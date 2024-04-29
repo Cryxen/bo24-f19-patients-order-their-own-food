@@ -1,6 +1,6 @@
 import { isArray, isString } from 'util';
 import * as mealsRepo from './Meals.repository'
-import { Meal } from './types';
+import { Meal } from "@prisma/client";
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from '@/libs/errors/MVC-errors';
 export const fetchAllMeals = async () => {
     try {
