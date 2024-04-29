@@ -6,8 +6,6 @@ import { MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors"
 import { error } from "console"
 
 export const fetchUsers = async (req: NextRequest) => {
-    let userFromDb
-    let usersFromDb
     if (req.nextUrl.searchParams.get('email')) {
         const email = req.nextUrl.searchParams.get('email')
         const password = req.nextUrl.searchParams.get('password')
@@ -26,21 +24,23 @@ export const fetchUsers = async (req: NextRequest) => {
                 return NextResponse.json({ success: false, error: MVCFetchingError("user", "controller", error) })
             }
         }
-        else {
-            try {
-                const usersFromDb = await userService.fetchAllUsers()
-                return NextResponse.json({
-                    status: 200,
-                    success: true,
-                    data: usersFromDb.data,
-                    error: usersFromDb.error
-                })
-            } catch (error) {
-                return NextResponse.json({ success: false, error: MVCFetchingError("users", "controller", error) })
-            }
+    }
+    else {
+        try {
+            const usersFromDb = await userService.fetchAllUsers()
+            console.log(usersFromDb)
+            return NextResponse.json({
+                status: 200,
+                success: usersFromDb?.success,
+                data: usersFromDb?.data,
+                error: usersFromDb?.error
+            })
+        } catch (error) {
+            return NextResponse.json({ success: false, error: MVCFetchingError("users", "controller", error) })
         }
     }
 }
+
 
 export const saveUser = async (req: NextRequest) => {
     try {
