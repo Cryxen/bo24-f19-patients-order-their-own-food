@@ -69,7 +69,8 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
             if (response.status === 200) {
                 const data = await response.json()
                 ordersByRoom.forEach(async el => {
-                    await deleteOrderFromDb(el.id)
+                    if (typeof el.id === "number")
+                        await deleteOrderFromDb(el.id)
                 });
             }
         }
@@ -81,7 +82,7 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
             <div className="container"><h4 className="room">Rom {ordersByRoom[0]?.roomNumber}</h4></div>
             <div className="dish-view container">
                 {ordersByRoom.map(order => {
-                    const orderClass = new OrderClass(order.id, order.size, order.roomNumber, order.mealPlanId, order.mealPlan, "test")
+                    const orderClass = new OrderClass(order.id!, order.size, order.roomNumber, order.mealPlanId, order.mealPlan, "test")
                     let mainDish: string = 'undefined'
                     let sideDish: string = 'undefined'
 
