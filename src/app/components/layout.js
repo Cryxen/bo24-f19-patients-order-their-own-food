@@ -1,6 +1,6 @@
 "use client"
 import { checkUserRole } from '@/libs/router/checkUserRole'
-import Footer from './footer'
+import Footer from './Footer'
 import Header from './header'
 const Layout = ({ children }) => {
 
