@@ -38,18 +38,18 @@ const Orderlist = () => {
                 <h1>Bestillinger</h1>
                 <div className="main-wrapper">
                     {
-                    roomsFromDb?.map(room => {
-                        const ordersByRoom = []
-                        for (const order of ordersFromDb) {
-                            if (room.roomNumber === order.roomNumber)
-                                ordersByRoom.push(order)
-                        }
-                        if (ordersByRoom.length > 0) {
-                            return (
-                                <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders} />
-                            )
-                        }
-                    })}
+                        roomsFromDb?.map(room => {
+                            const ordersByRoom: Order[] = []
+                            ordersFromDb?.map(order => {
+                                if (room.roomNumber === order.roomNumber)
+                                    ordersByRoom.push(order)
+                            })
+                            if (ordersByRoom.length > 0) {
+                                return (
+                                    <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders} />
+                                )
+                            }
+                        })}
                 </div>
                 {ordersFromDb?.length <= 0 ?
                     <h3>Det er ingen bestillinger igjen</h3> : ''
