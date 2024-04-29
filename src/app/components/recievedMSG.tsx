@@ -67,7 +67,7 @@ const RecievedMSG = () => {
                         <p>{message.message}</p>
                     </div>
                     <div className="div3">
-                        <p>{message.room}</p>
+                        <p>Rom: {message.room}</p>
                     </div>
                     <div className="div4">
                         <button className='removeMsg' onClick={() => removeMessage(message.messageID)}>Fjern melding</button>

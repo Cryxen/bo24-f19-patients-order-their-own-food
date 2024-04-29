@@ -78,6 +78,14 @@ const Foodorders = () => {
         if (response.status === 200) {
             const data = await response.json()
             console.log(data)
+            setSelectedRoom({
+                roomNumber: 0,
+                dietaryRestrictions: [],
+                consistancyRestrictions: [],
+                allergyRestrictions: [],
+                intoleranceRestrictions: [],
+                dietaryNeeds: []
+            });
         }
     }
 
