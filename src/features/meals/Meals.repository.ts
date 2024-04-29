@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-import { Meal } from "./types"
+import { Meal, PrismaClient } from "@prisma/client"
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors"
 
 const prisma = new PrismaClient()

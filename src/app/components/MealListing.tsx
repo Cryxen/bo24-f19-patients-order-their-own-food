@@ -10,7 +10,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
         mealName: '',
         description: '',
         category: 'undefined',
-        dietaryInfo: '',
+        dietaryInfo: [],
         imageUrl: ''
     }) //There's probably a much better way to do this  
     const [showConfirmationWindow, setShowConfirmationWindow] = useState<Boolean>(false)
@@ -46,11 +46,6 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
     }
 
     // Seems unused, TODO: Find out if can be deleted.
-    const handleDietaryInformationChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setMealToChange(prev => ({
-            ...prev, dietaryInfo: event.target.value
-        }))
-    }
 
     const handleDeleteMealButton = async (event: MouseEvent<HTMLButtonElement>) => {
         // Show confirmation window
@@ -114,12 +109,15 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
     const handleDietaryChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
             setMealToChange(prev => ({
-                ...prev, dietaryInfo: [...(prev.dietaryInfo || []), event.target.value] // Idea from chatGPT to ensure that dietaryInfo is array.
+                // ...prev, dietaryInfo: [...(prev.dietaryInfo || []), event.target.value] // Idea from chatGPT to ensure that dietaryInfo is array.
+                ...prev, dietaryInfo: [...(prev.dietaryInfo as []), event.target.value] // Idea from chatGPT to ensure that dietaryInfo is array.
             }))
         }
         else {
             setMealToChange(prev => ({
-                ...prev, dietaryInfo: prev.dietaryInfo?.filter(diet => diet !== event.target.value)
+                // ...prev, dietaryInfo: prev.dietaryInfo?.filter((diet: string) => diet !== event.target.value)
+                ...prev,
+                dietaryInfo: Array.isArray(prev.dietaryInfo) ? prev.dietaryInfo?.filter((diet: string) => diet !== event.target.value) : prev.dietaryInfo
             }))
         }
         console.log(meal)
@@ -136,7 +134,7 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
                 <td>{meal.imageUrl}</td>
                 <td>{meal.mealName}</td>
                 <td>{meal.description}</td>
-                <td>{meal.category}</td>
+                <td>{meal.category as string}</td>
                 <td>
                     <ul>
                         {

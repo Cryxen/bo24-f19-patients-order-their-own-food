@@ -1,6 +1,6 @@
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from '@/libs/errors/MVC-errors'
 import * as ordersRepository from './Orders.repository'
-import { Order } from './types'
+import { Order } from '@prisma/client'
 
 export const fetchAllOrders = async () => {
     try {
