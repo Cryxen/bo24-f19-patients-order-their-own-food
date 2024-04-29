@@ -115,7 +115,9 @@ const MealListing = (props: { meal: Meal, meals: Meal[], setMeals: Dispatch<SetS
         }
         else {
             setMealToChange(prev => ({
-                ...prev, dietaryInfo: prev.dietaryInfo?.filter((diet: string) => diet !== event.target.value)
+                // ...prev, dietaryInfo: prev.dietaryInfo?.filter((diet: string) => diet !== event.target.value)
+                ...prev,
+                dietaryInfo: Array.isArray(prev.dietaryInfo) ? prev.dietaryInfo?.filter((diet: string) => diet !== event.target.value) : prev.dietaryInfo
             }))
         }
         console.log(meal)
