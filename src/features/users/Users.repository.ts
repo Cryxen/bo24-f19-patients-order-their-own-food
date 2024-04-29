@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client"
 import { User } from "./types"
 import { MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors"
 
-const prisma = new PrismaClient()
+import prisma from "@/libs/utils/prisma"
 
 export const fetchAllUsers = async () => {
     console.log("Inside fetchAllusers repo!")

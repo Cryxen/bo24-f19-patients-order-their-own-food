@@ -1,7 +1,8 @@
 
 
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/libs/utils/prisma"
+
 
 type Message = {
     messageID?: number;
@@ -9,8 +10,6 @@ type Message = {
     room: string;
     message: string;
 };
-
-const prisma = new PrismaClient();
 
 export const fetchAllMessages = async () => {
     try {

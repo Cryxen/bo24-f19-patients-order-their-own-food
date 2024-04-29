@@ -1,7 +1,7 @@
 import { MVCFetchingError } from "@/libs/errors/MVC-errors";
 import { PrismaClient } from "@prisma/client";
+import prisma from "@/libs/utils/prisma"
 
-const prisma = new PrismaClient()
 
 export const fetchAllDietaryNeeds = async () => {
     try {

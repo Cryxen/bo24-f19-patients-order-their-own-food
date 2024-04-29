@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { PastOrder } from "./types";
 import { MVCSavingError } from "@/libs/errors/MVC-errors";
-
-const prisma = new PrismaClient()
+import prisma from "@/libs/utils/prisma"
 
 export const savePastOrder = async (pastOrder: PastOrder) => {
     try {

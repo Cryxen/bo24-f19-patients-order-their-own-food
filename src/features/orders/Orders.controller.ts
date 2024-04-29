@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as ordersService from './Orders.service'
-import { Order } from './types'
+import { Order } from '@prisma/client'
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from '@/libs/errors/MVC-errors'
 
 export const fetchAllOrders = async () => {

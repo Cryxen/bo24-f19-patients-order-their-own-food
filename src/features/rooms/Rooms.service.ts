@@ -5,7 +5,7 @@ import { MVCDeletingError, MVCFetchingError, MVCUpdatingError } from '@/libs/err
 
 const changeKeyNames = (rooms: any[]): RoomType[] => {
     let roomWithProperKeys: RoomType[] = []
-    rooms.forEach(element => {
+    rooms?.forEach(element => {
         roomWithProperKeys.push({
             roomNumber: element.roomNumber,
             dietaryRestrictions: element.RoomToDietaryRestrictions,
