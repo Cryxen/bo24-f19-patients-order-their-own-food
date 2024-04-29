@@ -2,15 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import '../styles/minidiet.scss';
-
-interface Room {
-  roomNumber: number;
-  allergyRestrictions: string[];
-  consistencyRestrictions: string[];
-  dietaryNeeds: string[];
-  dietaryRestrictions: string[];
-  intoleranceRestrictions: string[];
-}
+import { Room } from '@/features/rooms/types';
 
 const DietInfoContainer = () => {
     const [rooms, setRooms] = useState<Room[]>([]);
@@ -38,7 +30,7 @@ const DietInfoContainer = () => {
   
   
 
-  const DietInfoComp = ({ dietType, dietName }: { dietType: string; dietName: string }) => {
+  const DietInfoComp = ({ dietType, dietName }: { dietType: string; dietName: string | undefined}) => {
     return (
 
       <article className='Minibox'>
@@ -64,7 +56,7 @@ const DietInfoContainer = () => {
 
         const hasRestrictions =
           (room.allergyRestrictions && room.allergyRestrictions.length > 0) ||
-          (room.consistencyRestrictions && room.consistencyRestrictions.length > 0) ||
+          (room.consistancyRestrictions && room.consistancyRestrictions.length > 0) ||
           (room.dietaryNeeds && room.dietaryNeeds.length > 0) ||
           (room.dietaryRestrictions && room.dietaryRestrictions.length > 0) ||
           (room.intoleranceRestrictions && room.intoleranceRestrictions.length > 0);
@@ -85,8 +77,8 @@ const DietInfoContainer = () => {
                 <DietInfoComp key={index} dietType="Diettrestriksjoner" dietName={restriction.dietaryRestrictionId} />
               ))}
 
-              {room.consistencyRestrictions && room.consistencyRestrictions.map((restriction, index) => (
-                <DietInfoComp key={index} dietType="Konsistensrestriksjoner" dietName={restriction} />
+              {room.consistancyRestrictions && room.consistancyRestrictions.map((restriction, index) => (
+                <DietInfoComp key={index} dietType="Konsistensrestriksjoner" dietName={restriction as unknown as string} />
               ))}
 
               {room.allergyRestrictions.map((restriction, index) => (
