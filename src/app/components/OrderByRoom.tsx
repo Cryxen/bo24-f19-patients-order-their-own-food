@@ -79,8 +79,8 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
 
     return (
         <section className="dish-section">
-            <div className="container"><h4 className="room">Rom {ordersByRoom[0]?.roomNumber}</h4></div>
-            <div className="dish-view container">
+            <div className="containerOrder"><h4 className="room">Rom {ordersByRoom[0]?.roomNumber}</h4></div>
+            <div className="dish-view containerOrder">
                 {ordersByRoom.map(order => {
                     const orderClass = new OrderClass(order.id!, order.size, order.roomNumber, order.mealPlanId, order.mealPlan, "test")
                     let mainDish: string = 'undefined'
@@ -98,7 +98,7 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
                     )
                 })}
             </div>
-            <div className="select container">
+            <div className="select containerOrder">
                 <button className="select-button" onClick={handleOrderChangeButton}>Endre bestilling</button>
                 <button className="select-button" onClick={handleMarkDeliveredButton}>Merk levert</button>
             </div>

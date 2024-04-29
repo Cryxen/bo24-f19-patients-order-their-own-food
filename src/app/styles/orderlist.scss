@@ -2,31 +2,39 @@
 
 .main-wrapper {
     width: min(75rem, 100%);
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: $white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
 
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    
 }
+
+
+
 
 .dish-section {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin: 1vh;
+    border: outset;
 }
 
-.container {
+.containerOrder {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     flex-wrap: wrap;
-    background-color: $blue;
+    
 
-    border: 1px solid $black;
     border-right: none;
     border-collapse: collapse;
 
@@ -36,18 +44,23 @@
     padding: 1rem;
 }
 
-.container:first-child {
+.containerOrder:first-child {
     width: 25%;
+    border-right: outset;
+    background-color: $blue;
 }
 
-.container:last-child {
-    border-right: 1px solid $black;
+.containerOrder:last-child {
+    width: 30%;
 }
+
+
 
 .dish {
-    border: 1px solid $black;
+    border: outset;
     font-size: 1rem;
     padding: 0.5rem;
+    background-color: $neutral-200;
 }
 
 .select-button {

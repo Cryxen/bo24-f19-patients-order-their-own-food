@@ -103,6 +103,39 @@ footer {
     background-color: $neutral-50;
 }
 
+.nav-button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    background-color: $blue;
+
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+    border-radius: 0.5em;
+    padding: 1em;
+
+    
+    color: $black;
+    cursor: pointer;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover {
+        background: $gray-300;
+        font-weight: bolder;
+        transform: scale(1.10);
+    }
+}
+
+.dashboardwrap, .main-wrapper{
+    border-radius: 1vh;
+}
+
+
+
 // .select-button {
     // display: inline-block;
     // text-align: center;
@@ -145,5 +178,5 @@ footer {
 //     background-color: $gray-300;
 //     color: $black;
 
-//     border: 1px solid black;
+//     border: 1px solid $black;
 // }

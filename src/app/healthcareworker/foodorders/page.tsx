@@ -44,10 +44,12 @@ const Foodorders = () => {
     const fetchAllRooms = async (): Promise<void> => {
         try {
             const response = await fetch('/api/rooms');
+            console.log(response)
             if (!response.ok) {
                 throw new Error('Failed to fetch rooms');
             }
             const data = await response.json();
+            console.log(data)
             setRoomsFromDb(data.data);
         } catch (error) {
             console.error('Error fetching rooms:', error);
@@ -78,6 +80,14 @@ const Foodorders = () => {
         if (response.status === 200) {
             const data = await response.json()
             console.log(data)
+            setSelectedRoom({
+                roomNumber: 0,
+                dietaryRestrictions: [],
+                consistancyRestrictions: [],
+                allergyRestrictions: [],
+                intoleranceRestrictions: [],
+                dietaryNeeds: []
+            });
         }
     }
 

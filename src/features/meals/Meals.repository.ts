@@ -1,7 +1,8 @@
-import { Meal, PrismaClient } from "@prisma/client"
+import { Meal } from "@prisma/client"
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors"
 
-const prisma = new PrismaClient()
+import prisma from "@/libs/utils/prisma"
+
 
 export const fetchAllMeals = async () => {
     try {

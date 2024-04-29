@@ -1,7 +1,8 @@
 import { MVCDeletingError, MVCFetchingError, MVCSavingError } from "@/libs/errors/MVC-errors"
 import { Order, PrismaClient } from "@prisma/client"
+import prisma from "@/libs/utils/prisma"
 
-const prisma = new PrismaClient
+
 
 export const fetchAllOrders = async () => {
 
