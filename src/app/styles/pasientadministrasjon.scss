@@ -64,7 +64,7 @@ h1 {
   }
 
   .diet-container {
-    border-style: solid;
+    border-style: outset;
     width: 10rem;
     height: 10rem;
     text-align: center;
@@ -86,7 +86,8 @@ h1 {
 
   .restriction-container {
     min-width: 100%;
-    border: 1px solid $black;
+    border: outset;
+    border-radius: 1vh;
     display: flex;
     justify-content: center;
     align-items: center;

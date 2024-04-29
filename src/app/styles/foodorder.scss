@@ -10,6 +10,8 @@
     align-items: center;
     gap: 1rem;
 
+
+
     .room-container {
     }
 
@@ -21,9 +23,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        border: outset;
+        border-radius: 1vh;
+
+
 
         .order-table, td {
-            border: 1px solid $black;
+            //border: 1px solid $black;
             border-collapse: collapse;  
         }
 
@@ -37,12 +43,18 @@
             .order-config {
                 border: none;
                 padding: 1rem;
+                min-height: 20vh;
+                border-left: inset;
+                
 
                 display: flex;
-                justify-content: space-evenly;
+                
+                justify-content: center;
                 align-items: center;
                 flex-wrap: wrap;
                 gap: 1rem;
+
+
 
                 .select-button {
                     display: inline-block;
@@ -63,13 +75,13 @@
                     }
                 }
                 
-                .portions {
-                    display: none;
-                    
-                    @media only screen and (min-width: 768px) {
-                        display: inline-block;
-                    }
-                }
+                //.portions {
+                //    display: none;
+                //    
+                //    @media only screen and (min-width: 768px) {
+                //        display: inline-block;
+                //    }
+                //}
             }
         }
     }
@@ -89,13 +101,52 @@
         }
     }
 
-    @media only screen and (min-width: 768px) {
-        .portion {
-            display: none;
-        }
-    }
 }
+
+.imageFood {
+    width: 15rem;
+    margin: auto;
+
+}
+
+
 
 .red {
     background-color: $red;
 }
+
+.portions:focus {
+    background-color: blue; 
+    color: white; 
+}
+
+.display-table {
+    width: 20vh;
+}
+
+
+
+.main-wrapper {
+    width: min(75rem, 100%);
+    padding: 1rem;
+    margin-top: 2rem;
+    background-color: $white;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.2);
+
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    gap: 1rem;
+}
+
+.table-description {
+    margin: auto;
+}
+
+.selectedSizeP{
+    border-left: inset;
+    padding-bottom: .7vh;
+}
+
