@@ -9,7 +9,7 @@ import CreateUser from '@/app/components/CreateUser';
 
 
 
-const useradministration = () => {
+const Useradministration = () => {
 
     const [users, setUsers] = useState<User[]>([])
 
@@ -71,4 +71,4 @@ const useradministration = () => {
         </Layout>
     )
 }
-export default useradministration
+export default Useradministration
