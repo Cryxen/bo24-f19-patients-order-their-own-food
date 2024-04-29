@@ -3,7 +3,8 @@ import { MealPlan } from "./types";
 import { Meal } from "../meals/types";
 import { MVCDeletingError, MVCFetchingError, MVCSavingError, MVCUpdatingError } from "@/libs/errors/MVC-errors";
 
-const prisma = new PrismaClient()
+import prisma from "@/libs/utils/prisma"
+
 
 export const fetchAllMealPlans = async () => {
     try {

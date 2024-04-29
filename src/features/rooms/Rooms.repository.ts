@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client"
+// import { PrismaClient } from "@prisma/client"
 import { Room } from "./types"
 import { DietaryRestriction } from "../dietaryRestrictions/types"
 import { FoodConsistency } from "../consistencyRestrictions/types"
@@ -6,8 +6,9 @@ import { Allergy } from "../allergyRestrictions/types"
 import { Intolerance } from "../intoleranceRestrictions/types"
 import { DietaryNeeds } from "../DietaryNeeds/types"
 import { MVCDeletingError, MVCFetchingError, MVCUpdatingError } from "@/libs/errors/MVC-errors"
+import prisma from "@/libs/utils/prisma"
 
-const prisma = new PrismaClient()
+// const prisma = prisma
 export const fetchAllRooms = async () => {
     try {
         const roomsFromDb = await prisma.room.findMany({
