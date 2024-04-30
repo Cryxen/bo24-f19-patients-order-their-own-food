@@ -159,6 +159,6 @@ model Message {
   messageID Int @id @default(autoincrement())
   title String
   room String
-  message String
+  message String? @db.Text
   createdAt DateTime @default(now())
 }

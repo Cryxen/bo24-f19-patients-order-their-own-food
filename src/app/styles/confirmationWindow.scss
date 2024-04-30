@@ -6,40 +6,46 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
     width: 100%;
-    background-color: $slate-500;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 .confirmationWindowContainter {
-    position: relative;
-    width: min(25rem, 100%);
-    margin: 10em auto;
-    padding: 1em;
-    opacity: 0.8;
-    background-color: $neutral-300;
-    border-radius: 0.25em;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+}
 
-    .confirmation-button {
-        display: inline-block;
-        text-align: center;
-        text-decoration: none;
-    
-        font-size: 1rem;
-        border: 0;
-        padding: 0.5em 1em;
-        margin: 0.5em;
-    
-        background-color: $gray-300;
-        color: $black;
-        cursor: pointer;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    
-        &:hover {
-            background: $white;
-        }
-    }
+.confirmationWindowContainter p {
+    margin-bottom: 20px;
+}
+
+.confirmationWindowContainter button {
+    padding: 8px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: color 0.3s;
+}
+
+.confirmationWindowContainter button:last-child {
+    margin-right: 0;
+}
+
+.confirmationWindowContainter button.confirmation-button {
+    background-color: $red;
+    color: white;
+}
+
+.confirmationWindowContainter button:hover {
+    color: black; 
 }
 

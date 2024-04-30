@@ -6,6 +6,7 @@ const Budget = () => {
         <Layout>
         <div className="mainDiv">
             <h1>Budsjett</h1>
+            <h2>NB: Ikke funksjonell i prototype</h2>
             <form className="main-wrapper">
                 <div className="item-container">
                     <div className="item-box">

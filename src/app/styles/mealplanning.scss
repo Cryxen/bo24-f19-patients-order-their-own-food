@@ -14,9 +14,6 @@
     align-items: center;
     gap: 1rem;
 
-    .arrow {
-        font-size: 2rem;
-    }
 
     input[type=text] {
         display: inline-block;
@@ -25,8 +22,9 @@
         padding: 0.5em;
         background-color: $gray-300;
         color: $black;
-    
         border: 1px solid $black;
+        text-align: center;
+        font-weight: bolder;
     }
     
     .date-container {
@@ -70,9 +68,10 @@
             align-items: center;
             gap: 1rem;
 
-            margin: 0 auto;
+            margin:  auto;
             padding: 1rem;
-            border: 1px solid $black;
+            border: outset;
+            border-radius: 1vh;
 
             .config-button {
                 display: inline-block;
@@ -136,7 +135,8 @@
                     font-size: 1rem;
                     padding: 0.5em;
                     resize: none;
-                    border: 1px solid $black;
+                    border: solid 1px;
+                    
 
                     background-color: $gray-300;
                     color: $black;
@@ -145,15 +145,23 @@
         }
 
         .meal-plan-container {
-            border: 1px solid $black;
+            border: outset;
+            border-radius: 1vh;
             background-color: $neutral-200;
 
             margin: 0 auto;
             
             .meal-plan {
-                border: 1px solid $black;
+                border: outset;
+                border-radius: 1vh;
                 background-color: $blue;
                 margin: 1rem;
+                display: flex;
+                flex-direction: column;
+
+                .imageFood{
+                    width: 15vh;
+                }
 
                 .config-meal-box {
                     display: flex;
@@ -231,6 +239,7 @@
                         justify-content: flex-start;
                         align-items: flex-start;
                         gap: 0.5rem;
+                        align-items: center;
                     }
 
                     .arrow {
@@ -247,20 +256,24 @@
             align-items: center;
             gap: 1rem;
 
-            border: 1px solid $black;
+            border: outset;
+            border-radius: 1vh;
             padding: 1rem;
             margin: 0 auto;
-            height: 25rem;
     
             background-color: $neutral-200;
 
             .nutrition-graph {
                 width: 100%;
                 padding: 1rem;
-                height: 30%;
-
-                border: 1px solid $black;
+            
+                border: outset;
+                border-radius: 1vh;
                 background-color: $red;
+            }
+
+            .imageGraph {
+                width: 30vh;
             }
 
             .nutrition-overview {
@@ -268,7 +281,8 @@
                 padding: 1rem;
                 height: 70%;
 
-                border: 1px solid $black;
+                border: outset;
+                border-radius: 1vh;
                 margin-bottom: auto;
                 background-color: $red;
             }

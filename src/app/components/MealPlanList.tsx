@@ -93,7 +93,7 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
             })
             if (response.status === 200) {
                 const data = await response.json()
-                console.log(data)
+                console.log(data);
             }
         }
     }
@@ -164,8 +164,8 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
                 <div className="meal-desc-container">
                     <section className="description-meal-box">
                         <h4>{mealPlan.description}</h4>
+                        <img src={'/media/placeholderfood.webp'} alt='Bilde måltid' className="imageFood"></img>
                         <p>Dato: {mealPlan.date.toString()}</p>
-                        <p>Bilde</p>
                         {mealPlan.meals.map(el =>
                             (MAIN_DISH as unknown as MainDish[]).includes(el.meal?.category as MainDish) ? <p key={el.meal?.mealName}>Hovedrett: {el.meal?.mealName}</p> : ''
                         )}
@@ -173,7 +173,6 @@ const MealPlanList = (props: { mealPlan: MealPlan, date: Date, setListOfMealPlan
                             (SIDE_DISH as unknown as SideDish[]).includes(el.meal?.category as SideDish) ? <p key={el.meal?.mealName}>Ved siden av: {el.meal?.mealName}</p> : ''
                         )}
                     </section>
-                    <span className="arrow">&#8594;</span>
                 </div>
             }
         </div>
