@@ -7,7 +7,7 @@ export default function DevDash() {
         <Layout>
             <div className="mainDiv">
                 <h1>Developer Dashboard</h1>
-                <div className='dashboardwrap'>
+                <div className='dashboardwrapper'>
                     <section className="dashboard-role-container">
                         <h2>Admin</h2>
                         <div className="dashboard-container">
