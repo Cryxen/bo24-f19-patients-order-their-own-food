@@ -55,6 +55,7 @@ const NewMealPlan = (props: { date: Date, fetchMealPlans: () => void }) => {
             const data = await response.json()
             fetchMealPlans()
             console.log(data)
+            alert('Måltid opprettet')
         }
         else
             console.log(response)

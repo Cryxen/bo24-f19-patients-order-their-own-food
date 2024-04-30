@@ -25,6 +25,7 @@
     justify-content: center;
     margin: 1vh;
     border: outset;
+    border-radius: 1vh;
 }
 
 .containerOrder {
@@ -37,6 +38,8 @@
 
     border-right: none;
     border-collapse: collapse;
+    border-bottom-left-radius: 1vh;
+    border-top-left-radius: 1vh;
 
     width: 100%;
     gap: 1rem;
@@ -58,12 +61,66 @@
 
 .dish {
     border: outset;
+    border-radius: .5vh;
     font-size: 1rem;
     padding: 0.5rem;
     background-color: $neutral-200;
 }
 
 .select-button {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+
+    font-size: 1rem;
+    border: 0;
+    padding: 0.5em 1em;
+
+    background-color: $gray-300;
+    color: $black;
+    cursor: pointer;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+        background: $white;
+    }
+}
+
+.tekstEndring{
+    padding: 1vh;
+    font-weight: bolder;
+}
+
+.tekstEndringKom{
+    font-weight: bolder;
+}
+
+
+.dropdownChange {
+    margin: 1vh;
+    height: 3vh;
+    appearance: none; 
+    padding: 0.5em 2em 0.5em 0.5em; 
+    font-size: 1rem;
+    border: 1px solid $gray-300; 
+    border-radius: 0.5rem; 
+    background-color: $white; 
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='5' viewBox='0 0 10 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 5L0.330127 0.656855L9.66987 0.656856L5 5Z' fill='%23000000'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; 
+    background-position: right 0.5em top 50%; 
+    color: $black;
+  }
+
+  .dropdownChange:hover {
+    border-color: $neutral-300; 
+  }
+ 
+  .dropdownChange:focus {
+    outline: none; 
+    background-position: right 0.5em bottom 50%;
+  }
+
+.saveChangeButton{
     display: inline-block;
     text-align: center;
     text-decoration: none;
