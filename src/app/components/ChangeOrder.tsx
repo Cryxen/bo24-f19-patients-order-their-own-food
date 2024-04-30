@@ -72,8 +72,8 @@ const ChangeOrder = (props: { order: OrderClass, fetchAllOrders: () => void, set
 
     return (
         <form key={order.id}>
-            <label htmlFor="todaysMealPlans">Velg rett:</label>
-            <select name="todaysMealPlans" id="todaysMealPlans" onChange={handleMealPlanChange}>
+            <label htmlFor="todaysMealPlans" className="tekstEndring">Velg rett:</label>
+            <select name="todaysMealPlans" id="todaysMealPlans" onChange={handleMealPlanChange} className="dropdownChange">
                 <option value={0}>
                     Velg nytt måltid:
                 </option>
@@ -89,14 +89,14 @@ const ChangeOrder = (props: { order: OrderClass, fetchAllOrders: () => void, set
                     </option>)
                 })}
             </select>
-            <p>Kommentar: {newMealPlanToUpdate?.description}</p>
-            <select name="mealPlanSize" id="mealPlanSize" onChange={handleSizeChange}>
+            <p className="tekstEndringKom">Kommentar: {newMealPlanToUpdate?.description}</p>
+            <select name="mealPlanSize" id="mealPlanSize" onChange={handleSizeChange} className="dropdownChange">
                 <option value={order.size}>{order.mealSize}</option>
                 {remainingOrderSizes.map(size =>
                     <option key={size.sizeNumber} value={size.sizeNumber}>{size.sizeName}</option>
                 )}
             </select>
-            <button onClick={handleUpdateButton}>Lagre endring</button>
+            <button onClick={handleUpdateButton} className="saveChangeButton">Lagre endring</button>
         </form>
     )
 }

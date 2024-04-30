@@ -55,20 +55,22 @@ const Useradministration = () => {
 
     return (
         <Layout>
-            <div className="mainDiv">
-                <h1>Brukeradministrasjon</h1>
-                <div className="main-wrapper">
-
-                    {users.map((user: User) =>
+        <div className="mainDiv">
+            <h1>Brukeradministrasjon</h1>
+            <div className="main-wrapper">
+                {users
+                    .filter(user => user.role !== "development") // Fjerner developmentbruker fra listen
+                    .map((user: User) =>
                         <div className="useradmin-container" key={user.email}>
-                            <section className="user-box"><p>{user.name}</p></section>
+                            <section className="user-box"><p>Navn: {user.name}</p></section>
+                            <section className="user-box"><p>Epost: {user.email}</p></section>
                             <section className="role-box"><Rolledrop user={user} changeRole={changeRole} /></section>
                         </div>
                     )}
-                    <CreateUser setUsers={setUsers}/>
-                </div>
+                <CreateUser setUsers={setUsers}/>
             </div>
-        </Layout>
+        </div>
+    </Layout>
     )
 }
 export default Useradministration

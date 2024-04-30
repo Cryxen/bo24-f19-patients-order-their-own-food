@@ -33,7 +33,7 @@ const DietInfoContainer = () => {
   const DietInfoComp = ({ dietType, dietName }: { dietType: string; dietName: string | undefined}) => {
     return (
 
-      <article className='Minibox'>
+      <article className='Minibox fadeIn'>
         <div className="Topbox">
           <p className='textDiet'>{dietType}</p>
         </div>
@@ -51,6 +51,7 @@ const DietInfoContainer = () => {
   }
 
   return (
+    <div className="main-wrapper fadeIn">
     <div className='displayX'>
       {rooms.map((room, index) => {
 
@@ -69,7 +70,7 @@ const DietInfoContainer = () => {
         return (
           <div key={index} className="gridLayout">
             <div className='div1'>
-              <h1>Rom {room.roomNumber}</h1>
+              <h1 className='RomTittel'>Rom {room.roomNumber}</h1>
             </div>
             <div className='div2'>
 
@@ -77,9 +78,10 @@ const DietInfoContainer = () => {
                 <DietInfoComp key={index} dietType="Diettrestriksjoner" dietName={restriction.dietaryRestrictionId} />
               ))}
 
-              {room.consistancyRestrictions && room.consistancyRestrictions.map((restriction, index) => (
-                <DietInfoComp key={index} dietType="Konsistensrestriksjoner" dietName={restriction as unknown as string} />
+              {room.consistancyRestrictions.map((restriction, index) => (
+                <DietInfoComp key={index} dietType="Konsistensrestriksjoner" dietName={restriction.foodConsistencyRestrictionId} />
               ))}
+
 
               {room.allergyRestrictions.map((restriction, index) => (
                 restriction && <DietInfoComp key={index} dietType="Allergier" dietName={restriction.allergyRestricionId} />
@@ -97,6 +99,7 @@ const DietInfoContainer = () => {
           </div>
         );
       })}
+    </div>
     </div>
   );
   
