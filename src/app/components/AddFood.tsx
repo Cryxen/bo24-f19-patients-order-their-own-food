@@ -132,7 +132,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
             <fieldset className="food-fieldset">
                 <legend className="food-legend">Følgende diett restriksjoner kan få utslag på maten</legend>
                 {
-                    dietaryRestrictionsFromDb.map(restriction =>
+                    dietaryRestrictionsFromDb?.map(restriction =>
                         <div className="restriction-box" key={restriction.dietaryRestriction}>
                             <label htmlFor={restriction.dietaryRestriction}>{restriction.dietaryRestriction}</label>
                             <input type="checkbox" id={restriction.dietaryRestriction} value={restriction.dietaryRestriction} itemID={restriction.dietaryRestriction} onChange={handleDietaryChange} />
@@ -143,7 +143,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
             <fieldset className="food-fieldset">
                 <legend className="food-legend">Følgende konsistens kan få utslag på maten</legend>
                 {
-                    consistencyRestrictionsFromDb.map(restriction =>
+                    consistencyRestrictionsFromDb?.map(restriction =>
                         <div className="restriction-box" key={restriction.consistency}>
                             <label htmlFor={restriction.consistency}>{restriction.consistency}</label>
                             <input type="checkbox" id={restriction.consistency} value={restriction.consistency} itemID={restriction.consistency} onChange={handleDietaryChange} />
@@ -154,7 +154,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
             <fieldset className="food-fieldset">
                 <legend className="food-legend">Følgende allergier kan få utslag på maten</legend>
                 {
-                    allergyRestrictionsFromDb.map(restriction =>
+                    allergyRestrictionsFromDb?.map(restriction =>
                         <div className="restriction-box" key={restriction.allergy}>
                             <label htmlFor={restriction.allergy}>{restriction.allergy}</label>
                             <input type="checkbox" id={restriction.allergy} value={restriction.allergy} itemID={restriction.allergy} onChange={handleDietaryChange} />
@@ -165,7 +165,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
             <fieldset className="food-fieldset">
                 <legend className="food-legend">Følgende intolerans restriksjoner kan få utslag på maten</legend>
                 {
-                    intoleranceRestrictionsFromDb.map(restriction =>
+                    intoleranceRestrictionsFromDb?.map(restriction =>
                         <div className="restriction-box" key={restriction.intolerance}>
                             <label htmlFor={restriction.intolerance}>{restriction.intolerance}</label>
                             <input type="checkbox" id={restriction.intolerance} value={restriction.intolerance} itemID={restriction.intolerance} onChange={handleDietaryChange} />
@@ -176,7 +176,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
             <fieldset className="food-fieldset">
                 <legend className="food-legend">Følgende konstbehov kan gjelde maten</legend>
                 {
-                    dietaryNeedsFromDb.map(restriction =>
+                    dietaryNeedsFromDb?.map(restriction =>
                         <div className="restriction-box" key={restriction.dietaryNeed}>
                             <label htmlFor={restriction.dietaryNeed}>{restriction.dietaryNeed}</label>
                             <input type="checkbox" id={restriction.dietaryNeed} value={restriction.dietaryNeed} itemID={restriction.dietaryNeed} onChange={handleDietaryChange} />

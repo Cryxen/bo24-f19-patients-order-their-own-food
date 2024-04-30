@@ -39,7 +39,7 @@ const Foodmanagement = () => {
         if (response.status === 200) {
             const data = await response.json()
             const mealsFromAPI = data?.data as Meal[]
-            mealsFromAPI.forEach(element => {
+            mealsFromAPI?.forEach(element => {
                 if (typeof element.dietaryInfo === 'string')
                     element.dietaryInfo = stringToArray(element.dietaryInfo)
             });
@@ -54,9 +54,9 @@ const Foodmanagement = () => {
     }
 
     const mergeFilterChange = (filter1: Meal[], filter2: Meal[]) => {
-        const filter2MealNames = filter2.map(meal => meal.mealName)
+        const filter2MealNames = filter2?.map(meal => meal.mealName)
         setFilteredMeals(
-            filter1.filter(el => filter2MealNames.includes(el.mealName))
+            filter1?.filter(el => filter2MealNames?.includes(el.mealName))
         )
     }
 
@@ -67,7 +67,7 @@ const Foodmanagement = () => {
             mergeFilterChange(meals, nameFilteredMeals)
         }
         else {
-            const filtered = meals.filter(el => el.category === event.target.value)
+            const filtered = meals?.filter(el => el.category === event.target.value)
             setCategoryFilteredMeals(filtered)
             mergeFilterChange(filtered, nameFilteredMeals)
         }
@@ -84,7 +84,7 @@ const Foodmanagement = () => {
             mergeFilterChange(filtered, categoryFilteredMeals)
         }
         else {
-            const filtered = meals.filter(el => el.mealName.toLowerCase().includes(nameFilter.toLowerCase()))
+            const filtered = meals?.filter(el => el.mealName.toLowerCase().includes(nameFilter.toLowerCase()))
             setNameFilteredMeals(filtered)
             mergeFilterChange(filtered, categoryFilteredMeals)
         }
@@ -113,7 +113,7 @@ const Foodmanagement = () => {
                         </div>
                         <div className="results-box">
                             <div className="results">
-                            <span>Viser resultater:</span>
+                                <span>Viser resultater:</span>
                             </div>
                             <select className="sort dropdown">
                                 <option>Sorteringsmetoder</option>
