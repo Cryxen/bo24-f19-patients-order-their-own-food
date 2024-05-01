@@ -20,6 +20,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
         category: 'undefined',
         dietaryInfo: []
     })
+    const [showLoading, setShowLoading] = useState<boolean>(true)
 
     useEffect(() => {
         fetchAllDietaryRestrictions()
@@ -29,11 +30,23 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
         fetchAllDietaryNeeds()
     }, [])
 
+    /**
+     * Checks if restrictions have loaded. If loaded: Sets showLoading to false
+     */
+    const checkIfRestrictionsHaveLoaded = () => {
+        if (dietaryRestrictionsFromDb && consistencyRestrictionsFromDb && allergyRestrictionsFromDb && intoleranceRestrictionsFromDb &&
+            dietaryNeedsFromDb)
+            setShowLoading(false)
+        else
+            console.log("noe gikk galt")
+    }
+
     const fetchAllDietaryRestrictions = async () => {
         const response = await fetch('/api/dietaryRestrictions')
         if (response.status === 200) {
             const data = await response.json()
             setDietaryRestrictionsFromDb(data.data)
+            checkIfRestrictionsHaveLoaded()
         }
     }
 
@@ -42,6 +55,8 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
         if (response.status === 200) {
             const data = await response.json()
             setConsistencyRestrictionsFromDb(data.data)
+            checkIfRestrictionsHaveLoaded()
+
         }
     }
 
@@ -50,6 +65,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
         if (response.status === 200) {
             const data = await response.json()
             setAllergyRestrictionsFromDb(data.data)
+            checkIfRestrictionsHaveLoaded()
         }
     }
 
@@ -58,6 +74,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
         if (response.status === 200) {
             const data = await response.json()
             setIntoleranceRestrictionsFromDb(data.data)
+            checkIfRestrictionsHaveLoaded()
         }
     }
 
@@ -66,6 +83,7 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
         if (response.status === 200) {
             const data = await response.json()
             setDietaryNeedsFromDb(data.data)
+            checkIfRestrictionsHaveLoaded()
         }
     }
 
@@ -128,62 +146,64 @@ const AddFood = (props: { meals: Meal[], setMeals: Dispatch<SetStateAction<Meal[
                 <label htmlFor="category">Kategori: </label>
                 <MealCategoryRolldownMenu meal={meal} handleCategoryChange={handleCategoryChange} />
             </div>
-            
-            <fieldset className="food-fieldset">
-                <legend className="food-legend">Følgende diett restriksjoner kan få utslag på maten</legend>
-                {
-                    dietaryRestrictionsFromDb?.map(restriction =>
-                        <div className="restriction-box" key={restriction.dietaryRestriction}>
-                            <label htmlFor={restriction.dietaryRestriction}>{restriction.dietaryRestriction}</label>
-                            <input type="checkbox" id={restriction.dietaryRestriction} value={restriction.dietaryRestriction} itemID={restriction.dietaryRestriction} onChange={handleDietaryChange} />
-                        </div>
-                    )
-                }
-            </fieldset>
-            <fieldset className="food-fieldset">
-                <legend className="food-legend">Følgende konsistens kan få utslag på maten</legend>
-                {
-                    consistencyRestrictionsFromDb?.map(restriction =>
-                        <div className="restriction-box" key={restriction.consistency}>
-                            <label htmlFor={restriction.consistency}>{restriction.consistency}</label>
-                            <input type="checkbox" id={restriction.consistency} value={restriction.consistency} itemID={restriction.consistency} onChange={handleDietaryChange} />
-                        </div>
-                    )
-                }
-            </fieldset>
-            <fieldset className="food-fieldset">
-                <legend className="food-legend">Følgende allergier kan få utslag på maten</legend>
-                {
-                    allergyRestrictionsFromDb?.map(restriction =>
-                        <div className="restriction-box" key={restriction.allergy}>
-                            <label htmlFor={restriction.allergy}>{restriction.allergy}</label>
-                            <input type="checkbox" id={restriction.allergy} value={restriction.allergy} itemID={restriction.allergy} onChange={handleDietaryChange} />
-                        </div>
-                    )
-                }
-            </fieldset>
-            <fieldset className="food-fieldset">
-                <legend className="food-legend">Følgende intolerans restriksjoner kan få utslag på maten</legend>
-                {
-                    intoleranceRestrictionsFromDb?.map(restriction =>
-                        <div className="restriction-box" key={restriction.intolerance}>
-                            <label htmlFor={restriction.intolerance}>{restriction.intolerance}</label>
-                            <input type="checkbox" id={restriction.intolerance} value={restriction.intolerance} itemID={restriction.intolerance} onChange={handleDietaryChange} />
-                        </div>
-                    )
-                }
-            </fieldset>
-            <fieldset className="food-fieldset">
-                <legend className="food-legend">Følgende konstbehov kan gjelde maten</legend>
-                {
-                    dietaryNeedsFromDb?.map(restriction =>
-                        <div className="restriction-box" key={restriction.dietaryNeed}>
-                            <label htmlFor={restriction.dietaryNeed}>{restriction.dietaryNeed}</label>
-                            <input type="checkbox" id={restriction.dietaryNeed} value={restriction.dietaryNeed} itemID={restriction.dietaryNeed} onChange={handleDietaryChange} />
-                        </div>
-                    )
-                }
-            </fieldset>
+            {showLoading ? <p>Laster restriksjoner....</p> :
+                <>
+                    <fieldset className="food-fieldset">
+                        <legend className="food-legend">Følgende diett restriksjoner kan få utslag på maten</legend>
+                        {
+                            dietaryRestrictionsFromDb?.map(restriction =>
+                                <div className="restriction-box" key={restriction.dietaryRestriction}>
+                                    <label htmlFor={restriction.dietaryRestriction}>{restriction.dietaryRestriction}</label>
+                                    <input type="checkbox" id={restriction.dietaryRestriction} value={restriction.dietaryRestriction} itemID={restriction.dietaryRestriction} onChange={handleDietaryChange} />
+                                </div>
+                            )
+                        }
+                    </fieldset>
+                    <fieldset className="food-fieldset">
+                        <legend className="food-legend">Følgende konsistens kan få utslag på maten</legend>
+                        {
+                            consistencyRestrictionsFromDb?.map(restriction =>
+                                <div className="restriction-box" key={restriction.consistency}>
+                                    <label htmlFor={restriction.consistency}>{restriction.consistency}</label>
+                                    <input type="checkbox" id={restriction.consistency} value={restriction.consistency} itemID={restriction.consistency} onChange={handleDietaryChange} />
+                                </div>
+                            )
+                        }
+                    </fieldset>
+                    <fieldset className="food-fieldset">
+                        <legend className="food-legend">Følgende allergier kan få utslag på maten</legend>
+                        {
+                            allergyRestrictionsFromDb?.map(restriction =>
+                                <div className="restriction-box" key={restriction.allergy}>
+                                    <label htmlFor={restriction.allergy}>{restriction.allergy}</label>
+                                    <input type="checkbox" id={restriction.allergy} value={restriction.allergy} itemID={restriction.allergy} onChange={handleDietaryChange} />
+                                </div>
+                            )
+                        }
+                    </fieldset>
+                    <fieldset className="food-fieldset">
+                        <legend className="food-legend">Følgende intolerans restriksjoner kan få utslag på maten</legend>
+                        {
+                            intoleranceRestrictionsFromDb?.map(restriction =>
+                                <div className="restriction-box" key={restriction.intolerance}>
+                                    <label htmlFor={restriction.intolerance}>{restriction.intolerance}</label>
+                                    <input type="checkbox" id={restriction.intolerance} value={restriction.intolerance} itemID={restriction.intolerance} onChange={handleDietaryChange} />
+                                </div>
+                            )
+                        }
+                    </fieldset>
+                    <fieldset className="food-fieldset">
+                        <legend className="food-legend">Følgende konstbehov kan gjelde maten</legend>
+                        {
+                            dietaryNeedsFromDb?.map(restriction =>
+                                <div className="restriction-box" key={restriction.dietaryNeed}>
+                                    <label htmlFor={restriction.dietaryNeed}>{restriction.dietaryNeed}</label>
+                                    <input type="checkbox" id={restriction.dietaryNeed} value={restriction.dietaryNeed} itemID={restriction.dietaryNeed} onChange={handleDietaryChange} />
+                                </div>
+                            )
+                        }
+                    </fieldset>
+                </>}
             <button onClick={submitMealToDB}>Legg til måltid</button>
         </form>
     )
