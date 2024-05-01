@@ -11,6 +11,7 @@ const Mealplanning = () => {
     const [listOfMealPlans, setListOfMealPlans] = useState<MealPlan[]>([]);
     const [showMealPlans, setShowMealPlans] = useState<Boolean>(true);
     const [date, setDate] = useState<Date>(new Date());
+    const [showLoading, setShowLoading] = useState<boolean>(true)
 
     useEffect(() => {
         fetchMealPlans();
@@ -21,6 +22,7 @@ const Mealplanning = () => {
         if (response.status === 200) {
             const data = await response.json();
             setListOfMealPlans(data.data);
+            setShowLoading(false)
         }
     };
 
@@ -47,19 +49,20 @@ const Mealplanning = () => {
                     </div>
 
                     <div className="main-container">
-                        {showMealPlans ? (
-                            <div className="meal-plan-container">
-                                {filteredMealPlans.length > 0 ? (
-                                    filteredMealPlans.map(mealPlan => (
-                                        <MealPlanList mealPlan={mealPlan} key={mealPlan.id} date={date} setListOfMealPlans={setListOfMealPlans} listOfMealPlans={listOfMealPlans}/>
-                                    ))
-                                ) : (
-                                    <p>Finner ingen måltidsplaner for valgt dato</p>
-                                )}
-                            </div>
-                        ) : (
-                            <NewMealPlan date={date} fetchMealPlans={fetchMealPlans}/>
-                        )}
+                        {showLoading ? <p className="meal-plan-container">Laster måltidsplaner....</p> :
+                            showMealPlans ? (
+                                <div className="meal-plan-container">
+                                    {filteredMealPlans.length > 0 ? (
+                                        filteredMealPlans.map(mealPlan => (
+                                            <MealPlanList mealPlan={mealPlan} key={mealPlan.id} date={date} setListOfMealPlans={setListOfMealPlans} listOfMealPlans={listOfMealPlans} />
+                                        ))
+                                    ) : (
+                                        <p>Finner ingen måltidsplaner for valgt dato</p>
+                                    )}
+                                </div>
+                            ) : (
+                                <NewMealPlan date={date} fetchMealPlans={fetchMealPlans} />
+                            )}
 
 
                         {/* Ikke funkjsonelt i prototype */}
