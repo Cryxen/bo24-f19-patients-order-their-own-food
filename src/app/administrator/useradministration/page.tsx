@@ -12,6 +12,7 @@ import CreateUser from '@/app/components/CreateUser';
 const Useradministration = () => {
 
     const [users, setUsers] = useState<User[]>([])
+    const [showLoading, setShowLoading] = useState<boolean>(true)
 
     useEffect(() => {
         fetchUsers()
@@ -22,6 +23,7 @@ const Useradministration = () => {
         if (response.status == 200) {
             const data = await response.json()
             setUsers(data.data)
+            setShowLoading(false)
         }
         else
             console.error("Something went wrong retrieving users from API")
@@ -55,22 +57,23 @@ const Useradministration = () => {
 
     return (
         <Layout>
-        <div className="mainDiv">
-            <h1>Brukeradministrasjon</h1>
-            <div className="main-wrapper">
-                {users
-                    .filter(user => user.role !== "development") // Fjerner developmentbruker fra listen
-                    .map((user: User) =>
-                        <div className="useradmin-container" key={user.email}>
-                            <section className="user-box"><p>Navn: {user.name}</p></section>
-                            <section className="user-box"><p>Epost: {user.email}</p></section>
-                            <section className="role-box"><Rolledrop user={user} changeRole={changeRole} /></section>
-                        </div>
-                    )}
-                <CreateUser setUsers={setUsers}/>
+            <div className="mainDiv">
+                <h1>Brukeradministrasjon</h1>
+                <div className="main-wrapper">
+                    {showLoading ? <p>Laster brukere...</p> :
+                        users
+                            .filter(user => user.role !== "development") // Fjerner developmentbruker fra listen
+                            .map((user: User) =>
+                                <div className="useradmin-container" key={user.email}>
+                                    <section className="user-box"><p>Navn: {user.name}</p></section>
+                                    <section className="user-box"><p>Epost: {user.email}</p></section>
+                                    <section className="role-box"><Rolledrop user={user} changeRole={changeRole} /></section>
+                                </div>
+                            )}
+                    <CreateUser setUsers={setUsers} />
+                </div>
             </div>
-        </div>
-    </Layout>
+        </Layout>
     )
 }
 export default Useradministration
