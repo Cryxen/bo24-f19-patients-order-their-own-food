@@ -17,6 +17,7 @@ const Foodmanagement = () => {
     const [categoryFilteredMeals, setCategoryFilteredMeals] = useState<Meal[]>([])
     const [nameFilter, setNameFilter] = useState<string>('')
     const [nameFilteredMeals, setNameFilteredMeals] = useState<Meal[]>([])
+    const [showLoading, setShowLoading] = useState<boolean>(true)
 
     useEffect(() => {
         fetchMealsFromAPI()
@@ -26,11 +27,18 @@ const Foodmanagement = () => {
         setFilteredMeals(meals)
     }, [meals])
 
+    /**
+     * splits string to array
+     * @param string string to convert to array
+     * @returns array of strings
+     */
     const stringToArray = (string: string): string[] => {
         return string.split(',')
     }
 
-
+    /**
+     * Fetches meals from API
+     */
     const fetchMealsFromAPI = async () => {
         const response = await fetch('/api/meals')
         if (response.status === 200) {
@@ -45,11 +53,17 @@ const Foodmanagement = () => {
             setFilteredMeals(mealsFromAPI) //show all meals by default
             setCategoryFilteredMeals(mealsFromAPI)
             setNameFilteredMeals(mealsFromAPI)
+            setShowLoading(false)
         }
         else
             console.error('something went wrong fetching meals from API. status code: ' + response.status)
     }
 
+    /**
+     * Merges filters upon change
+     * @param filter1 Filter 1 
+     * @param filter2 Filter 2
+     */
     const mergeFilterChange = (filter1: Meal[], filter2: Meal[]) => {
         const filter2MealNames = filter2?.map(meal => meal.mealName)
         setFilteredMeals(
@@ -122,24 +136,26 @@ const Foodmanagement = () => {
                         </div>
                     </div>
                     <div className="database-container">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Matnavn</th>
-                                    <th>Beskrivelse</th>
-                                    <th>Kategori</th>
-                                    <th>Diet info</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {filteredMeals?.map((meal) =>
-                                    <MealListing meal={meal} setMeals={setMeals} setFilteredMeals={setFilteredMeals} meals={meals} key={meal.mealName} />
-                                )}
-                            </tbody>
-                        </table>
+                        {showLoading ? <p>Laster måltider.... </p> :
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Matnavn</th>
+                                        <th>Beskrivelse</th>
+                                        <th>Kategori</th>
+                                        <th>Diet info</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {filteredMeals?.map((meal) =>
+                                        <MealListing meal={meal} setMeals={setMeals} setFilteredMeals={setFilteredMeals} meals={meals} key={meal.mealName} />
+                                    )}
+                                </tbody>
+                            </table>
+                        }
                     </div>
                     <div className="config-container">
                         {/* <button>[+] Ny matrett</button> */}
