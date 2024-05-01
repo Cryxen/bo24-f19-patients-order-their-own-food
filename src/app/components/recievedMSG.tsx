@@ -17,7 +17,7 @@ const RecievedMSG = () => {
     const [messageToDelete, setMessageToDelete] = useState<number | null>(null);
     const [messageTitleToDelete, setMessageTitleToDelete] = useState<string>('');
     const [inboxEmpty, setInboxEmpty] = useState<boolean>(false);
-
+    const [showLoading, setShowLoading] = useState<boolean>(true)
     useEffect(() => {
         fetchMessages();
     }, []);
@@ -31,6 +31,7 @@ const RecievedMSG = () => {
             const data = await response.json();
             setMessages(data.data);
             setInboxEmpty(data.data.length === 0);
+            setShowLoading(false)
         } catch (error) {
             console.error('Error fetching messages:', error);
         }
@@ -44,11 +45,11 @@ const RecievedMSG = () => {
                     'Content-Type': 'application/json',
                 },
             });
-    
+
             if (!response.ok) {
                 throw new Error('Failed to remove message');
             }
-    
+
             const updatedMessages = messages.filter(message => message.messageID !== messageID);
             setMessages(updatedMessages);
             setMessageTitleToDelete('');
@@ -57,7 +58,7 @@ const RecievedMSG = () => {
             console.error('Error removing message:', error);
         }
     };
-    
+
 
     const handleDeleteMessageButton = (messageID: number, messageTitle: string) => {
         setMessageToDelete(messageID);
@@ -78,23 +79,24 @@ const RecievedMSG = () => {
         const day = date.getDate();
         const month = date.getMonth() + 1;
         const year = date.getFullYear() % 100;
-    
+
         const formattedDay = day < 10 ? `0${day}` : `${day}`;
         const formattedMonth = month < 10 ? `0${month}` : `${month}`;
-    
+
         const hours = date.getHours();
         const minutes = date.getMinutes();
-    
+
         const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
         const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
-    
+
         return `${formattedDay}/${formattedMonth}/${year} ${formattedHours}:${formattedMinutes}`;
     };
-    
+
 
     return (
         <div className="main-wrapper">
-            {inboxEmpty ? (
+            {showLoading ? <p>Laster meldinger...</p> : 
+            inboxEmpty ? (
                 <p>Innboks er tom</p>
             ) : (
                 messages.slice().reverse().map((message) => (
