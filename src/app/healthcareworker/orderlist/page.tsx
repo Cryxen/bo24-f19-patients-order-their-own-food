@@ -9,6 +9,8 @@ import { Room } from '@/features/rooms/types'
 const Orderlist = () => {
     const [ordersFromDb, setOrdersFromDb] = useState<Order[]>([])
     const [roomsFromDb, setRoomsFromDb] = useState<Room[]>([])
+    const [showLoading, setShowLoading] = useState<boolean>(true)
+
     useEffect(() => {
         fetchAllOrders()
         fetchAllRooms()
@@ -19,6 +21,7 @@ const Orderlist = () => {
         if (response.status === 200) {
             const data = await response.json()
             setOrdersFromDb(data.data)
+            setShowLoading(false)
         }
     }
 
@@ -47,20 +50,23 @@ const Orderlist = () => {
                 <h1>Bestillinger</h1>
                 <div className="main-wrapper">
                     {
-                        roomsFromDb?.map(room => {
-                            const ordersByRoom: Order[] = []
-                            ordersFromDb?.map(order => {
-                                if (room.roomNumber === order.roomNumber)
-                                    ordersByRoom.push(order)
-                            })
-                            if (ordersByRoom.length > 0) {
-                                return (
-                                    <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders} removeOrderFromList={removeOrderFromList} />
-                                )
-                            }
-                        })}
+                        showLoading ?
+                            <p>Laster bestillinger....</p>
+                            :
+                            roomsFromDb?.map(room => {
+                                const ordersByRoom: Order[] = []
+                                ordersFromDb?.map(order => {
+                                    if (room.roomNumber === order.roomNumber)
+                                        ordersByRoom.push(order)
+                                })
+                                if (ordersByRoom.length > 0) {
+                                    return (
+                                        <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders} removeOrderFromList={removeOrderFromList} />
+                                    )
+                                }
+                            })}
                 </div>
-                {ordersFromDb?.length <= 0 ?
+                {ordersFromDb?.length <= 0 && !showLoading ?
                     <h3>Det er ingen bestillinger igjen</h3> : ''
                 }
             </div>
