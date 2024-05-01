@@ -32,6 +32,15 @@ const Orderlist = () => {
         }
     }
 
+    /**
+     * Removes orders from list to create a feeling of spontanious feedback.
+     * @param roomNumber Room number which is to be filtered out of db
+     */
+    const removeOrderFromList = (roomNumber: number) => {
+        const ordersWithoutRoomNumber = ordersFromDb.filter(order => order.roomNumber !== roomNumber)
+        setOrdersFromDb(ordersWithoutRoomNumber)
+    }
+
     return (
         <Layout>
             <div className="mainDiv">
@@ -46,7 +55,7 @@ const Orderlist = () => {
                             })
                             if (ordersByRoom.length > 0) {
                                 return (
-                                    <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders} />
+                                    <OrderByRoom key={room.roomNumber} ordersByRoom={ordersByRoom} fetchAllOrders={fetchAllOrders} removeOrderFromList={removeOrderFromList} />
                                 )
                             }
                         })}

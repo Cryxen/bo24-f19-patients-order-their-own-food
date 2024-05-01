@@ -6,16 +6,19 @@ import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
 import ChangeOrder from "./ChangeOrder"
 import { PastOrder } from "@/features/pastOrder/types"
 
-const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void }) => {
+const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void, removeOrderFromList: (roomNumber: number) => void }) => {
     const [showChangeOrder, setShowChangeOrder] = useState<boolean>(false)
     const [pastOrdersByRooms, setPastOrdersByRooms] = useState<PastOrder[]>([])
-    const { ordersByRoom, fetchAllOrders } = props
+    const { ordersByRoom, fetchAllOrders, removeOrderFromList } = props
 
     useEffect(() => {
         populatePastOrdersByRooms()
 
     }, [])
 
+    /**
+     * Populates list of orders by room.
+     */
     const populatePastOrdersByRooms = () => {
         const date = new Date()
         ordersByRoom.map(order => {
@@ -48,33 +51,48 @@ const OrderByRoom = (props: { ordersByRoom: Order[], fetchAllOrders: () => void 
         setShowChangeOrder(!showChangeOrder)
     }
 
+    /**
+     * Deletes order from db
+     * @param orderId order id to be deleted
+     */
     const deleteOrderFromDb = async (orderId: number): Promise<void> => {
         const response = await fetch('/api/orders?deleteId=' + orderId, {
             method: 'DELETE'
         })
         if (response.status === 200) {
             const data = await response.json()
-            console.log(orderId)
-            console.log(data)
             fetchAllOrders() // Fetch new orders
         }
     }
 
-    const handleMarkDeliveredButton = async (event: MouseEvent<HTMLButtonElement>) => {
+    /**
+     * Saving past orders to db
+     */
+    const savePastOrders = async () => {
+        console.log(pastOrdersByRooms)
         pastOrdersByRooms.map(async el => {
             const response = await fetch('/api/pastOrder', {
                 method: 'POST',
                 body: JSON.stringify(el)
+
             })
             if (response.status === 200) {
                 const data = await response.json()
-                ordersByRoom.forEach(async el => {
-                    if (typeof el.id === "number")
-                        await deleteOrderFromDb(el.id)
-                });
             }
-        }
-        )
+        })
+    }
+
+    /**
+     * Marks order as complete by saving order to pastOrder table in db and removing it from order table in db
+     * @param event Button press
+     */
+    const handleMarkDeliveredButton = async (event: MouseEvent<HTMLButtonElement>) => {
+        await savePastOrders()
+        removeOrderFromList(ordersByRoom[0].roomNumber)
+        ordersByRoom.forEach(async el => {
+            if (typeof el.id === "number")
+                await deleteOrderFromDb(el.id)
+        });
     }
 
     return (
