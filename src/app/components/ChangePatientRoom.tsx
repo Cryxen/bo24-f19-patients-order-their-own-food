@@ -25,15 +25,21 @@ const ChangePatientRoom = (props: { setShowRestrictions?: Dispatch<SetStateActio
                 setShowRestrictions(false)
         }
     }
+
+    console.log(roomsFromDb)
     return (
         <div className="room-container">
             <h2 className="title">Velg rom</h2>
+            {roomsFromDb.length > 0 ? 
             <select name="room" id="room" className="room dropdown" onChange={handleRoomChange} value={selectedRoom.roomNumber}>
                 <option value="0">Velg rom</option>
                 {roomsFromDb?.map(room => {
                     return <option key={room.roomNumber} value={room.roomNumber}>{room.roomNumber}</option>
                 })}
             </select>
+        : 
+        <p>Laster rom...</p>    
+        }
         </div>
     )
 }
