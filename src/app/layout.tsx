@@ -6,7 +6,7 @@ import Footer from './components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'B24IKT19 Patients order their own food.',
+  title: 'B24IKT19 Idavollen.',
   description: 'Bachelorprosjekt ved Høgskolen i Østfold for Sunnaas Sykehus Produsert av: Mats L. Christensen, Håkon S. Strøm og Le Nguyen Gia Tuan ',
 }
 
